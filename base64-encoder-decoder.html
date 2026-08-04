@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      name="keywords"
+      content="base64 encoder, base64 decoder, base64 tool, file to base64, url safe base64, utf8 base64 converter"
+    />
+    
+    <link
+      rel="canonical"
+      href="https://comprexa.app/base64-encoder-decoder.html"
+    />
+
+<!-- Open Graph / Social -->
+
+<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <style>
+      .b64-card {
+        padding: 28px;
+        margin-bottom: 24px;
+      }
+
+      .category-tabs-container {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .category-tab {
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .category-tab--active {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+      }
+
+      .b64-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .b64-box {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .b64-title {
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .b64-textarea {
+        width: 100%;
+        height: 220px;
+        padding: 14px;
+        font-family: "Fira Code", monospace;
+        font-size: 0.95rem;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        background: var(--bg-body);
+        color: var(--text-main);
+        resize: vertical;
+        outline: none;
+        line-height: 1.5;
+      }
+
+      .b64-textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      }
+
+      .file-dropzone-box {
+        border: 2px dashed var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 36px 20px;
+        text-align: center;
+        background: var(--bg-surface-hover);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 20px;
+      }
+
+      .file-dropzone-box.drag-over {
+        border-color: var(--primary);
+        background: var(--bg-body);
+      }
+    </style>
+
+<title>Base64 Encoder & Decoder — Comprexa</title>
+  <meta name="description" content="Encode text and files to Base64 format, or decode Base64 back to text. Fast and secure local conversion tool." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Base64 Encoder & Decoder — Comprexa" />
+  <meta property="og:description" content="Encode text and files to Base64 format, or decode Base64 back to text. Fast and secure local conversion tool." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/base64-encoder-decoder.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Base64 Encoder & Decoder — Comprexa" />
+  <meta name="twitter:description" content="Encode text and files to Base64 format, or decode Base64 back to text. Fast and secure local conversion tool." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/base64-encoder-decoder.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Developer Tools",
+      "item": "https://comprexa.com/developer-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Base64 Encoder & Decoder — Comprexa",
+      "item": "https://comprexa.com/base64-encoder-decoder.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Base64 Encoder & Decoder — Comprexa",
+  "url": "https://comprexa.com/base64-encoder-decoder.html",
+  "description": "Encode text and files to Base64 format, or decode Base64 back to text. Fast and secure local conversion tool.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Universal Header Navigation -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Dynamic Breadcrumbs -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+
+      <!-- Dynamic Hero Header -->
+      <div id="landing-hero"></div>
+
+      <!-- Tool Workspace -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container">
+          <div class="card workspace-card b64-card">
+            <!-- Mode Tabs -->
+            <div class="category-tabs-container">
+              <button
+                class="category-tab category-tab--active"
+                id="tab-mode-encode"
+              >
+                Encode Mode (Text &rarr; Base64)
+              </button>
+              <button class="category-tab" id="tab-mode-decode">
+                Decode Mode (Base64 &rarr; Text)
+              </button>
+              <button class="category-tab" id="tab-mode-file">
+                File to Base64 Mode
+              </button>
+            </div>
+
+            <!-- Options Row -->
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
+              "
+            >
+              <label class="checkbox-label">
+                <input type="checkbox" id="chk-url-safe" />
+                <span>URL-Safe Base64 (replace +/ with -_)</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="chk-wrap-76" />
+                <span>MIME Wrap (76 chars per line)</span>
+              </label>
+              <span
+                id="b64-status-badge"
+                class="badge badge--subtle"
+                style="margin-left: auto"
+                >Ready</span
+              >
+            </div>
+
+            <!-- Section A: Text Conversion -->
+            <div id="section-b64-text">
+              <div class="b64-grid">
+                <div class="b64-box">
+                  <div class="b64-title">
+                    <span>Input Content</span>
+                  </div>
+                  <textarea
+                    id="b64-input"
+                    class="b64-textarea"
+                    placeholder="Enter text or base64 here..."
+                    spellcheck="false"
+                  ></textarea>
+                </div>
+
+                <div class="b64-box">
+                  <div class="b64-title">
+                    <span>Converted Output</span>
+                  </div>
+                  <textarea
+                    id="b64-output"
+                    class="b64-textarea"
+                    readonly
+                    placeholder="Output will appear here..."
+                    spellcheck="false"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section B: File to Base64 -->
+            <div id="section-b64-file" style="display: none">
+              <div class="file-dropzone-box" id="b64-file-dropzone">
+                <input type="file" id="b64-file-input" style="display: none" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="margin-bottom: 8px; color: var(--primary)"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <div
+                  style="
+                    font-weight: 700;
+                    font-size: 1rem;
+                    color: var(--text-main);
+                  "
+                >
+                  Click or Drag File to Encode to Base64 Data URI
+                </div>
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    margin-top: 4px;
+                  "
+                >
+                  Supports images, documents, audio, and binary files
+                </div>
+              </div>
+
+              <div class="b64-box">
+                <div class="b64-title">Base64 Data URI String</div>
+                <textarea
+                  id="b64-file-output"
+                  class="b64-textarea"
+                  readonly
+                  placeholder="File Data URI Base64 output will appear here..."
+                  spellcheck="false"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+                flex-wrap: wrap;
+                gap: 12px;
+              "
+            >
+              <div style="display: flex; gap: 8px">
+                <button
+                  type="button"
+                  class="btn btn--primary"
+                  id="btn-swap-b64"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="m16 3 4 4-4 4" />
+                    <path d="M20 7H4" />
+                    <path d="m8 21-4-4 4-4" />
+                    <path d="M4 17h16" />
+                  </svg>
+                  <span>Swap Input / Output</span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--outline"
+                  id="btn-copy-b64"
+                >
+                  Copy Output
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--outline"
+                  id="btn-download-b64"
+                >
+                  Download .TXT
+                </button>
+              </div>
+              <button type="button" class="btn btn--outline" id="btn-clear-b64">
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Landing Sections -->
+      <div id="landing-features"></div>
+      <div id="landing-how-it-works"></div>
+      <div id="landing-benefits"></div>
+      <div id="landing-faq"></div>
+      <div id="landing-related-tools"></div>
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- Scripts -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <!-- Page Specific Scripts -->
+    <script type="module" src="/js/utility/base64-encoder-decoder.js"></script>
+  </body>
+</html>

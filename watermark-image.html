@@ -1,0 +1,1503 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      name="keywords"
+      content="watermark image, add watermark to photo, protect photos, photo watermark online, text watermark, logo watermark, batch watermark photos, image watermark"
+    />
+
+<!-- Open Graph / Social -->
+
+<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- JSZip Library for Bulk ZIP Packaging -->
+
+<title>Add Watermark to Image | Protect Photos — Comprexa</title>
+  <meta name="description" content="Add custom text or image watermarks to your photos to protect them. Apply watermarks in bulk locally in your browser." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Add Watermark to Image | Protect Photos — Comprexa" />
+  <meta property="og:description" content="Add custom text or image watermarks to your photos to protect them. Apply watermarks in bulk locally in your browser." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/watermark-image.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Add Watermark to Image | Protect Photos — Comprexa" />
+  <meta name="twitter:description" content="Add custom text or image watermarks to your photos to protect them. Apply watermarks in bulk locally in your browser." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/watermark-image.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Image Tools",
+      "item": "https://comprexa.com/image-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Add Watermark to Image",
+      "item": "https://comprexa.com/watermark-image.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Add Watermark to Image",
+  "url": "https://comprexa.com/watermark-image.html",
+  "description": "Add custom text or image watermarks to your photos to protect them. Apply watermarks in bulk locally in your browser.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Universal Header Navigation -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+            <li><a href="/contact.html" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="header-search-btn"
+            class="btn btn--icon"
+            aria-label="Open Search"
+            title="Open Search (Cmd+K)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <button
+            id="header-settings-btn"
+            class="btn btn--icon btn-settings-trigger"
+            aria-label="Global Preferences & Settings"
+            title="Preferences & Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-label="Toggle Mobile Navigation Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div
+      id="mobile-drawer"
+      class="mobile-drawer"
+      aria-label="Mobile Navigation"
+    >
+      <ul class="mobile-drawer__list">
+        <li><a href="/" class="mobile-drawer__link">Home</a></li>
+        <li><a href="/#tools" class="mobile-drawer__link">Tools</a></li>
+        <li>
+          <a href="/#categories" class="mobile-drawer__link">Categories</a>
+        </li>
+        <li><a href="/#blog" class="mobile-drawer__link">Blog</a></li>
+        <li><a href="/about.html" class="mobile-drawer__link">About</a></li>
+      </ul>
+    </div>
+
+    <main>
+      <!-- 1. Dynamic Breadcrumbs -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+
+      <!-- 2. Dynamic Hero Header -->
+      <div id="landing-hero"></div>
+
+      <!-- 3. Universal Tool Workspace Container -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container container--narrow" style="max-width: 980px">
+          <!-- Universal Watermark Workspace Card -->
+          <div
+            class="card workspace-card"
+            id="watermark-app-container"
+            style="padding: 28px"
+          >
+            <!-- Step 1: Universal Dropzone Area -->
+            <div class="watermark-upload-section" id="watermark-upload-section">
+              <div
+                class="file-uploader__dropzone"
+                id="watermark-dropzone"
+                tabindex="0"
+                role="button"
+                aria-label="Upload image files zone. Click or drag and drop image files here."
+              >
+                <input
+                  type="file"
+                  id="watermark-file-input"
+                  class="file-uploader__input"
+                  multiple
+                  accept="image/jpeg,image/jpg,image/png,image/webp,image/bmp,.jpg,.jpeg,.png,.webp,.bmp"
+                  aria-hidden="true"
+                  tabindex="-1"
+                />
+                <div class="file-uploader__icon-wrap">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                    <circle cx="9" cy="9" r="2" />
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                    <path d="M12 12 8 8" />
+                  </svg>
+                </div>
+                <div class="file-uploader__title">
+                  Upload Image(s) to <span>Add Watermark</span>
+                </div>
+                <div class="file-uploader__hint-main">
+                  Drag & drop your photos here or paste from clipboard (Ctrl+V)
+                </div>
+                <button
+                  type="button"
+                  class="btn btn--primary file-uploader__choose-btn"
+                  id="btn-browse-trigger"
+                  tabindex="-1"
+                  style="
+                    margin-top: 6px;
+                    margin-bottom: 8px;
+                    min-width: 160px;
+                    height: 40px;
+                    padding: 0 20px;
+                    font-size: 0.92rem;
+                  "
+                >
+                  Browse Files
+                </button>
+                <div
+                  class="file-uploader__sub-text"
+                  style="
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    color: var(--text-muted);
+                  "
+                >
+                  Select 1 or multiple photos to protect with custom watermark
+                </div>
+                <div
+                  class="file-uploader__formats"
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--text-muted);
+                    opacity: 0.8;
+                    margin-top: 2px;
+                  "
+                >
+                  Supported inputs: JPG, JPEG, PNG, WebP & BMP (up to 100 MB)
+                </div>
+              </div>
+            </div>
+
+            <!-- Hidden Input for Adding More Images -->
+            <input
+              type="file"
+              id="add-more-file-input"
+              multiple
+              accept="image/jpeg,image/jpg,image/png,image/webp,image/bmp,.jpg,.jpeg,.png,.webp,.bmp"
+              style="display: none"
+            />
+
+            <!-- Step 2: Interactive Studio (Visible after at least 1 image is uploaded) -->
+            <div
+              class="watermark-studio-section"
+              id="watermark-studio-section"
+              style="display: none"
+            >
+              <!-- Queue Top Toolbar -->
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-bottom: 16px;
+                  padding-bottom: 12px;
+                  border-bottom: 1px solid var(--border-subtle);
+                  flex-wrap: wrap;
+                  gap: 10px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <h3
+                    style="
+                      font-size: 1.1rem;
+                      font-weight: 700;
+                      color: var(--text-main);
+                      margin: 0;
+                    "
+                  >
+                    Uploaded Image(s)
+                  </h3>
+                  <span
+                    class="badge badge--primary badge--pill"
+                    id="uploaded-count-badge"
+                    >1 image</span
+                  >
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center">
+                  <button
+                    type="button"
+                    class="btn btn--outline btn--sm"
+                    id="btn-add-more-trigger"
+                    title="Add more images to queue"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Add More</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--ghost btn--danger btn--sm"
+                    id="btn-clear-all"
+                    title="Clear all uploaded images"
+                  >
+                    <span>Clear All</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Queue Thumbnails Strip (If multiple images uploaded) -->
+              <div
+                id="image-queue-strip"
+                style="
+                  display: flex;
+                  gap: 10px;
+                  overflow-x: auto;
+                  padding-bottom: 10px;
+                  margin-bottom: 18px;
+                  scrollbar-width: thin;
+                "
+              ></div>
+
+              <!-- 2-Column Studio Grid -->
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1.1fr 0.9fr;
+                  gap: 24px;
+                  align-items: start;
+                "
+                id="studio-grid-layout"
+              >
+                <!-- Left Column: Live Canvas Preview -->
+                <div
+                  style="
+                    background: var(--bg-surface-subtle);
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-xl);
+                    padding: 18px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 380px;
+                  "
+                  id="canvas-preview-container"
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 12px;
+                    "
+                  >
+                    <span
+                      style="
+                        font-size: 0.82rem;
+                        font-weight: 700;
+                        color: var(--text-muted);
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"
+                        />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      Live Real-Time Preview
+                    </span>
+                    <span
+                      id="preview-resolution-tag"
+                      style="
+                        font-size: 0.76rem;
+                        font-weight: 700;
+                        color: var(--primary);
+                        background: var(--primary-light);
+                        padding: 2px 8px;
+                        border-radius: 4px;
+                      "
+                    >
+                      0 × 0 px
+                    </span>
+                  </div>
+
+                  <div
+                    style="
+                      max-width: 100%;
+                      width: 100%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: #0f172a;
+                      border-radius: var(--radius-lg);
+                      padding: 12px;
+                      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+                      overflow: hidden;
+                    "
+                  >
+                    <canvas
+                      id="watermark-canvas"
+                      style="
+                        max-width: 100%;
+                        max-height: 480px;
+                        object-fit: contain;
+                        border-radius: 4px;
+                        display: block;
+                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+                      "
+                    ></canvas>
+                  </div>
+
+                  <div
+                    style="
+                      margin-top: 10px;
+                      font-size: 0.78rem;
+                      color: var(--text-muted);
+                      text-align: center;
+                    "
+                  >
+                    Changes apply instantly in full canvas fidelity
+                  </div>
+                </div>
+
+                <!-- Right Column: Watermark Controls Panel -->
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 18px;
+                    padding: 20px;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-xl);
+                    background: var(--bg-surface);
+                  "
+                >
+                  <!-- Watermark Mode Switcher: Text vs Image -->
+                  <div class="form-group" style="margin-bottom: 0">
+                    <label
+                      class="form-label"
+                      style="
+                        font-weight: 700;
+                        font-size: 0.88rem;
+                        margin-bottom: 8px;
+                        display: block;
+                      "
+                      >Watermark Mode</label
+                    >
+                    <div style="display: flex; gap: 8px">
+                      <button
+                        type="button"
+                        class="btn btn--primary wm-mode-tab-btn active"
+                        data-mode="text"
+                        id="tab-text-mode"
+                        style="flex: 1; font-weight: 700"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.5"
+                        >
+                          <polyline points="4 7 4 4 20 4 20 7" />
+                          <line x1="9" y1="20" x2="15" y2="20" />
+                          <line x1="12" y1="4" x2="12" y2="20" />
+                        </svg>
+                        <span>Text Watermark</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn--outline wm-mode-tab-btn"
+                        data-mode="image"
+                        id="tab-image-mode"
+                        style="flex: 1; font-weight: 700"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.5"
+                        >
+                          <rect
+                            width="18"
+                            height="18"
+                            x="3"
+                            y="3"
+                            rx="2"
+                            ry="2"
+                          />
+                          <circle cx="9" cy="9" r="2" />
+                          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                        </svg>
+                        <span>Logo Image</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- PANEL 1: TEXT WATERMARK CONTROLS -->
+                  <div
+                    id="text-controls-panel"
+                    style="display: flex; flex-direction: column; gap: 14px"
+                  >
+                    <!-- Custom Text Input -->
+                    <div class="form-group" style="margin-bottom: 0">
+                      <label
+                        for="wm-text-input"
+                        class="form-label"
+                        style="
+                          font-weight: 700;
+                          font-size: 0.85rem;
+                          margin-bottom: 6px;
+                          display: block;
+                        "
+                        >Watermark Text</label
+                      >
+                      <input
+                        type="text"
+                        id="wm-text-input"
+                        value="© COMPREXA WATERMARK"
+                        placeholder="Enter custom watermark text..."
+                        class="ui-input"
+                        style="width: 100%; font-weight: 600"
+                      />
+                    </div>
+
+                    <!-- Font Family & Weight -->
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1.2fr 0.8fr;
+                        gap: 10px;
+                      "
+                    >
+                      <div>
+                        <label
+                          for="wm-font-family"
+                          class="form-label"
+                          style="
+                            font-weight: 700;
+                            font-size: 0.8rem;
+                            margin-bottom: 4px;
+                            display: block;
+                          "
+                          >Font Family</label
+                        >
+                        <select
+                          id="wm-font-family"
+                          class="ui-select"
+                          style="
+                            width: 100%;
+                            font-size: 0.82rem;
+                            font-weight: 600;
+                          "
+                        >
+                          <option value="Plus Jakarta Sans" selected>
+                            Plus Jakarta Sans
+                          </option>
+                          <option value="Space Grotesk">Space Grotesk</option>
+                          <option value="Playfair Display">
+                            Playfair Display
+                          </option>
+                          <option value="Arial">Arial</option>
+                          <option value="Georgia">Georgia</option>
+                          <option value="Courier New">Courier New</option>
+                          <option value="Impact">Impact</option>
+                          <option value="Trebuchet MS">Trebuchet MS</option>
+                          <option value="Verdana">Verdana</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label
+                          class="form-label"
+                          style="
+                            font-weight: 700;
+                            font-size: 0.8rem;
+                            margin-bottom: 4px;
+                            display: block;
+                          "
+                          >Font Style</label
+                        >
+                        <div style="display: flex; gap: 4px">
+                          <button
+                            type="button"
+                            class="btn btn--primary btn--sm style-toggle-btn active"
+                            id="btn-toggle-bold"
+                            style="
+                              flex: 1;
+                              padding: 0;
+                              height: 32px;
+                              font-weight: 800;
+                            "
+                            title="Bold"
+                          >
+                            B
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn--outline btn--sm style-toggle-btn"
+                            id="btn-toggle-italic"
+                            style="
+                              flex: 1;
+                              padding: 0;
+                              height: 32px;
+                              font-style: italic;
+                              font-weight: 700;
+                            "
+                            title="Italic"
+                          >
+                            I
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Font Size Slider -->
+                    <div class="form-group" style="margin-bottom: 0">
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          margin-bottom: 4px;
+                        "
+                      >
+                        <label
+                          for="wm-font-size-slider"
+                          class="form-label"
+                          style="
+                            font-weight: 700;
+                            font-size: 0.82rem;
+                            margin: 0;
+                          "
+                          >Font Size</label
+                        >
+                        <span
+                          id="wm-font-size-val"
+                          style="
+                            font-size: 0.85rem;
+                            font-weight: 800;
+                            color: var(--primary);
+                          "
+                          >48 px</span
+                        >
+                      </div>
+                      <input
+                        type="range"
+                        id="wm-font-size-slider"
+                        min="10"
+                        max="200"
+                        step="1"
+                        value="48"
+                        style="
+                          width: 100%;
+                          accent-color: var(--primary);
+                          cursor: pointer;
+                        "
+                      />
+                    </div>
+
+                    <!-- Text Color Options -->
+                    <div class="form-group" style="margin-bottom: 0">
+                      <label
+                        class="form-label"
+                        style="
+                          font-weight: 700;
+                          font-size: 0.82rem;
+                          margin-bottom: 6px;
+                          display: block;
+                        "
+                        >Text Color</label
+                      >
+                      <div
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          align-items: center;
+                          flex-wrap: wrap;
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="btn btn--primary btn--sm text-color-btn active"
+                          data-color="#FFFFFF"
+                          style="
+                            background: #ffffff;
+                            color: #000;
+                            border: 1px solid var(--border-subtle);
+                            font-weight: 700;
+                          "
+                        >
+                          White
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm text-color-btn"
+                          data-color="#000000"
+                          style="
+                            background: #000000;
+                            color: #fff;
+                            font-weight: 700;
+                          "
+                        >
+                          Black
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm text-color-btn"
+                          data-color="#EF4444"
+                          style="
+                            background: #ef4444;
+                            color: #fff;
+                            font-weight: 700;
+                          "
+                        >
+                          Red
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm text-color-btn"
+                          data-color="#F59E0B"
+                          style="
+                            background: #f59e0b;
+                            color: #fff;
+                            font-weight: 700;
+                          "
+                        >
+                          Gold
+                        </button>
+                        <div
+                          style="display: flex; align-items: center; gap: 4px"
+                        >
+                          <input
+                            type="color"
+                            id="custom-text-color-picker"
+                            value="#FFFFFF"
+                            style="
+                              width: 30px;
+                              height: 30px;
+                              border: 1px solid var(--border-subtle);
+                              border-radius: 4px;
+                              cursor: pointer;
+                              padding: 0;
+                              background: none;
+                            "
+                            title="Custom Color"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- PANEL 2: LOGO IMAGE WATERMARK CONTROLS -->
+                  <div
+                    id="image-controls-panel"
+                    style="display: none; flex-direction: column; gap: 14px"
+                  >
+                    <!-- Logo Upload Input -->
+                    <div class="form-group" style="margin-bottom: 0">
+                      <label
+                        class="form-label"
+                        style="
+                          font-weight: 700;
+                          font-size: 0.85rem;
+                          margin-bottom: 6px;
+                          display: block;
+                        "
+                        >Upload Watermark Logo Image</label
+                      >
+                      <div
+                        style="display: flex; gap: 10px; align-items: center"
+                      >
+                        <input
+                          type="file"
+                          id="logo-file-input"
+                          accept="image/png,image/webp,image/svg+xml,image/jpeg,image/bmp"
+                          style="display: none"
+                        />
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm"
+                          id="btn-browse-logo"
+                          style="height: 38px; font-weight: 700"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                          >
+                            <path
+                              d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                            />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                          </svg>
+                          <span>Choose Logo Image</span>
+                        </button>
+                        <span
+                          id="logo-filename-text"
+                          style="
+                            font-size: 0.8rem;
+                            color: var(--text-muted);
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            flex: 1;
+                          "
+                        >
+                          No logo selected (using default icon)
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Logo Scale / Resize Slider -->
+                    <div class="form-group" style="margin-bottom: 0">
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          margin-bottom: 4px;
+                        "
+                      >
+                        <label
+                          for="wm-logo-scale-slider"
+                          class="form-label"
+                          style="
+                            font-weight: 700;
+                            font-size: 0.82rem;
+                            margin: 0;
+                          "
+                          >Logo Scale / Size</label
+                        >
+                        <span
+                          id="wm-logo-scale-val"
+                          style="
+                            font-size: 0.85rem;
+                            font-weight: 800;
+                            color: var(--primary);
+                          "
+                          >25%</span
+                        >
+                      </div>
+                      <input
+                        type="range"
+                        id="wm-logo-scale-slider"
+                        min="5"
+                        max="150"
+                        step="1"
+                        value="25"
+                        style="
+                          width: 100%;
+                          accent-color: var(--primary);
+                          cursor: pointer;
+                        "
+                      />
+                    </div>
+                  </div>
+
+                  <!-- SHARED CONTROLS: Opacity, Rotation, Position, Margin -->
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 14px;
+                      padding-top: 12px;
+                      border-top: 1px solid var(--border-subtle);
+                    "
+                  >
+                    <!-- Opacity & Rotation Sliders in 2 Columns -->
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 12px;
+                      "
+                    >
+                      <div>
+                        <div
+                          style="
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 4px;
+                          "
+                        >
+                          <label
+                            for="wm-opacity-slider"
+                            class="form-label"
+                            style="
+                              font-weight: 700;
+                              font-size: 0.8rem;
+                              margin: 0;
+                            "
+                            >Opacity</label
+                          >
+                          <span
+                            id="wm-opacity-val"
+                            style="
+                              font-size: 0.82rem;
+                              font-weight: 800;
+                              color: var(--primary);
+                            "
+                            >70%</span
+                          >
+                        </div>
+                        <input
+                          type="range"
+                          id="wm-opacity-slider"
+                          min="5"
+                          max="100"
+                          step="1"
+                          value="70"
+                          style="
+                            width: 100%;
+                            accent-color: var(--primary);
+                            cursor: pointer;
+                          "
+                        />
+                      </div>
+
+                      <div>
+                        <div
+                          style="
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 4px;
+                          "
+                        >
+                          <label
+                            for="wm-rotation-slider"
+                            class="form-label"
+                            style="
+                              font-weight: 700;
+                              font-size: 0.8rem;
+                              margin: 0;
+                            "
+                            >Rotation</label
+                          >
+                          <span
+                            id="wm-rotation-val"
+                            style="
+                              font-size: 0.82rem;
+                              font-weight: 800;
+                              color: var(--primary);
+                            "
+                            >0°</span
+                          >
+                        </div>
+                        <input
+                          type="range"
+                          id="wm-rotation-slider"
+                          min="-180"
+                          max="180"
+                          step="1"
+                          value="0"
+                          style="
+                            width: 100%;
+                            accent-color: var(--primary);
+                            cursor: pointer;
+                          "
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Margin / Offset Slider -->
+                    <div class="form-group" style="margin-bottom: 0">
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          margin-bottom: 4px;
+                        "
+                      >
+                        <label
+                          for="wm-margin-slider"
+                          class="form-label"
+                          style="
+                            font-weight: 700;
+                            font-size: 0.82rem;
+                            margin: 0;
+                          "
+                          >Edge Margin / Padding</label
+                        >
+                        <span
+                          id="wm-margin-val"
+                          style="
+                            font-size: 0.82rem;
+                            font-weight: 800;
+                            color: var(--primary);
+                          "
+                          >24 px</span
+                        >
+                      </div>
+                      <input
+                        type="range"
+                        id="wm-margin-slider"
+                        min="0"
+                        max="150"
+                        step="1"
+                        value="24"
+                        style="
+                          width: 100%;
+                          accent-color: var(--primary);
+                          cursor: pointer;
+                        "
+                      />
+                    </div>
+
+                    <!-- Position Grid Buttons -->
+                    <div class="form-group" style="margin-bottom: 0">
+                      <label
+                        class="form-label"
+                        style="
+                          font-weight: 700;
+                          font-size: 0.82rem;
+                          margin-bottom: 8px;
+                          display: block;
+                        "
+                        >Position Alignment</label
+                      >
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(3, 1fr);
+                          gap: 6px;
+                          margin-bottom: 8px;
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="top-left"
+                          title="Top Left"
+                        >
+                          ↖ Top-Left
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="top-center"
+                          title="Top Center"
+                        >
+                          ↑ Top-Center
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="top-right"
+                          title="Top Right"
+                        >
+                          ↗ Top-Right
+                        </button>
+
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="left-center"
+                          title="Left Center"
+                        >
+                          ← Left
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--primary btn--sm pos-grid-btn active"
+                          data-pos="center"
+                          title="Center"
+                        >
+                          • Center
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="right-center"
+                          title="Right Center"
+                        >
+                          → Right
+                        </button>
+
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="bottom-left"
+                          title="Bottom Left"
+                        >
+                          ↙ Bottom-Left
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="bottom-center"
+                          title="Bottom Center"
+                        >
+                          ↓ Bottom-Center
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn--outline btn--sm pos-grid-btn"
+                          data-pos="bottom-right"
+                          title="Bottom Right"
+                        >
+                          ↘ Bottom-Right
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        class="btn btn--outline btn--sm pos-grid-btn"
+                        data-pos="tile"
+                        id="btn-pos-tile"
+                        style="width: 100%; font-weight: 700"
+                      >
+                        <span>:: Repeat Tile Pattern (Grid Full Image)</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Execute Action Button -->
+                  <button
+                    type="button"
+                    class="btn btn--primary btn--lg btn--full"
+                    id="btn-execute-watermark"
+                    style="
+                      height: 48px;
+                      font-size: 1rem;
+                      font-weight: 700;
+                      margin-top: 6px;
+                    "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <polygon
+                        points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                      />
+                    </svg>
+                    <span id="btn-execute-label">Apply & Export Watermark</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Loading / Processing State -->
+            <div
+              id="watermark-processing-state"
+              style="display: none; margin-top: 24px"
+            >
+              <div
+                class="processing-state"
+                style="text-align: center; padding: 36px 16px"
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 16px;
+                  "
+                >
+                  <span class="ui-spinner ui-spinner--lg"></span>
+                </div>
+                <div
+                  style="
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                    color: var(--text-main);
+                    margin-bottom: 6px;
+                  "
+                  id="watermark-status-title"
+                >
+                  Applying Watermark...
+                </div>
+                <div
+                  style="
+                    font-size: 0.9rem;
+                    color: var(--text-muted);
+                    margin-bottom: 16px;
+                  "
+                  id="watermark-status-desc"
+                >
+                  Rendering pixel-perfect watermark on canvas...
+                </div>
+                <div
+                  class="ui-progress-bar"
+                  style="max-width: 400px; margin: 0 auto 12px auto"
+                >
+                  <div
+                    class="ui-progress-bar__inner"
+                    id="watermark-progress-fill"
+                    style="width: 10%"
+                  ></div>
+                </div>
+                <div
+                  style="
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                    color: var(--text-muted);
+                  "
+                  id="watermark-progress-percent"
+                >
+                  10%
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: Results Section -->
+            <div
+              id="watermark-result-section"
+              style="display: none; margin-top: 24px"
+            >
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 12px;
+                  padding-bottom: 16px;
+                  border-bottom: 1px solid var(--border-subtle);
+                  margin-bottom: 20px;
+                "
+              >
+                <div>
+                  <h3
+                    style="
+                      font-size: 1.2rem;
+                      font-weight: 800;
+                      color: var(--text-main);
+                      margin: 0 0 4px 0;
+                    "
+                  >
+                    Watermarked Result(s)
+                  </h3>
+                  <p
+                    style="
+                      font-size: 0.85rem;
+                      color: var(--text-muted);
+                      margin: 0;
+                    "
+                    id="result-summary-text"
+                  >
+                    Watermark applied successfully!
+                  </p>
+                </div>
+
+                <div
+                  style="
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    flex-wrap: wrap;
+                  "
+                >
+                  <button
+                    type="button"
+                    class="btn btn--primary"
+                    id="btn-download-all-zip"
+                    style="height: 42px; font-weight: 700; display: none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Download All (.zip)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn--outline"
+                    id="btn-start-over"
+                    style="height: 42px"
+                  >
+                    <span>Watermark More Images</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Grid/List of Results -->
+              <div
+                id="watermark-results-container"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 16px;
+                  margin-bottom: 24px;
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Landing Sections -->
+      <div id="landing-features"></div>
+      <div id="landing-how-it-works"></div>
+      <div id="landing-benefits"></div>
+      <div id="landing-faq"></div>
+      <div id="landing-related-tools"></div>
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Global Scripts -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <!-- Page Specific Scripts -->
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+    ></script>
+    <script type="module" src="/js/tool-content.js"></script>
+    <script type="module" src="/js/tool-landing.js"></script>
+    <script type="module" src="/js/image-tools/watermark-image.js"></script>
+  </body>
+</html>

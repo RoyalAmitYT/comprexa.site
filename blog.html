@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+<title>Blog & Tutorials | File Tips — Comprexa</title>
+  <meta name="description" content="Explore the Comprexa blog for tutorials, guides, and tips on file conversion, compression, productivity, and privacy-first web tools." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Blog & Tutorials | File Tips — Comprexa" />
+  <meta property="og:description" content="Explore the Comprexa blog for tutorials, guides, and tips on file conversion, compression, productivity, and privacy-first web tools." />
+  <meta property="og:type" content="blog" />
+  <meta property="og:url" content="https://comprexa.com/blog.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog & Tutorials | File Tips — Comprexa" />
+  <meta name="twitter:description" content="Explore the Comprexa blog for tutorials, guides, and tips on file conversion, compression, productivity, and privacy-first web tools." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/blog.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://comprexa.com/blog.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Blog & Tutorials | File Tips — Comprexa",
+  "description": "Explore the Comprexa blog for tutorials, guides, and tips on file conversion, compression, productivity, and privacy-first web tools.",
+  "url": "https://comprexa.com/blog.html"
+}
+</script>
+</head>
+  <body>
+    <!-- ==========================================================================
+       Header Navigation
+       ========================================================================== -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <!-- Brand Logo -->
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link" aria-current="page">Home</a></li>
+            <li><a href="/#tools" class="nav__link">Tools</a></li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li>
+              <a href="/blog.html" class="nav__link nav__link--active">Blog</a>
+            </li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+            <li><a href="/contact.html" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Header Action Controls -->
+        <div class="header__actions">
+          <!-- Quick Search Trigger -->
+          <button
+            id="header-search-btn"
+            class="btn btn--icon"
+            aria-label="Open Search (Press Cmd+K)"
+            title="Open Search (Cmd+K)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <!-- Global Preferences & Settings Trigger -->
+          <button
+            id="header-settings-btn"
+            class="btn btn--icon btn-settings-trigger"
+            aria-label="Global Preferences & Settings"
+            title="Preferences & Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+
+          <!-- Light / Dark Theme Toggle -->
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+
+          <!-- All Tools CTA Button -->
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-label="Toggle Mobile Navigation Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Menu Overlay -->
+    <div
+      id="mobile-drawer"
+      class="mobile-drawer"
+      aria-label="Mobile Navigation"
+    >
+      <ul class="mobile-drawer__list">
+        <li><a href="/" class="mobile-drawer__link">Home</a></li>
+        <li><a href="/#tools" class="mobile-drawer__link">Tools</a></li>
+        <li>
+          <a href="/#categories" class="mobile-drawer__link">Categories</a>
+        </li>
+        <li><a href="/blog.html" class="mobile-drawer__link">Blog</a></li>
+        <li><a href="/about.html" class="mobile-drawer__link">About</a></li>
+        <li><a href="/contact.html" class="mobile-drawer__link">Contact</a></li>
+      </ul>
+      <div class="mobile-drawer__actions">
+        <button
+          id="theme-toggle-mobile"
+          class="btn btn--secondary"
+          style="width: 100%; justify-content: flex-start"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+          <span>Toggle Dark Mode</span>
+        </button>
+        <a href="/#tools" class="btn btn--primary" style="width: 100%">
+          Browse All Tools
+        </a>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <!-- Premium Hero Section -->
+      <section class="blog-hero">
+        <div class="blog-hero__bg"></div>
+        <div class="container blog-hero__inner">
+          <div class="section-header__badge" style="margin: 0 auto 24px">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"
+              />
+            </svg>
+            <span>Knowledge Hub</span>
+          </div>
+          <h1 class="hero__title">
+            Comprexa <span class="text-gradient">Blog</span>
+          </h1>
+          <p
+            class="hero__subtitle"
+            style="margin: 0 auto 40px; max-width: 600px"
+          >
+            Insights, guides, and tutorials on file processing, privacy, and
+            modern web technologies.
+          </p>
+
+          <!-- Search Bar -->
+          <div class="blog-search">
+            <svg
+              class="blog-search__icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input
+              type="text"
+              class="blog-search__input"
+              placeholder="Search articles, guides, tutorials..."
+              aria-label="Search articles"
+            />
+            <button class="btn btn--primary btn--sm blog-search__btn">
+              Search
+            </button>
+          </div>
+
+          <!-- Filter Chips -->
+          <div class="blog-filters">
+            <button class="blog-filter-chip active">All</button>
+            <button class="blog-filter-chip">PDF</button>
+            <button class="blog-filter-chip">Images</button>
+            <button class="blog-filter-chip">Documents</button>
+            <button class="blog-filter-chip">QR</button>
+            <button class="blog-filter-chip">Developer</button>
+            <button class="blog-filter-chip">Privacy</button>
+            <button class="blog-filter-chip">Tutorials</button>
+            <button class="blog-filter-chip">News</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 0">
+        <div class="container">
+          <!-- Featured Article -->
+          <article class="blog-featured fade-in-on-scroll">
+            <a
+              href="/article.html?id=how-to-compress-pdf-without-losing-quality"
+              class="blog-featured__link-wrapper"
+            >
+              <div class="blog-featured__image-container">
+                <img src="/assets/images/compress-pdf-guide.webp" alt="Abstract illustration of PDF document compression showing a large document being shrunk" width="1200" height="630" loading="eager" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" class="blog-featured__placeholder-img">
+              </div>
+              <div class="blog-featured__content">
+                <div class="blog-card-modern__meta" style="margin-bottom: 16px">
+                  <span class="blog-card-modern__category">Tutorials</span>
+                  <span class="blog-card-modern__read-time">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="margin-right: 4px; vertical-align: middle"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    5 min read
+                  </span>
+                  <span class="blog-card-modern__read-time"
+                    >August 12, 2026</span
+                  >
+                </div>
+                <h2 class="blog-featured__title">
+                  How to Compress PDF Without Losing Quality
+                </h2>
+                <p class="blog-featured__excerpt">
+                  Learn step-by-step techniques to shrink large PDF documents
+                  down to 90% smaller size while keeping text and graphics
+                  crystal clear. We explore lossless compression, image
+                  downsampling, and removing metadata.
+                </p>
+                <div class="blog-featured__footer">
+                  <div class="blog-author">
+                    <div class="blog-author__avatar">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    </div>
+                    <span class="blog-author__name">Alex Chen</span>
+                  </div>
+                  <span class="btn btn--primary btn--sm">
+                    Read Article
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="margin-left: 6px"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- Latest Articles Grid -->
+          <h3
+            class="section-title"
+            style="margin: 64px 0 32px; font-size: 1.5rem; font-weight: 700"
+          >
+            Latest Articles
+          </h3>
+
+          <div class="blog-grid-modern">
+            <!-- Article 2 -->
+            <article class="blog-card-modern fade-in-on-scroll">
+              <a
+                href="/article.html?id=best-free-image-compression-tools-in-2026"
+                class="blog-card-modern__link"
+              >
+                <div class="blog-card-modern__image">
+                  <img src="/assets/images/image-compression-tools.webp" alt="Abstract representation of digital image files being optimized and compressed" width="800" height="600" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" class="blog-card__placeholder-img">
+                </div>
+                <div class="blog-card-modern__body">
+                  <div class="blog-card-modern__meta">
+                    <span class="blog-card-modern__category">Images</span>
+                    <span class="blog-card-modern__read-time">4 min read</span>
+                  </div>
+                  <h4 class="blog-card-modern__title">
+                    Best Free Image Compression Tools in 2026
+                  </h4>
+                  <p class="blog-card-modern__excerpt">
+                    A comprehensive comparison of modern lossy and lossless web
+                    image optimizers for WebP, PNG, and JPG formats.
+                  </p>
+                  <div class="blog-card-modern__footer">
+                    <div class="blog-author-sm">
+                      <span class="blog-author-sm__name">Sarah Jones</span>
+                      <span class="blog-author-sm__dot">•</span>
+                      <span class="blog-author-sm__date">Aug 05</span>
+                    </div>
+                    <span class="blog-card-modern__read-btn">
+                      Read
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="margin-left: 4px"
+                      >
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <!-- Article 3 -->
+            <article
+              class="blog-card-modern fade-in-on-scroll"
+              style="transition-delay: 100ms"
+            >
+              <a
+                href="/article.html?id=everything-you-need-to-know-about-pdf-files"
+                class="blog-card-modern__link"
+              >
+                <div class="blog-card-modern__image">
+                  <img src="/assets/images/pdf-files-explained.webp" alt="Technical diagram abstract showing the internal structure and security of a PDF document" width="800" height="600" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" class="blog-card__placeholder-img">
+                </div>
+                <div class="blog-card-modern__body">
+                  <div class="blog-card-modern__meta">
+                    <span class="blog-card-modern__category">Developer</span>
+                    <span class="blog-card-modern__read-time">6 min read</span>
+                  </div>
+                  <h4 class="blog-card-modern__title">
+                    Everything You Need to Know About PDF Files
+                  </h4>
+                  <p class="blog-card-modern__excerpt">
+                    Explore how PDF specifications work under the hood, how page
+                    rendering functions, and how browser WebAssembly keeps
+                    documents private.
+                  </p>
+                  <div class="blog-card-modern__footer">
+                    <div class="blog-author-sm">
+                      <span class="blog-author-sm__name">Michael Lee</span>
+                      <span class="blog-author-sm__dot">•</span>
+                      <span class="blog-author-sm__date">Jul 28</span>
+                    </div>
+                    <span class="blog-card-modern__read-btn">
+                      Read
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="margin-left: 4px"
+                      >
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <!-- Article 4 -->
+            <article
+              class="blog-card-modern fade-in-on-scroll"
+              style="transition-delay: 200ms"
+            >
+              <a
+                href="/article.html?id=the-future-of-browser-based-tools"
+                class="blog-card-modern__link"
+              >
+                <div class="blog-card-modern__image">
+                  <img src="/assets/images/browser-based-tools-future.webp" alt="Futuristic browser window with glowing nodes representing web assembly processing" width="800" height="600" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" class="blog-card__placeholder-img">
+                </div>
+                <div class="blog-card-modern__body">
+                  <div class="blog-card-modern__meta">
+                    <span class="blog-card-modern__category">News</span>
+                    <span class="blog-card-modern__read-time">3 min read</span>
+                  </div>
+                  <h4 class="blog-card-modern__title">
+                    The Future of Browser-Based Tools
+                  </h4>
+                  <p class="blog-card-modern__excerpt">
+                    How WebAssembly and modern browser APIs are eliminating the
+                    need for desktop applications and cloud server processing.
+                  </p>
+                  <div class="blog-card-modern__footer">
+                    <div class="blog-author-sm">
+                      <span class="blog-author-sm__name">Alex Chen</span>
+                      <span class="blog-author-sm__dot">•</span>
+                      <span class="blog-author-sm__date">Jul 15</span>
+                    </div>
+                    <span class="blog-card-modern__read-btn">
+                      Read
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="margin-left: 4px"
+                      >
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="blog-load-more">
+            <button class="btn btn--outline btn--lg">
+              Load More Articles
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="margin-left: 8px"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+       Premium Footer
+       ========================================================================== -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- Global Framework Libraries -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/articles.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+  </body>
+</html>

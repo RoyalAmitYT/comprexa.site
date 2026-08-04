@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      name="keywords"
+      content="hash generator, md5 generator, sha256 generator, sha1 calculator, file hash checker, sha512 generator"
+    />
+
+<title>
+      Cryptographic Hash Generator (MD5, SHA-1, SHA-256, SHA-512) — Comprexa
+    </title>
+
+    <!-- Open Graph / Social -->
+
+<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <style>
+      .hash-card {
+        padding: 28px;
+        margin-bottom: 24px;
+      }
+
+      .category-tabs-container {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .category-tab {
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .category-tab--active {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+      }
+
+      .hash-textarea {
+        width: 100%;
+        height: 120px;
+        padding: 14px;
+        font-family: "Fira Code", monospace;
+        font-size: 0.95rem;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        background: var(--bg-body);
+        color: var(--text-main);
+        resize: vertical;
+        outline: none;
+      }
+
+      .hash-textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      }
+
+      .file-dropzone-box {
+        border: 2px dashed var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 36px 20px;
+        text-align: center;
+        background: var(--bg-surface-hover);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .file-dropzone-box.drag-over {
+        border-color: var(--primary);
+        background: var(--bg-body);
+      }
+
+      .hash-results-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .hash-algo-card {
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 14px 18px;
+      }
+
+      .hash-algo-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .hash-algo-title {
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .hash-algo-box {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .hash-input-field {
+        width: 100%;
+        padding: 10px 14px;
+        font-family: "Fira Code", monospace;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        background: var(--bg-body);
+        color: var(--text-main);
+        outline: none;
+      }
+
+      .hash-compare-box {
+        margin-top: 24px;
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 16px;
+      }
+    </style>
+
+<title>Hash Generator | MD5, SHA-1, SHA-256 — Comprexa</title>
+  <meta name="description" content="Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text strings. Fast and secure cryptographic hash generator." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hash Generator | MD5, SHA-1, SHA-256 — Comprexa" />
+  <meta property="og:description" content="Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text strings. Fast and secure cryptographic hash generator." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/hash-generator.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hash Generator | MD5, SHA-1, SHA-256 — Comprexa" />
+  <meta name="twitter:description" content="Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text strings. Fast and secure cryptographic hash generator." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/hash-generator.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Developer Tools",
+      "item": "https://comprexa.com/developer-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Cryptographic Hash Generator (MD5, SHA-1, SHA-256, SHA-512) — Comprexa",
+      "item": "https://comprexa.com/hash-generator.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Cryptographic Hash Generator (MD5, SHA-1, SHA-256, SHA-512) — Comprexa",
+  "url": "https://comprexa.com/hash-generator.html",
+  "description": "Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text strings. Fast and secure cryptographic hash generator.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Universal Header Navigation -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Dynamic Breadcrumbs -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+
+      <!-- Dynamic Hero Header -->
+      <div id="landing-hero"></div>
+
+      <!-- Tool Workspace -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container">
+          <div class="card workspace-card hash-card">
+            <!-- Input Mode Tabs -->
+            <div class="category-tabs-container">
+              <button
+                class="category-tab category-tab--active"
+                id="tab-mode-text"
+              >
+                Text Input Mode
+              </button>
+              <button class="category-tab" id="tab-mode-file">
+                File Upload Mode
+              </button>
+            </div>
+
+            <!-- Mode 1: Text Section -->
+            <div id="section-hash-text">
+              <textarea
+                id="hash-text-input"
+                class="hash-textarea"
+                placeholder="Type or paste plain text here to generate hashes in real time..."
+                spellcheck="false"
+              ></textarea>
+            </div>
+
+            <!-- Mode 2: File Section -->
+            <div id="section-hash-file" style="display: none">
+              <div class="file-dropzone-box" id="hash-file-dropzone">
+                <input type="file" id="hash-file-input" style="display: none" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="margin-bottom: 8px; color: var(--primary)"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <div
+                  style="
+                    font-weight: 700;
+                    font-size: 1rem;
+                    color: var(--text-main);
+                  "
+                >
+                  Click or Drag & Drop File to Hash
+                </div>
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    margin-top: 4px;
+                  "
+                >
+                  Supports any file format (PDF, images, zip, binaries)
+                  processed 100% locally
+                </div>
+              </div>
+              <div
+                id="file-info-card"
+                style="
+                  display: none;
+                  margin-top: 12px;
+                  background: var(--bg-surface-hover);
+                  border: 1px solid var(--border-subtle);
+                  padding: 12px 16px;
+                  border-radius: var(--radius-md);
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <strong id="file-name-text" style="color: var(--text-main)"
+                    >document.pdf</strong
+                  >
+                  <span
+                    id="file-size-text"
+                    style="
+                      color: var(--text-muted);
+                      font-size: 0.85rem;
+                      margin-left: 8px;
+                    "
+                    >(1.2 MB)</span
+                  >
+                </div>
+                <span class="badge badge--success">File Loaded</span>
+              </div>
+            </div>
+
+            <!-- Hash Formatting Options -->
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+              "
+            >
+              <label class="checkbox-label">
+                <input type="checkbox" id="chk-uppercase" />
+                <span>Uppercase Hash Output</span>
+              </label>
+              <div style="display: flex; gap: 8px">
+                <button
+                  type="button"
+                  class="btn btn--primary"
+                  id="btn-copy-all-hashes"
+                >
+                  Copy All Hashes
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--outline"
+                  id="btn-clear-hashes"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <!-- Calculated Hash Results -->
+            <div class="hash-results-grid">
+              <!-- MD5 -->
+              <div class="hash-algo-card">
+                <div class="hash-algo-header">
+                  <span class="hash-algo-title">MD5 Hash</span>
+                  <span class="badge badge--subtle"
+                    >128-bit / 32 hex chars</span
+                  >
+                </div>
+                <div class="hash-algo-box">
+                  <input
+                    type="text"
+                    id="hash-res-md5"
+                    class="hash-input-field"
+                    readonly
+                    autocomplete="off"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn--outline btn-copy-single-hash"
+                    data-target="hash-res-md5"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+
+              <!-- SHA-1 -->
+              <div class="hash-algo-card">
+                <div class="hash-algo-header">
+                  <span class="hash-algo-title">SHA-1 Hash</span>
+                  <span class="badge badge--subtle"
+                    >160-bit / 40 hex chars</span
+                  >
+                </div>
+                <div class="hash-algo-box">
+                  <input
+                    type="text"
+                    id="hash-res-sha1"
+                    class="hash-input-field"
+                    readonly
+                    autocomplete="off"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn--outline btn-copy-single-hash"
+                    data-target="hash-res-sha1"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+
+              <!-- SHA-256 -->
+              <div class="hash-algo-card">
+                <div class="hash-algo-header">
+                  <span class="hash-algo-title">SHA-256 Hash</span>
+                  <span class="badge badge--primary"
+                    >256-bit / 64 hex chars (Recommended)</span
+                  >
+                </div>
+                <div class="hash-algo-box">
+                  <input
+                    type="text"
+                    id="hash-res-sha256"
+                    class="hash-input-field"
+                    readonly
+                    autocomplete="off"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn--outline btn-copy-single-hash"
+                    data-target="hash-res-sha256"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+
+              <!-- SHA-512 -->
+              <div class="hash-algo-card">
+                <div class="hash-algo-header">
+                  <span class="hash-algo-title">SHA-512 Hash</span>
+                  <span class="badge badge--subtle"
+                    >512-bit / 128 hex chars</span
+                  >
+                </div>
+                <div class="hash-algo-box">
+                  <input
+                    type="text"
+                    id="hash-res-sha512"
+                    class="hash-input-field"
+                    readonly
+                    autocomplete="off"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn--outline btn-copy-single-hash"
+                    data-target="hash-res-sha512"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hash Verification / Compare Checker -->
+            <div class="hash-compare-box">
+              <div
+                style="
+                  font-weight: 800;
+                  font-size: 0.9rem;
+                  color: var(--text-main);
+                  margin-bottom: 8px;
+                "
+              >
+                Verify Expected Hash Match
+              </div>
+              <input
+                type="text"
+                id="hash-compare-input"
+                class="hash-input-field"
+                placeholder="Paste an expected hash string here to compare against above digests..."
+                spellcheck="false"
+              />
+              <div id="hash-compare-status" style="margin-top: 10px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Landing Sections -->
+      <div id="landing-features"></div>
+      <div id="landing-how-it-works"></div>
+      <div id="landing-benefits"></div>
+      <div id="landing-faq"></div>
+      <div id="landing-related-tools"></div>
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- Scripts -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <!-- Page Specific Scripts -->
+    <script type="module" src="/js/utility/hash-generator.js"></script>
+  </body>
+</html>

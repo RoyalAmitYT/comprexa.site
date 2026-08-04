@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>
+      Free QR Code Generator — Create Custom Vector QR Codes | Comprexa
+    </title>
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      .qr-type-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .qr-type-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        background: var(--bg-surface-subtle);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+      }
+      .qr-type-tab:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+        background: var(--bg-surface);
+      }
+      .qr-type-tab.active {
+        color: #ffffff;
+        background: var(--primary);
+        border-color: var(--primary);
+        box-shadow: 0 2px 6px rgba(99, 102, 241, 0.25);
+      }
+      .qr-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .qr-pill {
+        padding: 6px 12px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        background: var(--bg-surface-subtle);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-pill, 999px);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+      }
+      .qr-pill:hover {
+        color: var(--text-main);
+        border-color: var(--border-main);
+      }
+      .qr-pill.pill--active {
+        color: #ffffff;
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+      .swatch-grid {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        margin-top: 6px;
+      }
+      .qr-swatch-btn {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 2px solid var(--border-subtle);
+        cursor: pointer;
+        padding: 0;
+        transition: transform var(--transition-fast);
+      }
+      .qr-swatch-btn:hover {
+        transform: scale(1.15);
+      }
+    </style>
+
+<title>Free QR Code Generator | Create Custom QR — Comprexa</title>
+  <meta name="description" content="Generate custom QR codes for URLs, text, Wi-Fi, email, and more. Download high-quality QR codes in PNG or SVG formats." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free QR Code Generator | Create Custom QR — Comprexa" />
+  <meta property="og:description" content="Generate custom QR codes for URLs, text, Wi-Fi, email, and more. Download high-quality QR codes in PNG or SVG formats." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/qr-generator.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free QR Code Generator | Create Custom QR — Comprexa" />
+  <meta name="twitter:description" content="Generate custom QR codes for URLs, text, Wi-Fi, email, and more. Download high-quality QR codes in PNG or SVG formats." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/qr-generator.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "QR Tools",
+      "item": "https://comprexa.com/qr-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Free QR Code Generator — Create Custom Vector QR Codes",
+      "item": "https://comprexa.com/qr-generator.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free QR Code Generator — Create Custom Vector QR Codes",
+  "url": "https://comprexa.com/qr-generator.html",
+  "description": "Generate custom QR codes for URLs, text, Wi-Fi, email, and more. Download high-quality QR codes in PNG or SVG formats.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Header Navigation -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. Dynamic Breadcrumb & Hero Section -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+      <div id="landing-hero"></div>
+
+      <!-- Tool Workspace Container -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container" style="max-width: 900px; margin: 0 auto">
+          <div style="display: flex; flex-direction: column; gap: 24px">
+            <!-- 2. Select Data Type Card -->
+            <div
+              class="card workspace-card"
+              style="
+                padding: 24px;
+                border: 1px solid var(--border-subtle);
+                border-radius: var(--radius-xl);
+                background: var(--bg-surface);
+              "
+            >
+              <h3
+                style="
+                  font-size: 1.05rem;
+                  font-weight: 700;
+                  color: var(--text-main);
+                  margin-bottom: 14px;
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                "
+              >
+                <span
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 50%;
+                    background: var(--primary);
+                    color: #fff;
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                  "
+                  >1</span
+                >
+                <span>Select Data Type</span>
+              </h3>
+
+              <div class="qr-type-tabs">
+                <button
+                  type="button"
+                  class="qr-type-tab active"
+                  data-type="url"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path
+                      d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                    />
+                  </svg>
+                  <span>URL</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="text">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M17 61H3" />
+                    <path d="M21 12H3" />
+                    <path d="M17 18H3" />
+                  </svg>
+                  <span>Text</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="wifi">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                    <line x1="12" y1="20" x2="12.01" y2="20" />
+                  </svg>
+                  <span>Wi-Fi</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="vcard">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  <span>vCard</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="email">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  <span>Email</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="phone">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                    />
+                  </svg>
+                  <span>Phone</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="sms">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                    />
+                  </svg>
+                  <span>SMS</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="whatsapp">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                  </svg>
+                  <span>WhatsApp</span>
+                </button>
+                <button type="button" class="qr-type-tab" data-type="location">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>Location</span>
+                </button>
+              </div>
+
+              <!-- Dynamic Form Content -->
+              <div id="qr-form-fields"></div>
+            </div>
+
+            <!-- 3. Customize Design & Colors Card -->
+            <div
+              class="card workspace-card"
+              style="
+                padding: 24px;
+                border: 1px solid var(--border-subtle);
+                border-radius: var(--radius-xl);
+                background: var(--bg-surface);
+              "
+            >
+              <h3
+                style="
+                  font-size: 1.05rem;
+                  font-weight: 700;
+                  color: var(--text-main);
+                  margin-bottom: 16px;
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                "
+              >
+                <span
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 50%;
+                    background: var(--primary);
+                    color: #fff;
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                  "
+                  >2</span
+                >
+                <span>Design & Colors</span>
+              </h3>
+
+              <div style="display: flex; flex-direction: column; gap: 20px">
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                    gap: 16px;
+                  "
+                >
+                  <!-- Foreground Color -->
+                  <div class="form-group">
+                    <label
+                      class="form-label"
+                      style="
+                        font-weight: 600;
+                        display: block;
+                        margin-bottom: 6px;
+                      "
+                      >Foreground Color</label
+                    >
+                    <div style="display: flex; align-items: center; gap: 10px">
+                      <input
+                        type="color"
+                        id="qr-dark-color"
+                        value="#000000"
+                        style="
+                          width: 44px;
+                          height: 38px;
+                          border-radius: var(--radius-md);
+                          border: 1px solid var(--border-subtle);
+                          cursor: pointer;
+                          padding: 2px;
+                        "
+                      />
+                      <input
+                        type="text"
+                        id="qr-dark-hex"
+                        class="ui-input"
+                        value="#000000"
+                        style="width: 100px; text-transform: uppercase"
+                      />
+                    </div>
+                    <div class="swatch-grid">
+                      <button
+                        type="button"
+                        class="qr-swatch-btn"
+                        data-target="dark"
+                        data-color="#000000"
+                        style="background: #000000"
+                      ></button>
+                      <button
+                        type="button"
+                        class="qr-swatch-btn"
+                        data-target="dark"
+                        data-color="#6366f1"
+                        style="background: #6366f1"
+                      ></button>
+                      <button
+                        type="button"
+                        class="qr-swatch-btn"
+                        data-target="dark"
+                        data-color="#0f766e"
+                        style="background: #0f766e"
+                      ></button>
+                      <button
+                        type="button"
+                        class="qr-swatch-btn"
+                        data-target="dark"
+                        data-color="#b91c1c"
+                        style="background: #b91c1c"
+                      ></button>
+                      <button
+                        type="button"
+                        class="qr-swatch-btn"
+                        data-target="dark"
+                        data-color="#1e293b"
+                        style="background: #1e293b"
+                      ></button>
+                    </div>
+                  </div>
+
+                  <!-- Background Color -->
+                  <div class="form-group">
+                    <label
+                      class="form-label"
+                      style="
+                        font-weight: 600;
+                        display: block;
+                        margin-bottom: 6px;
+                      "
+                      >Background Color</label
+                    >
+                    <div style="display: flex; align-items: center; gap: 10px">
+                      <input
+                        type="color"
+                        id="qr-light-color"
+                        value="#ffffff"
+                        style="
+                          width: 44px;
+                          height: 38px;
+                          border-radius: var(--radius-md);
+                          border: 1px solid var(--border-subtle);
+                          cursor: pointer;
+                          padding: 2px;
+                        "
+                      />
+                      <input
+                        type="text"
+                        id="qr-light-hex"
+                        class="ui-input"
+                        value="#FFFFFF"
+                        style="width: 100px; text-transform: uppercase"
+                      />
+                    </div>
+                    <div
+                      style="
+                        margin-top: 8px;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                      "
+                    >
+                      <label
+                        class="ui-switch"
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 8px;
+                          cursor: pointer;
+                        "
+                      >
+                        <input type="checkbox" id="qr-transparent-bg" />
+                        <span
+                          style="
+                            font-size: 0.85rem;
+                            font-weight: 600;
+                            color: var(--text-main);
+                          "
+                          >Transparent Background</span
+                        >
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Contrast Warning Box -->
+                <div
+                  id="contrast-warning-box"
+                  style="
+                    display: none;
+                    padding: 12px 14px;
+                    background: rgba(245, 158, 11, 0.12);
+                    border: 1px solid rgba(245, 158, 11, 0.3);
+                    border-radius: var(--radius-md);
+                    color: #d97706;
+                    font-size: 0.82rem;
+                    align-items: center;
+                    gap: 8px;
+                  "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
+                    />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                  <span
+                    >Low color contrast detected! Scanning performance may be
+                    affected. Use dark code on light background.</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Advanced Settings (Optional) Card -->
+            <div
+              class="card workspace-card"
+              style="
+                padding: 24px;
+                border: 1px solid var(--border-subtle);
+                border-radius: var(--radius-xl);
+                background: var(--bg-surface);
+              "
+            >
+              <h3
+                style="
+                  font-size: 1.05rem;
+                  font-weight: 700;
+                  color: var(--text-main);
+                  margin-bottom: 16px;
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                "
+              >
+                <span
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 50%;
+                    background: var(--bg-surface-subtle);
+                    border: 1px solid var(--border-subtle);
+                    color: var(--text-muted);
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                  "
+                  >3</span
+                >
+                <span>Advanced Settings (Optional)</span>
+              </h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  gap: 16px;
+                "
+              >
+                <div class="form-group">
+                  <label
+                    class="form-label"
+                    style="font-weight: 600; display: block; margin-bottom: 6px"
+                    >Module Style</label
+                  >
+                  <div class="qr-pills">
+                    <button
+                      type="button"
+                      class="qr-pill pill--active"
+                      data-qr-style="square"
+                    >
+                      Square
+                    </button>
+                    <button
+                      type="button"
+                      class="qr-pill"
+                      data-qr-style="rounded"
+                    >
+                      Rounded
+                    </button>
+                    <button type="button" class="qr-pill" data-qr-style="dots">
+                      Dots
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-label"
+                    style="font-weight: 600; display: block; margin-bottom: 6px"
+                    >Output Size (px)</label
+                  >
+                  <div class="qr-pills">
+                    <button type="button" class="qr-pill" data-qr-size="256">
+                      256px
+                    </button>
+                    <button
+                      type="button"
+                      class="qr-pill pill--active"
+                      data-qr-size="512"
+                    >
+                      512px
+                    </button>
+                    <button type="button" class="qr-pill" data-qr-size="1024">
+                      1024px
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-label"
+                    style="font-weight: 600; display: block; margin-bottom: 6px"
+                    >Quiet Zone (Margin)</label
+                  >
+                  <div class="qr-pills">
+                    <button type="button" class="qr-pill" data-qr-margin="0">
+                      None
+                    </button>
+                    <button
+                      type="button"
+                      class="qr-pill pill--active"
+                      data-qr-margin="2"
+                    >
+                      Normal (2)
+                    </button>
+                    <button type="button" class="qr-pill" data-qr-margin="4">
+                      Large (4)
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-label"
+                    style="font-weight: 600; display: block; margin-bottom: 6px"
+                    >Error Correction Level</label
+                  >
+                  <div class="qr-pills">
+                    <button
+                      type="button"
+                      class="qr-pill"
+                      data-qr-ecc="L"
+                      title="7% recovery"
+                    >
+                      Low (L)
+                    </button>
+                    <button
+                      type="button"
+                      class="qr-pill pill--active"
+                      data-qr-ecc="M"
+                      title="15% recovery"
+                    >
+                      Medium (M)
+                    </button>
+                    <button
+                      type="button"
+                      class="qr-pill"
+                      data-qr-ecc="Q"
+                      title="25% recovery"
+                    >
+                      Quality (Q)
+                    </button>
+                    <button
+                      type="button"
+                      class="qr-pill"
+                      data-qr-ecc="H"
+                      title="30% recovery"
+                    >
+                      High (H)
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Center Logo Overlay -->
+              <div
+                class="form-group"
+                style="
+                  padding-top: 14px;
+                  margin-top: 16px;
+                  border-top: 1px solid var(--border-subtle);
+                "
+              >
+                <label
+                  class="form-label"
+                  style="font-weight: 600; display: block; margin-bottom: 6px"
+                  >Center Logo / Icon Overlay (Optional)</label
+                >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    flex-wrap: wrap;
+                  "
+                >
+                  <label
+                    class="btn btn--secondary"
+                    style="
+                      cursor: pointer;
+                      padding: 8px 14px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="17 8 12 3 7 8" />
+                      <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                    <span>Upload Logo</span>
+                    <input
+                      type="file"
+                      id="qr-logo-upload"
+                      accept="image/*"
+                      style="display: none"
+                    />
+                  </label>
+
+                  <img
+                    id="qr-logo-img-preview"
+                    src=""
+                    alt="Logo"
+                    style="
+                      display: none;
+                      width: 36px;
+                      height: 36px;
+                      object-fit: contain;
+                      border-radius: 6px;
+                      border: 1px solid var(--border-subtle);
+                    "
+                   width="36" height="36" loading="lazy" decoding="async" />
+
+                  <button
+                    type="button"
+                    id="qr-logo-remove"
+                    class="btn btn--secondary"
+                    style="
+                      display: none;
+                      color: var(--color-danger, #ef4444);
+                      padding: 8px 12px;
+                      font-size: 0.82rem;
+                    "
+                  >
+                    Remove Logo
+                  </button>
+                </div>
+                <div
+                  class="form-hint"
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    margin-top: 4px;
+                  "
+                >
+                  Logos automatically switch Error Correction to Level H (30%)
+                  to ensure scan reliability.
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Large Full-Width "Generate QR Code" Button -->
+            <div style="margin: 4px 0">
+              <button
+                type="button"
+                class="btn btn--primary btn--lg"
+                id="generate-qr-cta"
+                style="
+                  width: 100%;
+                  min-height: 54px;
+                  padding: 14px 24px;
+                  font-size: 1.1rem;
+                  font-weight: 700;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 10px;
+                  border-radius: var(--radius-lg);
+                  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+                  cursor: pointer;
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <rect width="5" height="5" x="3" y="3" rx="1" />
+                  <rect width="5" height="5" x="16" y="3" rx="1" />
+                  <rect width="5" height="5" x="3" y="16" rx="1" />
+                  <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
+                  <path d="M21 21v.01" />
+                  <path d="M12 7v3a2 2 0 0 1-2 2H7" />
+                </svg>
+                <span>Generate QR Code</span>
+              </button>
+            </div>
+
+            <!-- 6. QR Preview Card -->
+            <div
+              class="card workspace-card"
+              id="qr-preview-card"
+              style="
+                padding: 24px;
+                border: 1px solid var(--border-subtle);
+                border-radius: var(--radius-xl);
+                background: var(--bg-surface);
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-bottom: 16px;
+                "
+              >
+                <h3
+                  style="
+                    font-size: 1.05rem;
+                    font-weight: 700;
+                    color: var(--text-main);
+                    margin: 0;
+                  "
+                >
+                  6. QR Code Preview
+                </h3>
+                <span
+                  id="qr-status-badge"
+                  class="badge badge--pill"
+                  style="
+                    background: var(--bg-surface-subtle);
+                    color: var(--text-muted);
+                    font-size: 0.75rem;
+                    font-weight: 700;
+                    padding: 4px 10px;
+                    border-radius: var(--radius-pill, 999px);
+                  "
+                  >Awaiting Generation</span
+                >
+              </div>
+
+              <!-- Preview Box -->
+              <div
+                id="qr-preview-wrapper"
+                style="
+                  padding: 28px;
+                  background: var(--bg-surface-subtle);
+                  border: 1px dashed var(--border-main);
+                  border-radius: var(--radius-lg);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 280px;
+                "
+              >
+                <!-- Dynamically populated -->
+              </div>
+
+              <!-- 7. Download Actions (PNG, SVG, Copy) -->
+              <div
+                style="
+                  margin-top: 20px;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 14px;
+                "
+              >
+                <div class="form-group">
+                  <label
+                    class="form-label"
+                    style="font-size: 0.85rem; font-weight: 600"
+                    >Download Filename</label
+                  >
+                  <input
+                    type="text"
+                    id="qr-filename-input"
+                    class="ui-input"
+                    value="comprexa-qr"
+                    style="font-size: 0.88rem; max-width: 360px"
+                  />
+                </div>
+
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                    gap: 12px;
+                  "
+                >
+                  <button
+                    type="button"
+                    class="btn btn--primary"
+                    id="dl-png-btn"
+                    disabled
+                    style="justify-content: center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Download PNG</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--secondary"
+                    id="dl-svg-btn"
+                    disabled
+                    style="justify-content: center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Download SVG</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--secondary"
+                    id="dl-jpg-btn"
+                    disabled
+                    style="justify-content: center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Download JPG</span>
+                  </button>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap">
+                  <button
+                    type="button"
+                    class="btn btn--secondary"
+                    id="copy-img-btn"
+                    disabled
+                    style="flex: 1; font-size: 0.85rem; justify-content: center"
+                  >
+                    Copy Image
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--secondary"
+                    id="copy-svg-btn"
+                    disabled
+                    style="flex: 1; font-size: 0.85rem; justify-content: center"
+                  >
+                    Copy SVG Code
+                  </button>
+                </div>
+              </div>
+
+              <!-- 8. Generated QR Information -->
+              <div
+                style="
+                  margin-top: 20px;
+                  padding: 14px;
+                  background: var(--bg-surface-subtle);
+                  border-radius: var(--radius-md);
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                  gap: 10px;
+                  font-size: 0.85rem;
+                  color: var(--text-muted);
+                  border: 1px solid var(--border-subtle);
+                "
+              >
+                <div>
+                  <strong>Data Type:</strong>
+                  <span id="res-meta-type">URL</span>
+                </div>
+                <div>
+                  <strong>Resolution:</strong>
+                  <span id="res-meta-res">512 × 512 px</span>
+                </div>
+                <div>
+                  <strong>Error Correction:</strong>
+                  <span id="res-meta-ecl">Level M</span>
+                </div>
+                <div style="grid-column: 1 / -1; word-break: break-all">
+                  <strong>Payload Data:</strong>
+                  <span id="res-meta-payload">Awaiting generation...</span>
+                </div>
+              </div>
+
+              <!-- Reset Default Settings -->
+              <div style="margin-top: 16px; text-align: right">
+                <button
+                  type="button"
+                  class="btn btn--secondary"
+                  id="reset-qr-cta"
+                  style="font-size: 0.82rem; color: var(--text-muted)"
+                >
+                  Reset Default Settings
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. Dynamic FAQ Section -->
+      <div id="landing-faq"></div>
+
+      <!-- 10. Dynamic Related Tools Grid -->
+      <div id="landing-related-tools"></div>
+
+      <!-- Dynamic Call-to-Action Banner -->
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- 11. Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- Toast Root -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+
+    <!-- Page Specific Scripts -->
+    <script type="module" src="/js/tool-content.js"></script>
+    <script type="module" src="/js/tool-landing.js"></script>
+    <script type="module" src="/js/qr-tools/qr-generator.js"></script>
+  </body>
+</html>

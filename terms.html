@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Premium Documentation Styles -->
+    <style>
+      /* Premium Animations */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulseSoft {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 1;
+        }
+      }
+
+      .terms-animate-fade-up {
+        animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .terms-animate-delay-1 {
+        animation-delay: 100ms;
+      }
+      .terms-animate-delay-2 {
+        animation-delay: 200ms;
+      }
+      .terms-animate-delay-3 {
+        animation-delay: 300ms;
+      }
+
+      /* Hero Gradient & Layout Tweaks */
+      .terms-hero {
+        position: relative;
+        padding: 100px 0 80px;
+        overflow: hidden;
+        background: var(--gradient-hero-bg);
+        text-align: center;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .terms-hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        background: var(--primary-subtle);
+        border: 1px solid var(--primary-border);
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+
+      .terms-hero__badge-pulse {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        animation: pulseSoft 2s infinite ease-in-out;
+      }
+
+      /* Modern Typography Scales */
+      .terms-display-title {
+        font-size: clamp(2.25rem, 5vw, 3.75rem);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+        margin-bottom: 24px;
+      }
+
+      .terms-subtitle {
+        max-width: 720px;
+        margin: 0 auto 24px;
+        font-size: clamp(1.05rem, 2vw, 1.2rem);
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      .terms-last-updated {
+        display: inline-block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        background: var(--bg-surface-hover);
+        padding: 6px 16px;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--border-subtle);
+      }
+
+      /* Documentation Layout Grid */
+      .docs-section {
+        padding: 80px 0;
+      }
+
+      .docs-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+
+      @media (min-width: 1024px) {
+        .docs-container {
+          grid-template-columns: 1fr 280px;
+          gap: 64px;
+        }
+      }
+
+      /* Elegant Document Card Sectioning */
+      .docs-content {
+        max-width: 720px;
+      }
+
+      .docs-section-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 40px;
+        margin-bottom: 32px;
+        box-shadow: var(--shadow-sm);
+        transition:
+          border-color var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      .docs-section-card:hover {
+        border-color: var(--primary-border);
+        box-shadow: var(--shadow-md);
+      }
+
+      .docs-section-card h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 18px;
+        scroll-margin-top: 100px; /* Offset for sticky header scroll target */
+      }
+
+      .docs-section-card p,
+      .docs-section-card ul {
+        color: var(--text-muted);
+        line-height: 1.7;
+        font-size: 0.95rem;
+      }
+
+      .docs-section-card p + p,
+      .docs-section-card p + ul,
+      .docs-section-card ul + p {
+        margin-top: 16px;
+      }
+
+      .docs-section-card ul {
+        padding-left: 20px;
+        list-style-type: disc;
+      }
+
+      .docs-section-card li {
+        margin-bottom: 8px;
+      }
+
+      /* Sticky Sidebar Navigation */
+      .docs-sidebar-wrapper {
+        display: none;
+      }
+
+      @media (min-width: 1024px) {
+        .docs-sidebar-wrapper {
+          display: block;
+          position: sticky;
+          top: 120px;
+        }
+      }
+
+      .docs-sidebar {
+        padding-left: 18px;
+        border-left: 2px solid var(--border-subtle);
+      }
+
+      .docs-sidebar__title {
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        margin-bottom: 18px;
+      }
+
+      .docs-sidebar__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .docs-sidebar__link {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: all var(--transition-fast);
+        display: block;
+      }
+
+      .docs-sidebar__link:hover {
+        color: var(--primary);
+      }
+
+      .docs-sidebar__link.active {
+        color: var(--primary);
+        font-weight: 700;
+        padding-left: 6px;
+        border-left: 2px solid var(--primary);
+        margin-left: -20px; /* Aligns with active indicator */
+      }
+
+      /* Bottom Centered CTA Card */
+      .terms-cta {
+        padding: 60px 0;
+        background-color: var(--bg-surface-hover);
+        border-top: 1px solid var(--border-subtle);
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .terms-cta-card {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: 48px;
+        text-align: center;
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+      }
+
+      .terms-cta-card__title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 12px;
+      }
+
+      .terms-cta-card__desc {
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 28px;
+      }
+
+      /* Email Link styling */
+      .terms-email {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 1px dashed var(--primary);
+        transition: border-bottom-style var(--transition-fast);
+      }
+
+      .terms-email:hover {
+        border-bottom-style: solid;
+      }
+    </style>
+
+<title>Terms of Service — Comprexa</title>
+  <meta name="description" content="Read the terms of service and usage conditions for Comprexa. By using our free file tools, you agree to our policies." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Terms of Service — Comprexa" />
+  <meta property="og:description" content="Read the terms of service and usage conditions for Comprexa. By using our free file tools, you agree to our policies." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/terms.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Terms of Service — Comprexa" />
+  <meta name="twitter:description" content="Read the terms of service and usage conditions for Comprexa. By using our free file tools, you agree to our policies." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/terms.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Terms of Service — Comprexa",
+      "item": "https://comprexa.com/terms.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Terms of Service — Comprexa",
+  "description": "Read the terms of service and usage conditions for Comprexa. By using our free file tools, you agree to our policies.",
+  "url": "https://comprexa.com/terms.html"
+}
+</script>
+</head>
+  <body>
+    <!-- ==========================================================================
+       Header Navigation
+       ========================================================================== -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <!-- Brand Logo -->
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li><a href="/#tools" class="nav__link">Tools</a></li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/blog.html" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+            <li><a href="/contact.html" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Header Action Controls -->
+        <div class="header__actions">
+          <!-- Quick Search Trigger -->
+          <button
+            id="header-search-btn"
+            class="btn btn--icon"
+            aria-label="Open Search (Press Cmd+K)"
+            title="Open Search (Cmd+K)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <!-- Global Preferences & Settings Trigger -->
+          <button
+            id="header-settings-btn"
+            class="btn btn--icon btn-settings-trigger"
+            aria-label="Global Preferences & Settings"
+            title="Preferences & Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+
+          <!-- Light / Dark Theme Toggle -->
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+              <path d="M19 3v4" />
+              <path d="M21 5h-4" />
+            </svg>
+          </button>
+
+          <!-- All Tools CTA Button -->
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-label="Toggle Mobile Navigation Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Menu Overlay -->
+    <div
+      id="mobile-drawer"
+      class="mobile-drawer"
+      aria-label="Mobile Navigation"
+    >
+      <ul class="mobile-drawer__list">
+        <li><a href="/" class="mobile-drawer__link">Home</a></li>
+        <li><a href="/#tools" class="mobile-drawer__link">Tools</a></li>
+        <li>
+          <a href="/#categories" class="mobile-drawer__link">Categories</a>
+        </li>
+        <li><a href="/blog.html" class="mobile-drawer__link">Blog</a></li>
+        <li><a href="/about.html" class="mobile-drawer__link">About</a></li>
+        <li><a href="/contact.html" class="mobile-drawer__link">Contact</a></li>
+      </ul>
+
+      <div class="mobile-drawer__actions">
+        <button
+          id="theme-toggle-mobile"
+          class="btn btn--secondary"
+          style="width: 100%; justify-content: flex-start"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            <path d="M19 3v4" />
+            <path d="M21 5h-4" />
+          </svg>
+          <span>Toggle Dark Mode</span>
+        </button>
+
+        <a href="/#tools" class="btn btn--primary" style="width: 100%">
+          Browse All Tools
+        </a>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+       Main Terms of Service Layout
+       ========================================================================== -->
+    <main id="main-content" class="terms-animate-fade-up">
+      <!-- ==========================================================================
+         Hero Section
+         ========================================================================== -->
+      <section class="terms-hero">
+        <div class="hero__bg-grid" aria-hidden="true"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
+
+        <div class="container relative z-10">
+          <!-- Badge -->
+          <div class="terms-hero__badge terms-animate-fade-up">
+            <span class="terms-hero__badge-pulse"></span>
+            <span>Legal Information</span>
+          </div>
+
+          <!-- Heading -->
+          <h1
+            class="terms-display-title terms-animate-fade-up terms-animate-delay-1"
+          >
+            Terms of Service
+          </h1>
+
+          <!-- Subtitle Description -->
+          <p class="terms-subtitle terms-animate-fade-up terms-animate-delay-2">
+            Please read these Terms of Service carefully before using Comprexa.
+            By accessing or using our website, you agree to these terms.
+          </p>
+
+          <!-- Last Updated Stamp -->
+          <div
+            class="terms-last-updated terms-animate-fade-up terms-animate-delay-3"
+          >
+            Last Updated: August 2026
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Documentation Section with Layout Grid
+         ========================================================================== -->
+      <section class="docs-section">
+        <div class="container">
+          <div class="docs-container">
+            <!-- Left Column: Core Terms Content -->
+            <div class="docs-content">
+              <!-- 1. Acceptance of Terms -->
+              <div class="docs-section-card">
+                <h2 id="acceptance">1. Acceptance of Terms</h2>
+                <p>
+                  By accessing, browsing, or using the Comprexa platform
+                  ("Website", "Services"), you acknowledge that you have read,
+                  understood, and agree to be bound by these Terms of Service
+                  ("Terms") along with our Privacy Policy.
+                </p>
+                <p>
+                  If you do not agree with any part of these Terms, you must
+                  immediately cease all access and use of our website and its
+                  provided services.
+                </p>
+              </div>
+
+              <!-- 2. Use of Services -->
+              <div class="docs-section-card">
+                <h2 id="use-of-services">2. Use of Services</h2>
+                <p>
+                  You may use Comprexa solely for lawful purposes and in
+                  accordance with these Terms. You are responsible for ensuring
+                  that all files, input, and material processed through our
+                  services do not violate any state, national, or international
+                  laws.
+                </p>
+                <p>Specifically, you agree that you must not:</p>
+                <ul>
+                  <li>
+                    <strong>Abuse the Services:</strong> Use the tools in any
+                    manner that could disable, overburden, damage, or impair the
+                    website or interfere with any other party's use.
+                  </li>
+                  <li>
+                    <strong>Attempt Unauthorized Access:</strong> Attempt to
+                    gain unauthorized access to, interfere with, damage, or
+                    disrupt any parts of the website, the server on which the
+                    website is stored, or any database connected to the website.
+                  </li>
+                  <li>
+                    <strong>Upload Malicious Content:</strong> Introduce any
+                    viruses, Trojan horses, worms, logic bombs, or other
+                    material that is malicious or technologically harmful to
+                    client browsers or network endpoints.
+                  </li>
+                  <li>
+                    <strong>Disrupt Website Functionality:</strong> Use any
+                    automated scrapers, indexers, or bots to bypass structural
+                    restrictions or perform brute-force processing operations
+                    without prior written authorization.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 3. Browser-Based Processing -->
+              <div class="docs-section-card">
+                <h2 id="browser-processing">3. Browser-Based Processing</h2>
+                <p>
+                  Comprexa relies heavily on a decentralized browser-based
+                  execution paradigm. Most file utilities, compressors,
+                  converters, editors, and diagnostic scanners execute entirely
+                  locally within your browser engine. This means:
+                </p>
+                <ul>
+                  <li>
+                    <strong>In-Memory Processing:</strong> Your files are
+                    loaded, processed, and compiled strictly in-memory within
+                    your device. No permanent copies are uploaded to our remote
+                    infrastructure, except where explicitly stated.
+                  </li>
+                  <li>
+                    <strong>User Responsibility:</strong> You are solely
+                    responsible for the safety, integrity, and backups of the
+                    source files you choose to process on your hardware.
+                    Comprexa has no custody of your files and cannot retrieve or
+                    recover any lost data.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 4. Intellectual Property -->
+              <div class="docs-section-card">
+                <h2 id="intellectual-property">4. Intellectual Property</h2>
+                <p>The Comprexa platform, including its:</p>
+                <ul>
+                  <li>
+                    <strong>Source Code & Logic:</strong> Frontend scripts,
+                    utility wrappers, style mechanisms, and custom libraries.
+                  </li>
+                  <li>
+                    <strong>Visual Elements:</strong> Brand elements, design
+                    systems, illustrations, iconography, and styling sheets.
+                  </li>
+                  <li>
+                    <strong>Logos & Trademarks:</strong> Distinctive corporate
+                    names, badges, trade dress, and service marks.
+                  </li>
+                  <li>
+                    <strong>Source Content:</strong> Educational articles,
+                    descriptions, layouts, and documentation.
+                  </li>
+                </ul>
+                <p>
+                  are the exclusive property of Comprexa and are protected by
+                  applicable local and international copyright, trademark,
+                  patent, trade secret, and other intellectual property or
+                  proprietary rights laws.
+                </p>
+              </div>
+
+              <!-- 5. Third-Party Services -->
+              <div class="docs-section-card">
+                <h2 id="third-party">5. Third-Party Services</h2>
+                <p>
+                  Comprexa may integrate or rely on trusted third-party cloud,
+                  hosting, advertising, and analysis services, including:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Google AdSense:</strong> To display relevant visual
+                    advertisements to support free web utility access.
+                  </li>
+                  <li>
+                    <strong>Google Analytics:</strong> To assess generalized
+                    visitor counts and interaction paths.
+                  </li>
+                  <li>
+                    <strong>Cloudflare:</strong> To manage secure network
+                    routing, SSL handshakes, and caching.
+                  </li>
+                </ul>
+                <p>
+                  Each third-party service operates under its own legal terms
+                  and privacy frameworks. We encourage you to review their
+                  specific disclaimers, as we have no control over their
+                  independent operations or external terms of use.
+                </p>
+              </div>
+
+              <!-- 6. Disclaimer -->
+              <div class="docs-section-card">
+                <h2 id="disclaimer">6. Disclaimer</h2>
+                <p>
+                  COMPREXA IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS,
+                  WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+                </p>
+                <p>
+                  While we make every effort to maintain accurate, secure, and
+                  performant browser tools, we do not guarantee that:
+                </p>
+                <ul>
+                  <li>
+                    The service will be completely uninterrupted, secure, or
+                    free from operational bugs or script errors.
+                  </li>
+                  <li>
+                    The results obtained from using our compression, conversion,
+                    or PDF tools will always meet your specific requirements or
+                    be 100% accurate.
+                  </li>
+                  <li>
+                    The website or the servers that make it available are free
+                    of viruses or other harmful components (though Cloudflare
+                    filters are active).
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 7. Limitation of Liability -->
+              <div class="docs-section-card">
+                <h2 id="limitation-of-liability">7. Limitation of Liability</h2>
+                <p>
+                  TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT
+                  SHALL COMPREXA, ITS DEVELOPERS, PARTNERS, OR AFFILIATES BE
+                  LIABLE FOR ANY DAMAGES OF ANY KIND ARISING OUT OF OR IN
+                  CONNECTION WITH YOUR USE, OR INABILITY TO USE, THE SERVICES.
+                </p>
+                <p>This includes, but is not limited to, liability for:</p>
+                <ul>
+                  <li>
+                    <strong>Data Loss:</strong> Corruption, deletion, or loss of
+                    any documents, images, text, or database files processed
+                    through client browser tools.
+                  </li>
+                  <li>
+                    <strong>File Corruption:</strong> Errors introduced into
+                    output artifacts during browser-based encoding or
+                    compression routines.
+                  </li>
+                  <li>
+                    <strong>Business Interruption:</strong> Financial loss,
+                    delay of work, or system downtime experienced during
+                    platform interactions.
+                  </li>
+                  <li>
+                    <strong>Consequential Damages:</strong> Any direct,
+                    indirect, incidental, special, consequential, or punitive
+                    damages whatsoever.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 8. Changes to the Terms -->
+              <div class="docs-section-card">
+                <h2 id="updates">8. Changes to the Terms</h2>
+                <p>
+                  We reserve the right, at our sole discretion, to modify or
+                  replace these Terms of Service at any time.
+                </p>
+                <p>
+                  When modifications are made, we will update the "Last Updated"
+                  date at the top of this document. Your continued use of
+                  Comprexa following the publication of any changes indicates
+                  your full acceptance of the updated Terms.
+                </p>
+              </div>
+
+              <!-- 9. Contact Information -->
+              <div class="docs-section-card">
+                <h2 id="contact">9. Contact Information</h2>
+                <p>
+                  If you have any questions, suggestions, or concerns regarding
+                  these Terms of Service, please do not hesitate to contact us:
+                </p>
+                <p>
+                  <strong>Email:</strong>
+                  <a
+                    href="mailto:skamitboss4148@gmail.com"
+                    class="terms-email"
+                    title="Email Comprexa Legal Support"
+                    >skamitboss4148@gmail.com</a
+                  >
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Column: Desktop Sticky Table of Contents -->
+            <div class="docs-sidebar-wrapper" aria-label="Table of Contents">
+              <div class="docs-sidebar">
+                <div class="docs-sidebar__title">On This Page</div>
+                <ul class="docs-sidebar__list">
+                  <li>
+                    <a href="#acceptance" class="docs-sidebar__link"
+                      >Acceptance</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#use-of-services" class="docs-sidebar__link"
+                      >Use of Services</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#browser-processing" class="docs-sidebar__link"
+                      >Browser Processing</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#intellectual-property" class="docs-sidebar__link"
+                      >Intellectual Property</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#third-party" class="docs-sidebar__link"
+                      >Third-Party Services</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#disclaimer" class="docs-sidebar__link"
+                      >Disclaimer</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#limitation-of-liability"
+                      class="docs-sidebar__link"
+                      >Limitation of Liability</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#updates" class="docs-sidebar__link">Updates</a>
+                  </li>
+                  <li>
+                    <a href="#contact" class="docs-sidebar__link">Contact</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Bottom CTA Section
+         ========================================================================== -->
+      <section class="terms-cta">
+        <div class="container">
+          <div class="terms-cta-card">
+            <h2 class="terms-cta-card__title">Questions About These Terms?</h2>
+            <p class="terms-cta-card__desc">
+              If you have questions regarding these Terms of Service, feel free
+              to contact us.
+            </p>
+            <a
+              href="/contact.html"
+              class="btn btn--primary py-3.5 px-8 text-base inline-flex items-center gap-2"
+            >
+              <span>Contact Us</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+       Footer Section
+       ========================================================================== -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- ==========================================================================
+       Scripts Section
+       ========================================================================== -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+
+    <!-- Table of Contents Active Link Highlight Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const links = document.querySelectorAll(".docs-sidebar__link");
+        const sections = document.querySelectorAll(
+          ".docs-content .docs-section-card h2",
+        );
+
+        function updateActiveLink() {
+          let activeId = "";
+          const scrollPosition = window.scrollY + 160; // offset for comfortable scrolling triggers
+
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (scrollPosition >= sectionTop) {
+              activeId = section.getAttribute("id");
+            }
+          });
+
+          links.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${activeId}`) {
+              link.classList.add("active");
+            }
+          });
+        }
+
+        window.addEventListener("scroll", updateActiveLink);
+        updateActiveLink(); // Initial run
+      });
+    </script>
+  </body>
+</html>

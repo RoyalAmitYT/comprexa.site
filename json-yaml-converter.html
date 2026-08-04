@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      name="keywords"
+      content="json to yaml, yaml to json, json yaml converter, convert json to yaml online, convert yaml to json, json2yaml, yaml2json"
+    />
+    
+    <link
+      rel="canonical"
+      href="https://comprexa.app/json-yaml-converter.html"
+    />
+    <title>
+      Free Online JSON ↔ YAML Converter — Convert JSON & YAML Code | Comprexa
+    </title>
+
+    <!-- Open Graph / Social -->
+
+<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+<title>JSON to YAML Converter — Comprexa</title>
+  <meta name="description" content="Convert data between JSON and YAML formats instantly. Fast, free, and secure browser-based developer tool." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="JSON to YAML Converter — Comprexa" />
+  <meta property="og:description" content="Convert data between JSON and YAML formats instantly. Fast, free, and secure browser-based developer tool." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/json-yaml-converter.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JSON to YAML Converter — Comprexa" />
+  <meta name="twitter:description" content="Convert data between JSON and YAML formats instantly. Fast, free, and secure browser-based developer tool." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/json-yaml-converter.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Developer Tools",
+      "item": "https://comprexa.com/developer-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Free Online JSON ↔ YAML Converter — Convert JSON & YAML Code",
+      "item": "https://comprexa.com/json-yaml-converter.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free Online JSON ↔ YAML Converter — Convert JSON & YAML Code",
+  "url": "https://comprexa.com/json-yaml-converter.html",
+  "description": "Convert data between JSON and YAML formats instantly. Fast, free, and secure browser-based developer tool.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Universal Header Navigation -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+            <li><a href="/contact.html" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="header-search-btn"
+            class="btn btn--icon"
+            aria-label="Open Search"
+            title="Open Search (Cmd+K)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <button
+            id="header-settings-btn"
+            class="btn btn--icon btn-settings-trigger"
+            aria-label="Global Preferences & Settings"
+            title="Preferences & Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-label="Toggle Mobile Navigation Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div
+      id="mobile-drawer"
+      class="mobile-drawer"
+      aria-label="Mobile Navigation"
+    >
+      <ul class="mobile-drawer__list">
+        <li><a href="/" class="mobile-drawer__link">Home</a></li>
+        <li><a href="/#tools" class="mobile-drawer__link">Tools</a></li>
+        <li>
+          <a href="/#categories" class="mobile-drawer__link">Categories</a>
+        </li>
+        <li><a href="/#blog" class="mobile-drawer__link">Blog</a></li>
+        <li><a href="/about.html" class="mobile-drawer__link">About</a></li>
+      </ul>
+    </div>
+
+    <main>
+      <!-- 1. Dynamic Breadcrumbs -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+
+      <!-- 2. Dynamic Hero Header -->
+      <div id="landing-hero"></div>
+
+      <!-- 3. Tool Workspace Container -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container">
+          <div
+            class="card workspace-card"
+            style="padding: 24px; margin-bottom: 24px"
+          >
+            <!-- File Banner when uploaded -->
+            <div
+              id="active-file-banner"
+              style="
+                display: none;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 14px;
+                background: var(--bg-surface-hover);
+                border: 1px solid var(--border-subtle);
+                border-radius: var(--radius-md);
+                margin-bottom: 16px;
+              "
+            ></div>
+
+            <!-- Configuration & Options Bar -->
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 16px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid var(--border-subtle);
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  flex-wrap: wrap;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <label
+                    for="conversion-mode"
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 700;
+                      color: var(--text-muted);
+                    "
+                    >Mode:</label
+                  >
+                  <select
+                    id="conversion-mode"
+                    class="ui-select"
+                    style="padding: 5px 12px; font-size: 0.85rem"
+                  >
+                    <option value="auto" selected>Auto Detect Format</option>
+                    <option value="json-to-yaml">JSON → YAML</option>
+                    <option value="yaml-to-json">YAML → JSON</option>
+                  </select>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <label
+                    for="indent-select"
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 700;
+                      color: var(--text-muted);
+                    "
+                    >Indentation:</label
+                  >
+                  <select
+                    id="indent-select"
+                    class="ui-select"
+                    style="padding: 5px 12px; font-size: 0.85rem"
+                  >
+                    <option value="2" selected>2 Spaces</option>
+                    <option value="4">4 Spaces</option>
+                  </select>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn--outline btn--sm"
+                  id="btn-swap"
+                  title="Swap Conversion Direction"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <path d="m16 3 4 4-4 4" />
+                    <path d="M20 7H4" />
+                    <path d="m8 21-4-4 4-4" />
+                    <path d="M4 17h16" />
+                  </svg>
+                  <span>Swap Direction</span>
+                </button>
+
+                <span
+                  id="detected-format-badge"
+                  class="badge"
+                  style="
+                    display: none;
+                    padding: 4px 10px;
+                    font-size: 0.75rem;
+                    font-weight: 700;
+                    background: var(--bg-surface-hover);
+                    color: var(--primary);
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-full);
+                  "
+                  >Auto-Detected: JSON</span
+                >
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  gap: 8px;
+                  align-items: center;
+                  flex-wrap: wrap;
+                "
+              >
+                <button
+                  type="button"
+                  class="btn btn--ghost btn--sm"
+                  id="btn-sample-json"
+                >
+                  Sample JSON
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--ghost btn--sm"
+                  id="btn-sample-yaml"
+                >
+                  Sample YAML
+                </button>
+
+                <label
+                  class="btn btn--outline btn--sm"
+                  style="cursor: pointer; margin: 0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
+                  <span>Upload File</span>
+                  <input
+                    type="file"
+                    id="file-upload-input"
+                    accept=".json,.yaml,.yml,.txt"
+                    hidden
+                  />
+                </label>
+
+                <button
+                  type="button"
+                  class="btn btn--ghost btn--sm"
+                  id="btn-clear"
+                >
+                  Clear
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--outline btn--sm"
+                  id="btn-copy"
+                >
+                  Copy Output
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--primary btn--sm"
+                  id="btn-download"
+                >
+                  Download
+                </button>
+              </div>
+            </div>
+
+            <!-- Diagnostic Error & Status Banner -->
+            <div id="dev-status-banner"></div>
+
+            <!-- Split Code Editor Grid -->
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 16px;
+                margin-top: 16px;
+              "
+            >
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <span
+                  style="
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                    color: var(--text-muted);
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                  "
+                  id="input-panel-title"
+                  >Input Code</span
+                >
+                <div id="converter-input-editor"></div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <span
+                  style="
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                    color: var(--text-muted);
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                  "
+                  id="output-panel-title"
+                  >Converted Output</span
+                >
+                <div id="converter-output-editor"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- How It Works Card -->
+          <div
+            class="card workspace-card workspace-how-card"
+            style="margin-bottom: 24px"
+          >
+            <div class="workspace-how-header">
+              <h3 class="workspace-how-title">How it works</h3>
+            </div>
+            <div class="workspace-how-steps">
+              <div class="workspace-how-step">
+                <div class="workspace-how-step__badge">1</div>
+                <div class="workspace-how-step__text">
+                  <strong>Input JSON or YAML</strong>
+                  <span
+                    >Paste configuration code into the editor or upload a .json
+                    / .yaml file</span
+                  >
+                </div>
+              </div>
+              <div class="workspace-how-arrow" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </div>
+              <div class="workspace-how-step">
+                <div class="workspace-how-step__badge">2</div>
+                <div class="workspace-how-step__text">
+                  <strong>Auto Format Detection</strong>
+                  <span
+                    >Format is detected automatically and converted instantly in
+                    real time</span
+                  >
+                </div>
+              </div>
+              <div class="workspace-how-arrow" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </div>
+              <div class="workspace-how-step">
+                <div class="workspace-how-step__badge">3</div>
+                <div class="workspace-how-step__text">
+                  <strong>Copy or Download</strong>
+                  <span
+                    >Copy converted output or save directly as a .yaml or .json
+                    file</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Dynamic Features Section -->
+      <div id="landing-features"></div>
+
+      <!-- 5. Dynamic How It Works Section -->
+      <div id="landing-how-it-works"></div>
+
+      <!-- 6. Dynamic Benefits Section -->
+      <div id="landing-benefits"></div>
+
+      <!-- 7. Dynamic FAQ Section -->
+      <div id="landing-faq"></div>
+
+      <!-- 8. Dynamic Related Tools Grid -->
+      <div id="landing-related-tools"></div>
+
+      <!-- 9. Dynamic Call-to-Action Banner -->
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Global Scripts -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <!-- Page Specific Scripts -->
+    <script type="module" src="/js/tool-content.js"></script>
+    <script type="module" src="/js/tool-landing.js"></script>
+    <script type="module" src="/js/developer/json-yaml-converter.js"></script>
+  </body>
+</html>

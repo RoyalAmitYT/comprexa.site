@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Premium Contact Page Extra Styles (SaaS Layout & Custom Interactivity) -->
+    <style>
+      /* Premium Animation Keyframes */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulseSoft {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 1;
+        }
+      }
+
+      /* Custom CSS Overrides & Helpers for Contact Page */
+      .contact-animate-fade-up {
+        animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .contact-animate-delay-1 {
+        animation-delay: 100ms;
+      }
+      .contact-animate-delay-2 {
+        animation-delay: 200ms;
+      }
+      .contact-animate-delay-3 {
+        animation-delay: 300ms;
+      }
+
+      /* Hero Gradient & Layout Tweaks */
+      .contact-hero {
+        position: relative;
+        padding: 100px 0 80px;
+        overflow: hidden;
+        background: var(--gradient-hero-bg);
+        text-align: center;
+      }
+
+      .contact-hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        background: var(--primary-subtle);
+        border: 1px solid var(--primary-border);
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+
+      .contact-hero__badge-pulse {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        animation: pulseSoft 2s infinite ease-in-out;
+      }
+
+      /* Modern Typography Scales */
+      .contact-display-title {
+        font-size: clamp(2.25rem, 5vw, 3.75rem);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+        margin-bottom: 24px;
+      }
+
+      .contact-subtitle {
+        max-width: 720px;
+        margin: 0 auto 36px;
+        font-size: clamp(1.05rem, 2vw, 1.2rem);
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      /* Spacing & Section Anchors */
+      .contact-section {
+        padding: 80px 0;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .contact-section--neutral {
+        background-color: var(--bg-surface-hover);
+      }
+
+      /* Premium Contact Card Grid */
+      .contact-methods-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      
+      @media (min-width: 768px) {
+        .contact-methods-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .contact-card {
+        padding: 48px 32px;
+        border-radius: var(--radius-xl);
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: all var(--transition-normal);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-card:hover {
+        border-color: var(--primary-border);
+        transform: translateY(-4px);
+      }
+
+      .contact-card__icon-container {
+        width: 72px;
+        height: 72px;
+        border-radius: var(--radius-lg);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-subtle);
+        color: var(--primary);
+        margin-bottom: 24px;
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .contact-card__title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 12px;
+      }
+
+      .contact-card__desc {
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 24px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        flex-grow: 1;
+      }
+      
+      .contact-method-value {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 24px;
+        padding: 12px 24px;
+        background-color: var(--bg-surface-hover);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+      }
+
+      .contact-card__btn {
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+      }
+
+      /* Support Features */
+      .support-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      @media (min-width: 768px) {
+        .support-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .support-card {
+        padding: 28px;
+        border-radius: var(--radius-lg);
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        transition: all var(--transition-normal);
+        text-align: center;
+      }
+
+      .support-card:hover {
+        border-color: var(--primary-border);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .support-card__icon {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-md);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-subtle);
+        color: var(--primary);
+        margin-bottom: 16px;
+      }
+
+      .support-card__title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 8px;
+      }
+
+      .support-card__desc {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* Final CTA / Thank you styling */
+      .contact-thank-you {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 48px;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .contact-thank-you__heart {
+        display: inline-block;
+        margin-left: 4px;
+      }
+
+      .contact-thank-you__quote {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin-bottom: 32px;
+      }
+
+</style>
+
+<title>Contact Us | Support & Feedback — Comprexa</title>
+  <meta name="description" content="Get in touch with the Comprexa team. We are here to help with support, feedback, or inquiries regarding our suite of free file tools." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact Us | Support & Feedback — Comprexa" />
+  <meta property="og:description" content="Get in touch with the Comprexa team. We are here to help with support, feedback, or inquiries regarding our suite of free file tools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/contact.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact Us | Support & Feedback — Comprexa" />
+  <meta name="twitter:description" content="Get in touch with the Comprexa team. We are here to help with support, feedback, or inquiries regarding our suite of free file tools." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/contact.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contact Us",
+      "item": "https://comprexa.com/contact.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does it take to receive a reply?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We typically respond to all inquiries within 24 to 48 hours during regular business days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I report bugs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, absolutely. If you encounter any issues while using our tools, please send us an email or a WhatsApp message with the details (including your browser and operating system) so we can fix it promptly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I request a new feature?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We are always looking to improve Comprexa. If you have an idea for a new tool or feature, please let us know. Your feedback directly shapes our roadmap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Comprexa free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Comprexa is completely free. We provide powerful client-side tools without paywalls, subscriptions, or file size limits."
+      }
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Us | Support & Feedback — Comprexa",
+  "description": "Get in touch with the Comprexa team. We are here to help with support, feedback, or inquiries regarding our suite of free file tools.",
+  "url": "https://comprexa.com/contact.html"
+}
+</script>
+</head>
+  <body>
+    <!-- ==========================================================================
+       Header Navigation
+       ========================================================================== -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <!-- Brand Logo -->
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li><a href="/#tools" class="nav__link">Tools</a></li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/blog.html" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+            <li>
+              <a
+                href="/contact.html"
+                class="nav__link nav__link--active"
+                aria-current="page"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Header Action Controls -->
+        <div class="header__actions">
+          <!-- Quick Search Trigger -->
+          <button
+            id="header-search-btn"
+            class="btn btn--icon"
+            aria-label="Open Search (Press Cmd+K)"
+            title="Open Search (Cmd+K)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <!-- Global Preferences & Settings Trigger -->
+          <button
+            id="header-settings-btn"
+            class="btn btn--icon btn-settings-trigger"
+            aria-label="Global Preferences & Settings"
+            title="Preferences & Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+
+          <!-- Light / Dark Theme Toggle -->
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+              <path d="M19 3v4" />
+              <path d="M21 5h-4" />
+            </svg>
+          </button>
+
+          <!-- All Tools CTA Button -->
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-label="Toggle Mobile Navigation Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Menu Overlay -->
+    <div
+      id="mobile-drawer"
+      class="mobile-drawer"
+      aria-label="Mobile Navigation"
+    >
+      <ul class="mobile-drawer__list">
+        <li><a href="/" class="mobile-drawer__link">Home</a></li>
+        <li><a href="/#tools" class="mobile-drawer__link">Tools</a></li>
+        <li>
+          <a href="/#categories" class="mobile-drawer__link">Categories</a>
+        </li>
+        <li><a href="/blog.html" class="mobile-drawer__link">Blog</a></li>
+        <li><a href="/about.html" class="mobile-drawer__link">About</a></li>
+        <li>
+          <a
+            href="/contact.html"
+            class="mobile-drawer__link mobile-drawer__link--active"
+            aria-current="page"
+            >Contact</a
+          >
+        </li>
+      </ul>
+
+      <div class="mobile-drawer__actions">
+        <button
+          id="theme-toggle-mobile"
+          class="btn btn--secondary"
+          style="width: 100%; justify-content: flex-start"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            <path d="M19 3v4" />
+            <path d="M21 5h-4" />
+          </svg>
+          <span>Toggle Dark Mode</span>
+        </button>
+
+        <a href="/#tools" class="btn btn--primary" style="width: 100%">
+          Browse All Tools
+        </a>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+       Main Contact Layout
+       ========================================================================== -->
+        <main id="main-content" class="contact-animate-fade-up">
+      <!-- Hero Section -->
+      <section class="contact-hero">
+        <div class="container">
+          <div class="contact-hero__badge contact-animate-fade-up">
+            <span class="contact-hero__badge-pulse"></span>
+            <span>Contact Us</span>
+          </div>
+          <h1 class="contact-display-title contact-animate-fade-up contact-animate-delay-1">
+            We're Here to Help
+          </h1>
+          <p class="contact-subtitle contact-animate-fade-up contact-animate-delay-2">
+            Have a question, found a bug, want to suggest a feature, or need assistance? We'd love to hear from you.
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact Methods Section -->
+      <section class="contact-section">
+        <div class="container">
+          <div class="contact-methods-grid contact-animate-fade-up contact-animate-delay-3">
+            <!-- Email Support Card -->
+            <div class="contact-card">
+              <div class="contact-card__icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+              </div>
+              <h2 class="contact-card__title">Email Support</h2>
+              <p class="contact-card__desc">
+                For general questions, support, bug reports, feature requests, or business inquiries.
+              </p>
+              <div class="contact-method-value">skamitboss4148@gmail.com</div>
+              <a href="mailto:skamitboss4148@gmail.com" class="btn btn--primary contact-card__btn">
+                <span>Contact via Email</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              </a>
+            </div>
+
+            <!-- WhatsApp Support Card -->
+            <div class="contact-card">
+              <div class="contact-card__icon-container" style="color: #25D366; background-color: rgba(37, 211, 102, 0.1);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <h2 class="contact-card__title">WhatsApp Support</h2>
+              <p class="contact-card__desc">
+                Need a quick response? Contact us directly on WhatsApp.
+              </p>
+              <div class="contact-method-value">+91 6295864148</div>
+              <a href="https://wa.me/916295864148" target="_blank" rel="noopener noreferrer" class="btn btn--primary contact-card__btn" style="background-color: #25D366; border-color: #25D366; color: white;">
+                <span>Chat on WhatsApp</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Contact Us Section -->
+      <section class="contact-section contact-section--neutral">
+        <div class="container">
+          <div class="support-grid contact-animate-fade-up">
+            <!-- Response Time Card -->
+            <div class="support-card">
+              <div class="support-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <h3 class="support-card__title">Response Time</h3>
+              <p class="support-card__desc">Usually within 24–48 hours.</p>
+            </div>
+
+            <!-- Privacy Card -->
+            <div class="support-card">
+              <div class="support-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </div>
+              <h3 class="support-card__title">Privacy</h3>
+              <p class="support-card__desc">Your messages remain private.</p>
+            </div>
+
+            <!-- Support Card -->
+            <div class="support-card">
+              <div class="support-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <path d="M16 13H8" />
+                  <path d="M16 17H8" />
+                  <path d="M10 9H8" />
+                </svg>
+              </div>
+              <h3 class="support-card__title">Support</h3>
+              <p class="support-card__desc">
+                Questions, feedback, bugs, feature requests, and business inquiries.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="contact-section">
+        <div class="container" style="max-width: 800px;">
+          <h2 class="contact-display-title" style="text-align: center; font-size: 2.25rem; margin-bottom: 48px;">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            
+            <div class="faq-item">
+              <button class="faq-item__question" aria-expanded="false" id="faq-btn-c1">
+                <span>How long does it take to receive a reply?</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-item__answer" id="faq-ans-c1" role="region" aria-labelledby="faq-btn-c1">
+                <p>We typically respond to all inquiries within 24 to 48 hours during regular business days.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-item__question" aria-expanded="false" id="faq-btn-c2">
+                <span>Can I report bugs?</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-item__answer" id="faq-ans-c2" role="region" aria-labelledby="faq-btn-c2">
+                <p>Yes, absolutely. If you encounter any issues while using our tools, please send us an email or a WhatsApp message with the details (including your browser and operating system) so we can fix it promptly.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-item__question" aria-expanded="false" id="faq-btn-c3">
+                <span>Can I request a new feature?</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-item__answer" id="faq-ans-c3" role="region" aria-labelledby="faq-btn-c3">
+                <p>We are always looking to improve Comprexa. If you have an idea for a new tool or feature, please let us know. Your feedback directly shapes our roadmap.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-item__question" aria-expanded="false" id="faq-btn-c4">
+                <span>Is Comprexa free to use?</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-item__answer" id="faq-ans-c4" role="region" aria-labelledby="faq-btn-c4">
+                <p>Yes, Comprexa is completely free. We provide powerful client-side tools without paywalls, subscriptions, or file size limits.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA Section -->
+      <section class="contact-section" style="border-bottom: none">
+        <div class="container">
+          <div class="contact-thank-you contact-animate-fade-up">
+            <h2 class="contact-card__title" style="font-size: 2rem; margin-bottom: 16px;">
+              Thank You for Using Comprexa <span class="contact-thank-you__heart">💜</span>
+            </h2>
+            <p class="contact-thank-you__quote" style="max-width: 600px; margin-left: auto; margin-right: auto; font-style: normal; margin-bottom: 32px;">
+              Your feedback helps us improve Comprexa and build better tools for everyone.
+            </p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+              <a href="/#tools" class="btn btn--primary">
+                <span>Browse All Tools</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </a>
+              <a href="/" class="btn btn--secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Back to Home</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+<!-- ==========================================================================
+       Footer Section
+       ========================================================================== -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- ==========================================================================
+       Scripts Section
+       ========================================================================== -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+
+    <!-- Copy to Clipboard & Toast Trigger Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const copyBtn = document.getElementById("btn-copy-email");
+        const emailText = "skamitboss4148@gmail.com";
+
+        if (copyBtn) {
+          copyBtn.addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(emailText);
+
+              // Try to trigger Comprexa's beautiful built-in toast system
+              if (
+                window.ComprexaToast &&
+                typeof window.ComprexaToast.success === "function"
+              ) {
+                window.ComprexaToast.success("Email copied successfully.");
+              } else {
+                // Fallback simple clean alert if toast not loaded yet
+                if (window.ComprexaToast)
+                  window.ComprexaToast.success(
+                    "Email copied successfully: " + emailText,
+                  );
+              }
+            } catch (err) {
+              console.error("Failed to copy text: ", err);
+              // Fallback for older browsers or permission denied
+              const textArea = document.createElement("textarea");
+              textArea.value = emailText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.focus();
+              textArea.select();
+              try {
+                document.execCommand("copy");
+                if (
+                  window.ComprexaToast &&
+                  typeof window.ComprexaToast.success === "function"
+                ) {
+                  window.ComprexaToast.success("Email copied successfully.");
+                } else {
+                  if (window.ComprexaToast)
+                    window.ComprexaToast.success(
+                      "Email copied successfully: " + emailText,
+                    );
+                }
+              } catch (copyErr) {
+                console.error("execCommand copy failed: ", copyErr);
+              }
+              document.body.removeChild(textArea);
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

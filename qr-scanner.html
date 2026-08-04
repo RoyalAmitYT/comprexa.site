@@ -1,0 +1,1476 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      .dropzone--active {
+        border-color: var(--primary) !important;
+        background: rgba(99, 102, 241, 0.08) !important;
+      }
+      .video-viewfinder {
+        position: relative;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: #000000;
+        border: 2px solid var(--primary);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+      .video-viewfinder video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .viewfinder-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .viewfinder-box {
+        width: 220px;
+        height: 220px;
+        border: 2px dashed rgba(255, 255, 255, 0.85);
+        border-radius: var(--radius-md);
+        box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.45);
+      }
+      /* Keep the two-column "has-file" workspace layout responsive: the
+         shared template's has-file rule pins a fixed sidebar column with
+         !important, which otherwise overrides the site-wide mobile stacking
+         breakpoint. Scoped to this page only. */
+      @media (max-width: 992px) {
+        #landing-workspace.tool-workspace[data-workspace-state="has-file"]
+          .tool-workspace__grid {
+          grid-template-columns: 1fr !important;
+        }
+        .tool-workspace__sidebar {
+          position: static !important;
+        }
+      }
+    </style>
+
+<title>Free QR Code Scanner | Read Barcodes — Comprexa</title>
+  <meta name="description" content="Scan QR codes and barcodes instantly using your device camera or by uploading an image. Fast, secure, and private." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free QR Code Scanner | Read Barcodes — Comprexa" />
+  <meta property="og:description" content="Scan QR codes and barcodes instantly using your device camera or by uploading an image. Fast, secure, and private." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/qr-scanner.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free QR Code Scanner | Read Barcodes — Comprexa" />
+  <meta name="twitter:description" content="Scan QR codes and barcodes instantly using your device camera or by uploading an image. Fast, secure, and private." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/qr-scanner.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "QR Tools",
+      "item": "https://comprexa.com/qr-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Free QR Code Scanner",
+      "item": "https://comprexa.com/qr-scanner.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free QR Code Scanner",
+  "url": "https://comprexa.com/qr-scanner.html",
+  "description": "Scan QR codes and barcodes instantly using your device camera or by uploading an image. Fast, secure, and private.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- ==========================================================================
+       Header Navigation
+       ========================================================================== -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Dynamic Breadcrumb & Hero -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+      <div id="landing-hero"></div>
+
+      <!-- Tool Workspace Container -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container">
+          <div
+            class="tool-workspace__grid"
+            style="
+              display: grid;
+              grid-template-columns: minmax(0, 1fr) 380px;
+              gap: 24px;
+              align-items: start;
+            "
+          >
+            <!-- Main Left Column: File Upload & Camera Scanner -->
+            <div
+              class="tool-workspace__main"
+              style="display: flex; flex-direction: column; gap: 20px"
+            >
+              <!-- Scan Tool Card -->
+              <div
+                class="card workspace-card"
+                id="scanner-main-card"
+                style="
+                  padding: 32px 24px;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-xl);
+                  background: var(--bg-surface);
+                  text-align: center;
+                  transition: all var(--transition-normal);
+                "
+              >
+                <!-- IDLE / UPLOAD STATE -->
+                <div id="scanner-upload-state">
+                  <div
+                    id="scanner-dropzone"
+                    style="
+                      border: 2px dashed var(--border-main);
+                      padding: 40px 20px;
+                      border-radius: var(--radius-lg);
+                      cursor: pointer;
+                      transition: all 0.2s ease;
+                    "
+                  >
+                    <div
+                      style="
+                        width: 56px;
+                        height: 56px;
+                        border-radius: 50%;
+                        background: rgba(99, 102, 241, 0.12);
+                        color: var(--primary);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 16px;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="28"
+                        height="28"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                      </svg>
+                    </div>
+                    <h3
+                      style="
+                        font-size: 1.25rem;
+                        font-weight: 700;
+                        color: var(--text-main);
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Upload or Drag & Drop Image
+                    </h3>
+                    <p
+                      style="
+                        font-size: 0.9rem;
+                        color: var(--text-muted);
+                        max-width: 440px;
+                        margin: 0 auto 24px;
+                      "
+                    >
+                      Supports PNG, JPG, JPEG, WEBP, GIF, SVG or paste directly
+                      from clipboard (Ctrl+V / Cmd+V).
+                    </p>
+                    <div
+                      style="
+                        display: flex;
+                        gap: 12px;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                      "
+                    >
+                      <button
+                        type="button"
+                        class="btn btn--primary"
+                        id="scanner-select-file-btn"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                          <polyline points="17 8 12 3 7 8" />
+                          <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        <span>Browse Image File</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn--secondary"
+                        id="paste-clipboard-btn"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <rect width="8" height="4" x="8" y="2" rx="1" />
+                          <path
+                            d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                          />
+                        </svg>
+                        <span>Paste from Clipboard</span>
+                      </button>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="scanner-file-input"
+                    accept="image/png,image/jpeg,image/jpg,image/webp,image/gif,image/svg+xml"
+                    style="display: none"
+                  />
+                </div>
+
+                <!-- PREVIEW STATE -->
+                <div id="scanner-preview-state" style="display: none">
+                  <div
+                    style="
+                      background: var(--bg-surface-subtle);
+                      padding: 24px;
+                      border-radius: var(--radius-lg);
+                      border: 1px solid var(--border-subtle);
+                    "
+                  >
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 16px;
+                      "
+                    >
+                      <span
+                        style="
+                          font-size: 0.9rem;
+                          font-weight: 700;
+                          color: var(--text-main);
+                        "
+                        >Image Ready for Scan</span
+                      >
+                      <button
+                        type="button"
+                        id="clear-image-btn"
+                        style="
+                          background: none;
+                          border: none;
+                          color: var(--color-danger, #ef4444);
+                          cursor: pointer;
+                          font-size: 0.85rem;
+                          font-weight: 600;
+                          display: flex;
+                          align-items: center;
+                          gap: 4px;
+                        "
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M3 6h18" />
+                          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                        </svg>
+                        Remove
+                      </button>
+                    </div>
+
+                    <div
+                      style="
+                        background: #ffffff;
+                        padding: 12px;
+                        border-radius: var(--radius-md);
+                        display: inline-block;
+                        box-shadow: var(--shadow-sm);
+                        margin-bottom: 16px;
+                      "
+                    >
+                      <img
+                        id="image-preview"
+                        src=""
+                        alt="Uploaded Image"
+                        style="
+                          max-width: 100%;
+                          max-height: 280px;
+                          display: block;
+                          object-fit: contain;
+                          border-radius: 4px;
+                        "
+                       width="800" height="600" loading="lazy" decoding="async" />
+                    </div>
+
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: center;
+                        gap: 20px;
+                        font-size: 0.85rem;
+                        color: var(--text-muted);
+                        flex-wrap: wrap;
+                        margin-bottom: 24px;
+                      "
+                    >
+                      <span id="img-meta-filename"
+                        ><strong>File:</strong> -</span
+                      >
+                      <span id="img-meta-size"><strong>Size:</strong> -</span>
+                      <span id="img-meta-dimensions"
+                        ><strong>Dimensions:</strong> -</span
+                      >
+                    </div>
+
+                    <!-- WARNING CARD (Hidden by default) -->
+                    <div
+                      id="scanner-warning-card"
+                      style="
+                        display: none;
+                        margin-bottom: 24px;
+                        padding: 16px;
+                        background: rgba(239, 68, 68, 0.08);
+                        border: 1px solid rgba(239, 68, 68, 0.3);
+                        border-radius: var(--radius-md);
+                        text-align: left;
+                      "
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          align-items: flex-start;
+                          gap: 12px;
+                        "
+                      >
+                        <div
+                          style="
+                            color: #ef4444;
+                            flex-shrink: 0;
+                            margin-top: 2px;
+                          "
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h4
+                            style="
+                              font-size: 0.95rem;
+                              font-weight: 700;
+                              color: #dc2626;
+                              margin: 0 0 4px 0;
+                            "
+                          >
+                            No QR Code detected
+                          </h4>
+                          <p
+                            style="
+                              font-size: 0.85rem;
+                              color: var(--text-main);
+                              margin: 0;
+                            "
+                          >
+                            The scanner couldn't identify a valid QR pattern.
+                            Ensure the code is clear, well-lit, and correctly
+                            oriented. You can try scanning again or upload a
+                            different image.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- PRIMARY SCAN BUTTON -->
+                    <style>
+                      @keyframes qrSpin {
+                        to {
+                          transform: rotate(360deg);
+                        }
+                      }
+                    </style>
+                    <button
+                      type="button"
+                      class="btn btn--primary"
+                      id="scan-action-btn"
+                      style="
+                        width: 100%;
+                        max-width: 320px;
+                        font-weight: 700;
+                        padding: 16px 32px;
+                        font-size: 1.1rem;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        box-shadow: var(--shadow-md);
+                      "
+                    >
+                      <span
+                        id="scan-btn-spinner"
+                        style="
+                          display: none;
+                          width: 20px;
+                          height: 20px;
+                          border: 3px solid rgba(255, 255, 255, 0.3);
+                          border-top-color: #ffffff;
+                          border-radius: 50%;
+                          animation: qrSpin 0.8s linear infinite;
+                        "
+                      ></span>
+                      <svg
+                        id="scan-btn-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                        <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                        <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                        <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                        <rect x="7" y="7" width="10" height="10" rx="1" />
+                      </svg>
+                      <span id="scan-btn-text">Scan QR Code</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn--secondary"
+                      id="scan-another-btn"
+                      style="
+                        display: none;
+                        width: 100%;
+                        max-width: 320px;
+                        margin: 0 auto;
+                        justify-content: center;
+                      "
+                    >
+                      Scan Another Image
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CAMERA MODE CARD -->
+              <div
+                class="card workspace-card"
+                id="camera-module-card"
+                style="
+                  padding: 24px;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-xl);
+                  background: var(--bg-surface);
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    gap: 12px;
+                    margin-bottom: 16px;
+                  "
+                >
+                  <div>
+                    <h3
+                      style="
+                        font-size: 1.1rem;
+                        font-weight: 700;
+                        color: var(--text-main);
+                        margin: 0;
+                      "
+                    >
+                      Camera Scanner
+                    </h3>
+                    <p
+                      style="
+                        font-size: 0.85rem;
+                        color: var(--text-muted);
+                        margin-top: 4px;
+                      "
+                    >
+                      Scan using your device webcam or rear camera
+                    </p>
+                  </div>
+
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <select
+                      id="camera-select"
+                      class="ui-select"
+                      style="
+                        display: none;
+                        font-size: 0.85rem;
+                        padding: 8px 12px;
+                      "
+                    ></select>
+
+                    <button
+                      type="button"
+                      class="btn btn--secondary"
+                      id="start-camera-btn"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                        />
+                        <circle cx="12" cy="13" r="4" />
+                      </svg>
+                      <span>Start Camera</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn--secondary"
+                      id="stop-camera-btn"
+                      style="display: none; color: var(--color-danger, #ef4444)"
+                    >
+                      Stop Camera
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  id="camera-viewfinder-container"
+                  style="
+                    display: none;
+                    width: 100%;
+                    max-width: 480px;
+                    margin: 0 auto;
+                    border-radius: var(--radius-lg);
+                    overflow: hidden;
+                    background: #000;
+                    position: relative;
+                    border: 2px solid var(--primary);
+                    box-shadow: var(--shadow-md);
+                  "
+                >
+                  <video
+                    id="camera-video"
+                    autoplay
+                    muted
+                    playsinline
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      display: block;
+                      object-fit: cover;
+                    "
+                  ></video>
+                  <div
+                    style="
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
+                      pointer-events: none;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div
+                      style="
+                        width: 200px;
+                        height: 200px;
+                        border: 3px dashed rgba(255, 255, 255, 0.8);
+                        border-radius: 12px;
+                        box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.5);
+                      "
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- How It Works Card (Positioned in main left column) -->
+              <div class="card workspace-card workspace-how-card">
+                <div class="workspace-how-header">
+                  <h3 class="workspace-how-title">How it works</h3>
+                </div>
+                <div class="workspace-how-steps">
+                  <div class="workspace-how-step">
+                    <div class="workspace-how-step__badge">1</div>
+                    <div class="workspace-how-step__text">
+                      <strong>Upload or Camera</strong>
+                      <span>Select an image or activate your webcam</span>
+                    </div>
+                  </div>
+                  <div class="workspace-how-arrow" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </div>
+                  <div class="workspace-how-step">
+                    <div class="workspace-how-step__badge">2</div>
+                    <div class="workspace-how-step__text">
+                      <strong>Scan QR Code</strong>
+                      <span>Click scan to decode securely in your browser</span>
+                    </div>
+                  </div>
+                  <div class="workspace-how-arrow" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </div>
+                  <div class="workspace-how-step">
+                    <div class="workspace-how-step__badge">3</div>
+                    <div class="workspace-how-step__text">
+                      <strong>Get Results</strong>
+                      <span>Copy text, open URLs, or download data</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Sidebar Column: Decoded Results -->
+            <div
+              class="tool-workspace__sidebar"
+              style="
+                position: sticky;
+                top: 90px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+              "
+            >
+              <div
+                class="card workspace-card"
+                style="
+                  padding: 24px;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-xl);
+                  background: var(--bg-surface);
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 16px;
+                  "
+                >
+                  <span
+                    style="
+                      font-size: 1rem;
+                      font-weight: 700;
+                      color: var(--text-main);
+                    "
+                    >Scan Result</span
+                  >
+                  <span
+                    id="scanner-result-type-badge"
+                    class="badge badge--pill"
+                    style="
+                      background: rgba(99, 102, 241, 0.12);
+                      color: var(--primary);
+                      font-size: 0.75rem;
+                      font-weight: 700;
+                    "
+                    >Awaiting Code</span
+                  >
+                </div>
+
+                <!-- Awaiting / Empty State -->
+                <div
+                  id="scanner-empty-state"
+                  style="
+                    padding: 36px 16px;
+                    text-align: center;
+                    color: var(--text-muted);
+                    background: var(--bg-surface-subtle);
+                    border: 1px dashed var(--border-subtle);
+                    border-radius: var(--radius-lg);
+                  "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="38"
+                    height="38"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    style="margin: 0 auto 12px; opacity: 0.5"
+                  >
+                    <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                    <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                    <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                    <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                    <rect width="8" height="8" x="8" y="8" rx="1" />
+                  </svg>
+                  <p
+                    style="
+                      font-weight: 600;
+                      font-size: 0.95rem;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    No QR Code Scanned Yet
+                  </p>
+                  <p style="font-size: 0.82rem">
+                    Upload an image or start camera scan to reveal content
+                  </p>
+                </div>
+
+                <!-- Active Decoded Result Panel -->
+                <div id="scanner-results-panel" style="display: none">
+                  <div class="form-group" style="margin-bottom: 12px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 6px;
+                      "
+                    >
+                      <label
+                        class="form-label"
+                        style="font-size: 0.82rem; font-weight: 600"
+                        >Decoded Payload Content</label
+                      >
+                      <span
+                        id="scanner-result-char-count"
+                        style="font-size: 0.75rem; color: var(--text-muted)"
+                        >0 chars</span
+                      >
+                    </div>
+                    <textarea
+                      id="scanner-result-text"
+                      class="ui-textarea"
+                      rows="6"
+                      readonly
+                      style="
+                        width: 100%;
+                        font-family: monospace;
+                        font-size: 0.88rem;
+                        line-height: 1.5;
+                        resize: vertical;
+                        background: var(--bg-surface-subtle);
+                      "
+                    ></textarea>
+                  </div>
+
+                  <!-- Primary Action Buttons -->
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 10px;
+                      margin-top: 16px;
+                    "
+                  >
+                    <button
+                      type="button"
+                      class="btn btn--primary btn--lg"
+                      id="copy-result-btn"
+                      style="width: 100%; justify-content: center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <rect
+                          width="14"
+                          height="14"
+                          x="8"
+                          y="8"
+                          rx="2"
+                          ry="2"
+                        />
+                        <path
+                          d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                        />
+                      </svg>
+                      <span>Copy Decoded Result</span>
+                    </button>
+
+                    <!-- Contextual Action Buttons -->
+                    <button
+                      type="button"
+                      class="btn btn--secondary"
+                      id="open-url-btn"
+                      style="
+                        display: none;
+                        width: 100%;
+                        justify-content: center;
+                        background: rgba(99, 102, 241, 0.1);
+                        color: var(--primary);
+                        border-color: rgba(99, 102, 241, 0.3);
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                        />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                      <span>Open Link in Browser</span>
+                    </button>
+
+                    <a
+                      id="call-btn"
+                      href="#"
+                      class="btn btn--secondary"
+                      style="
+                        display: none;
+                        width: 100%;
+                        justify-content: center;
+                        text-decoration: none;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                        />
+                      </svg>
+                      <span>Call Phone Number</span>
+                    </a>
+
+                    <a
+                      id="email-btn"
+                      href="#"
+                      class="btn btn--secondary"
+                      style="
+                        display: none;
+                        width: 100%;
+                        justify-content: center;
+                        text-decoration: none;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
+                      <span>Send Email Message</span>
+                    </a>
+
+                    <a
+                      id="sms-btn"
+                      href="#"
+                      class="btn btn--secondary"
+                      style="
+                        display: none;
+                        width: 100%;
+                        justify-content: center;
+                        text-decoration: none;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                        />
+                      </svg>
+                      <span>Send SMS Message</span>
+                    </a>
+
+                    <a
+                      id="whatsapp-btn"
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn--secondary"
+                      style="
+                        display: none;
+                        width: 100%;
+                        justify-content: center;
+                        text-decoration: none;
+                        color: #16a34a;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                        <path
+                          d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"
+                        />
+                      </svg>
+                      <span>Open WhatsApp Chat</span>
+                    </a>
+
+                    <a
+                      id="maps-btn"
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn--secondary"
+                      style="
+                        display: none;
+                        width: 100%;
+                        justify-content: center;
+                        text-decoration: none;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                        />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      <span>Open Location in Google Maps</span>
+                    </a>
+
+                    <!-- Wi-Fi Card Details -->
+                    <div
+                      id="wifi-details-card"
+                      style="
+                        display: none;
+                        padding: 12px;
+                        background: var(--bg-surface-subtle);
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-md);
+                        text-align: left;
+                        margin-top: 4px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 0.8rem;
+                          font-weight: 700;
+                          color: var(--text-main);
+                          margin-bottom: 8px;
+                          display: flex;
+                          align-items: center;
+                          gap: 6px;
+                        "
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M12 20h.01" />
+                          <path d="M2 8.82a15 15 0 0 1 20 0" />
+                          <path d="M5 12.85a10 10 0 0 1 14 0" />
+                          <path d="M8.5 16.88a5 5 0 0 1 7 0" />
+                        </svg>
+                        Wi-Fi Network Credentials
+                      </div>
+                      <div
+                        style="
+                          font-size: 0.82rem;
+                          color: var(--text-muted);
+                          display: flex;
+                          flex-direction: column;
+                          gap: 4px;
+                        "
+                      >
+                        <div>
+                          <strong>Network Name (SSID):</strong>
+                          <span id="wifi-ssid">-</span>
+                        </div>
+                        <div>
+                          <strong>Password:</strong>
+                          <span
+                            id="wifi-password"
+                            style="font-family: monospace; font-weight: 600"
+                            >-</span
+                          >
+                        </div>
+                        <div>
+                          <strong>Security:</strong>
+                          <span id="wifi-encryption">-</span>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn--secondary"
+                        id="copy-wifi-pass-btn"
+                        style="
+                          margin-top: 8px;
+                          font-size: 0.78rem;
+                          width: 100%;
+                          justify-content: center;
+                          padding: 6px 12px;
+                        "
+                      >
+                        Copy Wi-Fi Password
+                      </button>
+                    </div>
+
+                    <!-- vCard Contact Card Details -->
+                    <div
+                      id="vcard-details-card"
+                      style="
+                        display: none;
+                        padding: 12px;
+                        background: var(--bg-surface-subtle);
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-md);
+                        text-align: left;
+                        margin-top: 4px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 0.8rem;
+                          font-weight: 700;
+                          color: var(--text-main);
+                          margin-bottom: 8px;
+                          display: flex;
+                          align-items: center;
+                          gap: 6px;
+                        "
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                          />
+                          <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        Contact Card
+                      </div>
+                      <div
+                        style="
+                          font-size: 0.82rem;
+                          color: var(--text-muted);
+                          display: flex;
+                          flex-direction: column;
+                          gap: 4px;
+                        "
+                      >
+                        <div>
+                          <strong>Name:</strong>
+                          <span id="vcard-name">-</span>
+                        </div>
+                        <div>
+                          <strong>Phone:</strong>
+                          <span id="vcard-phone">-</span>
+                        </div>
+                        <div>
+                          <strong>Email:</strong>
+                          <span id="vcard-email">-</span>
+                        </div>
+                        <div>
+                          <strong>Organization:</strong>
+                          <span id="vcard-org">-</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Contextual: Save vCard / Add to Calendar -->
+                    <button
+                      type="button"
+                      class="btn btn--secondary"
+                      id="download-vcf-btn"
+                      style="display: none; width: 100%; justify-content: center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                      </svg>
+                      <span>Save Contact (.vcf)</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn--secondary"
+                      id="download-ics-btn"
+                      style="display: none; width: 100%; justify-content: center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                      <span>Add to Calendar (.ics)</span>
+                    </button>
+
+                    <!-- Generate QR Code from Result -->
+                    <a
+                      id="generate-qr-again-btn"
+                      href="/qr-generator.html"
+                      class="btn btn--secondary"
+                      style="
+                        width: 100%;
+                        justify-content: center;
+                        text-decoration: none;
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                      </svg>
+                      <span>Generate QR Code from Result</span>
+                    </a>
+
+                    <div style="display: flex; gap: 10px; margin-top: 4px">
+                      <button
+                        type="button"
+                        class="btn btn--secondary"
+                        id="download-txt-btn"
+                        style="
+                          flex: 1;
+                          justify-content: center;
+                          font-size: 0.82rem;
+                        "
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                          <polyline points="7 10 12 15 17 10" />
+                          <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>Download TXT</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn--secondary"
+                        id="scan-again-btn"
+                        style="
+                          flex: 1;
+                          justify-content: center;
+                          font-size: 0.82rem;
+                          color: var(--text-muted);
+                        "
+                      >
+                        Scan Another
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Features Section -->
+      <div id="landing-features"></div>
+
+      <!-- Dynamic How It Works Section -->
+      <div id="landing-how-it-works"></div>
+
+      <!-- Dynamic Benefits Section -->
+      <div id="landing-benefits"></div>
+
+      <!-- Dynamic FAQ Section -->
+      <div id="landing-faq"></div>
+
+      <!-- Dynamic Related Tools Grid -->
+      <div id="landing-related-tools"></div>
+
+      <!-- Dynamic Call-to-Action Banner -->
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- Toast Root -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+
+    <!-- Page Specific Scripts -->
+    <script type="module" src="/js/tool-content.js"></script>
+    <script type="module" src="/js/tool-landing.js"></script>
+    <script type="module" src="/js/qr-tools/qr-scanner.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      name="keywords"
+      content="split pdf, extract pdf pages, separate pdf pages, pdf page extractor, split pdf by range"
+    />
+
+<!-- Open Graph / Social -->
+
+<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- PDF-Lib & JSZip Libraries for Client-Side Stream Processing -->
+
+<title>Split PDF Online | Extract PDF Pages — Comprexa</title>
+  <meta name="description" content="Split PDF files into individual pages or extract specific pages to a new PDF document. Fast, free, and secure." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Split PDF Online | Extract PDF Pages — Comprexa" />
+  <meta property="og:description" content="Split PDF files into individual pages or extract specific pages to a new PDF document. Fast, free, and secure." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/split-pdf.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Split PDF Online | Extract PDF Pages — Comprexa" />
+  <meta name="twitter:description" content="Split PDF files into individual pages or extract specific pages to a new PDF document. Fast, free, and secure." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/split-pdf.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "PDF Tools",
+      "item": "https://comprexa.com/pdf-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Split PDF Online",
+      "item": "https://comprexa.com/split-pdf.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Split PDF Online",
+  "url": "https://comprexa.com/split-pdf.html",
+  "description": "Split PDF files into individual pages or extract specific pages to a new PDF document. Fast, free, and secure.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Universal Header Navigation -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+            <li><a href="/contact.html" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="header-search-btn"
+            class="btn btn--icon"
+            aria-label="Open Search"
+            title="Open Search (Cmd+K)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <button
+            id="header-settings-btn"
+            class="btn btn--icon btn-settings-trigger"
+            aria-label="Global Preferences & Settings"
+            title="Preferences & Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-label="Toggle Mobile Navigation Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div
+      id="mobile-drawer"
+      class="mobile-drawer"
+      aria-label="Mobile Navigation"
+    >
+      <ul class="mobile-drawer__list">
+        <li><a href="/" class="mobile-drawer__link">Home</a></li>
+        <li><a href="/#tools" class="mobile-drawer__link">Tools</a></li>
+        <li>
+          <a href="/#categories" class="mobile-drawer__link">Categories</a>
+        </li>
+        <li><a href="/#blog" class="mobile-drawer__link">Blog</a></li>
+        <li><a href="/about.html" class="mobile-drawer__link">About</a></li>
+      </ul>
+    </div>
+
+    <main>
+      <!-- 1. Dynamic Breadcrumbs -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+
+      <!-- 2. Dynamic Hero Header -->
+      <div id="landing-hero"></div>
+
+      <!-- 3. Universal Tool Workspace Container -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container container--narrow" style="max-width: 860px">
+          <!-- Universal Single Tool Container -->
+          <div
+            class="card workspace-card"
+            id="split-app-container"
+            style="padding: 28px"
+          >
+            <!-- Step 1: Universal Dropzone Area -->
+            <div class="split-upload-section" id="split-upload-section">
+              <div
+                class="file-uploader__dropzone"
+                id="split-dropzone"
+                tabindex="0"
+                role="button"
+                aria-label="Upload PDF file zone. Click or drag and drop a PDF file here."
+              >
+                <input
+                  type="file"
+                  id="split-file-input"
+                  class="file-uploader__input"
+                  accept="application/pdf"
+                  aria-hidden="true"
+                  tabindex="-1"
+                />
+                <div class="file-uploader__icon-wrap">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="9" y1="15" x2="15" y2="15" />
+                  </svg>
+                </div>
+                <div class="file-uploader__title">
+                  Upload PDF to <span>Split PDF</span>
+                </div>
+                <div class="file-uploader__hint-main">
+                  Drag & drop your PDF file here
+                </div>
+                <button
+                  type="button"
+                  class="btn btn--primary file-uploader__choose-btn"
+                  tabindex="-1"
+                  style="
+                    margin-top: 4px;
+                    margin-bottom: 8px;
+                    min-width: 150px;
+                    height: 38px;
+                    padding: 0 18px;
+                    font-size: 0.9rem;
+                  "
+                >
+                  Browse Files
+                </button>
+                <div
+                  class="file-uploader__sub-text"
+                  style="
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    color: var(--text-muted);
+                  "
+                >
+                  Select a PDF file to extract or split into separate documents
+                </div>
+                <div
+                  class="file-uploader__formats"
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--text-muted);
+                    opacity: 0.8;
+                    margin-top: 2px;
+                  "
+                >
+                  Supported format: PDF
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Uploaded File Info Card -->
+            <div
+              class="split-file-section"
+              id="split-file-section"
+              style="display: none; margin-top: 24px"
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-bottom: 12px;
+                  padding-bottom: 10px;
+                  border-bottom: 1px solid var(--border-subtle);
+                "
+              >
+                <h3
+                  style="
+                    font-size: 1.05rem;
+                    font-weight: 700;
+                    color: var(--text-main);
+                    margin: 0;
+                  "
+                >
+                  Selected Document
+                </h3>
+                <button
+                  type="button"
+                  class="btn btn--ghost btn--danger btn--sm"
+                  id="btn-remove-pdf"
+                  title="Remove or replace document"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                  <span>Remove File</span>
+                </button>
+              </div>
+
+              <div
+                class="card"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 16px;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-lg);
+                  background: var(--bg-surface);
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    min-width: 0;
+                    flex: 1;
+                  "
+                >
+                  <div
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      border-radius: var(--radius-md);
+                      background: rgba(99, 102, 241, 0.12);
+                      color: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                      />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                  </div>
+                  <div style="min-width: 0; flex: 1">
+                    <div
+                      style="
+                        font-weight: 700;
+                        font-size: 1rem;
+                        color: var(--text-main);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      "
+                      id="split-filename-display"
+                    >
+                      document.pdf
+                    </div>
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        margin-top: 3px;
+                        font-size: 0.82rem;
+                        color: var(--text-muted);
+                      "
+                    >
+                      <span id="split-filesize-display">0 KB</span>
+                      <span>•</span>
+                      <span
+                        class="badge badge--primary badge--pill"
+                        id="split-pagecount-display"
+                        >0 pages</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn--outline btn--sm"
+                  id="btn-change-pdf"
+                  style="margin-left: 12px; flex-shrink: 0"
+                >
+                  <span>Change PDF</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Split Options Section -->
+            <div
+              class="split-options-section"
+              id="split-options-section"
+              style="
+                display: none;
+                margin-top: 24px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border-subtle);
+              "
+            >
+              <h4
+                style="
+                  font-size: 1rem;
+                  font-weight: 700;
+                  color: var(--text-main);
+                  margin: 0 0 14px 0;
+                "
+              >
+                Choose Split Method
+              </h4>
+
+              <!-- Split Method Selector Grid -->
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                  gap: 12px;
+                  margin-bottom: 20px;
+                "
+              >
+                <label class="ui-radio-card" style="cursor: pointer">
+                  <input type="radio" name="split_method" value="all" checked />
+                  <div class="ui-radio-card__inner" style="padding: 12px 14px">
+                    <span
+                      class="ui-radio-card__title"
+                      style="font-weight: 700; font-size: 0.92rem"
+                      >Split Every Page</span
+                    >
+                    <span class="ui-radio-card__sub" style="font-size: 0.78rem"
+                      >Extract each page into a separate 1-page PDF file</span
+                    >
+                  </div>
+                </label>
+
+                <label class="ui-radio-card" style="cursor: pointer">
+                  <input type="radio" name="split_method" value="range" />
+                  <div class="ui-radio-card__inner" style="padding: 12px 14px">
+                    <span
+                      class="ui-radio-card__title"
+                      style="font-weight: 700; font-size: 0.92rem"
+                      >By Page Range</span
+                    >
+                    <span class="ui-radio-card__sub" style="font-size: 0.78rem"
+                      >Split document into specific ranges (e.g. 1-5,
+                      6-10)</span
+                    >
+                  </div>
+                </label>
+
+                <label class="ui-radio-card" style="cursor: pointer">
+                  <input type="radio" name="split_method" value="extract" />
+                  <div class="ui-radio-card__inner" style="padding: 12px 14px">
+                    <span
+                      class="ui-radio-card__title"
+                      style="font-weight: 700; font-size: 0.92rem"
+                      >Extract Pages</span
+                    >
+                    <span class="ui-radio-card__sub" style="font-size: 0.78rem"
+                      >Select specific pages (e.g. 1, 3, 7) to extract</span
+                    >
+                  </div>
+                </label>
+
+                <label class="ui-radio-card" style="cursor: pointer">
+                  <input type="radio" name="split_method" value="fixed" />
+                  <div class="ui-radio-card__inner" style="padding: 12px 14px">
+                    <span
+                      class="ui-radio-card__title"
+                      style="font-weight: 700; font-size: 0.92rem"
+                      >Every N Pages</span
+                    >
+                    <span class="ui-radio-card__sub" style="font-size: 0.78rem"
+                      >Split after every N pages automatically</span
+                    >
+                  </div>
+                </label>
+              </div>
+
+              <!-- Contextual Controls for Selected Method -->
+
+              <!-- Method 2: Page Ranges Input -->
+              <div
+                id="method-panel-range"
+                class="method-panel"
+                style="
+                  display: none;
+                  background: var(--bg-surface-hover);
+                  padding: 16px;
+                  border-radius: var(--radius-lg);
+                  border: 1px solid var(--border-subtle);
+                  margin-bottom: 20px;
+                "
+              >
+                <div class="form-group" style="margin-bottom: 8px">
+                  <label
+                    for="input-split-ranges"
+                    class="form-label"
+                    style="font-weight: 700"
+                    >Page Ranges</label
+                  >
+                  <input
+                    type="text"
+                    id="input-split-ranges"
+                    class="ui-input"
+                    placeholder="e.g. 1-3, 4-8, 9-12"
+                  />
+                  <div
+                    style="
+                      font-size: 0.78rem;
+                      color: var(--text-muted);
+                      margin-top: 6px;
+                    "
+                  >
+                    Separate ranges with commas. Example:
+                    <code
+                      style="
+                        background: var(--bg-surface);
+                        padding: 2px 6px;
+                        border-radius: 4px;
+                      "
+                      >1-5, 6-10</code
+                    >
+                    creates 2 PDF files.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Method 3: Extract Pages Input -->
+              <div
+                id="method-panel-extract"
+                class="method-panel"
+                style="
+                  display: none;
+                  background: var(--bg-surface-hover);
+                  padding: 16px;
+                  border-radius: var(--radius-lg);
+                  border: 1px solid var(--border-subtle);
+                  margin-bottom: 20px;
+                "
+              >
+                <div class="form-group" style="margin-bottom: 12px">
+                  <label
+                    for="input-split-extract-pages"
+                    class="form-label"
+                    style="font-weight: 700"
+                    >Pages to Extract</label
+                  >
+                  <input
+                    type="text"
+                    id="input-split-extract-pages"
+                    class="ui-input"
+                    placeholder="e.g. 1, 3, 5-7"
+                  />
+                  <div
+                    style="
+                      font-size: 0.78rem;
+                      color: var(--text-muted);
+                      margin-top: 6px;
+                    "
+                  >
+                    Enter single page numbers or ranges separated by commas.
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin: 0">
+                  <label
+                    class="form-label"
+                    style="font-weight: 700; margin-bottom: 6px"
+                    >Output Format</label
+                  >
+                  <div style="display: flex; gap: 16px">
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        font-size: 0.88rem;
+                        cursor: pointer;
+                      "
+                    >
+                      <input
+                        type="radio"
+                        name="extract_output_mode"
+                        value="single"
+                        checked
+                      />
+                      <span>Merge extracted pages into 1 single PDF</span>
+                    </label>
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        font-size: 0.88rem;
+                        cursor: pointer;
+                      "
+                    >
+                      <input
+                        type="radio"
+                        name="extract_output_mode"
+                        value="multiple"
+                      />
+                      <span>Save each extracted page as an individual PDF</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Method 4: Fixed Page Interval Input -->
+              <div
+                id="method-panel-fixed"
+                class="method-panel"
+                style="
+                  display: none;
+                  background: var(--bg-surface-hover);
+                  padding: 16px;
+                  border-radius: var(--radius-lg);
+                  border: 1px solid var(--border-subtle);
+                  margin-bottom: 20px;
+                "
+              >
+                <div class="form-group" style="margin: 0">
+                  <label
+                    for="input-split-fixed-n"
+                    class="form-label"
+                    style="font-weight: 700"
+                    >Split Every N Pages</label
+                  >
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
+                      max-width: 260px;
+                    "
+                  >
+                    <input
+                      type="number"
+                      id="input-split-fixed-n"
+                      class="ui-input"
+                      value="2"
+                      min="1"
+                      step="1"
+                    />
+                    <span
+                      style="
+                        font-size: 0.88rem;
+                        font-weight: 600;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                      "
+                      >pages</span
+                    >
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.78rem;
+                      color: var(--text-muted);
+                      margin-top: 6px;
+                    "
+                  >
+                    Document will be divided into equal chunks of N pages.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Split PDF Action Button -->
+              <button
+                type="button"
+                class="btn btn--primary btn--lg btn--full"
+                id="btn-execute-split"
+                style="height: 48px; font-size: 1rem; font-weight: 700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="16" y1="3" x2="16" y2="21" />
+                  <line x1="8" y1="3" x2="8" y2="21" />
+                  <polygon points="12 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+                <span>Split PDF File</span>
+              </button>
+            </div>
+
+            <!-- Step 4: Loading / Processing State -->
+            <div
+              id="split-processing-state"
+              style="display: none; margin-top: 24px"
+            >
+              <div
+                class="processing-state"
+                style="text-align: center; padding: 32px 16px"
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 16px;
+                  "
+                >
+                  <span class="ui-spinner ui-spinner--lg"></span>
+                </div>
+                <div
+                  style="
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                    color: var(--text-main);
+                    margin-bottom: 6px;
+                  "
+                  id="split-status-title"
+                >
+                  Splitting PDF Document...
+                </div>
+                <div
+                  style="
+                    font-size: 0.9rem;
+                    color: var(--text-muted);
+                    margin-bottom: 16px;
+                  "
+                  id="split-status-desc"
+                >
+                  Extracting pages with client-side PDF engine
+                </div>
+                <div
+                  class="ui-progress-bar"
+                  style="max-width: 400px; margin: 0 auto 12px auto"
+                >
+                  <div
+                    class="ui-progress-bar__inner"
+                    id="split-progress-fill"
+                    style="width: 25%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5: Result / Download State -->
+            <div
+              id="split-result-section"
+              style="display: none; margin-top: 24px"
+            >
+              <div class="processing-state" style="text-align: center">
+                <div
+                  class="processing-success-icon"
+                  style="margin: 0 auto 16px auto"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="36"
+                    height="36"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <h3
+                  style="
+                    font-size: 1.3rem;
+                    font-weight: 800;
+                    color: var(--text-main);
+                    margin: 0 0 6px 0;
+                  "
+                >
+                  PDF Split Successfully!
+                </h3>
+                <p
+                  style="
+                    font-size: 0.95rem;
+                    color: var(--text-muted);
+                    margin: 0 0 20px 0;
+                  "
+                  id="split-result-summary"
+                >
+                  Extracted PDF pages into separate files.
+                </p>
+
+                <!-- Top Action Bar: Download ZIP (If multiple files) -->
+                <div
+                  id="split-zip-download-container"
+                  style="
+                    display: none;
+                    margin-bottom: 24px;
+                    padding: 18px;
+                    background: rgba(99, 102, 241, 0.08);
+                    border: 1px solid var(--primary-border);
+                    border-radius: var(--radius-xl);
+                    text-align: left;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      flex-wrap: wrap;
+                      gap: 12px;
+                    "
+                  >
+                    <div>
+                      <div
+                        style="
+                          font-weight: 800;
+                          font-size: 1.05rem;
+                          color: var(--text-main);
+                        "
+                        id="zip-filename-display"
+                      >
+                        split_files.zip
+                      </div>
+                      <div
+                        style="font-size: 0.82rem; color: var(--text-muted)"
+                        id="zip-meta-display"
+                      >
+                        All split PDF files packaged in a single ZIP archive
+                      </div>
+                    </div>
+                    <a
+                      href="#"
+                      download="split_files.zip"
+                      class="btn btn--primary"
+                      id="btn-download-all-zip"
+                      style="height: 42px; font-weight: 700; padding: 0 22px"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                      >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                      </svg>
+                      <span>Download All (.zip)</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- List of Generated PDF Files -->
+                <div style="text-align: left; margin-bottom: 20px">
+                  <h4
+                    style="
+                      font-size: 0.95rem;
+                      font-weight: 700;
+                      color: var(--text-main);
+                      margin-bottom: 12px;
+                      display: flex;
+                      align-items: center;
+                      gap: 8px;
+                    "
+                  >
+                    <span>Generated Files</span>
+                    <span
+                      class="badge badge--pill"
+                      id="split-generated-count-badge"
+                      >0 files</span
+                    >
+                  </h4>
+                  <div
+                    id="split-generated-files-list"
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 10px;
+                      max-height: 380px;
+                      overflow-y: auto;
+                      padding-right: 4px;
+                    "
+                  ></div>
+                </div>
+
+                <!-- Start Over Button -->
+                <button
+                  type="button"
+                  class="btn btn--outline btn--sm"
+                  id="btn-split-start-over"
+                  style="margin-top: 8px"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                    />
+                    <path d="M3 3v5h5" />
+                    <path
+                      d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"
+                    />
+                    <path d="M16 16h5v5" />
+                  </svg>
+                  <span>Split Another PDF</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Dynamic Features Section -->
+      <div id="landing-features"></div>
+
+      <!-- 5. Dynamic How It Works Section -->
+      <div id="landing-how-it-works"></div>
+
+      <!-- 6. Dynamic Benefits Section -->
+      <div id="landing-benefits"></div>
+
+      <!-- 7. Dynamic FAQ Section -->
+      <div id="landing-faq"></div>
+
+      <!-- 8. Dynamic Related Tools Grid -->
+      <div id="landing-related-tools"></div>
+
+      <!-- 9. Dynamic Call-to-Action Banner -->
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Global Scripts -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <!-- Page Specific Scripts -->
+    <script
+      type="module"
+      src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+    ></script>
+    <script type="module" src="/js/tool-content.js"></script>
+    <script type="module" src="/js/tool-landing.js"></script>
+    <script type="module" src="/js/pdf-tools/split-pdf.js"></script>
+  </body>
+</html>

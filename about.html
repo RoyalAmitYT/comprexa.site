@@ -1,0 +1,2318 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Premium About Page Extra Styles (SaaS Layout & Custom Interactivity) -->
+    <style>
+      /* Premium Animation Keyframes */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulseSoft {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 1;
+        }
+      }
+
+      /* Custom CSS Overrides & Helpers for About Page */
+      .about-animate-fade-up {
+        animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .about-animate-delay-1 {
+        animation-delay: 100ms;
+      }
+      .about-animate-delay-2 {
+        animation-delay: 200ms;
+      }
+      .about-animate-delay-3 {
+        animation-delay: 300ms;
+      }
+
+      /* Hero Gradient & Layout Tweaks */
+      .about-hero {
+        position: relative;
+        padding: 100px 0 80px;
+        overflow: hidden;
+        background: var(--gradient-hero-bg);
+        text-align: center;
+      }
+
+      .about-hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        background: var(--primary-subtle);
+        border: 1px solid var(--primary-border);
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+
+      .about-hero__badge-pulse {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        animation: pulseSoft 2s infinite ease-in-out;
+      }
+
+      /* Modern Typography Scales */
+      .about-display-title {
+        font-size: clamp(2.25rem, 5vw, 3.75rem);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+        margin-bottom: 24px;
+      }
+
+      .about-title-gradient {
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .about-subtitle {
+        max-width: 720px;
+        margin: 0 auto 36px;
+        font-size: clamp(1.05rem, 2vw, 1.2rem);
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      /* Spacing & Section Anchors */
+      .about-section {
+        padding: 90px 0;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .about-section--neutral {
+        background-color: var(--bg-surface-hover);
+      }
+
+      .about-section-header {
+        text-align: center;
+        max-width: 650px;
+        margin: 0 auto 56px;
+      }
+
+      .about-section-title {
+        font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--text-main);
+        margin-bottom: 16px;
+      }
+
+      .about-section-subtitle {
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* Our Mission Grid Styling */
+      .mission-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        align-items: center;
+      }
+      @media (min-width: 992px) {
+        .mission-grid {
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 64px;
+        }
+      }
+
+      .mission-narrative {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--text-main);
+      }
+
+      .mission-narrative p {
+        margin-bottom: 20px;
+      }
+
+      .mission-narrative p:last-child {
+        margin-bottom: 0;
+      }
+
+      .mission-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .mission-card {
+        padding: 24px;
+        border-radius: var(--radius-lg);
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        transition: all var(--transition-normal);
+      }
+
+      .mission-card:hover {
+        border-color: var(--primary-border);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .mission-card__icon-wrapper {
+        width: 42px;
+        height: 42px;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        background-color: var(--primary-subtle);
+        color: var(--primary);
+      }
+
+      .mission-card__title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 8px;
+      }
+
+      .mission-card__desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* Why Comprexa Grid Styling */
+      .why-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 24px;
+      }
+      @media (min-width: 640px) {
+        .why-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .why-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .why-card {
+        padding: 28px;
+        border-radius: var(--radius-xl);
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        transition: all var(--transition-normal);
+      }
+
+      .why-card:hover {
+        border-color: var(--primary-border);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .why-card__icon-wrapper {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        background-color: var(--primary-subtle);
+        color: var(--primary);
+      }
+
+      .why-card__title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 10px;
+      }
+
+      .why-card__desc {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        line-height: 1.55;
+      }
+
+      /* Technology Layout */
+      .tech-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      @media (min-width: 768px) {
+        .tech-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1200px) {
+        .tech-grid {
+          grid-template-columns: repeat(5, 1fr);
+          gap: 20px;
+        }
+      }
+
+      .tech-card {
+        padding: 24px;
+        border-radius: var(--radius-lg);
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        transition: all var(--transition-normal);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tech-card:hover {
+        border-color: var(--primary-border);
+        transform: translateY(-2px);
+      }
+
+      .tech-card__badge {
+        font-size: 0.725rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary);
+        margin-bottom: 12px;
+      }
+
+      .tech-card__title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 10px;
+      }
+
+      .tech-card__desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* Categories List */
+      .cat-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      @media (min-width: 640px) {
+        .cat-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .cat-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .cat-card {
+        padding: 28px;
+        border-radius: var(--radius-xl);
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        transition: all var(--transition-normal);
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .cat-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .cat-card__header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .cat-card__icon-wrapper {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-fast);
+      }
+
+      /* Category colors matching style.css tokens */
+      .cat-icon--pdf {
+        background-color: rgba(239, 68, 68, 0.08);
+        color: #ef4444;
+      }
+      .cat-icon--image {
+        background-color: rgba(16, 185, 129, 0.08);
+        color: #10b981;
+      }
+      .cat-icon--doc {
+        background-color: rgba(59, 130, 246, 0.08);
+        color: #3b82f6;
+      }
+      .cat-icon--converter {
+        background-color: rgba(245, 158, 11, 0.08);
+        color: #f59e0b;
+      }
+      .cat-icon--qr {
+        background-color: rgba(139, 92, 246, 0.08);
+        color: #8b5cf6;
+      }
+      .cat-icon--dev {
+        background-color: rgba(14, 165, 233, 0.08);
+        color: #0ea5e9;
+      }
+      .cat-icon--text {
+        background-color: rgba(168, 85, 247, 0.08);
+        color: #a855f7;
+      }
+      .cat-icon--utility {
+        background-color: rgba(99, 102, 241, 0.08);
+        color: #6366f1;
+      }
+      .cat-icon--color {
+        background-color: rgba(236, 72, 153, 0.08);
+        color: #ec4899;
+      }
+
+      .cat-card__title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      .cat-card__desc {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        line-height: 1.55;
+        margin-bottom: 24px;
+        flex-grow: 1;
+      }
+
+      .cat-card__action {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .cat-card__action svg {
+        transition: transform var(--transition-fast);
+      }
+
+      .cat-card:hover .cat-card__action svg {
+        transform: translateX(4px);
+      }
+
+      /* Principles List */
+      .principles-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 24px;
+      }
+      @media (min-width: 640px) {
+        .principles-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .principles-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .principle-card {
+        padding: 28px;
+        border-radius: var(--radius-lg);
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        transition: all var(--transition-normal);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .principle-card:hover {
+        border-color: var(--primary-border);
+        box-shadow: var(--shadow-md);
+      }
+
+      .principle-card__num {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        font-size: 4.5rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--primary-subtle);
+        opacity: 0.25;
+        user-select: none;
+      }
+
+      .principle-card__title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 12px;
+      }
+
+      .principle-card__desc {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        line-height: 1.55;
+      }
+
+      /* Stats Grid */
+      .stats-container {
+        border-radius: var(--radius-xl);
+        padding: 48px 24px;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        text-align: center;
+      }
+      @media (min-width: 768px) {
+        .stats-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .stat-number {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 4px;
+      }
+
+      .stat-desc {
+        font-size: 0.775rem;
+        color: var(--text-muted);
+      }
+
+      /* FAQ List Layout Adjustment */
+      .faq-container-custom {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Premium CTA Section */
+      .cta-banner {
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.08) 0%,
+          rgba(168, 85, 247, 0.08) 50%,
+          rgba(59, 130, 246, 0.08) 100%
+        );
+        border: 1px solid var(--primary-border);
+        border-radius: var(--radius-xl);
+        padding: 64px 32px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+      }
+
+      .cta-banner__glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 450px;
+        height: 450px;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.15) 0%,
+          rgba(236, 72, 153, 0.05) 60%,
+          transparent 100%
+        );
+        filter: blur(80px);
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      .cta-banner__title {
+        font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+        margin-bottom: 16px;
+        line-height: 1.25;
+      }
+
+      .cta-banner__text {
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        max-width: 540px;
+        margin: 0 auto 32px;
+        line-height: 1.6;
+      }
+    </style>
+
+<title>About Us | Privacy-First File Tools — Comprexa</title>
+  <meta name="description" content="Learn about Comprexa, our mission to provide fast, secure, and privacy-first browser-based file tools without uploading your data to servers." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="About Us | Privacy-First File Tools — Comprexa" />
+  <meta property="og:description" content="Learn about Comprexa, our mission to provide fast, secure, and privacy-first browser-based file tools without uploading your data to servers." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/about.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Us | Privacy-First File Tools — Comprexa" />
+  <meta name="twitter:description" content="Learn about Comprexa, our mission to provide fast, secure, and privacy-first browser-based file tools without uploading your data to servers." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/about.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About Us",
+      "item": "https://comprexa.com/about.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Comprexa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Comprexa is an elegant, single-view file utility workspace that provides a comprehensive suite of tools for processing documents, PDFs, developer formats, vector codes, and web assets. Unlike traditional conversion websites, Comprexa executes calculations locally on your own CPU instead of transferring files over the web."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Comprexa free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, completely. All tools inside Comprexa are free of charge, with no subscription prompts, account registration requirements, file size limits, or daily usage caps. We don't collect credit cards because we don't have server-hosting costs to cover for your files—your own device does the processing work!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do files leave my device?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never. This is our absolute architectural commitment. All operations—including heavy actions like optimizing a multi-page PDF or extracting images—happen locally inside your web page memory via JavaScript and WebAssembly compiled code. Your data is never uploaded, transferred, or cached on any remote servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why browser-first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard online converters pose severe confidentiality vulnerabilities, and they waste time and broadband bandwidth on upload/download cycles. Processing files directly inside your browser's sandboxed environment ensures your documents are protected by cryptography, loads instantaneously, and lets you work offline anywhere."
+      }
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Us | Privacy-First File Tools — Comprexa",
+  "description": "Learn about Comprexa, our mission to provide fast, secure, and privacy-first browser-based file tools without uploading your data to servers.",
+  "url": "https://comprexa.com/about.html"
+}
+</script>
+</head>
+  <body>
+    <!-- ==========================================================================
+       Header Navigation
+       ========================================================================== -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <!-- Brand Logo -->
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li><a href="/#tools" class="nav__link">Tools</a></li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/blog.html" class="nav__link">Blog</a></li>
+            <li>
+              <a
+                href="/about.html"
+                class="nav__link nav__link--active"
+                aria-current="page"
+                >About</a
+              >
+            </li>
+            <li><a href="/contact.html" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Header Action Controls -->
+        <div class="header__actions">
+          <!-- Quick Search Trigger -->
+          <button
+            id="header-search-btn"
+            class="btn btn--icon"
+            aria-label="Open Search (Press Cmd+K)"
+            title="Open Search (Cmd+K)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <!-- Global Preferences & Settings Trigger -->
+          <button
+            id="header-settings-btn"
+            class="btn btn--icon btn-settings-trigger"
+            aria-label="Global Preferences & Settings"
+            title="Preferences & Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+
+          <!-- Light / Dark Theme Toggle -->
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Light or Dark Mode"
+            title="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+              <path d="M19 3v4" />
+              <path d="M21 5h-4" />
+            </svg>
+          </button>
+
+          <!-- All Tools CTA Button -->
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-label="Toggle Mobile Navigation Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Menu Overlay -->
+    <div
+      id="mobile-drawer"
+      class="mobile-drawer"
+      aria-label="Mobile Navigation"
+    >
+      <ul class="mobile-drawer__list">
+        <li><a href="/" class="mobile-drawer__link">Home</a></li>
+        <li><a href="/#tools" class="mobile-drawer__link">Tools</a></li>
+        <li>
+          <a href="/#categories" class="mobile-drawer__link">Categories</a>
+        </li>
+        <li><a href="/blog.html" class="mobile-drawer__link">Blog</a></li>
+        <li>
+          <a
+            href="/about.html"
+            class="mobile-drawer__link mobile-drawer__link--active"
+            aria-current="page"
+            >About</a
+          >
+        </li>
+        <li><a href="/contact.html" class="mobile-drawer__link">Contact</a></li>
+      </ul>
+
+      <div class="mobile-drawer__actions">
+        <button
+          id="theme-toggle-mobile"
+          class="btn btn--secondary"
+          style="width: 100%; justify-content: flex-start"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            <path d="M19 3v4" />
+            <path d="M21 5h-4" />
+          </svg>
+          <span>Toggle Dark Mode</span>
+        </button>
+
+        <a href="/#tools" class="btn btn--primary" style="width: 100%">
+          Browse All Tools
+        </a>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+       Main About Layout
+       ========================================================================== -->
+    <main id="main-content" class="about-animate-fade-up">
+      <!-- ==========================================================================
+         Hero Section
+         ========================================================================== -->
+      <section class="about-hero">
+        <div class="hero__bg-grid" aria-hidden="true"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
+
+        <div class="container relative z-10">
+          <!-- Small Brand Badge -->
+          <div
+            class="about-hero__badge about-animate-fade-up about-animate-delay-1"
+          >
+            <span class="about-hero__badge-pulse" aria-hidden="true"></span>
+            <span>About Comprexa</span>
+          </div>
+
+          <!-- Large Heading -->
+          <h1
+            class="about-display-title about-animate-fade-up about-animate-delay-2"
+          >
+            Powerful Browser-Based File Tools.<br />
+            <span class="about-title-gradient">Built for Everyone.</span>
+          </h1>
+
+          <!-- Professional Subtitle -->
+          <p class="about-subtitle about-animate-fade-up about-animate-delay-3">
+            Comprexa provides fast, secure, browser-first file processing
+            without requiring uploads, registration, or cloud accounts.
+            Everything you need to manage PDFs, optimize images, convert
+            formats, and edit developer scripts, built right inside your
+            browser.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center about-animate-fade-up"
+            style="
+              animation-delay: 400ms;
+              gap: 16px;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            <a
+              href="/#tools"
+              class="btn btn--primary btn--lg py-3.5 px-8 text-base"
+            >
+              <span>Browse All Tools</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+            <a
+              href="/contact.html"
+              class="btn btn--secondary btn--lg py-3.5 px-8 text-base"
+            >
+              <span>Contact Us</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Our Mission Section
+         ========================================================================== -->
+      <section class="about-section" id="mission">
+        <div class="container">
+          <div class="mission-grid">
+            <!-- Narrative -->
+            <div class="mission-narrative">
+              <div
+                class="inline-flex items-center px-2.5 py-1 rounded bg-indigo-500/10 text-xs font-bold text-indigo-500 uppercase tracking-wide mb-4"
+              >
+                Our Mission
+              </div>
+              <h2 class="about-section-title">
+                Redefining How the World Manages Files
+              </h2>
+              <p>
+                Traditional online converters and file processors force you to
+                upload your sensitive spreadsheets, tax documents, and personal
+                images to unknown remote servers. This introduces massive
+                privacy risks, drains internet bandwidth on upload and download
+                cycles, and subjects you to queue lines and paywalls.
+              </p>
+              <p>
+                <strong
+                  >At Comprexa, our mission is to deliver complete,
+                  professional-grade utility tools that run entirely
+                  client-side.</strong
+                >
+                By executing secure binary logic directly on your processor
+                inside your browser tab, we make file optimization instant,
+                offline-capable, and private by architecture.
+              </p>
+              <p>
+                We believe file tools should be simple, lightweight, and
+                accessible to everyone without registration limits, credit
+                cards, or advertisements.
+              </p>
+            </div>
+
+            <!-- The Four Pillars Cards -->
+            <div class="mission-cards">
+              <!-- Pillar: Fast -->
+              <div class="mission-card">
+                <div class="mission-card__icon-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                </div>
+                <h3 class="mission-card__title">Fast</h3>
+                <p class="mission-card__desc">
+                  No upload queues. Files process locally on your device in
+                  milliseconds with zero network delays.
+                </p>
+              </div>
+
+              <!-- Pillar: Private -->
+              <div class="mission-card">
+                <div class="mission-card__icon-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </div>
+                <h3 class="mission-card__title">Private</h3>
+                <p class="mission-card__desc">
+                  Your data stays strictly yours. Files are processed entirely
+                  in memory and never touch our servers.
+                </p>
+              </div>
+
+              <!-- Pillar: Free -->
+              <div class="mission-card">
+                <div class="mission-card__icon-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <line x1="12" x2="12" y1="2" y2="22" />
+                    <path
+                      d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                    />
+                  </svg>
+                </div>
+                <h3 class="mission-card__title">Free</h3>
+                <p class="mission-card__desc">
+                  Completely free of charge. No account sign-ups, no limited
+                  trial periods, and no hidden upgrades.
+                </p>
+              </div>
+
+              <!-- Pillar: Accessible -->
+              <div class="mission-card">
+                <div class="mission-card__icon-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                    <path d="M2 12h20" />
+                  </svg>
+                </div>
+                <h3 class="mission-card__title">Accessible</h3>
+                <p class="mission-card__desc">
+                  Optimized for every device size, touch responsive, and
+                  lightweight for slow networks.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Why Comprexa Section
+         ========================================================================== -->
+      <section class="about-section about-section--neutral" id="why">
+        <div class="container">
+          <div class="about-section-header">
+            <div
+              class="inline-flex items-center px-2.5 py-1 rounded bg-indigo-500/10 text-xs font-bold text-indigo-500 uppercase tracking-wide mb-4"
+            >
+              Why Comprexa
+            </div>
+            <h2 class="about-section-title">
+              Designed with Modern SaaS Integrity
+            </h2>
+            <p class="about-section-subtitle">
+              We strip away the clutter, sign-up requirements, and advertising
+              popups of traditional file utilities to give you an elegant,
+              focused workflow workspace.
+            </p>
+          </div>
+
+          <div class="why-grid">
+            <!-- Item 1 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m8 12 3 3 5-5" />
+                </svg>
+              </div>
+              <h3 class="why-card__title">100% Browser Processing</h3>
+              <p class="why-card__desc">
+                Run all tools directly in your tab. The system executes
+                calculations locally, eliminating queue times.
+              </p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <h3 class="why-card__title">Privacy First</h3>
+              <p class="why-card__desc">
+                Zero server uploads. Your data is processed in-memory, ensuring
+                absolute privacy compliance.
+              </p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" x2="12" y1="3" y2="15" />
+                </svg>
+              </div>
+              <h3 class="why-card__title">No Upload Required</h3>
+              <p class="why-card__desc">
+                Instant start. Simply select your document or image and watch
+                the conversion render instantly.
+              </p>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path
+                    d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
+                  />
+                  <polyline points="13 2 13 9 20 9" />
+                </svg>
+              </div>
+              <h3 class="why-card__title">Fast Performance</h3>
+              <p class="why-card__desc">
+                Powered by optimized WebAssembly bundles, tapping raw device
+                rendering speeds.
+              </p>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+                  <line x1="12" x2="12" y1="18" y2="18.01" />
+                </svg>
+              </div>
+              <h3 class="why-card__title">Mobile Friendly</h3>
+              <p class="why-card__desc">
+                A responsive layout designed with touch ergonomics for a
+                frictionless mobile web experience.
+              </p>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M12 2v20" />
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+              </div>
+              <h3 class="why-card__title">Free Forever</h3>
+              <p class="why-card__desc">
+                Completely unrestricted, ad-free access to all categories
+                without subscription prompts.
+              </p>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <rect width="18" height="18" x="3" y="3" rx="2" />
+                  <path d="M21 9H3" />
+                  <path d="M21 15H3" />
+                  <path d="M12 3v18" />
+                </svg>
+              </div>
+              <h3 class="why-card__title">Modern UI</h3>
+              <p class="why-card__desc">
+                A clean, distraction-free environment utilizing high-contrast
+                light and dark themes.
+              </p>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="why-card">
+              <div class="why-card__icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path
+                    d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"
+                  />
+                  <path
+                    d="M6 21a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3v12a3 3 0 0 0 3 3z"
+                  />
+                </svg>
+              </div>
+              <h3 class="why-card__title">Cross Platform</h3>
+              <p class="why-card__desc">
+                Flawless operation across macOS, Windows, Linux, iOS, iPadOS,
+                and Android browsers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Our Technology Section
+         ========================================================================== -->
+      <section class="about-section" id="technology">
+        <div class="container">
+          <div class="about-section-header">
+            <div
+              class="inline-flex items-center px-2.5 py-1 rounded bg-indigo-500/10 text-xs font-bold text-indigo-500 uppercase tracking-wide mb-4"
+            >
+              Our Technology
+            </div>
+            <h2 class="about-section-title">How It Works Behind the Screen</h2>
+            <p class="about-section-subtitle">
+              We utilize cutting-edge browser capabilities to make client-side
+              execution possible for complex operations previously reserved for
+              remote servers.
+            </p>
+          </div>
+
+          <div class="tech-grid">
+            <!-- Tech Card 1 -->
+            <div class="tech-card">
+              <span class="tech-card__badge">High-Speed Execution</span>
+              <h3 class="tech-card__title">WebAssembly</h3>
+              <p class="tech-card__desc">
+                We compile high-performance, industry-standard C++ and Rust
+                libraries directly into low-level binary code that runs inside
+                your browser at near-native CPU speeds.
+              </p>
+            </div>
+
+            <!-- Tech Card 2 -->
+            <div class="tech-card">
+              <span class="tech-card__badge">Native Integration</span>
+              <h3 class="tech-card__title">Modern Browser APIs</h3>
+              <p class="tech-card__desc">
+                We use modern HTML5 APIs like Web Crypto for password safety,
+                canvas rendering engines for image resizing, and file stream
+                readers for efficient document loading.
+              </p>
+            </div>
+
+            <!-- Tech Card 3 -->
+            <div class="tech-card">
+              <span class="tech-card__badge">Decentralized Power</span>
+              <h3 class="tech-card__title">Client-Side Logic</h3>
+              <p class="tech-card__desc">
+                By routing code execution straight to your local hardware, we
+                remove the server middleman. This eliminates data center
+                overhead, carbon emissions, and transit lag.
+              </p>
+            </div>
+
+            <!-- Tech Card 4 -->
+            <div class="tech-card">
+              <span class="tech-card__badge">Optimized Flow</span>
+              <h3 class="tech-card__title">Parallel Pipelines</h3>
+              <p class="tech-card__desc">
+                Using multi-threaded web workers, we perform intensive
+                operations (like batch image optimization) in background
+                threads, keeping your web layout perfectly fluid.
+              </p>
+            </div>
+
+            <!-- Tech Card 5 -->
+            <div class="tech-card">
+              <span class="tech-card__badge">Cryptographic Safety</span>
+              <h3 class="tech-card__title">Secure Sandbox</h3>
+              <p class="tech-card__desc">
+                All file operations are contained within the browser's strictly
+                isolated process sandbox, giving you a math-proven guarantee
+                that files cannot leak onto the web.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Our Tool Categories Section
+         ========================================================================== -->
+      <section class="about-section about-section--neutral" id="categories">
+        <div class="container">
+          <div class="about-section-header">
+            <div
+              class="inline-flex items-center px-2.5 py-1 rounded bg-indigo-500/10 text-xs font-bold text-indigo-500 uppercase tracking-wide mb-4"
+            >
+              Our Tool Suitcase
+            </div>
+            <h2 class="about-section-title">Explore 9 Distinct Categories</h2>
+            <p class="about-section-subtitle">
+              Discover our comprehensive collection of professional-grade file
+              utilities, built to cover all your digital office tasks.
+            </p>
+          </div>
+
+          <div class="cat-grid">
+            <!-- Category 1: PDF Tools -->
+            <a href="/pdf-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--pdf">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <path d="M12 18v-6" />
+                    <path d="m9 15 3 3 3-3" />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">PDF Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Merge, split, compress, protect, unlock, and extract text/images
+                from your PDF files directly in your browser.
+              </p>
+              <div class="cat-card__action">
+                <span>View PDF Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 2: Image Tools -->
+            <a href="/image-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--image">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                    <circle cx="9" cy="9" r="2" />
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">Image Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Compress, resize, crop, rotate, watermark, and convert image
+                formats locally with full resolution preservation.
+              </p>
+              <div class="cat-card__action">
+                <span>View Image Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 3: Document Tools -->
+            <a
+              href="/category-template.html?category=document-tools"
+              class="cat-card"
+            >
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--doc">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <line x1="10" y1="9" x2="8" y2="9" />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">Document Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Process Word files, Excel sheets, PowerPoint slides, and text
+                records safely with zero document format distortion.
+              </p>
+              <div class="cat-card__action">
+                <span>View Document Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 4: Converter Tools -->
+            <a href="/converter-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--converter">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m16 3 4 4-4 4" />
+                    <path d="M20 7H4" />
+                    <path d="m8 21-4-4 4-4" />
+                    <path d="M4 17h16" />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">Converter Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Transcode and translate documents, configurations, values, and
+                archives with lossless fidelity.
+              </p>
+              <div class="cat-card__action">
+                <span>View Converter Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 5: QR Tools -->
+            <a href="/qr-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--qr">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect width="5" height="5" x="3" y="3" rx="1" />
+                    <rect width="5" height="5" x="16" y="3" rx="1" />
+                    <rect width="5" height="5" x="3" y="16" rx="1" />
+                    <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
+                    <path d="M21 21v.01" />
+                    <path d="M12 7v3a2 2 0 0 1-2 2H7" />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">QR Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Generate fully customizable colored vector QR codes, or scan and
+                decode QR graphics in real-time with your camera.
+              </p>
+              <div class="cat-card__action">
+                <span>View QR Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 6: Text Tools -->
+            <a href="/text-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--text">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">Text Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Analyze document readability, count words, modify cases, sort
+                lists, and strip duplicate string entries locally.
+              </p>
+              <div class="cat-card__action">
+                <span>View Text Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 7: Developer Tools -->
+            <a href="/developer-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--dev">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">Developer Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Validate and format JSON files, encode strings with Base64,
+                generate checksum hashes, and inspect structured data trees.
+              </p>
+              <div class="cat-card__action">
+                <span>View Developer Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 8: Utility Tools -->
+            <a href="/utility-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--utility">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">Utility Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Generate cryptographically secure strong passwords, make custom
+                UUID codes, and access digital timestamp converters.
+              </p>
+              <div class="cat-card__action">
+                <span>View Utility Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+
+            <!-- Category 9: Color Tools -->
+            <a href="/color-tools.html" class="cat-card">
+              <div class="cat-card__header">
+                <div class="cat-card__icon-wrapper cat-icon--color">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="13.5" cy="6.5" r=".5" />
+                    <circle cx="17.5" cy="10.5" r=".5" />
+                    <circle cx="8.5" cy="7.5" r=".5" />
+                    <circle cx="6.5" cy="12.5" r=".5" />
+                    <path
+                      d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.72 1.7-1.65 0-.43-.17-.83-.44-1.14-.29-.33-.46-.77-.46-1.21 0-.93.75-1.7 1.68-1.7H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"
+                    />
+                  </svg>
+                </div>
+                <h3 class="cat-card__title">Color Tools</h3>
+              </div>
+              <p class="cat-card__desc">
+                Extract color palettes from photos, convert Hex/RGB/HSL
+                coordinates, and run accessibility color contrast audits.
+              </p>
+              <div class="cat-card__action">
+                <span>View Color Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Our Principles Section
+         ========================================================================== -->
+      <section class="about-section" id="principles">
+        <div class="container">
+          <div class="about-section-header">
+            <div
+              class="inline-flex items-center px-2.5 py-1 rounded bg-indigo-500/10 text-xs font-bold text-indigo-500 uppercase tracking-wide mb-4"
+            >
+              Our Principles
+            </div>
+            <h2 class="about-section-title">The Foundations of Comprexa</h2>
+            <p class="about-section-subtitle">
+              Six core ethical and technical pillars that guide how we engineer
+              our tools and serve our global community.
+            </p>
+          </div>
+
+          <div class="principles-grid">
+            <!-- Principle 1 -->
+            <div class="principle-card">
+              <div class="principle-card__num" aria-hidden="true">01</div>
+              <h3 class="principle-card__title">Privacy First</h3>
+              <p class="principle-card__desc">
+                We build interfaces that mathematically prove files never leave
+                your computer, rather than just asking you to trust a written
+                privacy policy. Your local browser window acts as an isolated
+                vault.
+              </p>
+            </div>
+
+            <!-- Principle 2 -->
+            <div class="principle-card">
+              <div class="principle-card__num" aria-hidden="true">02</div>
+              <h3 class="principle-card__title">Performance</h3>
+              <p class="principle-card__desc">
+                Your modern device is an incredibly powerful computer. We write
+                ultra-lean script wrappers to utilize that raw computing power,
+                letting you bypass cloud queue latency completely.
+              </p>
+            </div>
+
+            <!-- Principle 3 -->
+            <div class="principle-card">
+              <div class="principle-card__num" aria-hidden="true">03</div>
+              <h3 class="principle-card__title">Simplicity</h3>
+              <p class="principle-card__desc">
+                No bloat. We eliminate intrusive paywalls, mandatory user
+                logins, cookie-consent walls, and flashing ads. We prioritize
+                clean workspaces that value your time and attention.
+              </p>
+            </div>
+
+            <!-- Principle 4 -->
+            <div class="principle-card">
+              <div class="principle-card__num" aria-hidden="true">04</div>
+              <h3 class="principle-card__title">Accessibility</h3>
+              <p class="principle-card__desc">
+                Utilities belong to everyone. We ensure that our interfaces are
+                highly readable, fully keyboard navigable, and extremely
+                lightweight so they load instantly on low-speed cell signals.
+              </p>
+            </div>
+
+            <!-- Principle 5 -->
+            <div class="principle-card">
+              <div class="principle-card__num" aria-hidden="true">05</div>
+              <h3 class="principle-card__title">Reliability</h3>
+              <p class="principle-card__desc">
+                Comprexa executes deterministically. Because processing lives
+                locally within your browser's context, our core utilities will
+                keep functioning even if your internet connection drops offline
+                mid-flight.
+              </p>
+            </div>
+
+            <!-- Principle 6 -->
+            <div class="principle-card">
+              <div class="principle-card__num" aria-hidden="true">06</div>
+              <h3 class="principle-card__title">Continuous Improvement</h3>
+              <p class="principle-card__desc">
+                We actively refine our compiled libraries, update core
+                WebAssembly packages, and optimize rendering codecs to ensure
+                you consistently receive state-of-the-art file operations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Statistics Section
+         ========================================================================== -->
+      <section class="about-section about-section--neutral" id="statistics">
+        <div class="container">
+          <div class="about-section-header">
+            <div
+              class="inline-flex items-center px-2.5 py-1 rounded bg-indigo-500/10 text-xs font-bold text-indigo-500 uppercase tracking-wide mb-4"
+            >
+              Comprexa In Numbers
+            </div>
+            <h2 class="about-section-title">Scale Without Compromise</h2>
+            <p class="about-section-subtitle">
+              Designed to offer unlimited power while maintaining absolute
+              privacy guarantees.
+            </p>
+          </div>
+
+          <div class="stats-container">
+            <div class="stats-grid">
+              <!-- Stat 1 -->
+              <div>
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Professional Tools</div>
+                <div class="stat-desc">Complete office utilities</div>
+              </div>
+
+              <!-- Stat 2 -->
+              <div>
+                <div class="stat-number" data-target="9">0</div>
+                <div class="stat-label">Tool Categories</div>
+                <div class="stat-desc">Organized for efficiency</div>
+              </div>
+
+              <!-- Stat 3 -->
+              <div>
+                <div class="stat-number" data-target="100">0</div>
+                <div class="stat-label">Browser Processing</div>
+                <div class="stat-desc">Zero files touch the cloud</div>
+              </div>
+
+              <!-- Stat 4 -->
+              <div>
+                <div class="stat-number" data-target="0">0</div>
+                <div class="stat-label">Free Forever</div>
+                <div class="stat-desc">Zero subscription cost</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         FAQ Section
+         ========================================================================== -->
+      <section class="about-section" id="faq">
+        <div class="container">
+          <div class="about-section-header">
+            <div
+              class="inline-flex items-center px-2.5 py-1 rounded bg-indigo-500/10 text-xs font-bold text-indigo-500 uppercase tracking-wide mb-4"
+            >
+              FAQ
+            </div>
+            <h2 class="about-section-title">Common Questions & Answers</h2>
+            <p class="about-section-subtitle">
+              Everything you need to know about Comprexa's architecture and
+              performance values.
+            </p>
+          </div>
+
+          <div class="faq-container-custom">
+            <div class="faq-list">
+              <!-- FAQ 1 -->
+              <div class="faq-item">
+                <button class="faq-item__question" aria-expanded="false">
+                  <span>What is Comprexa?</span>
+                  <svg
+                    class="faq-item__icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                <div class="faq-item__answer">
+                  <p>
+                    Comprexa is an elegant, single-view file utility workspace
+                    that provides a comprehensive suite of tools for processing
+                    documents, PDFs, developer formats, vector codes, and web
+                    assets. Unlike traditional conversion websites, Comprexa
+                    executes calculations locally on your own CPU instead of
+                    transferring files over the web.
+                  </p>
+                </div>
+              </div>
+
+              <!-- FAQ 2 -->
+              <div class="faq-item">
+                <button class="faq-item__question" aria-expanded="false">
+                  <span>Is Comprexa free?</span>
+                  <svg
+                    class="faq-item__icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                <div class="faq-item__answer">
+                  <p>
+                    Yes, completely. All tools inside Comprexa are free of
+                    charge, with no subscription prompts, account registration
+                    requirements, file size limits, or daily usage caps. We
+                    don't collect credit cards because we don't have
+                    server-hosting costs to cover for your files—your own device
+                    does the processing work!
+                  </p>
+                </div>
+              </div>
+
+              <!-- FAQ 3 -->
+              <div class="faq-item">
+                <button class="faq-item__question" aria-expanded="false">
+                  <span>Do files leave my device?</span>
+                  <svg
+                    class="faq-item__icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                <div class="faq-item__answer">
+                  <p>
+                    Never. This is our absolute architectural commitment. All
+                    operations—including heavy actions like optimizing a
+                    multi-page PDF or extracting images—happen locally inside
+                    your web page memory via JavaScript and WebAssembly compiled
+                    code. Your data is never uploaded, transferred, or cached on
+                    any remote servers.
+                  </p>
+                </div>
+              </div>
+
+              <!-- FAQ 4 -->
+              <div class="faq-item">
+                <button class="faq-item__question" aria-expanded="false">
+                  <span>Why browser-first?</span>
+                  <svg
+                    class="faq-item__icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                <div class="faq-item__answer">
+                  <p>
+                    Standard online converters pose severe confidentiality
+                    vulnerabilities, and they waste time and broadband bandwidth
+                    on upload/download cycles. Processing files directly inside
+                    your browser's sandboxed environment ensures your documents
+                    are protected by cryptography, loads instantaneously, and
+                    lets you work offline anywhere.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+         Final CTA Section
+         ========================================================================== -->
+      <section class="about-section" style="border-bottom: none">
+        <div class="container">
+          <div class="cta-banner">
+            <div class="cta-banner__glow" aria-hidden="true"></div>
+
+            <div class="relative z-10" style="max-width: 600px; margin: 0 auto">
+              <!-- Premium Badge -->
+              <div
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-6"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"
+                ></span>
+                <span>100% Client-Side Processing</span>
+              </div>
+
+              <h2 class="cta-banner__title">Ready to Work Smarter?</h2>
+              <p class="cta-banner__text">
+                Experience the future of browser-first productivity. Process
+                documents, compress images, edit developer assets, and manage
+                PDFs locally with absolute privacy and instant execution.
+              </p>
+
+              <div
+                class="cta-banner__actions flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+                style="
+                  margin-top: 24px;
+                  gap: 16px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <a
+                  href="/#tools"
+                  class="btn btn--primary py-3 px-8 text-sm font-semibold inline-flex items-center gap-2"
+                >
+                  <span>Browse All Tools</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </a>
+                <a
+                  href="/#categories"
+                  class="btn btn--secondary py-3 px-8 text-sm font-semibold"
+                >
+                  Explore Categories
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+       Footer Section (Universal footer dynamically populated by framework)
+       ========================================================================== -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- ==========================================================================
+       Scripts Section
+       ========================================================================== -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+
+    <!-- Animated Counter Script for Stats Section -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const statsElements = document.querySelectorAll(".stat-number");
+
+        const animateCounters = () => {
+          statsElements.forEach((element) => {
+            const target = parseInt(element.getAttribute("data-target"), 10);
+            const isPercent =
+              element.textContent.includes("%") ||
+              element.getAttribute("data-target") === "100";
+            const isPlus = element.getAttribute("data-target") === "50";
+            const isFree = element.getAttribute("data-target") === "0";
+
+            if (isFree) {
+              element.textContent = "100% Free";
+              return;
+            }
+
+            let current = 0;
+            const duration = 1200; // ms
+            const stepTime = Math.abs(Math.floor(duration / target));
+
+            const timer = setInterval(
+              () => {
+                current += 1;
+                if (current >= target) {
+                  current = target;
+                  clearInterval(timer);
+                }
+
+                if (isPercent) {
+                  element.textContent = current + "%";
+                } else if (isPlus) {
+                  element.textContent = current + "+";
+                } else {
+                  element.textContent = current;
+                }
+              },
+              Math.max(stepTime, 15),
+            );
+          });
+        };
+
+        // Intersection Observer to trigger when visible
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  animateCounters();
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.1 },
+          );
+
+          const statsSection = document.getElementById("statistics");
+          if (statsSection) observer.observe(statsSection);
+          else animateCounters();
+        } else {
+          animateCounters();
+        }
+      });
+    </script>
+  </body>
+</html>

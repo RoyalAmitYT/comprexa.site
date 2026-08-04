@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      name="keywords"
+      content="random string generator, token generator, api key generator, secret string maker, random string maker"
+    />
+    
+    <link
+      rel="canonical"
+      href="https://comprexa.app/random-string-generator.html"
+    />
+
+<!-- Open Graph / Social -->
+
+<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <style>
+      .str-card {
+        padding: 28px;
+        margin-bottom: 24px;
+      }
+
+      .str-options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .str-option-card {
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 16px;
+      }
+
+      .str-option-title {
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 12px;
+      }
+
+      .str-presets-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .str-preset-btn {
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .str-preset-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: var(--bg-body);
+      }
+
+      .str-textarea {
+        width: 100%;
+        height: 220px;
+        padding: 16px;
+        font-family: "Fira Code", monospace;
+        font-size: 0.95rem;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        background: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.6;
+        resize: vertical;
+        outline: none;
+      }
+    </style>
+
+<title>Random String Generator — Comprexa</title>
+  <meta name="description" content="Generate random text strings of any length using custom character sets. Fast, free, and secure browser utility." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Random String Generator — Comprexa" />
+  <meta property="og:description" content="Generate random text strings of any length using custom character sets. Fast, free, and secure browser utility." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/random-string-generator.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Random String Generator — Comprexa" />
+  <meta name="twitter:description" content="Generate random text strings of any length using custom character sets. Fast, free, and secure browser utility." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/random-string-generator.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Utility Tools",
+      "item": "https://comprexa.com/utility-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Random String Generator — Comprexa",
+      "item": "https://comprexa.com/random-string-generator.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Random String Generator — Comprexa",
+  "url": "https://comprexa.com/random-string-generator.html",
+  "description": "Generate random text strings of any length using custom character sets. Fast, free, and secure browser utility.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Universal Header Navigation -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo" aria-label="Comprexa Home">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav" aria-label="Main Navigation">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+            <li><a href="/#blog" class="nav__link">Blog</a></li>
+            <li><a href="/about.html" class="nav__link">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+          <a href="/#tools" class="btn btn--primary">
+            <span>All Tools</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Dynamic Breadcrumbs -->
+      <nav
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+
+      <!-- Dynamic Hero Header -->
+      <div id="landing-hero"></div>
+
+      <!-- Tool Workspace -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container">
+          <div class="card workspace-card str-card">
+            <!-- Quick Presets -->
+            <div class="str-presets-row">
+              <button
+                type="button"
+                class="str-preset-btn"
+                data-preset="api-key"
+              >
+                API Key (32-Char sk_live_)
+              </button>
+              <button
+                type="button"
+                class="str-preset-btn"
+                data-preset="hex-token"
+              >
+                64-Char Hex Token
+              </button>
+              <button
+                type="button"
+                class="str-preset-btn"
+                data-preset="alphanumeric"
+              >
+                Alphanumeric (16-Char)
+              </button>
+            </div>
+
+            <!-- Config Options -->
+            <div class="str-options-grid">
+              <!-- Length & Quantity -->
+              <div class="str-option-card">
+                <div class="str-option-title">Length & Quantity</div>
+                <div style="margin-bottom: 12px">
+                  <label
+                    style="
+                      font-size: 0.75rem;
+                      font-weight: 700;
+                      color: var(--text-muted);
+                    "
+                    >String Length (1 to 256)</label
+                  >
+                  <div style="display: flex; gap: 10px; align-items: center">
+                    <input
+                      type="range"
+                      id="str-len-slider"
+                      class="pwd-slider"
+                      min="1"
+                      max="128"
+                      value="16"
+                    />
+                    <input
+                      type="number"
+                      id="str-len-input"
+                      class="pwd-number-input"
+                      min="1"
+                      max="256"
+                      value="16"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    style="
+                      font-size: 0.75rem;
+                      font-weight: 700;
+                      color: var(--text-muted);
+                    "
+                    >Quantity (1 to 500)</label
+                  >
+                  <div style="display: flex; gap: 10px; align-items: center">
+                    <input
+                      type="range"
+                      id="str-qty-slider"
+                      class="pwd-slider"
+                      min="1"
+                      max="100"
+                      value="10"
+                    />
+                    <input
+                      type="number"
+                      id="str-qty-input"
+                      class="pwd-number-input"
+                      min="1"
+                      max="500"
+                      value="10"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Character Set -->
+              <div class="str-option-card">
+                <div class="str-option-title">Character Set Rules</div>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <label class="checkbox-label"
+                    ><input type="checkbox" id="chk-uppercase" checked /><span
+                      >Uppercase (A-Z)</span
+                    ></label
+                  >
+                  <label class="checkbox-label"
+                    ><input type="checkbox" id="chk-lowercase" checked /><span
+                      >Lowercase (a-z)</span
+                    ></label
+                  >
+                  <label class="checkbox-label"
+                    ><input type="checkbox" id="chk-numbers" checked /><span
+                      >Numbers (0-9)</span
+                    ></label
+                  >
+                  <label class="checkbox-label"
+                    ><input type="checkbox" id="chk-symbols" /><span
+                      >Symbols (!@#)</span
+                    ></label
+                  >
+                  <label class="checkbox-label"
+                    ><input type="checkbox" id="chk-exclude-ambiguous" /><span
+                      >Exclude Ambiguous (i, l, 1, O, 0)</span
+                    ></label
+                  >
+                </div>
+              </div>
+
+              <!-- Custom Set & Prefix -->
+              <div class="str-option-card">
+                <div class="str-option-title">Custom Rules & Formatting</div>
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                  <div>
+                    <label
+                      style="
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: var(--text-muted);
+                      "
+                      >Prefix / Suffix</label
+                    >
+                    <div style="display: flex; gap: 6px">
+                      <input
+                        type="text"
+                        id="str-prefix-input"
+                        class="pwd-number-input"
+                        style="width: 100%; text-align: left"
+                        placeholder="Prefix (e.g. sk_)"
+                      />
+                      <input
+                        type="text"
+                        id="str-suffix-input"
+                        class="pwd-number-input"
+                        style="width: 100%; text-align: left"
+                        placeholder="Suffix"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="checkbox-label"
+                      ><input type="checkbox" id="chk-custom-set" /><span
+                        >Use Custom Characters</span
+                      ></label
+                    >
+                    <input
+                      type="text"
+                      id="str-custom-set-input"
+                      class="pwd-number-input"
+                      style="
+                        width: 100%;
+                        text-align: left;
+                        margin-top: 6px;
+                        display: none;
+                      "
+                      placeholder="Exact custom chars..."
+                    />
+                  </div>
+                  <div>
+                    <label
+                      style="
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: var(--text-muted);
+                      "
+                      >Delimiter</label
+                    >
+                    <select
+                      id="str-delimiter-select"
+                      class="pwd-number-input"
+                      style="width: 100%; text-align: left; padding: 6px"
+                    >
+                      <option value="newline" selected>New Line</option>
+                      <option value="comma">Comma (,)</option>
+                      <option value="space">Space</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Output -->
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+              "
+            >
+              <span
+                style="
+                  font-weight: 800;
+                  font-size: 0.95rem;
+                  color: var(--text-main);
+                "
+                >Generated Random Strings</span
+              >
+              <span id="str-count-badge" class="badge badge--primary"
+                >10 Strings</span
+              >
+            </div>
+
+            <textarea
+              id="str-output"
+              class="str-textarea"
+              readonly
+              spellcheck="false"
+              aria-label="Generated Strings Output"
+            ></textarea>
+
+            <!-- Actions -->
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+                flex-wrap: wrap;
+                gap: 12px;
+              "
+            >
+              <div style="display: flex; gap: 8px">
+                <button
+                  type="button"
+                  class="btn btn--primary"
+                  id="btn-generate-strings"
+                >
+                  Generate Strings
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--outline"
+                  id="btn-copy-strings"
+                >
+                  Copy All
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--outline"
+                  id="btn-download-strings"
+                >
+                  Download .TXT
+                </button>
+              </div>
+              <button
+                type="button"
+                class="btn btn--outline"
+                id="btn-clear-strings"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Landing Sections -->
+      <div id="landing-features"></div>
+      <div id="landing-how-it-works"></div>
+      <div id="landing-benefits"></div>
+      <div id="landing-faq"></div>
+      <div id="landing-related-tools"></div>
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+
+    <!-- Scripts -->
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <!-- Page Specific Scripts -->
+    <script type="module" src="/js/utility/random-string-generator.js"></script>
+  </body>
+</html>

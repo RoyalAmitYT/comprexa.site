@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      name="keywords"
+      content="document metadata viewer, pdf metadata viewer, docx author inspection, view document properties online, file exif inspector"
+    />
+    
+    <link
+      rel="canonical"
+      href="https://comprexa.app/document-metadata-viewer.html"
+    />
+    <title>
+      Document Metadata Viewer — Inspect PDF, Word, Excel & PPT Properties |
+      Comprexa
+    </title>
+
+    <!-- Open Graph -->
+
+<!-- Google Fonts & Stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- PDF.js & JSZip -->
+
+<title>View Document Metadata | Exif & Info — Comprexa</title>
+  <meta name="description" content="Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="View Document Metadata | Exif & Info — Comprexa" />
+  <meta property="og:description" content="Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprexa.com/document-metadata-viewer.html" />
+  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:site_name" content="Comprexa" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="View Document Metadata | Exif & Info — Comprexa" />
+  <meta name="twitter:description" content="Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser." />
+  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  
+  <link rel="canonical" href="https://comprexa.com/document-metadata-viewer.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#6366f1" />
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comprexa.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Developer Tools",
+      "item": "https://comprexa.com/developer-tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Document Metadata Viewer — Inspect PDF, Word, Excel & PPT Properties",
+      "item": "https://comprexa.com/document-metadata-viewer.html"
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Document Metadata Viewer — Inspect PDF, Word, Excel & PPT Properties",
+  "url": "https://comprexa.com/document-metadata-viewer.html",
+  "description": "Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser.",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header" role="banner">
+      <div class="container header__inner">
+        <a href="/" class="logo">
+          <div class="logo__icon-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a1 1 0 0 0 1 1h4" />
+              <path d="m9 15 2 2 4-4" />
+            </svg>
+          </div>
+          <span class="logo__text">Comprexa</span>
+        </a>
+
+        <nav class="nav">
+          <ul class="nav__list">
+            <li><a href="/" class="nav__link">Home</a></li>
+            <li>
+              <a href="/#tools" class="nav__link nav__link--active">Tools</a>
+            </li>
+            <li><a href="/#categories" class="nav__link">Categories</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            id="theme-toggle"
+            class="btn btn--icon"
+            aria-label="Toggle Theme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+          <a href="/#tools" class="btn btn--primary">All Tools</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <nav class="breadcrumb-nav" id="landing-breadcrumb"></nav>
+      <div id="landing-hero"></div>
+
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container container--narrow" style="max-width: 860px">
+          <div class="card workspace-card" style="padding: 28px">
+            <!-- Step 1: Upload -->
+            <div id="meta-upload-section">
+              <div
+                class="file-uploader__dropzone"
+                id="meta-dropzone"
+                tabindex="0"
+                role="button"
+              >
+                <input
+                  type="file"
+                  id="meta-file-input"
+                  class="file-uploader__input"
+                  accept=".pdf,.docx,.xlsx,.pptx,.doc,.xls,.ppt"
+                  aria-hidden="true"
+                  tabindex="-1"
+                />
+                <div class="file-uploader__icon-wrap icon-bg--doc">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M12 15v2" />
+                    <path d="M12 7v2" />
+                  </svg>
+                </div>
+                <div class="file-uploader__title">
+                  Upload Any Document to <span>Inspect Metadata</span>
+                </div>
+                <div class="file-uploader__hint-main">
+                  Drag & drop your PDF, Word, Excel, or PowerPoint document here
+                </div>
+                <button
+                  type="button"
+                  class="btn btn--primary file-uploader__choose-btn"
+                  tabindex="-1"
+                  style="margin-top: 6px; margin-bottom: 8px"
+                >
+                  Browse Document
+                </button>
+                <div
+                  class="file-uploader__formats"
+                  style="font-size: 0.8rem; color: var(--text-muted)"
+                >
+                  Supported formats: .PDF, .DOCX, .XLSX, .PPTX
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Result Grid -->
+            <div id="meta-result-section" style="display: none">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 16px;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-lg);
+                  background: var(--bg-surface-hover);
+                  margin-bottom: 20px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 14px">
+                  <div
+                    class="icon-bg--doc"
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      border-radius: var(--radius-md);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: rgba(79, 70, 229, 0.12);
+                      color: var(--primary);
+                    "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                      />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-weight: 700;
+                        font-size: 1rem;
+                        color: var(--text-main);
+                      "
+                      id="meta-file-name-display"
+                    >
+                      document.pdf
+                    </div>
+                    <div
+                      style="font-size: 0.82rem; color: var(--text-muted)"
+                      id="meta-file-meta-display"
+                    >
+                      0 KB • Document
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn--outline btn--sm"
+                  id="btn-meta-change-file"
+                >
+                  Change Document
+                </button>
+              </div>
+
+              <!-- Metadata Cards Grid -->
+              <div id="meta-grid-container" style="margin-bottom: 24px"></div>
+
+              <!-- Action Toolbar -->
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 12px;
+                  justify-content: space-between;
+                  align-items: center;
+                  border-top: 1px solid var(--border-subtle);
+                  padding-top: 20px;
+                "
+              >
+                <button
+                  type="button"
+                  class="btn btn--outline btn--sm"
+                  id="btn-meta-copy-json"
+                >
+                  Copy JSON Metadata
+                </button>
+                <div style="display: flex; gap: 10px">
+                  <button
+                    type="button"
+                    class="btn btn--outline btn--sm"
+                    id="btn-meta-export-txt"
+                  >
+                    Export TXT Report
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--primary btn--sm"
+                    id="btn-meta-export-json"
+                  >
+                    Download JSON Report
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="landing-features"></div>
+      <div id="landing-how-it-works"></div>
+      <div id="landing-benefits"></div>
+      <div id="landing-faq"></div>
+      <div id="landing-related-tools"></div>
+      <div id="landing-cta"></div>
+    </main>
+
+    <!-- Universal Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo"></footer>
+    <!-- Global Framework Libraries -->
+    <script type="module" src="/js/categories.js"></script>
+    <script type="module" src="/js/tools.js"></script>
+    <script type="module" src="/js/framework.js"></script>
+    <script type="module" src="/js/settings.js"></script>
+    <script type="module" src="/js/search-engine.js"></script>
+    <script type="module" src="/js/command-palette.js"></script>
+    <script type="module" src="/js/seo-engine.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <!-- Page Specific Scripts -->
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+    ></script>
+    <script type="module" src="/js/tool-content.js"></script>
+    <script type="module" src="/js/tool-landing.js"></script>
+    <script type="module" src="/js/document/metadata-viewer.js"></script>
+  </body>
+</html>
