@@ -4,7 +4,7 @@
  * Core Scripting & Interactive Features
  */
 
-document.addEventListener("DOMContentLoaded", () => {
+function initComprexaApp() {
   // Dynamically render Article Content
   const articleMain = document.querySelector(".article-main");
   if (articleMain && window.ComprexaArticleRegistry) {
@@ -479,7 +479,12 @@ document.addEventListener("DOMContentLoaded", () => {
       typeof window.ComprexaToolsRegistry.getAll === "function"
     ) {
       registryTools = window.ComprexaToolsRegistry.getAll();
-    } else if (
+    }
+    if ((!registryTools || registryTools.length === 0) && window.COMPREXA_TOOLS_REGISTRY) {
+      registryTools = window.COMPREXA_TOOLS_REGISTRY;
+    }
+    if (
+      (!registryTools || registryTools.length === 0) &&
       typeof COMPREXA_TOOLS_REGISTRY !== "undefined" &&
       Array.isArray(COMPREXA_TOOLS_REGISTRY)
     ) {
@@ -2693,11 +2698,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!el.classList.contains("fade-in-on-scroll")) {
         el.classList.add("fade-in-on-scroll");
       }
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200 && rect.bottom > -100) {
+        el.classList.add("visible");
+      }
     });
 
     // Auto-add stagger-children to grid parents
     const grids = document.querySelectorAll(
-      ".popular-tools__grid, .categories-grid, .articles-grid, .features-grid, .stats-grid",
+      ".popular-grid, .popular-tools__grid, .categories-grid, .articles-grid, .features-grid, .stats-grid",
     );
     grids.forEach((grid) => grid.classList.add("stagger-children"));
 
@@ -2712,8 +2721,8 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         },
         {
-          rootMargin: "0px 0px -30px 0px",
-          threshold: 0.08,
+          rootMargin: "100px 0px 100px 0px",
+          threshold: 0.01,
         },
       );
 
@@ -2796,4 +2805,10 @@ document.addEventListener("DOMContentLoaded", () => {
         window.ComprexaFramework.renderUniversalFooter(footerExists);
     }
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initComprexaApp);
+} else {
+  initComprexaApp();
+}

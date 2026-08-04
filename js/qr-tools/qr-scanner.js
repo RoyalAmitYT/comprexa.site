@@ -1,36 +1,24 @@
 // @ts-nocheck
 /**
- * Comprexa QR Code Scanner Engine
- * ---------------------------------------------------------------------------
- * Rebuilt from scratch. 100% client-side, production-grade QR decoding.
- *
- * Decoding engine: @zxing/browser + @zxing/library (ISO/IEC 18004 compliant
- * multi-format reader used in production by countless commercial products).
- *
- * Capabilities:
- *  - Image upload (click-to-browse)
- *  - Drag & drop
- *  - Paste from clipboard (button + native Ctrl/Cmd+V anywhere on page)
- *  - Webcam / mobile rear camera live scanning
- *  - Automatic decode as soon as an image/frame is available
- *  - Manual "Scan QR Code" button for on-demand / repeat scans
- *  - Rich payload parsing: URL, Text, Wi-Fi, Email, Phone, SMS, WhatsApp,
- *    vCard, MeCard, Calendar (vEvent), Geo/Maps location
- * ---------------------------------------------------------------------------
+ * Comprexa QR Code Scanner Engine (Rewritten)
+ * Enterprise-grade 100% Client-Side QR Scanner.
+ * Architecture: State Machine + UI Controller + Scanner Engine.
  */
 
-import { BrowserQRCodeReader } from "@zxing/browser";
 import {
-  DecodeHintType,
+  BrowserQRCodeReader,
+  MultiFormatReader,
+  RGBLuminanceSource,
+  HybridBinarizer,
+  BinaryBitmap,
   BarcodeFormat,
-  NotFoundException,
-  ChecksumException,
-  FormatException,
+  DecodeHintType,
 } from "@zxing/library";
 
-// --- APPLICATION STATE MACHINE -----------------------------------------
+// --- STATE MACHINE ---
 const ScannerState = {
   IDLE: "IDLE",
+  IMAGE_SELECTED: "IMAGE_SELECTED",
   READY_TO_SCAN: "READY_TO_SCAN",
   SCANNING: "SCANNING",
   SUCCESS: "SUCCESS",
@@ -39,28 +27,27 @@ const ScannerState = {
 
 class QrScannerApp {
   constructor() {
+    // Current application state
     this.state = ScannerState.IDLE;
 
-    // --- Decoding engine ---
+    // Decoders
+    this.zxingBrowserReader = new BrowserQRCodeReader();
+    this.zxingMultiReader = new MultiFormatReader();
     const hints = new Map();
     hints.set(DecodeHintType.POSSIBLE_FORMATS, [BarcodeFormat.QR_CODE]);
     hints.set(DecodeHintType.TRY_HARDER, true);
-    this.reader = new BrowserQRCodeReader(hints, {
-      delayBetweenScanAttempts: 150,
-      delayBetweenScanSuccess: 500,
-    });
+    this.zxingMultiReader.setHints(hints);
 
-    // --- Active image data ---
+    // Active Data
     this.selectedFile = null;
     this.selectedDataUrl = null;
     this.decodedResult = null;
 
-    // --- Camera data ---
-    this.cameraControls = null;
+    // Camera Data
     this.isCameraActive = false;
-    this.activeCameraId = undefined;
-    this.videoDevices = [];
+    this.activeCameraId = null;
 
+    // Wait for DOM
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () => this.init());
     } else {
@@ -112,12 +99,8 @@ class QrScannerApp {
     this.resultsPanel = document.getElementById("scanner-results-panel");
     this.emptyState = document.getElementById("scanner-empty-state");
     this.resultText = document.getElementById("scanner-result-text");
-    this.resultCharCount = document.getElementById(
-      "scanner-result-char-count",
-    );
-    this.resultTypeBadge = document.getElementById(
-      "scanner-result-type-badge",
-    );
+    this.resultCharCount = document.getElementById("scanner-result-char-count");
+    this.resultTypeBadge = document.getElementById("scanner-result-type-badge");
 
     // Action Buttons
     this.copyBtn = document.getElementById("copy-result-btn");
@@ -129,41 +112,14 @@ class QrScannerApp {
     this.mapsBtn = document.getElementById("maps-btn");
     this.generateQrBtn = document.getElementById("generate-qr-again-btn");
     this.downloadTxtBtn = document.getElementById("download-txt-btn");
-    this.downloadVcfBtn = document.getElementById("download-vcf-btn");
-    this.downloadIcsBtn = document.getElementById("download-ics-btn");
     this.scanAgainBtn = document.getElementById("scan-again-btn"); // In sidebar
 
-    // Wi-Fi Card
+    // WiFi Card
     this.wifiDetailsCard = document.getElementById("wifi-details-card");
     this.wifiSsid = document.getElementById("wifi-ssid");
     this.wifiPassword = document.getElementById("wifi-password");
     this.wifiEncryption = document.getElementById("wifi-encryption");
     this.copyWifiPassBtn = document.getElementById("copy-wifi-pass-btn");
-
-    // vCard Card
-    this.vcardDetailsCard = document.getElementById("vcard-details-card");
-    this.vcardName = document.getElementById("vcard-name");
-    this.vcardPhone = document.getElementById("vcard-phone");
-    this.vcardEmail = document.getElementById("vcard-email");
-    this.vcardOrg = document.getElementById("vcard-org");
-
-    // Universal Tool Page Template: the results sidebar is only revealed
-    // once the workspace's progressive-disclosure state is "has-file"
-    // (see WorkspaceProgressiveController in script.js). Since the scanner
-    // uses its own bespoke upload/camera UI instead of the generic
-    // [data-file-uploader] component, we drive that same state machine
-    // directly so the template's layout/visibility rules apply correctly.
-    this.workspaceEl = document.getElementById("landing-workspace");
-  }
-
-  setWorkspaceHasFile() {
-    if (this.workspaceEl)
-      this.workspaceEl.setAttribute("data-workspace-state", "has-file");
-  }
-
-  setWorkspaceEmpty() {
-    if (this.workspaceEl)
-      this.workspaceEl.setAttribute("data-workspace-state", "empty");
   }
 
   bindEvents() {
@@ -172,12 +128,6 @@ class QrScannerApp {
       this.selectFileBtn.addEventListener("click", () =>
         this.fileInput?.click(),
       );
-    if (this.dropzone) {
-      this.dropzone.addEventListener("click", (e) => {
-        if (e.target.closest("button")) return; // let buttons handle themselves
-        this.fileInput?.click();
-      });
-    }
     if (this.fileInput) {
       this.fileInput.addEventListener("change", (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -187,40 +137,31 @@ class QrScannerApp {
     }
 
     if (this.dropzone) {
-      ["dragenter", "dragover"].forEach((evt) => {
-        this.dropzone.addEventListener(evt, (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.dropzone.classList.add("dropzone--active");
-        });
+      this.dropzone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        this.dropzone.classList.add("dropzone--active");
       });
-      ["dragleave", "dragend"].forEach((evt) => {
-        this.dropzone.addEventListener(evt, (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.dropzone.classList.remove("dropzone--active");
-        });
+      this.dropzone.addEventListener("dragleave", (e) => {
+        e.preventDefault();
+        this.dropzone.classList.remove("dropzone--active");
       });
       this.dropzone.addEventListener("drop", (e) => {
         e.preventDefault();
-        e.stopPropagation();
         this.dropzone.classList.remove("dropzone--active");
-        if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
           this.handleFileSelected(e.dataTransfer.files[0]);
         }
       });
     }
 
     if (this.pasteBtn)
-      this.pasteBtn.addEventListener("click", () => this.handlePasteButton());
+      this.pasteBtn.addEventListener("click", () => this.handlePaste());
     if (this.clearImageBtn)
       this.clearImageBtn.addEventListener("click", () => this.resetState());
 
-    // Main Scan Action (manual trigger / re-scan)
+    // Main Scan Action
     if (this.scanActionBtn)
-      this.scanActionBtn.addEventListener("click", () =>
-        this.executeScan(true),
-      );
+      this.scanActionBtn.addEventListener("click", () => this.executeScan());
     if (this.scanAnotherBtn)
       this.scanAnotherBtn.addEventListener("click", () => this.resetState());
     if (this.scanAgainBtn)
@@ -249,22 +190,16 @@ class QrScannerApp {
       this.openUrlBtn.addEventListener("click", () => this.openResultUrl());
     if (this.downloadTxtBtn)
       this.downloadTxtBtn.addEventListener("click", () =>
-        this.downloadResultAs("txt"),
-      );
-    if (this.downloadVcfBtn)
-      this.downloadVcfBtn.addEventListener("click", () =>
-        this.downloadResultAs("vcf"),
-      );
-    if (this.downloadIcsBtn)
-      this.downloadIcsBtn.addEventListener("click", () =>
-        this.downloadCalendarIcs(),
+        this.downloadResultTxt(),
       );
     if (this.copyWifiPassBtn) {
       this.copyWifiPassBtn.addEventListener("click", () => {
         if (this.wifiPassword && this.wifiPassword.textContent !== "-") {
           navigator.clipboard
             .writeText(this.wifiPassword.textContent)
-            .then(() => this.toast("Wi-Fi password copied!", "success"));
+            .then(() => {
+              this.toast("Wi-Fi password copied!", "success");
+            });
         }
       });
     }
@@ -287,11 +222,7 @@ class QrScannerApp {
     });
   }
 
-  async handlePasteButton() {
-    if (!navigator.clipboard || !navigator.clipboard.read) {
-      this.toast("Press Ctrl+V / Cmd+V to paste an image.", "info");
-      return;
-    }
+  async handlePaste() {
     try {
       const items = await navigator.clipboard.read();
       for (const item of items) {
@@ -311,7 +242,7 @@ class QrScannerApp {
     }
   }
 
-  // --- STATE CONTROLLER ---------------------------------------------------
+  // --- STATE CONTROLLER ---
   setState(newState) {
     this.state = newState;
     this.updateUI();
@@ -326,7 +257,6 @@ class QrScannerApp {
     // Stop camera if running
     this.stopCamera();
 
-    this.setWorkspaceEmpty();
     this.setState(ScannerState.IDLE);
   }
 
@@ -336,18 +266,23 @@ class QrScannerApp {
         this.toggleElement(this.uploadState, true);
         this.toggleElement(this.previewState, false);
         this.toggleElement(this.warningCard, false);
+
         this.toggleElement(this.scanActionBtn, true);
         this.toggleElement(this.scanAnotherBtn, false);
+
         this.setScanButtonMode("ready");
         this.hideResultPanel();
         break;
 
+      case ScannerState.IMAGE_SELECTED:
       case ScannerState.READY_TO_SCAN:
         this.toggleElement(this.uploadState, false);
         this.toggleElement(this.previewState, true);
         this.toggleElement(this.warningCard, false);
+
         this.toggleElement(this.scanActionBtn, true);
         this.toggleElement(this.scanAnotherBtn, false);
+
         this.setScanButtonMode("ready");
         this.hideResultPanel();
         break;
@@ -374,15 +309,15 @@ class QrScannerApp {
     }
   }
 
-  // --- IMAGE HANDLING -------------------------------------------------
+  // --- IMAGE HANDLING ---
   async handleFileSelected(file) {
     if (!file) return;
-    if (!file.type || !file.type.startsWith("image/")) {
+    if (!file.type.startsWith("image/")) {
       this.toast("Please provide a valid image file.", "error");
       return;
     }
 
-    // Stop camera if running — image & camera modes are mutually exclusive
+    // Stop camera if running
     this.stopCamera();
 
     this.selectedFile = file;
@@ -403,236 +338,141 @@ class QrScannerApp {
       if (this.metaDimensions) {
         this.metaDimensions.innerHTML = `<strong>Dimensions:</strong> ${img.naturalWidth} × ${img.naturalHeight} px`;
       }
-    } catch (e) {
-      /* non-fatal */
-    }
+    } catch (e) {}
 
-    this.setWorkspaceHasFile();
     this.setState(ScannerState.READY_TO_SCAN);
-
-    // Automatic QR Detection: immediately attempt a scan once the image
-    // is ready. The manual "Scan QR Code" button remains available for a
-    // deliberate re-attempt at any time.
-    this.executeScan(false);
   }
 
-  // --- SCAN ENGINE ---------------------------------------------------
-  async executeScan(isManualTrigger) {
+  // --- SCAN ENGINE ---
+  async executeScan() {
     if (
       this.state !== ScannerState.READY_TO_SCAN &&
       this.state !== ScannerState.FAILED
     )
       return;
-    if (!this.selectedDataUrl || !this.imagePreview) return;
+    if (!this.selectedDataUrl) return;
 
     this.setState(ScannerState.SCANNING);
 
     try {
-      // Let the "Scanning..." UI paint before the (synchronous-ish) decode work
-      await new Promise((resolve) => setTimeout(resolve, 40));
+      // Allow UI to render scanning state
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const result = await this.decodeImage(this.imagePreview);
+      const result = await this.decodeImageElement(this.imagePreview);
 
       if (result && result.getText()) {
         this.decodedResult = result.getText();
         this.toast("QR Code decoded successfully!", "success");
         this.setState(ScannerState.SUCCESS);
       } else {
-        throw new Error("No QR code detected");
+        throw new Error("No QR detected");
       }
     } catch (err) {
       this.setState(ScannerState.FAILED);
-      if (isManualTrigger) {
-        this.toast("No QR code could be detected in this image.", "error");
-      }
     }
   }
 
-  /**
-   * Attempts to decode a QR code from an <img> element using multiple
-   * strategies for maximum real-world reliability (small codes inside large
-   * photos, low-contrast prints, slightly rotated scans, etc.).
-   */
-  async decodeImage(imgEl) {
-    // Pass 1 — direct decode at native resolution (fast path, handles the
-    // vast majority of clean uploads/screenshots).
+  async decodeImageElement(imgEl) {
+    // Pass 1: BrowserQRCodeReader directly on image element
     try {
-      const result = await this.reader.decodeFromImageElement(imgEl);
+      const result =
+        await this.zxingBrowserReader.decodeFromImageElement(imgEl);
       if (result) return result;
     } catch (e) {
-      if (!this.isDecodeMiss(e)) throw e;
+      // Continue to next pass
     }
 
-    const img = await this.loadImage(imgEl.src);
-    const naturalW = img.naturalWidth || img.width;
-    const naturalH = img.naturalHeight || img.height;
-    if (!naturalW || !naturalH) return null;
-
-    // Pass 2 — upscale small images (helps tiny/low-res QR codes resolve
-    // enough contrast for the binarizer).
-    if (naturalW < 700 || naturalH < 700) {
-      try {
-        const scale = Math.min(4, 900 / Math.max(naturalW, naturalH));
-        const canvas = this.drawToCanvas(img, naturalW * scale, naturalH * scale);
-        const result = this.reader.decodeFromCanvas(canvas);
-        if (result) return result;
-      } catch (e) {
-        if (!this.isDecodeMiss(e)) throw e;
-      }
-    }
-
-    // Pass 3 — center-crop & zoom in, in case the QR code occupies only a
-    // small region of a much larger photograph.
+    // Pass 2: Canvas based robust scanning
     try {
-      const cropSize = Math.min(naturalW, naturalH);
+      const img = await this.loadImage(imgEl.src);
       const canvas = document.createElement("canvas");
-      const targetSize = Math.max(cropSize, 800);
-      canvas.width = targetSize;
-      canvas.height = targetSize;
+      const w = img.naturalWidth || img.width;
+      const h = img.naturalHeight || img.height;
+      canvas.width = w;
+      canvas.height = h;
       const ctx = canvas.getContext("2d", { willReadFrequently: true });
-      const sx = (naturalW - cropSize) / 2;
-      const sy = (naturalH - cropSize) / 2;
-      ctx.drawImage(
-        img,
-        sx,
-        sy,
-        cropSize,
-        cropSize,
-        0,
-        0,
-        targetSize,
-        targetSize,
-      );
-      const result = this.reader.decodeFromCanvas(canvas);
-      if (result) return result;
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, w, h);
+        const imgData = ctx.getImageData(0, 0, w, h);
+
+        const luminanceSource = new RGBLuminanceSource(imgData.data, w, h);
+        const binarizer = new HybridBinarizer(luminanceSource);
+        const binaryBitmap = new BinaryBitmap(binarizer);
+
+        const result = this.zxingMultiReader.decode(binaryBitmap);
+        if (result) return result;
+      }
     } catch (e) {
-      if (!this.isDecodeMiss(e)) throw e;
+      // Continue
     }
 
     return null;
   }
 
-  isDecodeMiss(err) {
-    return (
-      err instanceof NotFoundException ||
-      err instanceof ChecksumException ||
-      err instanceof FormatException ||
-      (err && /not found/i.test(err.message || ""))
-    );
-  }
-
-  drawToCanvas(img, w, h) {
-    const canvas = document.createElement("canvas");
-    canvas.width = Math.round(w);
-    canvas.height = Math.round(h);
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    return canvas;
-  }
-
-  // --- CAMERA HANDLING -------------------------------------------------
+  // --- CAMERA HANDLING ---
   async startCamera() {
-    // Stop any existing stream and clear image mode — camera & image
-    // workflows are mutually exclusive on this page.
-    this.stopCamera();
-    this.selectedFile = null;
-    this.selectedDataUrl = null;
-    this.decodedResult = null;
-    if (this.fileInput) this.fileInput.value = "";
-    this.setState(ScannerState.IDLE);
-
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      this.toast("Camera access is not supported in this browser.", "error");
-      return;
-    }
+    this.stopCamera(); // Clean up existing
+    this.resetState(); // Clear image states
 
     if (this.cameraContainer) this.cameraContainer.style.display = "block";
     if (this.startCameraBtn) this.startCameraBtn.style.display = "none";
     if (this.stopCameraBtn) this.stopCameraBtn.style.display = "inline-flex";
-    this.setWorkspaceHasFile();
 
     try {
+      const devices = await this.zxingBrowserReader.listVideoInputDevices();
+
+      if (devices.length === 0) {
+        throw new Error("No camera found");
+      }
+
+      if (this.cameraSelect && devices.length > 1) {
+        this.cameraSelect.style.display = "inline-block";
+        if (this.cameraSelect.options.length === 0) {
+          devices.forEach((d) => {
+            const opt = document.createElement("option");
+            opt.value = d.deviceId;
+            opt.text =
+              d.label || `Camera ${this.cameraSelect.options.length + 1}`;
+            this.cameraSelect.appendChild(opt);
+          });
+        }
+      }
+
+      const deviceId = this.activeCameraId || devices[0].deviceId;
       this.isCameraActive = true;
 
-      // Kick off the stream immediately using the preferred device (or the
-      // rear/environment camera by default on mobile when none is chosen
-      // yet), then populate the device picker in the background.
-      this.cameraControls = await this.reader.decodeFromVideoDevice(
-        this.activeCameraId,
+      this.zxingBrowserReader.decodeFromVideoDevice(
+        deviceId,
         this.cameraVideo,
         (result, err) => {
           if (result && this.isCameraActive) {
+            // Success!
             this.decodedResult = result.getText();
             this.toast("QR Code detected via camera!", "success");
             this.stopCamera();
             this.setState(ScannerState.SUCCESS);
-            return;
-          }
-          if (err && !this.isDecodeMiss(err)) {
-            // Non-fatal per-frame decode error; ignore and keep scanning.
           }
         },
       );
-
-      this.populateCameraDevices();
     } catch (err) {
       console.error("Camera startup error:", err);
       this.stopCamera();
-      this.setWorkspaceEmpty();
-      if (err && err.name === "NotAllowedError") {
-        this.toast(
-          "Camera permission denied. Please allow camera access.",
-          "error",
-        );
-      } else if (err && err.name === "NotFoundError") {
-        this.toast("No camera device was found on this device.", "error");
-      } else {
-        this.toast("Could not start camera. Check permissions.", "error");
-      }
-    }
-  }
-
-  async populateCameraDevices() {
-    try {
-      const devices = await BrowserQRCodeReader.listVideoInputDevices();
-      this.videoDevices = devices || [];
-
-      if (this.cameraSelect && this.videoDevices.length > 1) {
-        this.cameraSelect.style.display = "inline-block";
-        this.cameraSelect.innerHTML = "";
-        this.videoDevices.forEach((d, i) => {
-          const opt = document.createElement("option");
-          opt.value = d.deviceId;
-          opt.text = d.label || `Camera ${i + 1}`;
-          this.cameraSelect.appendChild(opt);
-        });
-        if (this.activeCameraId) {
-          this.cameraSelect.value = this.activeCameraId;
-        }
-      }
-    } catch (e) {
-      /* device enumeration is best-effort */
+      this.toast("Could not start camera. Check permissions.", "error");
     }
   }
 
   stopCamera() {
     this.isCameraActive = false;
-    if (this.cameraControls) {
-      try {
-        this.cameraControls.stop();
-      } catch (e) {
-        /* ignore */
-      }
-      this.cameraControls = null;
-    }
+    try {
+      this.zxingBrowserReader.reset();
+    } catch (e) {}
 
     if (this.cameraContainer) this.cameraContainer.style.display = "none";
     if (this.startCameraBtn) this.startCameraBtn.style.display = "inline-flex";
     if (this.stopCameraBtn) this.stopCameraBtn.style.display = "none";
   }
 
-  // --- RESULTS UI -------------------------------------------------------
+  // --- RESULTS UI ---
   hideResultPanel() {
     if (this.resultsPanel) this.resultsPanel.style.display = "none";
     if (this.emptyState) this.emptyState.style.display = "block";
@@ -651,12 +491,12 @@ class QrScannerApp {
       this.resultCharCount.textContent = `${this.decodedResult.length} chars`;
 
     const parsedData = this.parseQrData(this.decodedResult);
-    this.currentParsedData = parsedData;
 
-    if (this.resultTypeBadge) this.resultTypeBadge.textContent = parsedData.label;
+    if (this.resultTypeBadge)
+      this.resultTypeBadge.textContent = parsedData.label;
 
     // Reset action buttons visibility
-    const actionEls = [
+    const actionBtns = [
       this.openUrlBtn,
       this.callBtn,
       this.emailBtn,
@@ -664,27 +504,19 @@ class QrScannerApp {
       this.whatsappBtn,
       this.mapsBtn,
       this.wifiDetailsCard,
-      this.vcardDetailsCard,
-      this.downloadVcfBtn,
-      this.downloadIcsBtn,
     ];
-    actionEls.forEach((el) => this.toggleElement(el, false));
+    actionBtns.forEach((btn) => this.toggleElement(btn, false));
 
-    // Display context-specific buttons
+    // Display context specific buttons
     if (parsedData.isUrl) {
       this.toggleElement(this.openUrlBtn, true, "inline-flex");
-    }
-
-    if (parsedData.phone && this.callBtn) {
-      this.callBtn.href = `tel:${parsedData.phone}`;
+    } else if (parsedData.type === "PHONE" && this.callBtn) {
+      this.callBtn.href = parsedData.actionUrl;
       this.toggleElement(this.callBtn, true, "inline-flex");
-    }
-    if (parsedData.email && this.emailBtn) {
-      this.emailBtn.href = parsedData.mailtoUrl || `mailto:${parsedData.email}`;
+    } else if (parsedData.type === "EMAIL" && this.emailBtn) {
+      this.emailBtn.href = parsedData.actionUrl;
       this.toggleElement(this.emailBtn, true, "inline-flex");
-    }
-
-    if (parsedData.type === "SMS" && this.smsBtn) {
+    } else if (parsedData.type === "SMS" && this.smsBtn) {
       this.smsBtn.href = parsedData.actionUrl;
       this.toggleElement(this.smsBtn, true, "inline-flex");
     } else if (parsedData.type === "WHATSAPP" && this.whatsappBtn) {
@@ -695,204 +527,94 @@ class QrScannerApp {
       this.toggleElement(this.mapsBtn, true, "inline-flex");
     } else if (parsedData.type === "WIFI" && this.wifiDetailsCard) {
       this.toggleElement(this.wifiDetailsCard, true, "block");
-      if (this.wifiSsid) this.wifiSsid.textContent = parsedData.ssid || "-";
+      if (this.wifiSsid) this.wifiSsid.textContent = parsedData.ssid;
       if (this.wifiPassword)
-        this.wifiPassword.textContent = parsedData.password || "-";
+        this.wifiPassword.textContent = parsedData.password;
       if (this.wifiEncryption)
-        this.wifiEncryption.textContent = parsedData.encryption || "-";
-    } else if (
-      (parsedData.type === "VCARD" || parsedData.type === "MECARD") &&
-      this.vcardDetailsCard
-    ) {
-      this.toggleElement(this.vcardDetailsCard, true, "block");
-      if (this.vcardName) this.vcardName.textContent = parsedData.name || "-";
-      if (this.vcardPhone)
-        this.vcardPhone.textContent = parsedData.phone || "-";
-      if (this.vcardEmail)
-        this.vcardEmail.textContent = parsedData.email || "-";
-      if (this.vcardOrg) this.vcardOrg.textContent = parsedData.org || "-";
-      this.toggleElement(this.downloadVcfBtn, true, "inline-flex");
-    } else if (parsedData.type === "CALENDAR" && this.downloadIcsBtn) {
-      this.toggleElement(this.downloadIcsBtn, true, "inline-flex");
+        this.wifiEncryption.textContent = parsedData.encryption;
     }
 
     if (this.generateQrBtn) {
-      this.generateQrBtn.href = "/qr-generator.html";
+      this.generateQrBtn.href = `/?text=${encodeURIComponent(this.decodedResult)}`;
     }
   }
 
-  // --- QR PAYLOAD PARSER --------------------------------------------------
   parseQrData(text) {
-    const str = (text || "").trim();
+    const str = text.trim();
 
-    // --- URL ---
     if (/^https?:\/\//i.test(str) || /^www\./i.test(str)) {
       const url = /^www\./i.test(str) ? `https://${str}` : str;
-      // WhatsApp share links are URLs but deserve their own action
-      if (/^https?:\/\/(api\.)?wa\.me\//i.test(str)) {
-        return { type: "WHATSAPP", label: "WhatsApp", isUrl: true, actionUrl: str };
-      }
-      return { type: "URL", label: "Website Link", isUrl: true, actionUrl: url };
-    }
-
-    // --- WhatsApp deep link ---
-    if (/^whatsapp:\/\//i.test(str)) {
-      return { type: "WHATSAPP", label: "WhatsApp", actionUrl: str };
-    }
-
-    // --- SMS ---
-    if (/^smsto:/i.test(str) || /^sms:/i.test(str)) {
-      const rest = str.split(":").slice(1).join(":");
-      const number = rest.split(":")[0].split("?")[0];
       return {
-        type: "SMS",
-        label: "SMS Message",
-        phone: number,
-        actionUrl: `sms:${number}`,
+        type: "URL",
+        label: "Website Link",
+        isUrl: true,
+        actionUrl: url,
       };
     }
 
-    // --- Phone ---
-    if (/^tel:/i.test(str)) {
+    if (/^tel:/i.test(str) || /^\+?[0-9\s-]{7,15}$/.test(str)) {
       const phone = str.replace(/^tel:/i, "").trim();
-      return { type: "PHONE", label: "Phone Number", phone };
-    }
-    if (/^\+?[0-9][0-9\s-]{6,16}$/.test(str)) {
-      return { type: "PHONE", label: "Phone Number", phone: str };
+      return {
+        type: "PHONE",
+        label: "Phone Number",
+        actionUrl: `tel:${phone}`,
+      };
     }
 
-    // --- Email ---
-    if (/^mailto:/i.test(str)) {
-      const raw = str.replace(/^mailto:/i, "");
-      const email = raw.split("?")[0].trim();
-      return { type: "EMAIL", label: "Email Address", email, mailtoUrl: str };
-    }
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str)) {
+    if (/^mailto:/i.test(str) || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str)) {
+      const email = str
+        .replace(/^mailto:/i, "")
+        .split("?")[0]
+        .trim();
       return {
         type: "EMAIL",
         label: "Email Address",
-        email: str,
-        mailtoUrl: `mailto:${str}`,
+        actionUrl: str.startsWith("mailto:") ? str : `mailto:${email}`,
       };
     }
 
-    // --- Geo / Maps location ---
-    if (/^geo:/i.test(str)) {
-      const coords = str.replace(/^geo:/i, "").split("?")[0];
+    if (/^smsto:/i.test(str) || /^sms:/i.test(str)) {
+      const number = str.split(":")[1] || "";
+      return { type: "SMS", label: "SMS Message", actionUrl: `sms:${number}` };
+    }
+
+    if (/^https:\/\/wa\.me\//i.test(str) || /^whatsapp:\/\//i.test(str)) {
+      return { type: "WHATSAPP", label: "WhatsApp", actionUrl: str };
+    }
+
+    if (/^geo:/i.test(str) || /google\.com\/maps/i.test(str)) {
+      const url = /^geo:/i.test(str)
+        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(str.replace(/^geo:/i, ""))}`
+        : str;
       return {
         type: "LOCATION",
         label: "Location Coordinates",
-        actionUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coords)}`,
+        actionUrl: url,
       };
     }
-    if (/google\.com\/maps|goo\.gl\/maps|maps\.apple\.com/i.test(str)) {
-      return { type: "LOCATION", label: "Location Coordinates", actionUrl: str };
-    }
 
-    // --- Wi-Fi ---
     if (/^WIFI:/i.test(str)) {
-      const unescape = (v) =>
-        v ? v.replace(/\\;/g, ";").replace(/\\,/g, ",").replace(/\\:/g, ":") : v;
-      const ssid = unescape(str.match(/S:((?:[^;\\]|\\.)*);/)?.[1]) || "Unknown";
-      const pass = unescape(str.match(/P:((?:[^;\\]|\\.)*);/)?.[1]) || "";
-      const enc = str.match(/T:([^;]*);/)?.[1] || "WPA";
+      const ssid = str.match(/S:([^;]+)/)?.[1] || "Unknown";
+      const pass = str.match(/P:([^;]+)/)?.[1] || "None";
+      const enc = str.match(/T:([^;]+)/)?.[1] || "WPA";
       return {
         type: "WIFI",
         label: "Wi-Fi Network",
         ssid,
-        password: pass || "None",
-        encryption: enc || "None",
+        password: pass,
+        encryption: enc,
       };
     }
 
-    // --- vCard ---
-    if (/BEGIN:VCARD/i.test(str)) {
-      return this.parseVCard(str);
-    }
+    if (/BEGIN:VCARD/i.test(str))
+      return { type: "VCARD", label: "vCard Contact" };
+    if (/BEGIN:VEVENT/i.test(str))
+      return { type: "CALENDAR", label: "Calendar Event" };
 
-    // --- MeCard (common alternative contact-card format) ---
-    if (/^MECARD:/i.test(str)) {
-      return this.parseMeCard(str);
-    }
-
-    // --- Calendar event ---
-    if (/BEGIN:VEVENT/i.test(str)) {
-      const summary = str.match(/SUMMARY:([^\r\n]+)/i)?.[1] || "Event";
-      const location = str.match(/LOCATION:([^\r\n]+)/i)?.[1] || "";
-      return {
-        type: "CALENDAR",
-        label: "Calendar Event",
-        eventTitle: summary,
-        eventLocation: location,
-      };
-    }
-
-    // --- Plain text fallback ---
     return { type: "TEXT", label: "Plain Text" };
   }
 
-  parseVCard(str) {
-    const lines = str.split(/\r\n|\r|\n/);
-    let name = "";
-    let phone = "";
-    let email = "";
-    let org = "";
-
-    for (const rawLine of lines) {
-      const line = rawLine.trim();
-      if (!line) continue;
-      const colonIdx = line.indexOf(":");
-      if (colonIdx === -1) continue;
-      const key = line.slice(0, colonIdx).toUpperCase();
-      const value = line.slice(colonIdx + 1).trim();
-
-      if (key.startsWith("FN")) {
-        name = value;
-      } else if (key.startsWith("N") && !name) {
-        // N:LastName;FirstName;...
-        name = value
-          .split(";")
-          .filter(Boolean)
-          .reverse()
-          .join(" ")
-          .trim();
-      } else if (key.startsWith("TEL") && !phone) {
-        phone = value;
-      } else if (key.startsWith("EMAIL") && !email) {
-        email = value;
-      } else if (key.startsWith("ORG") && !org) {
-        org = value.replace(/;/g, " ").trim();
-      }
-    }
-
-    return {
-      type: "VCARD",
-      label: "vCard Contact",
-      name: name || "Unknown",
-      phone,
-      email,
-      org,
-      mailtoUrl: email ? `mailto:${email}` : undefined,
-    };
-  }
-
-  parseMeCard(str) {
-    const body = str.replace(/^MECARD:/i, "");
-    const get = (key) => body.match(new RegExp(`${key}:([^;]*);`, "i"))?.[1];
-    const nRaw = get("N") || "";
-    const name = nRaw.split(",").filter(Boolean).join(" ").trim();
-    return {
-      type: "MECARD",
-      label: "Contact Card",
-      name: name || "Unknown",
-      phone: get("TEL") || "",
-      email: get("EMAIL") || "",
-      org: get("ORG") || "",
-      mailtoUrl: get("EMAIL") ? `mailto:${get("EMAIL")}` : undefined,
-    };
-  }
-
-  // --- ACTIONS -------------------------------------------------------
+  // --- ACTIONS ---
   async copyResultToClipboard() {
     if (!this.decodedResult) return;
     try {
@@ -905,52 +627,27 @@ class QrScannerApp {
 
   openResultUrl() {
     if (!this.decodedResult) return;
-    const parsed = this.currentParsedData || this.parseQrData(this.decodedResult);
+    const parsed = this.parseQrData(this.decodedResult);
     if (parsed.isUrl && parsed.actionUrl) {
       window.open(parsed.actionUrl, "_blank", "noopener,noreferrer");
     }
   }
 
-  downloadResultAs(ext) {
+  downloadResultTxt() {
     if (!this.decodedResult) return;
-    const mime =
-      ext === "vcf" ? "text/vcard;charset=utf-8" : "text/plain;charset=utf-8";
-    const blob = new Blob([this.decodedResult], { type: mime });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    const filename = `qr-decoded-result.${ext}`;
-    a.download =
-      window.ComprexaUtils && window.ComprexaUtils.sanitizeFilename
-        ? window.ComprexaUtils.sanitizeFilename(filename)
-        : filename.replace(/[^a-zA-Z0-9_\-.]/g, "_");
-    a.click();
-    URL.revokeObjectURL(url);
-    this.toast(
-      ext === "vcf" ? "Contact saved as .vcf" : "Result downloaded as TXT",
-      "success",
-    );
-  }
-
-  downloadCalendarIcs() {
-    if (!this.decodedResult) return;
-    let content = this.decodedResult;
-    if (!/BEGIN:VCALENDAR/i.test(content)) {
-      content = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\n${content}\r\nEND:VCALENDAR`;
-    }
-    const blob = new Blob([content], {
-      type: "text/calendar;charset=utf-8",
+    const blob = new Blob([this.decodedResult], {
+      type: "text/plain;charset=utf-8",
     });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "qr-calendar-event.ics";
+    a.download = (window.ComprexaUtils && window.ComprexaUtils.sanitizeFilename ? window.ComprexaUtils.sanitizeFilename("qr-decoded-result.txt") : String("qr-decoded-result.txt").replace(/[^a-zA-Z0-9_\-\.]/g, '_'));
     a.click();
     URL.revokeObjectURL(url);
-    this.toast("Event saved as .ics", "success");
+    this.toast("Result downloaded as TXT", "success");
   }
 
-  // --- UTILS -------------------------------------------------------
+  // --- UTILS ---
   toggleElement(el, show, displayStyle = "block") {
     if (el) el.style.display = show ? displayStyle : "none";
   }
@@ -1005,15 +702,12 @@ class QrScannerApp {
   }
 
   toast(msg, type = "info") {
-    if (window.ComprexaToast && typeof window.ComprexaToast[type] === "function") {
-      window.ComprexaToast[type](msg);
-      return;
-    }
     if (
       window.ComprexaFramework &&
       typeof window.ComprexaFramework.showToast === "function"
     ) {
       window.ComprexaFramework.showToast(msg, type);
+    } else {
     }
   }
 }

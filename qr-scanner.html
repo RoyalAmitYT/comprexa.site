@@ -53,19 +53,6 @@
         border-radius: var(--radius-md);
         box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.45);
       }
-      /* Keep the two-column "has-file" workspace layout responsive: the
-         shared template's has-file rule pins a fixed sidebar column with
-         !important, which otherwise overrides the site-wide mobile stacking
-         breakpoint. Scoped to this page only. */
-      @media (max-width: 992px) {
-        #landing-workspace.tool-workspace[data-workspace-state="has-file"]
-          .tool-workspace__grid {
-          grid-template-columns: 1fr !important;
-        }
-        .tool-workspace__sidebar {
-          position: static !important;
-        }
-      }
     </style>
 
 <title>Free QR Code Scanner | Read Barcodes — Comprexa</title>
@@ -1242,124 +1229,10 @@
                       </button>
                     </div>
 
-                    <!-- vCard Contact Card Details -->
-                    <div
-                      id="vcard-details-card"
-                      style="
-                        display: none;
-                        padding: 12px;
-                        background: var(--bg-surface-subtle);
-                        border: 1px solid var(--border-subtle);
-                        border-radius: var(--radius-md);
-                        text-align: left;
-                        margin-top: 4px;
-                      "
-                    >
-                      <div
-                        style="
-                          font-size: 0.8rem;
-                          font-weight: 700;
-                          color: var(--text-main);
-                          margin-bottom: 8px;
-                          display: flex;
-                          align-items: center;
-                          gap: 6px;
-                        "
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                        >
-                          <path
-                            d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
-                          />
-                          <circle cx="12" cy="7" r="4" />
-                        </svg>
-                        Contact Card
-                      </div>
-                      <div
-                        style="
-                          font-size: 0.82rem;
-                          color: var(--text-muted);
-                          display: flex;
-                          flex-direction: column;
-                          gap: 4px;
-                        "
-                      >
-                        <div>
-                          <strong>Name:</strong>
-                          <span id="vcard-name">-</span>
-                        </div>
-                        <div>
-                          <strong>Phone:</strong>
-                          <span id="vcard-phone">-</span>
-                        </div>
-                        <div>
-                          <strong>Email:</strong>
-                          <span id="vcard-email">-</span>
-                        </div>
-                        <div>
-                          <strong>Organization:</strong>
-                          <span id="vcard-org">-</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Contextual: Save vCard / Add to Calendar -->
-                    <button
-                      type="button"
-                      class="btn btn--secondary"
-                      id="download-vcf-btn"
-                      style="display: none; width: 100%; justify-content: center"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                      </svg>
-                      <span>Save Contact (.vcf)</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn btn--secondary"
-                      id="download-ics-btn"
-                      style="display: none; width: 100%; justify-content: center"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <rect x="3" y="4" width="18" height="18" rx="2" />
-                        <line x1="16" y1="2" x2="16" y2="6" />
-                        <line x1="8" y1="2" x2="8" y2="6" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                      </svg>
-                      <span>Add to Calendar (.ics)</span>
-                    </button>
-
                     <!-- Generate QR Code from Result -->
                     <a
                       id="generate-qr-again-btn"
-                      href="/qr-generator.html"
+                      href="/"
                       class="btn btn--secondary"
                       style="
                         width: 100%;

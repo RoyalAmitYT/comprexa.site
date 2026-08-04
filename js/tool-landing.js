@@ -702,21 +702,21 @@ export class ComprexaToolLandingPage {
 
     container.innerHTML = `
       <section class="tool-section">
-        <div class="container container--narrow">
+        <div class="container">
           <div class="ui-section-header ui-section-header--center">
             <span class="ui-section-header__badge">Step-by-Step Guide</span>
             <h2 class="ui-section-header__title">How to Use ${tool.title}</h2>
             <p class="ui-section-header__subtitle">Three simple steps to complete your file task in seconds.</p>
           </div>
 
-          <div class="seo-steps-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
             ${steps
               .map(
                 (s) => `
-              <div class="card seo-step" style="padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); position: relative;">
-                <div class="seo-step__num" style="width: 36px; height: 36px; border-radius: 50%; background: var(--gradient-accent); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">${s.step}</div>
-                <h3 class="seo-step__title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">${s.title}</h3>
-                <p class="seo-step__desc" style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin: 0;">${s.description}</p>
+              <div class="card" style="padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; transition: transform var(--transition-fast), border-color var(--transition-fast);">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--gradient-accent); color: #fff; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">${s.step}</div>
+                <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 0;">${s.title}</h3>
+                <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; margin: 0;">${s.description}</p>
               </div>
             `,
               )
@@ -736,19 +736,19 @@ export class ComprexaToolLandingPage {
       : {};
     const benefits = content.benefits || [
       {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
         title: "Guaranteed Client Privacy",
         description:
           "All file processing occurs in your browser sandboxed WebAssembly runtime.",
       },
       {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
         title: "Zero Latency Pipeline",
         description:
           "Eliminates network queue times and slow remote server processing limits.",
       },
       {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
         title: "Unlimited Batch Execution",
         description:
           "Process as many files as you need without daily file quotas or registration.",
@@ -768,14 +768,14 @@ export class ComprexaToolLandingPage {
             ${benefits
               .map(
                 (b) => `
-              <div class="card" style="padding: 24px; border: 1px solid var(--border-subtle); border-top: 3px solid var(--primary); border-radius: var(--radius-xl); display: flex; flex-direction: column; gap: 12px; background: var(--bg-surface);">
+              <div class="card" style="padding: 24px; border: 1px solid var(--border-subtle); border-top: 3px solid var(--primary); border-radius: var(--radius-xl); display: flex; flex-direction: column; gap: 12px; background: var(--bg-surface); box-shadow: var(--shadow-sm); transition: transform var(--transition-fast), border-color var(--transition-fast);">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="width: 38px; height: 38px; border-radius: var(--radius-md); background: rgba(99, 102, 241, 0.12); color: var(--primary); display: flex; align-items: center; justify-content: center;">
+                  <div style="width: 40px; height: 40px; border-radius: var(--radius-lg); background: rgba(99, 102, 241, 0.12); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                     ${b.icon}
                   </div>
                   <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 0;">${b.title}</h3>
                 </div>
-                <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; margin: 0;">${b.description}</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">${b.description}</p>
               </div>
             `,
               )
@@ -802,25 +802,31 @@ export class ComprexaToolLandingPage {
     const content = this.contentRepo ? this.contentRepo.getContentForTool(tool) : {};
     const formats = content.supportedFormats || [];
 
-    if (formats.length === 0) return;
+    if (formats.length === 0) {
+      container.innerHTML = "";
+      return;
+    }
 
     container.innerHTML = `
-      <section class="tool-section bg-subtle" style="background-color: var(--color-surface-elevated); border-radius: 16px; margin-top: 32px; padding-bottom: 32px; padding-top: 32px;">
-        <div class="container container--narrow">
-          <div class="section-header fade-in-on-scroll">
-            <h2 class="section-header__title">Supported Formats</h2>
-            <p class="section-header__subtitle">High-speed format processing supported by ${tool.title}.</p>
+      <section class="tool-section">
+        <div class="container">
+          <div class="ui-section-header ui-section-header--center">
+            <span class="ui-section-header__badge">Compatibility</span>
+            <h2 class="ui-section-header__title">Supported File Formats</h2>
+            <p class="ui-section-header__subtitle">High-speed format processing supported by ${tool.title}.</p>
           </div>
-          <div class="tool-features-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
             ${formats
               .map(
                 (fmt) => `
-              <div class="tool-feature-card">
-                <div class="tool-feature-card__icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <div class="card" style="padding: 22px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); display: flex; align-items: flex-start; gap: 16px; box-shadow: var(--shadow-sm); transition: transform var(--transition-fast), border-color var(--transition-fast);">
+                <div style="width: 44px; height: 44px; border-radius: var(--radius-lg); background: rgba(99, 102, 241, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 </div>
-                <h3 class="tool-feature-card__title">${fmt.type}</h3>
-                <p class="tool-feature-card__desc">${fmt.format}</p>
+                <div>
+                  <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 0 0 4px 0;">${fmt.type}</h3>
+                  <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.5;">${fmt.format}</p>
+                </div>
               </div>
             `
               )
@@ -847,21 +853,28 @@ export class ComprexaToolLandingPage {
     const content = this.contentRepo ? this.contentRepo.getContentForTool(tool) : {};
     const useCases = content.useCases || [];
 
-    if (useCases.length === 0) return;
+    if (useCases.length === 0) {
+      container.innerHTML = "";
+      return;
+    }
 
     container.innerHTML = `
-      <section class="tool-section">
-        <div class="container container--narrow">
-          <div class="section-header fade-in-on-scroll">
-            <h2 class="section-header__title">Who is this for?</h2>
-            <p class="section-header__subtitle">Practical applications and use cases for ${tool.title}.</p>
+      <section class="tool-section bg-surface-subtle">
+        <div class="container">
+          <div class="ui-section-header ui-section-header--center">
+            <span class="ui-section-header__badge">Applications</span>
+            <h2 class="ui-section-header__title">Who Is This Tool For?</h2>
+            <p class="ui-section-header__subtitle">Practical applications and workflows for ${tool.title}.</p>
           </div>
-          <div class="tool-features-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
             ${useCases
               .map(
                 (uc) => `
-              <div class="tool-feature-card" style="padding: 16px; text-align: center; display: flex; align-items: center; justify-content: center; font-weight: 600;">
-                ${uc}
+              <div class="card" style="padding: 20px 22px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); display: flex; align-items: center; gap: 14px; font-weight: 600; font-size: 0.95rem; color: var(--text-main); box-shadow: var(--shadow-sm); transition: transform var(--transition-fast), border-color var(--transition-fast);">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(16, 185, 129, 0.12); color: #10b981; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>${uc}</span>
               </div>
             `
               )
@@ -882,31 +895,35 @@ export class ComprexaToolLandingPage {
     const rawFaqs = content.faqs || [];
     const faqs = rawFaqs.length > 0 ? rawFaqs : this._getToolFAQs(tool);
 
+    if (faqs.length === 0) return;
+
     container.innerHTML = `
       <section class="tool-section">
-        <div class="container container--narrow">
+        <div class="container">
           <div class="ui-section-header ui-section-header--center">
             <span class="ui-section-header__badge">Got Questions?</span>
             <h2 class="ui-section-header__title">Frequently Asked Questions</h2>
             <p class="ui-section-header__subtitle">Everything you need to know about using ${tool.title}.</p>
           </div>
 
-          <div class="faq-list">
-            ${faqs
-              .map(
-                (faq, index) => `
-              <div class="faq-item">
-                <button class="faq-item__question" aria-expanded="${index === 0 ? "true" : "false"}" id="faq-btn-${index}" aria-controls="faq-ans-${index}">
-                  <span>${faq.question}</span>
-                  <svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="faq-item__answer ${index === 0 ? "active" : ""}" id="faq-ans-${index}" role="region" aria-labelledby="faq-btn-${index}">
-                  <p>${faq.answer}</p>
+          <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-list">
+              ${faqs
+                .map(
+                  (faq, index) => `
+                <div class="faq-item">
+                  <button class="faq-item__question" aria-expanded="${index === 0 ? "true" : "false"}" id="faq-btn-${index}" aria-controls="faq-ans-${index}">
+                    <span>${faq.question}</span>
+                    <svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  <div class="faq-item__answer" id="faq-ans-${index}" role="region" aria-labelledby="faq-btn-${index}">
+                    <p style="margin: 0; line-height: 1.6; font-size: 0.925rem;">${faq.answer}</p>
+                  </div>
                 </div>
-              </div>
-            `,
-              )
-              .join("")}
+              `,
+                )
+                .join("")}
+            </div>
           </div>
         </div>
       </section>
@@ -930,7 +947,7 @@ export class ComprexaToolLandingPage {
               <p class="ui-section-header__subtitle">Discover other high-speed, free, and secure processing utilities in Comprexa.</p>
             </div>
 
-            <div class="tools-grid" id="related-tools-grid-mount" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;"></div>
+            <div id="related-tools-grid-mount" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;"></div>
           </div>
         </section>
       `;
@@ -984,28 +1001,34 @@ export class ComprexaToolLandingPage {
       const popularIds = ["compress-pdf", "compress-image", "word-counter", "qr-generator"];
       const popularTools = popularIds.map(id => this.registry.getById(id)).filter(t => t && t.id !== tool.id);
 
-      if (popularTools.length === 0) return;
+      if (popularTools.length === 0) {
+        container.innerHTML = "";
+        return;
+      }
 
       let html = `
-        <section class="tool-section bg-subtle" style="margin-top: 32px; padding-bottom: 32px; padding-top: 32px;">
-          <div class="container container--narrow">
-            <div class="section-header fade-in-on-scroll">
-              <h2 class="section-header__title">Popular Tools</h2>
-              <p class="section-header__subtitle">Explore highly used tools across Comprexa.</p>
+        <section class="tool-section">
+          <div class="container">
+            <div class="ui-section-header ui-section-header--center">
+              <span class="ui-section-header__badge">Popular Utilities</span>
+              <h2 class="ui-section-header__title">Most Popular Tools</h2>
+              <p class="ui-section-header__subtitle">Explore highly used tools across Comprexa.</p>
             </div>
-            <div class="tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
       `;
 
       popularTools.forEach(t => {
+        const href = window.getToolUrl ? window.getToolUrl(t) : `/${t.id}.html`;
         html += `
-          <a href="${t.url || `/${t.id}.html`}" class="card tool-card">
-            <div class="tool-card__icon ${t.colorClass || 'icon-bg--utility'}">
+          <a href="${href}" class="tool-card-mini" data-tool-id="${t.id}">
+            <div class="tool-card-mini__icon ${t.colorClass || 'icon-bg--utility'}">
               ${t.icon || ''}
             </div>
-            <div class="tool-card__content">
-              <h3 class="tool-card__title">${t.title}</h3>
-              <p class="tool-card__desc">${t.shortDescription}</p>
+            <div class="tool-card-mini__content">
+              <h4 class="tool-card-mini__title">${t.title}</h4>
+              <p class="tool-card-mini__desc">${t.shortDescription || ''}</p>
             </div>
+            <div class="tool-card-mini__arrow">&rarr;</div>
           </a>
         `;
       });
@@ -1027,13 +1050,13 @@ export class ComprexaToolLandingPage {
     const totalTools = "50+";
 
     container.innerHTML = `
-      <section class="cta-section">
+      <section class="tool-section bg-surface-subtle" style="padding: 64px 0;">
         <div class="container">
           <div class="cta-card">
             <div class="cta-card__content">
               <h2 class="cta-card__title">Ready to Process More Files?</h2>
               <p class="cta-card__desc">Explore our full catalog of ${totalTools} free, client-side conversion, compression, and developer utilities.</p>
-              <a href="/#tools" class="btn btn--primary btn--lg">
+              <a href="/#tools" class="btn btn--primary btn--lg" style="margin-top: 8px;">
                 <span>Explore All ${totalTools} Tools</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>

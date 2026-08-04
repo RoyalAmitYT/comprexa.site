@@ -2615,6 +2615,7 @@ class ComprexaToolRegistry {
 
 // Global Exports
 if (typeof window !== "undefined") {
+  window.COMPREXA_TOOLS_REGISTRY = COMPREXA_TOOLS_REGISTRY;
   window.ComprexaMetadataEngine = new ComprexaMetadataEngine(
     null,
     window.ComprexaCategories,
