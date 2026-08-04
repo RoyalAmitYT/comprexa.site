@@ -3403,43 +3403,199 @@ section.stats-section,
     gap: 10px !important;
   }
 
-  /* 2. Tool Card Sizing & Redesigned Mobile Layout & Typography */
+  /* 2. Tool Card Sizing & Restored Mobile Layout with Improved Typography */
   .feature-card,
+  .category-card,
+  .trust-card,
+  .privacy-card,
+  .featured-card,
   .category-tool-card,
-  .featured-card {
-    padding: 14px 10px 12px !important;
-    border-radius: var(--radius-xl) !important;
+  .step-card {
+    padding: 12px 10px !important;
+    border-radius: var(--radius-lg) !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
+    align-items: stretch !important;
+    text-align: left !important;
     justify-content: space-between !important;
     height: 100% !important;
-    min-height: 170px !important;
+    min-height: 155px !important;
     box-sizing: border-box !important;
     position: relative !important;
   }
 
   .popular-tools .feature-card {
-    padding: 14px 10px 12px !important;
+    padding: 12px 10px !important;
   }
 
   /* Header & Top Alignment - Tool Icon & Badges */
   .feature-card__header,
-  .category-tool-card__header,
-  .featured-card__top {
+  .category-card__header,
+  .featured-card__top,
+  .category-tool-card__header {
     display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    margin-bottom: 8px !important;
     gap: 4px !important;
-    margin-bottom: 2px !important;
     width: 100% !important;
     position: relative !important;
   }
 
   .feature-card__icon,
+  .category-card__icon,
+  .trust-card__icon,
+  .privacy-card__icon,
+  .featured-card__icon,
   .category-tool-card__icon-wrapper,
+  .step-card__icon {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    border-radius: var(--radius-md) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .feature-card__icon svg,
+  .category-card__icon svg,
+  .trust-card__icon svg,
+  .privacy-card__icon svg,
+  .featured-card__icon svg,
+  .category-tool-card__icon-wrapper svg,
+  .step-card__icon svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  /* Badges (Popular, Fast, etc.) */
+  .feature-card__badge,
+  .category-card__count,
+  .featured-card__ribbon,
+  .category-tool-card__badges .badge,
+  .badge--pill {
+    position: static !important;
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+    padding: 2px 5px !important;
+    letter-spacing: 0.01em !important;
+    white-space: nowrap !important;
+    border-radius: var(--radius-pill) !important;
+    line-height: 1 !important;
+    z-index: 1 !important;
+  }
+
+  .category-tool-card__badges {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: flex-end !important;
+    width: auto !important;
+  }
+
+  /* Category Label */
+  .feature-card__category,
+  .featured-card__cat-badge,
+  .category-tool-card__cat-label {
+    font-size: 0.625rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    text-align: left !important;
+    line-height: 1.1 !important;
+    opacity: 1 !important;
+  }
+
+  .feature-card__body,
+  .category-tool-card__content,
+  .featured-card__content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    flex-grow: 1 !important;
+  }
+
+  /* Tool Title - Retained Larger Text Size */
+  .feature-card__title,
+  .category-card__title,
+  .trust-card__title,
+  .privacy-card__title,
+  .featured-card__title,
+  .category-tool-card__title,
+  .step-card__title {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: var(--text-main) !important;
+    margin: 0 0 4px 0 !important;
+    text-align: left !important;
+    letter-spacing: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .popular-tools .feature-card__title {
+    font-size: 0.95rem !important;
+  }
+
+  /* Description - Retained Larger Text Size & Readability */
+  .feature-card__desc,
+  .category-card__desc,
+  .trust-card__desc,
+  .privacy-card__desc,
+  .featured-card__desc,
+  .category-tool-card__desc,
+  .step-card__desc {
+    font-size: 0.8125rem !important;
+    line-height: 1.4 !important;
+    color: var(--text-muted) !important;
+    margin: 0 0 8px 0 !important;
+    text-align: left !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Featured Tool Card Mobile Polish (max-width: 767px) */
+  .featured-card {
+    padding: 14px 12px 12px !important;
+    border-radius: var(--radius-xl) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    min-height: auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-subtle) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .featured-card__top {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 10px !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
   .featured-card__icon {
     width: 36px !important;
     height: 36px !important;
@@ -3449,98 +3605,53 @@ section.stats-section,
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 auto 2px !important;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15) !important;
+    margin: 0 !important;
   }
 
-  .feature-card__icon svg,
-  .category-tool-card__icon-wrapper svg,
   .featured-card__icon svg {
     width: 18px !important;
     height: 18px !important;
   }
 
-  /* Badges (Popular, Fast, etc.) - Top right corner on card */
-  .feature-card__badge,
-  .featured-card__ribbon,
-  .category-tool-card__badges .badge,
-  .badge--pill {
-    position: absolute !important;
-    top: -4px !important;
-    right: -2px !important;
-    font-size: 0.58rem !important;
-    font-weight: 700 !important;
-    padding: 2px 6px !important;
-    letter-spacing: 0.02em !important;
-    white-space: nowrap !important;
-    border-radius: var(--radius-pill) !important;
-    line-height: 1 !important;
-    z-index: 2 !important;
-  }
-
-  .category-tool-card__badges {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-  }
-
-  /* 1. Category Label: Positioned top-center right below Tool Icon */
-  .feature-card__category,
-  .featured-card__cat-badge,
-  .category-tool-card__cat-label {
+  .featured-card__cat-badge {
     font-size: 0.65rem !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.06em !important;
+    letter-spacing: 0.03em !important;
+    padding: 3px 8px !important;
+    border-radius: var(--radius-pill) !important;
+    background-color: var(--bg-surface-hover) !important;
     color: var(--primary) !important;
-    margin: 0 auto 4px !important;
-    text-align: center !important;
-    display: block !important;
-    line-height: 1.1 !important;
-    opacity: 0.9 !important;
+    border: 1px solid var(--border-subtle) !important;
   }
 
-  .feature-card__body,
-  .category-tool-card__content,
   .featured-card__content {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
+    align-items: flex-start !important;
+    text-align: left !important;
     width: 100% !important;
     flex-grow: 1 !important;
+    margin-bottom: 10px !important;
   }
 
-  /* 2. Tool Title: Noticeably larger font size, strong visual focus */
-  .feature-card__title,
-  .category-tool-card__title,
   .featured-card__title {
-    font-size: 1.025rem !important;
-    font-weight: 800 !important;
-    line-height: 1.25 !important;
+    font-size: 0.975rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
     color: var(--text-main) !important;
     margin: 0 0 4px 0 !important;
-    text-align: center !important;
-    letter-spacing: -0.015em !important;
+    text-align: left !important;
     word-break: break-word !important;
     overflow-wrap: anywhere !important;
   }
 
-  .popular-tools .feature-card__title {
-    font-size: 1.025rem !important;
-  }
-
-  /* 3. Description: Slightly larger size, improved line-height & readability */
-  .feature-card__desc,
-  .category-tool-card__desc,
   .featured-card__desc {
     font-size: 0.8125rem !important;
     line-height: 1.4 !important;
     color: var(--text-muted) !important;
-    margin: 0 0 10px 0 !important;
-    text-align: center !important;
+    margin: 0 !important;
+    text-align: left !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
@@ -3548,63 +3659,41 @@ section.stats-section,
     text-overflow: ellipsis !important;
   }
 
-  /* 4. Use Tool Button: Prominent CTA with increased touch target & text size */
-  .feature-card__footer,
-  .category-tool-card__footer,
+  /* Card Footer & Single Action Button */
   .featured-card__actions {
     width: 100% !important;
-    padding-top: 6px !important;
+    padding-top: 8px !important;
     margin-top: auto !important;
     border-top: 1px solid var(--border-subtle) !important;
     display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+    grid-template-columns: none !important;
   }
 
-  .feature-card__footer {
-    min-height: 36px !important;
-    border-radius: var(--radius-md) !important;
-    background: rgba(99, 102, 241, 0.08) !important;
-    border: 1px solid rgba(99, 102, 241, 0.18) !important;
-    color: var(--primary) !important;
-    font-size: 0.84375rem !important;
-    font-weight: 700 !important;
-    gap: 6px !important;
-    transition: background-color var(--transition-fast), border-color var(--transition-fast) !important;
-  }
-
-  [data-theme="dark"] .feature-card__footer {
-    background: rgba(129, 140, 248, 0.12) !important;
-    border-color: rgba(129, 140, 248, 0.25) !important;
-    color: #818cf8 !important;
-  }
-
-  .category-tool-card__btn,
-  .featured-card__actions .btn {
+  .featured-card__actions .featured-tool-btn,
+  .featured-card__actions .btn--primary {
     width: 100% !important;
     height: 36px !important;
-    font-size: 0.84375rem !important;
+    font-size: 0.8125rem !important;
     font-weight: 700 !important;
     border-radius: var(--radius-md) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
     background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%) !important;
     color: #ffffff !important;
     border: none !important;
-    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.28) !important;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25) !important;
   }
 
-  .feature-card__arrow,
-  .category-tool-card__btn svg,
-  .category-card__arrow {
-    width: 14px !important;
-    height: 14px !important;
-  }
-
-  .featured-card__benefits,
-  .featured-learn-btn {
+  .featured-card__actions .featured-learn-btn,
+  .featured-card__benefits {
     display: none !important;
   }
 
