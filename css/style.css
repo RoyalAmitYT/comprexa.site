@@ -3329,13 +3329,19 @@ section.stats-section,
     width: 100%;
   }
 
+  .site-footer__top {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 20px;
+  }
+
   .site-footer__bottom {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid var(--border-subtle);
-    margin-top: 48px;
-    padding-top: 24px;
+    margin-top: 36px;
+    padding-top: 20px;
     font-size: 0.8125rem;
     color: var(--text-muted);
     gap: 16px;
@@ -3567,6 +3573,19 @@ section.stats-section,
     display: contents;
   }
 
+  .site-footer__bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .footer-bottom__text,
+  .footer-bottom__text--center,
+  .footer-bottom__text--right {
+    text-align: center;
+    width: 100%;
+  }
+
   .cta-trust-bar {
     flex-direction: column;
     align-items: center;
@@ -3575,6 +3594,10 @@ section.stats-section,
 }
 
 @media (max-width: 480px) {
+  .site-footer__top {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
   .popular-grid,
   .popular-tools__grid,
   .categories-grid,

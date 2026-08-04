@@ -1,4 +1,13 @@
 // @ts-nocheck
+import './categories.js';
+import './articles.js';
+import './tools.js';
+import './framework.js';
+import './settings.js';
+import './search-engine.js';
+import './command-palette.js';
+import './seo-engine.js';
+
 /**
  * Comprexa - Modern File Utility Hub
  * Core Scripting & Interactive Features

@@ -69,6 +69,26 @@ window.getCategoryUrl = function getCategoryUrl(category) {
 };
 
 class ComprexaFramework {
+  constructor() {
+    this.registry = window.ComprexaToolsRegistry || null;
+    this.categories = window.ComprexaCategories || null;
+    if (typeof document !== "undefined") {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          this.ensureFooterRendered();
+        });
+      } else {
+        setTimeout(() => this.ensureFooterRendered(), 0);
+      }
+    }
+  }
+
+  ensureFooterRendered() {
+    const footerEl = document.querySelector("footer.site-footer, footer.footer, footer#footer, footer");
+    if (footerEl && footerEl.innerHTML.trim() === "") {
+      this.renderUniversalFooter(footerEl);
+    }
+  }
 
   /**
    * Secure filename sanitizer preventing directory traversal and invalid chars
@@ -97,11 +117,6 @@ class ComprexaFramework {
       return false;
     }
     return true;
-  }
-
-  constructor() {
-    this.registry = window.ComprexaToolsRegistry;
-    this.categories = window.ComprexaCategories;
   }
 
   // --------------------------------------------------------------------------
