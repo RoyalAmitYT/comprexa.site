@@ -1,6 +1,34 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
+  <script>
+    (function() {
+      try {
+        var theme = null;
+        var raw = localStorage.getItem("comprexa_settings_v1");
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && (parsed.theme === "dark" || parsed.theme === "light")) {
+            theme = parsed.theme;
+          }
+        }
+        if (!theme) {
+          var legacy = localStorage.getItem("comprexa-theme");
+          if (legacy === "dark" || legacy === "light") {
+            theme = legacy;
+          }
+        }
+        if (!theme) {
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            theme = "dark";
+          } else {
+            theme = "light";
+          }
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch(e) {}
+    })();
+  </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
@@ -46,9 +74,9 @@
   <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
   
   <link rel="canonical" href="https://comprexa.com/powerpoint-to-pdf.html" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  
+  
+  
   <meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,6 +126,12 @@
   }
 }
 </script>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-512x512.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
 </head>
   <body>
     <!-- Header -->

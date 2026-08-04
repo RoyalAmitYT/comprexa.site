@@ -426,7 +426,7 @@ class ComprexaCategoryLandingPage {
             </div>
           </div>
 
-          <div class="tools-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px;">
+          <div class="category-tools-grid">
             ${displayList.map((tool) => this._renderToolCard(tool)).join("")}
           </div>
         </div>
@@ -448,36 +448,35 @@ class ComprexaCategoryLandingPage {
           </div>
 
           <!-- Controls Toolbar: Search & Sorting -->
-          <div class="category-toolbar" style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 24px; background: var(--bg-surface); padding: 16px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+          <div class="category-toolbar">
             
             <!-- Category Search Input -->
-            <div style="position: relative; flex: 1; min-width: 240px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none;">
+            <div class="category-toolbar__search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="category-toolbar__search-icon">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
               </svg>
               <input 
                 type="text" 
                 id="category-search-input" 
-                class="form-control" 
+                class="form-control category-toolbar__input" 
                 placeholder="Search tools in ${category.name}..." 
                 value="${this.currentSearchQuery}"
                 aria-label="Search tools in this category"
-                style="padding-left: 42px; width: 100%; border-radius: var(--radius-md);"
               />
-              <button type="button" id="category-search-clear-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; display: ${this.currentSearchQuery ? "block" : "none"}; padding: 4px;" aria-label="Clear search">
+              <button type="button" id="category-search-clear-btn" class="category-toolbar__clear" style="display: ${this.currentSearchQuery ? "flex" : "none"};" aria-label="Clear search">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
               </button>
             </div>
 
             <!-- Sort Dropdown & Counter -->
-            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-              <span id="category-tool-counter" style="font-size: 0.88rem; font-weight: 600; color: var(--text-muted);">
+            <div class="category-toolbar__controls">
+              <span id="category-tool-counter" class="category-toolbar__counter">
                 Showing ${this.filteredTools.length} tools
               </span>
 
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <label for="category-sort-select" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;">Sort:</label>
-                <select id="category-sort-select" class="form-control" aria-label="Sort tools" style="padding: 8px 12px; border-radius: var(--radius-md); font-size: 0.88rem;">
+              <div class="category-toolbar__sort-wrap">
+                <label for="category-sort-select" class="category-toolbar__sort-label">Sort:</label>
+                <select id="category-sort-select" class="form-control category-toolbar__sort-select" aria-label="Sort tools">
                   <option value="popular" ${this.currentSortOption === "popular" ? "selected" : ""}>Popular First</option>
                   <option value="a-z" ${this.currentSortOption === "a-z" ? "selected" : ""}>Alphabetical (A-Z)</option>
                   <option value="newest" ${this.currentSortOption === "newest" ? "selected" : ""}>Recently Added</option>
@@ -521,63 +520,50 @@ class ComprexaCategoryLandingPage {
       return this.framework.renderCard(tool);
     }
 
-    // High quality fallback card renderer
+    // High quality fallback card renderer matching standard feature-card
     const catObj = this.categories
       ? this.categories.getById(tool.category) || {}
       : {};
-    let href = `/${tool.id}.html`;
-
-    // Direct html file mappings if available
-    if (
-      tool.id &&
-      (tool.id === "merge-pdf" ||
-        tool.id === "split-pdf" ||
-        tool.id === "compress-pdf" ||
-        tool.id === "rotate-pdf" ||
-        tool.id === "organize-pdf" ||
-        tool.id === "compress-image" ||
-        tool.id === "resize-image" ||
-        tool.id === "crop-image" ||
-        tool.id === "rotate-image" ||
-        tool.id === "qr-generator" ||
-        tool.id === "qr-scanner" ||
-        tool.id === "word-counter" ||
-        tool.id === "character-counter" ||
-        tool.id === "case-converter" ||
-        tool.id === "json-formatter" ||
-        tool.id === "color-picker" ||
-        tool.id === "color-converter" ||
-        tool.id === "color-palette-generator")
-    ) {
-      href = `/${tool.id}.html`;
+    let href = "#";
+    if (!tool.comingSoon) {
+      if (typeof window.getToolUrl === "function") {
+        href = window.getToolUrl(tool);
+      } else {
+        href = `/${tool.id}.html`;
+      }
     }
 
-    const catName = catObj.name || tool.categoryName || "Tool";
-    const badgeText = tool.badge || "Tool";
-    const badgeClass = tool.badge ? "badge--primary" : "badge--subtle";
+    const catName = catObj.name || tool.categoryName || tool.category || "Tool";
+    const badgeText = tool.comingSoon ? "Coming Soon" : (tool.badge || (tool.popular ? "Popular" : ""));
+    const badgeClass = tool.comingSoon ? "badge--subtle" : (tool.badge || tool.popular ? "badge--primary" : "badge--subtle");
+    const colorClass = tool.colorClass || catObj.colorToken || "icon-bg--utility";
+    const iconSvg = tool.icon || catObj.icon || `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2v4a1 1 0 0 0 1 1h4"/></svg>`;
+    const title = tool.title || "";
+    const desc = tool.shortDescription || tool.desc || "";
+    const badgeHtml = badgeText
+      ? `<span class="feature-card__badge badge--pill ${badgeClass}">${badgeText}</span>`
+      : "";
 
     return `
-      <article class="category-tool-card" data-tool-id="${tool.id}" data-category="${tool.category}">
-        <div class="category-tool-card__header">
-          <div class="category-tool-card__icon-wrapper ${tool.colorClass || "icon-bg--pdf"}">
-            ${tool.icon || catObj.icon || ""}
+      <a href="${href}" class="feature-card category-tool-card" data-id="${tool.id}" data-tool-id="${tool.id}" data-category="${tool.category}" aria-label="Open ${title} tool">
+        <div class="feature-card__header category-tool-card__header">
+          <div class="feature-card__icon category-tool-card__icon-wrapper ${colorClass}">
+            ${iconSvg}
           </div>
-          <div class="category-tool-card__badges">
-            <span class="category-tool-card__cat-label">${catName}</span>
-            <span class="badge ${badgeClass} badge--pill">${badgeText}</span>
-          </div>
+          ${badgeHtml}
         </div>
-        <div class="category-tool-card__content">
-          <h3 class="category-tool-card__title">${tool.title}</h3>
-          <p class="category-tool-card__desc">${tool.shortDescription || ""}</p>
+        <div class="feature-card__body category-tool-card__content">
+          <span class="feature-card__category category-tool-card__cat-label">${catName}</span>
+          <h3 class="feature-card__title category-tool-card__title">${title}</h3>
+          <p class="feature-card__desc category-tool-card__desc">${desc}</p>
         </div>
-        <div class="category-tool-card__footer">
-          <a href="${href}" class="category-tool-card__btn" aria-label="Use ${tool.title}">
-            <span>Use Tool</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+        <div class="feature-card__footer category-tool-card__footer">
+          <span>Use Tool</span>
+          <svg class="feature-card__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
         </div>
-      </article>
+      </a>
     `;
   }
 

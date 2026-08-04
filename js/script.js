@@ -75,7 +75,7 @@ function initComprexaApp() {
       const heroFigure = articleMain.querySelector(".article-hero-image");
       if (heroFigure) {
         heroFigure.innerHTML = `
-           <div class="${article.imageClass || "blog-img-bg--tech"}" style="width:100%; height: 400px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.9); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm);">
+           <div class="article-hero-banner ${article.imageClass || "blog-img-bg--tech"}">
                ${article.icon || ""}
            </div>
         `;
@@ -87,14 +87,14 @@ function initComprexaApp() {
         
         // Add Author Card
         const authorCard = `
-          <div style="margin-top: 48px; padding: 24px; display: flex; align-items: center; gap: 16px; background: var(--bg-surface-subtle); border-radius: 12px;">
-             <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <div class="article-author-card">
+             <div class="article-author-card__avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
              </div>
              <div>
-                <h4 style="margin: 0 0 4px 0; font-size: 1.125rem;">${article.author || 'Comprexa Team'}</h4>
-                <p style="margin: 0 0 8px 0; color: var(--text-muted); font-size: 0.875rem;">Building tools to make file processing fast, secure, and entirely in your browser.</p>
-                <a href="/about.html" style="font-size: 0.875rem; color: var(--primary); text-decoration: none; font-weight: 500;">Explore Details about us &rarr;</a>
+                <h4 class="article-author-card__name">${article.author || 'Comprexa Team'}</h4>
+                <p class="article-author-card__bio">Building tools to make file processing fast, secure, and entirely in your browser.</p>
+                <a href="/about.html" class="article-author-card__link">Explore Details about us &rarr;</a>
              </div>
           </div>
         `;
@@ -103,36 +103,56 @@ function initComprexaApp() {
         const currentUrl = encodeURIComponent(window.location.href);
         const shareText = encodeURIComponent(article.title);
         const socialHtml = `
-          <div style="margin-top: 32px; display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--border-subtle); padding-top: 24px;">
-             <span style="font-weight: 600; color: var(--text-main);">Share this article:</span>
-             <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm" aria-label="Share on X" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-             </a>
-             <a href="https://www.facebook.com/sharer/sharer.php?u=${currentUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm" aria-label="Share on Facebook" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-             </a>
-             <a href="https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${shareText}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm" aria-label="Share on LinkedIn" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-             </a>
-             <a href="https://api.whatsapp.com/send?text=${shareText} ${currentUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm" aria-label="Share on WhatsApp" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-             </a>
-             <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');" class="btn btn--icon btn--sm" aria-label="Copy Link" title="Copy Link" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-             </button>
+          <div class="article-share-bar">
+             <span class="article-share-bar__title">Share this article:</span>
+             <div class="article-share-bar__links">
+               <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm article-share-btn" aria-label="Share on X" title="Share on X">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+               </a>
+               <a href="https://www.facebook.com/sharer/sharer.php?u=${currentUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm article-share-btn" aria-label="Share on Facebook" title="Share on Facebook">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+               </a>
+               <a href="https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${shareText}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm article-share-btn" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+               </a>
+               <a href="https://api.whatsapp.com/send?text=${shareText} ${currentUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--icon btn--sm article-share-btn" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+               </a>
+               <button type="button" class="btn btn--icon btn--sm article-share-btn article-copy-link-btn" aria-label="Copy Link" title="Copy Link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+               </button>
+             </div>
           </div>
         `;
         
         contentEl.innerHTML = contentHtml + socialHtml + authorCard;
+
+        // Add copy link button listener
+        const copyBtn = contentEl.querySelector(".article-copy-link-btn");
+        if (copyBtn) {
+          copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+              const origTitle = copyBtn.getAttribute("title");
+              copyBtn.setAttribute("title", "Copied link!");
+              copyBtn.style.color = "var(--primary)";
+              setTimeout(() => {
+                copyBtn.setAttribute("title", origTitle);
+                copyBtn.style.color = "";
+              }, 2000);
+            }).catch(() => {});
+          });
+        }
       }
 
       // Update Table of Contents
       const tocContainer = articleMain.querySelector(".article-toc__list");
       const tocTitle = articleMain.querySelector(".article-toc__title");
-      if (tocTitle && window.innerWidth < 992) {
+      if (tocTitle) {
          tocTitle.addEventListener("click", () => {
-             const tocBlock = articleMain.querySelector(".article-toc");
-             if (tocBlock) tocBlock.classList.toggle("expanded");
+             if (window.innerWidth < 992) {
+               const tocBlock = articleMain.querySelector(".article-toc");
+               if (tocBlock) tocBlock.classList.toggle("expanded");
+             }
          });
       }
       
@@ -141,14 +161,29 @@ function initComprexaApp() {
         if (headings.length > 0) {
           tocContainer.innerHTML = Array.from(headings)
             .map((h, i) => {
-              // Ensure heading has an ID
               if (!h.id) {
                 h.id = "heading-" + i;
               }
               const isH3 = h.tagName.toLowerCase() === "h3";
-              return `<li style="${isH3 ? "padding-left: 1rem;" : ""}"><a href="#${h.id}" style="color: var(--text-muted); text-decoration: none; display: block; padding: 4px 0; transition: color var(--transition-fast);">${h.textContent}</a></li>`;
+              return `<li style="${isH3 ? "padding-left: 0.85rem;" : ""}"><a href="#${h.id}">${h.textContent}</a></li>`;
             })
             .join("");
+
+          // ScrollSpy for TOC active link
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const id = entry.target.id;
+                  tocContainer.querySelectorAll("a").forEach((a) => {
+                    a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
+                  });
+                }
+              });
+            }, { rootMargin: "-80px 0px -60% 0px", threshold: 0.1 });
+
+            headings.forEach((h) => observer.observe(h));
+          }
         } else {
           const tocBlock = articleMain.querySelector(".article-toc");
           if (tocBlock) tocBlock.style.display = "none";
@@ -161,19 +196,19 @@ function initComprexaApp() {
         let toolsHtml = "";
         if (article.relatedTools && window.ComprexaRegistry) {
            toolsHtml = `
-             <div style="margin-top: 32px;">
+             <div style="margin-top: 28px;">
                 <h4 class="article-sidebar__heading">Related Tools</h4>
                 ${article.relatedTools.map(tId => {
                    const t = window.ComprexaRegistry.getById(tId);
                    if(!t) return "";
                    return `
-                     <a href="${t.url || ('/' + t.id + '.html')}" class="sidebar-tool-card" style="margin-bottom: 12px; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border-subtle); transition: all var(--transition-fast);">
-                        <div class="sidebar-tool-card__icon" style="width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--bg-surface-hover); color: var(--primary);">
+                     <a href="${t.url || ('/' + t.id + '.html')}" class="sidebar-tool-card">
+                        <div class="sidebar-tool-card__icon">
                           ${t.icon}
                         </div>
-                        <div class="sidebar-tool-card__info" style="flex: 1; min-width: 0;">
-                          <div class="sidebar-tool-card__name" style="font-size: 0.875rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${t.title}</div>
-                          <div class="sidebar-tool-card__desc" style="font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${t.shortDescription || 'Tool'}</div>
+                        <div class="sidebar-tool-card__info">
+                          <div class="sidebar-tool-card__name">${t.title}</div>
+                          <div class="sidebar-tool-card__desc">${t.shortDescription || 'Tool'}</div>
                         </div>
                       </a>
                    `;
@@ -190,13 +225,13 @@ function initComprexaApp() {
               .slice(0, 3)
               .map(
                 (a) => `
-                <a href="/article.html?id=${a.id}" class="sidebar-tool-card" style="margin-bottom: 12px; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border-subtle); transition: all var(--transition-fast);">
-                  <div class="sidebar-tool-card__icon" style="width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--bg-surface-hover); color: var(--primary);">
+                <a href="/article.html?id=${a.id}" class="sidebar-tool-card">
+                  <div class="sidebar-tool-card__icon">
                     ${a.icon}
                   </div>
-                  <div class="sidebar-tool-card__info" style="flex: 1; min-width: 0;">
-                    <div class="sidebar-tool-card__name" style="font-size: 0.875rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${a.title}</div>
-                    <div class="sidebar-tool-card__desc" style="font-size: 0.75rem; color: var(--text-muted);">${a.readTime}</div>
+                  <div class="sidebar-tool-card__info">
+                    <div class="sidebar-tool-card__name">${a.title}</div>
+                    <div class="sidebar-tool-card__desc">${a.readTime}</div>
                   </div>
                 </a>
               `,
@@ -265,11 +300,24 @@ function initComprexaApp() {
   const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/><path d="M19 3v4"/><path d="M21 5h-4"/></svg>`;
 
   function getPreferredTheme() {
+    try {
+      const raw = localStorage.getItem("comprexa_settings_v1");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && (parsed.theme === "dark" || parsed.theme === "light")) {
+          return parsed.theme;
+        }
+      }
+    } catch (e) {}
     const savedTheme = localStorage.getItem("comprexa-theme");
-    if (savedTheme) {
+    if (savedTheme === "dark" || savedTheme === "light") {
       return savedTheme;
     }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
+    const currentAttr = rootElement.getAttribute("data-theme");
+    if (currentAttr === "dark" || currentAttr === "light") {
+      return currentAttr;
+    }
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
   }

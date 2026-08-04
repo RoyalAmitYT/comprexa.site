@@ -1,6 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
+  <script>
+    (function() {
+      try {
+        var theme = null;
+        var raw = localStorage.getItem("comprexa_settings_v1");
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && (parsed.theme === "dark" || parsed.theme === "light")) {
+            theme = parsed.theme;
+          }
+        }
+        if (!theme) {
+          var legacy = localStorage.getItem("comprexa-theme");
+          if (legacy === "dark" || legacy === "light") {
+            theme = legacy;
+          }
+        }
+        if (!theme) {
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            theme = "dark";
+          } else {
+            theme = "light";
+          }
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch(e) {}
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -33,9 +61,9 @@
   <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
   
   <link rel="canonical" href="https://comprexa.com/" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  
+  
+  
   <meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -148,6 +176,12 @@
   ]
 }
 </script>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-512x512.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
 </head>
 <body>
 
@@ -1350,11 +1384,6 @@
 
           <!-- Featured Tool 2: PDF Compressor (Most Popular Highlighted) -->
           <article class="featured-card featured-card--popular fade-in-on-scroll" tabindex="0" role="article" aria-label="Featured Tool: PDF Compressor (Most Popular)">
-            <div class="featured-card__ribbon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <span>Most Popular</span>
-            </div>
-
             <div class="featured-card__top">
               <div class="featured-card__icon icon-bg--pdf">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1364,7 +1393,7 @@
                   <path d="m9 14 3 3 3-3"/>
                 </svg>
               </div>
-              <span class="featured-card__cat-badge">PDF Tools</span>
+              <span class="featured-card__cat-badge featured-card__cat-badge--popular">Most Popular</span>
             </div>
 
             <div class="featured-card__content">

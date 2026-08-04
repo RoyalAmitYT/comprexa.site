@@ -161,33 +161,35 @@ class ComprexaFramework {
       `;
     }
 
-    const catName = categoryObj.name || tool.categoryName || "Tool";
+    const catName = categoryObj.name || tool.categoryName || tool.category || "Tool";
+    const colorClass = tool.colorClass || categoryObj.colorToken || "icon-bg--utility";
+    const iconSvg = tool.icon || categoryObj.icon || `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2v4a1 1 0 0 0 1 1h4"/></svg>`;
+    const title = tool.title || "";
+    const desc = tool.shortDescription || tool.desc || "";
     const badgeHtml = badgeText
-      ? `<span class="badge ${badgeClass} badge--pill">${badgeText}</span>`
+      ? `<span class="feature-card__badge badge--pill ${badgeClass}">${badgeText}</span>`
       : "";
 
     return `
-      <article class="category-tool-card" data-tool-id="${tool.id}" data-category="${tool.category}">
-        <div class="category-tool-card__header">
-          <div class="category-tool-card__icon-wrapper ${tool.colorClass || "icon-bg--pdf"}">
-            ${tool.icon || categoryObj.icon || ""}
+      <a href="${href}" class="feature-card category-tool-card" data-id="${tool.id}" data-tool-id="${tool.id}" data-category="${tool.category}" aria-label="Open ${title} tool">
+        <div class="feature-card__header category-tool-card__header">
+          <div class="feature-card__icon category-tool-card__icon-wrapper ${colorClass}">
+            ${iconSvg}
           </div>
-          <div class="category-tool-card__badges">
-            <span class="category-tool-card__cat-label">${catName}</span>
-            ${badgeHtml}
-          </div>
+          ${badgeHtml}
         </div>
-        <div class="category-tool-card__content">
-          <h3 class="category-tool-card__title">${tool.title}</h3>
-          <p class="category-tool-card__desc">${tool.shortDescription || ""}</p>
+        <div class="feature-card__body category-tool-card__content">
+          <span class="feature-card__category category-tool-card__cat-label">${catName}</span>
+          <h3 class="feature-card__title category-tool-card__title">${title}</h3>
+          <p class="feature-card__desc category-tool-card__desc">${desc}</p>
         </div>
-        <div class="category-tool-card__footer">
-          <a href="${href}" class="category-tool-card__btn" aria-label="Use ${tool.title}">
-            <span>Use Tool</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+        <div class="feature-card__footer category-tool-card__footer">
+          <span>Use Tool</span>
+          <svg class="feature-card__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
         </div>
-      </article>
+      </a>
     `;
   }
 
