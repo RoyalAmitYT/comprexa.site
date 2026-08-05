@@ -135,6 +135,62 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Watermark Mobile Optimization */
+    @media (max-width: 768px) {
+      #watermark-grid-layout {
+        display: flex !important;
+        flex-direction: column-reverse !important;
+        gap: 16px !important;
+      }
+      #watermark-grid-layout > div {
+        width: 100% !important;
+        box-sizing: border-box;
+      }
+      /* Live Preview */
+      #watermark-preview-stage {
+        min-height: 250px !important;
+        height: auto !important;
+        padding: 8px !important;
+      }
+      /* Position Grid */
+      #wm-position-grid {
+        max-width: 100% !important;
+        width: 100% !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+      .wm-pos-btn {
+        padding: 0 !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 0.85rem !important;
+      }
+      /* Preset Buttons Container */
+      .wm-preset-btn {
+        flex: 1 1 auto;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        white-space: normal !important;
+        text-align: center !important;
+      }
+      /* Inputs and sliders */
+      .ui-input {
+        width: 100% !important;
+        min-height: 44px !important;
+      }
+      /* Apply Button */
+      #btn-apply-watermark {
+        width: 100% !important;
+        min-height: 54px !important;
+        font-size: 1rem !important;
+      }
+    }
+  </style>
 </head>
   <body>
     <!-- Universal Header Navigation -->

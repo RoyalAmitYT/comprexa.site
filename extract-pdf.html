@@ -137,6 +137,129 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Extract Mobile Optimization */
+    @media (max-width: 768px) {
+      /* General layout */
+      #extract-app-container {
+        padding: 16px !important;
+      }
+      
+      /* 1. Document Preview card fixes */
+      #extract-file-info {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      #extract-file-info > div:first-child {
+        display: contents !important;
+      }
+      #extract-file-info h3 {
+        order: 1 !important;
+        margin-bottom: 12px !important;
+        text-align: center !important;
+      }
+      #extract-file-info > div.card {
+        order: 2 !important;
+        margin-bottom: 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px !important;
+        padding: 16px !important;
+      }
+      #extract-file-info > div.card > div:first-child {
+        width: 100% !important;
+      }
+      #btn-change-extract-pdf {
+        width: 100% !important;
+        margin-left: 0 !important;
+        min-height: 44px !important;
+      }
+      #extract-filename-display {
+        white-space: normal !important;
+        word-break: break-all !important;
+      }
+      #extract-file-info > div:first-child button {
+        order: 3 !important;
+        width: 100% !important;
+        min-height: 44px !important;
+        background: var(--bg-surface) !important;
+        border: 1px solid var(--border-subtle) !important;
+        margin: 0 !important;
+      }
+
+      /* 2. Page Thumbnails */
+      #extract-pages-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 16px !important;
+        max-height: 60vh !important;
+      }
+      .extract-page-card {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 12px !important;
+      }
+      .extract-page-card > div:last-child {
+        height: 280px !important;
+      }
+
+      /* 3. Extraction Settings */
+      #extract-workspace-section > div:last-child {
+        padding: 16px !important;
+      }
+      #extract-workspace-section > div:last-child > div:first-child > div:nth-child(2) {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+      #extract-range-input {
+        width: 100% !important;
+        min-height: 48px !important;
+        box-sizing: border-box !important;
+      }
+      #btn-apply-range {
+        width: 100% !important;
+        min-height: 48px !important;
+      }
+
+      /* 4. Action Buttons */
+      #extract-workspace-section > div:last-child > div:nth-child(2) {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px !important;
+      }
+      #extract-workspace-section > div:last-child > div:nth-child(2) > div:first-child {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      #extract-selection-badge {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px !important;
+        font-size: 0.95rem !important;
+      }
+      #extract-workspace-section > div:last-child > div:nth-child(2) > div:last-child {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+      }
+      #btn-select-all-extract, #btn-deselect-all-extract {
+        width: 100% !important;
+        min-height: 48px !important;
+        margin: 0 !important;
+      }
+      #btn-execute-extract {
+        width: 100% !important;
+        min-height: 56px !important;
+        font-size: 1.05rem !important;
+        margin-top: 8px !important;
+      }
+    }
+  </style>
 </head>
   <body>
     <!-- Header & Navigation -->
