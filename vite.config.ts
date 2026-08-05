@@ -1,5 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
-
 import path from "path";
 import fs from "fs";
 import { defineConfig } from "vite";
@@ -16,7 +14,7 @@ htmlFiles.forEach(file => {
 
 export default defineConfig(() => {
   return {
-    plugins: [ tailwindcss()],
+    plugins: [],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "."),
