@@ -1,874 +1,670 @@
 // @ts-nocheck
 /**
- * Comprexa - Universal Crop Image Controller
- * Completely rebuilt client-side image cropper with touch/mouse/trackpad gesture support,
- * real-time crop preview, rotation, flips, aspect ratios, circle mask, and zero-loss export.
+ * Comprexa - Crop Image Tool (Cropper.js integration)
+ * Rebuilt from scratch for maximum reliability.
  */
 
-import { ImageUtils } from "../image-engine.js";
+import {
+  ImageValidator,
+  ImageMetadataExtractor,
+  ImageExporter,
+  ImageUtils,
+  GlobalImageProgressManager,
+  ImageProgressState,
+} from "../image-engine.js";
 
-export class CropImageController {
+class CropImageApp {
   constructor() {
-    // Original File & Image
-    this.file = null;
-    this.originalImg = null;
-    this.imgWidth = 0;
-    this.imgHeight = 0;
-
-    // Transform State
-    this.rotation = 0; // 0, 90, 180, 270
-    this.flipH = false;
-    this.flipV = false;
-    this.zoom = 1.0; // 0.5 to 3.0
-
-    // Crop Selection State (in display canvas coordinates)
-    this.cropBox = { x: 0, y: 0, w: 100, h: 100 };
-    this.activeAspect = null; // null for free, or numeric ratio (e.g. 1.0, 1.333, 1.777)
-    this.isCircleMask = false;
-
-    // Display Stage Measurements
-    this.displayScale = 1.0; // Ratio of display canvas pixels to transformed image pixels
-    this.displayW = 0;
-    this.displayH = 0;
-
-    // Pointer Drag/Resize State
-    this.isDragging = false;
-    this.isResizing = false;
-    this.activeHandle = null;
-    this.dragStart = { x: 0, y: 0 };
-    this.boxStart = { x: 0, y: 0, w: 0, h: 0 };
-
-    // Offscreen Canvas for Transformed Full-Res Image
-    this.offscreenCanvas = document.createElement("canvas");
-    this.offscreenCtx = this.offscreenCanvas.getContext("2d");
-
+    this.cropper = null;
+    this.currentFile = null;
+    this.currentMetadata = null;
+    this.objectUrl = null;
+    this.resultDataUrl = null;
+    this.resultBlob = null;
+    
+    this.scaleX = 1;
+    this.scaleY = 1;
+    this.rotation = 0;
+    
     this.initDOM();
     this.bindEvents();
   }
 
   initDOM() {
-    // Upload Elements
-    this.dropZone = document.getElementById("crop-dropzone");
-    this.fileInput = document.getElementById("crop-file-input");
-
-    // Sections
     this.uploadSection = document.getElementById("crop-upload-section");
     this.configSection = document.getElementById("crop-config-section");
     this.progressSection = document.getElementById("crop-progress-section");
     this.resultSection = document.getElementById("crop-result-section");
-
-    // Uploaded File Info
-    this.uploadedFilename = document.getElementById("uploaded-filename");
-    this.uploadedFiledims = document.getElementById("uploaded-filedims");
-    this.uploadedFilesize = document.getElementById("uploaded-filesize");
-    this.btnChangeImage = document.getElementById("btn-change-image");
-
-    // Stage & Display
-    this.stageContainer = document.getElementById("crop-stage-container");
-    this.stageWrapper = document.getElementById("crop-stage-wrapper");
-    this.displayCanvas = document.getElementById("crop-display-canvas");
-    this.overlayBox = document.getElementById("crop-overlay-box");
-    this.boxDimensionsLabel = document.getElementById(
-      "crop-box-dimensions-label",
-    );
-
-    // Stage Quick Toolbar
-    this.btnZoomOut = document.getElementById("btn-zoom-out");
-    this.btnZoomIn = document.getElementById("btn-zoom-in");
+    
+    // Upload elements
+    this.dropZone = document.getElementById("crop-dropzone");
+    this.fileInput = document.getElementById("crop-file-input");
+    this.btnBrowse = this.dropZone ? this.dropZone.querySelector(".file-uploader__choose-btn") : document.getElementById("btn-browse-files");
+    
+    // Header elements
+    this.filenameEl = document.getElementById("uploaded-filename");
+    this.filedimsEl = document.getElementById("uploaded-filedims");
+    this.filesizeEl = document.getElementById("uploaded-filesize");
+    this.btnChange = document.getElementById("btn-change-image");
+    
+    // Cropper elements
+    this.imageElement = document.getElementById("cropper-image");
+    
+    // Aspect ratio chips
+    this.aspectChips = document.querySelectorAll(".aspect-preset-btn");
+    this.socialChips = document.querySelectorAll(".social-preset-btn");
+    
+    // Zoom and Quality
     this.zoomSlider = document.getElementById("zoom-slider");
     this.zoomValue = document.getElementById("zoom-value");
-
-    this.btnRotateCCW = document.getElementById("btn-rotate-ccw");
-    this.btnRotateCW = document.getElementById("btn-rotate-cw");
-    this.rotationAngleBadge = document.getElementById("rotation-angle-badge");
-
-    this.btnFlipH = document.getElementById("btn-flip-h");
-    this.btnFlipV = document.getElementById("btn-flip-v");
+    this.btnZoomOut = document.getElementById("btn-zoom-out");
+    this.btnZoomIn = document.getElementById("btn-zoom-in");
+    
+    // Export settings
+    this.exportFormat = document.getElementById("export-format-select");
+    this.exportQuality = document.getElementById("quality-slider");
+    this.qualityWrapper = document.getElementById("quality-slider-container");
+    this.qualityValBadge = document.getElementById("quality-val-badge");
+    this.outputFilenameInput = document.getElementById("output-filename-input");
+    
+    // Actions
     this.btnResetStage = document.getElementById("btn-reset-stage");
-
-    // Live Preview & Circle Mask
-    this.circleMaskCheckbox = document.getElementById("circle-mask-checkbox");
-    this.livePreviewCanvas = document.getElementById(
-      "live-crop-preview-canvas",
-    );
+    this.btnExecuteCrop = document.getElementById("btn-execute-crop");
+    this.btnDownloadCropped = document.getElementById("btn-download-cropped");
+    
+    // Live metrics
     this.liveCropDimensions = document.getElementById("live-crop-dimensions");
     this.liveAspectText = document.getElementById("live-aspect-text");
     this.liveEstSize = document.getElementById("live-est-size");
-
-    // Controls & Presets
-    this.aspectBtns = document.querySelectorAll(".aspect-preset-btn");
-    this.socialBtns = document.querySelectorAll(".social-preset-btn");
-    this.exportFormatSelect = document.getElementById("export-format-select");
-    this.qualitySliderContainer = document.getElementById(
-      "quality-slider-container",
-    );
-    this.qualitySlider = document.getElementById("quality-slider");
-    this.qualityValBadge = document.getElementById("quality-val-badge");
-    this.outputFilenameInput = document.getElementById("output-filename-input");
-    this.btnExecuteCrop = document.getElementById("btn-execute-crop");
-
-    // Progress Elements
-    this.progressBar = document.getElementById("crop-progress-bar");
-    this.progressStatus = document.getElementById("crop-progress-status");
-
-    // Result Elements
-    this.resultCroppedImage = document.getElementById("result-cropped-image");
+    
+    // Result elements
+    this.resultImage = document.getElementById("result-cropped-image");
     this.resOrigDims = document.getElementById("res-orig-dims");
     this.resCroppedDims = document.getElementById("res-cropped-dims");
     this.resOrigSize = document.getElementById("res-orig-size");
     this.resCroppedSize = document.getElementById("res-cropped-size");
-    this.btnDownloadCropped = document.getElementById("btn-download-cropped");
-    this.btnCropAnother = document.getElementById("btn-crop-another");
+    
+    // Live preview
+    this.livePreviewCanvas = document.getElementById("live-crop-preview-canvas");
+    this.circleMaskCheckbox = document.getElementById("circle-mask-checkbox");
+    
+    // Transform buttons
+    this.btnRotateCCW = document.getElementById("btn-rotate-ccw");
+    this.btnRotateCW = document.getElementById("btn-rotate-cw");
+    this.btnFlipH = document.getElementById("btn-flip-h");
+    this.btnFlipV = document.getElementById("btn-flip-v");
+    this.rotationAngleBadge = document.getElementById("rotation-angle-badge");
   }
 
   bindEvents() {
-    if (!this.dropZone || !this.fileInput) return;
+    // ----------------------------------------------------
+    // UPLOAD EVENTS
+    // ----------------------------------------------------
+    window.addEventListener("dragover", (e) => { e.preventDefault(); e.stopPropagation(); });
+    window.addEventListener("drop", (e) => { e.preventDefault(); e.stopPropagation(); });
 
-    // Dropzone Click & Drag/Drop
-    this.dropZone.addEventListener("click", () => this.fileInput.click());
-    this.dropZone.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        this.fileInput.click();
-      }
-    });
-
-    ["dragenter", "dragover"].forEach((eventName) => {
-      this.dropZone.addEventListener(eventName, (e) => {
+    if (this.dropZone) {
+      this.dropZone.addEventListener("click", (e) => {
+        if (e.target.tagName !== "BUTTON" && e.target !== this.fileInput) {
+          if (this.fileInput) this.fileInput.click();
+        }
+      });
+      this.dropZone.addEventListener("dragenter", (e) => {
         e.preventDefault();
         e.stopPropagation();
+      });
+      this.dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.dropZone.classList.add("drop-zone--active");
         this.dropZone.classList.add("file-uploader__dropzone--active");
       });
-    });
-
-    ["dragleave", "drop"].forEach((eventName) => {
-      this.dropZone.addEventListener(eventName, (e) => {
+      this.dropZone.addEventListener("dragleave", (e) => {
         e.preventDefault();
         e.stopPropagation();
+        this.dropZone.classList.remove("drop-zone--active");
         this.dropZone.classList.remove("file-uploader__dropzone--active");
       });
-    });
-
-    this.dropZone.addEventListener("drop", (e) => {
-      const files = e.dataTransfer?.files;
-      if (files && files.length > 0) {
-        this.handleFileSelect(files[0]);
-      }
-    });
-
-    this.fileInput.addEventListener("change", (e) => {
-      if (e.target.files && e.target.files.length > 0) {
-        this.handleFileSelect(e.target.files[0]);
-      }
-    });
-
-    if (this.btnChangeImage) {
-      this.btnChangeImage.addEventListener("click", () =>
-        this.fileInput.click(),
-      );
+      this.dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.dropZone.classList.remove("drop-zone--active");
+        this.dropZone.classList.remove("file-uploader__dropzone--active");
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          this.processFile(e.dataTransfer.files[0]);
+        }
+      });
     }
 
-    // Zoom Controls
+    if (this.btnBrowse && this.fileInput) {
+      this.btnBrowse.addEventListener("click", () => this.fileInput.click());
+    }
+    
+    if (this.fileInput) {
+      this.fileInput.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          const file = e.target.files[0];
+          e.target.value = ""; // Clear input so same file can be selected again
+          this.processFile(file);
+        }
+      });
+    }
+    
+    window.addEventListener("paste", (e) => {
+      if (this.uploadSection && this.uploadSection.style.display !== "none") {
+        const items = e.clipboardData?.items;
+        if (!items) return;
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].type.startsWith("image/")) {
+            const file = items[i].getAsFile();
+            if (file) {
+              e.preventDefault();
+              this.processFile(file);
+              break;
+            }
+          }
+        }
+      }
+    });
+
+    if (this.btnChange) {
+      this.btnChange.addEventListener("click", () => this.resetWorkspace());
+    }
+
+    // ----------------------------------------------------
+    // EDITOR EVENTS
+    // ----------------------------------------------------
+    this.aspectChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        this.clearActiveChips();
+        chip.classList.add("active", "btn--primary");
+        chip.classList.remove("btn--outline");
+        if (this.cropper) {
+          let aspect = chip.dataset.aspect;
+          if (aspect === "free") aspect = NaN;
+          else if (aspect === "a4") aspect = 1 / 1.414;
+          else {
+            const [w, h] = aspect.split(":");
+            aspect = parseInt(w, 10) / parseInt(h, 10);
+          }
+          this.cropper.setAspectRatio(aspect);
+        }
+      });
+    });
+
+    this.socialChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        this.clearActiveChips();
+        chip.classList.add("active", "btn--primary");
+        chip.classList.remove("btn--outline");
+        if (this.cropper) {
+          let ratio = chip.dataset.ratio;
+          const [w, h] = ratio.split(":");
+          this.cropper.setAspectRatio(parseFloat(w) / parseFloat(h));
+        }
+      });
+    });
+
     if (this.zoomSlider) {
       this.zoomSlider.addEventListener("input", (e) => {
-        this.setZoom(parseFloat(e.target.value) / 100);
-      });
-    }
-    if (this.btnZoomOut) {
-      this.btnZoomOut.addEventListener("click", () => {
-        const val = Math.max(50, this.zoom * 100 - 10);
-        this.setZoom(val / 100);
-      });
-    }
-    if (this.btnZoomIn) {
-      this.btnZoomIn.addEventListener("click", () => {
-        const val = Math.min(300, this.zoom * 100 + 10);
-        this.setZoom(val / 100);
+        if (this.cropper) {
+          const val = parseFloat(e.target.value) / 100;
+          this.cropper.zoomTo(val);
+          if (this.zoomValue) this.zoomValue.textContent = `${e.target.value}%`;
+        }
       });
     }
 
-    // Rotation & Flips
+    if (this.btnZoomOut && this.zoomSlider) {
+      this.btnZoomOut.addEventListener("click", () => {
+        if (!this.cropper) return;
+        let val = parseInt(this.zoomSlider.value, 10);
+        val = Math.max(parseInt(this.zoomSlider.min, 10), val - 10);
+        this.zoomSlider.value = val;
+        this.cropper.zoomTo(val / 100);
+        if (this.zoomValue) this.zoomValue.textContent = `${val}%`;
+      });
+    }
+
+    if (this.btnZoomIn && this.zoomSlider) {
+      this.btnZoomIn.addEventListener("click", () => {
+        if (!this.cropper) return;
+        let val = parseInt(this.zoomSlider.value, 10);
+        val = Math.min(parseInt(this.zoomSlider.max, 10), val + 10);
+        this.zoomSlider.value = val;
+        this.cropper.zoomTo(val / 100);
+        if (this.zoomValue) this.zoomValue.textContent = `${val}%`;
+      });
+    }
+
     if (this.btnRotateCCW) {
       this.btnRotateCCW.addEventListener("click", () => {
-        this.rotation = (this.rotation - 90 + 360) % 360;
-        this.updateTransforms(true);
+        if (!this.cropper) return;
+        this.rotation = (this.rotation - 90) % 360;
+        this.cropper.rotate(-90);
+        this.updateRotationBadge();
       });
     }
+
     if (this.btnRotateCW) {
       this.btnRotateCW.addEventListener("click", () => {
+        if (!this.cropper) return;
         this.rotation = (this.rotation + 90) % 360;
-        this.updateTransforms(true);
+        this.cropper.rotate(90);
+        this.updateRotationBadge();
       });
     }
+
     if (this.btnFlipH) {
       this.btnFlipH.addEventListener("click", () => {
-        this.flipH = !this.flipH;
-        this.updateTransforms(false);
+        if (!this.cropper) return;
+        this.scaleX = this.scaleX === 1 ? -1 : 1;
+        this.cropper.scaleX(this.scaleX);
       });
     }
+
     if (this.btnFlipV) {
       this.btnFlipV.addEventListener("click", () => {
-        this.flipV = !this.flipV;
-        this.updateTransforms(false);
+        if (!this.cropper) return;
+        this.scaleY = this.scaleY === 1 ? -1 : 1;
+        this.cropper.scaleY(this.scaleY);
       });
     }
+
     if (this.btnResetStage) {
       this.btnResetStage.addEventListener("click", () => {
+        if (!this.cropper) return;
         this.rotation = 0;
-        this.flipH = false;
-        this.flipV = false;
-        this.setZoom(1.0);
-        this.updateTransforms(true);
+        this.scaleX = 1;
+        this.scaleY = 1;
+        this.cropper.reset();
+        this.updateRotationBadge();
+        this.clearActiveChips();
+        const freeChip = document.querySelector('.aspect-preset-btn[data-aspect="free"]');
+        if (freeChip) {
+          freeChip.classList.add("active", "btn--primary");
+          freeChip.classList.remove("btn--outline");
+        }
+        this.cropper.setAspectRatio(NaN);
       });
     }
 
-    // Circle Mask Checkbox
-    if (this.circleMaskCheckbox) {
-      this.circleMaskCheckbox.addEventListener("change", (e) => {
-        this.isCircleMask = e.target.checked;
-        if (this.isCircleMask) {
-          // Circle mask forces 1:1 aspect ratio
-          this.setAspectRatio(1.0, "1:1");
-        } else {
-          this.updateOverlayStyles();
-          this.renderLivePreview();
-        }
-      });
-    }
-
-    // Aspect Ratio Presets
-    this.aspectBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const aspectKey = btn.getAttribute("data-aspect");
-        this.aspectBtns.forEach((b) =>
-          b.classList.remove("btn--primary", "active"),
-        );
-        this.aspectBtns.forEach((b) => b.classList.add("btn--outline"));
-        btn.classList.remove("btn--outline");
-        btn.classList.add("btn--primary", "active");
-
-        this.applyAspectPreset(aspectKey);
-      });
-    });
-
-    // Social Media Presets
-    this.socialBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const ratioAttr = btn.getAttribute("data-ratio");
-        let numericRatio = null;
-
-        if (ratioAttr === "1:1") numericRatio = 1.0;
-        else if (ratioAttr === "4:5") numericRatio = 4 / 5;
-        else if (ratioAttr === "9:16") numericRatio = 9 / 16;
-        else if (ratioAttr === "16:9") numericRatio = 16 / 9;
-        else if (ratioAttr === "2.63:1") numericRatio = 2.63;
-
-        if (numericRatio) {
-          this.aspectBtns.forEach((b) =>
-            b.classList.remove("btn--primary", "active"),
-          );
-          this.aspectBtns.forEach((b) => b.classList.add("btn--outline"));
-          this.setAspectRatio(numericRatio, btn.getAttribute("data-name"));
-        }
-      });
-    });
-
-    // Export Options
-    if (this.exportFormatSelect) {
-      this.exportFormatSelect.addEventListener("change", (e) => {
-        const val = e.target.value;
-        if (val === "image/jpeg" || val === "image/webp") {
-          this.qualitySliderContainer.style.display = "block";
-        } else {
-          this.qualitySliderContainer.style.display = "none";
-        }
-        this.renderLivePreview();
-      });
-    }
-
-    if (this.qualitySlider) {
-      this.qualitySlider.addEventListener("input", (e) => {
+    if (this.exportQuality && this.qualityValBadge) {
+      this.exportQuality.addEventListener("input", (e) => {
         this.qualityValBadge.textContent = `${e.target.value}%`;
-        this.renderLivePreview();
       });
     }
 
-    // Interactive Dragging & Resizing with Pointer Events
-    if (this.overlayBox) {
-      this.overlayBox.addEventListener("pointerdown", (e) =>
-        this.onPointerDown(e),
-      );
-      window.addEventListener("pointermove", (e) => this.onPointerMove(e));
-      window.addEventListener("pointerup", (e) => this.onPointerUp(e));
-      window.addEventListener("pointercancel", (e) => this.onPointerUp(e));
+    if (this.btnExecuteCrop) {
+      this.btnExecuteCrop.addEventListener("click", () => this.executeExport());
     }
 
-    // Action Execution & Restart
-    if (this.btnExecuteCrop) {
-      this.btnExecuteCrop.addEventListener("click", () => this.executeCrop());
+    if (this.btnDownloadCropped) {
+      this.btnDownloadCropped.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.downloadExport();
+      });
     }
-    if (this.btnCropAnother) {
-      this.btnCropAnother.addEventListener("click", () => this.resetToUpload());
+
+    if (this.circleMaskCheckbox) {
+      this.circleMaskCheckbox.addEventListener("change", () => this.updatePreview());
     }
   }
 
-  handleFileSelect(file) {
-    if (!file || !file.type.startsWith("image/")) {
-      if (window.ComprexaToast)
-        window.ComprexaToast.error(
-          "Please select a valid image file (JPG, PNG, WEBP, GIF, BMP);.",
-        );
+  // ----------------------------------------------------
+  // WORKFLOW: FILE PROCESSING
+  // ----------------------------------------------------
+  async processFile(file) {
+    if (!file) return;
+
+    try {
+      this.showToast("Reading image file...", "info");
+
+      // 1. Validate
+      await ImageValidator.validateFile(file, {
+        allowedMimeTypes: ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "image/bmp", "image/x-bmp", "image/avif"],
+        allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif", "bmp", "avif"],
+      });
+
+      this.currentFile = file;
+
+      // 2. Metadata
+      this.currentMetadata = await ImageMetadataExtractor.extractMetadata(file);
+
+      // 3. Render Object URL
+      if (this.objectUrl) URL.revokeObjectURL(this.objectUrl);
+      this.objectUrl = URL.createObjectURL(file);
+
+      // 4. Update Header DOM
+      if (this.filenameEl) this.filenameEl.textContent = this.currentMetadata.name;
+      if (this.filedimsEl) this.filedimsEl.textContent = this.currentMetadata.dimensionsFormatted;
+      if (this.filesizeEl) this.filesizeEl.textContent = this.currentMetadata.fileSizeFormatted;
+
+      // 5. Toggle Views
+      if (this.uploadSection) this.uploadSection.style.display = "none";
+      if (this.configSection) this.configSection.style.display = "block";
+      if (this.resultSection) this.resultSection.style.display = "none";
+      if (this.progressSection) this.progressSection.style.display = "none";
+
+      // 6. Output Controls
+      if (this.exportFormat) {
+        const isJpgOrWebp = this.currentMetadata.mimeType === "image/jpeg" || this.currentMetadata.mimeType === "image/webp";
+        if (this.qualityWrapper) {
+          this.qualityWrapper.style.display = isJpgOrWebp ? "block" : "none";
+        }
+      }
+
+      // 7. Initialize Cropper Engine
+      this.startCropEngine();
+
+    } catch (err) {
+      const msg = err.userMessage || err.message || "Failed to load image.";
+      this.showToast(msg, "error");
+      this.resetWorkspace();
+    }
+  }
+
+  startCropEngine() {
+    if (!this.imageElement) {
+      this.showToast("Editor rendering error: Missing image container.", "error");
       return;
     }
 
-    this.file = file;
-
-    // Load Image Object
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        this.originalImg = img;
-        this.imgWidth = img.naturalWidth;
-        this.imgHeight = img.naturalHeight;
-
-        // Display Metadata
-        this.uploadedFilename.textContent = file.name;
-        this.uploadedFiledims.textContent = `${this.imgWidth} × ${this.imgHeight} px`;
-        this.uploadedFilesize.textContent = ImageUtils.formatBytes(file.size);
-
-        if (this.outputFilenameInput) {
-          const nameWithoutExt =
-            file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
-          this.outputFilenameInput.value = `${nameWithoutExt}-cropped`;
-        }
-
-        // Show Config Section
-        this.uploadSection.style.display = "none";
-        this.progressSection.style.display = "none";
-        this.resultSection.style.display = "none";
-        this.configSection.style.display = "block";
-
-        // Reset state & render stage
-        this.rotation = 0;
-        this.flipH = false;
-        this.flipV = false;
-        this.zoom = 1.0;
-        this.activeAspect = null;
-        this.isCircleMask = false;
-        if (this.circleMaskCheckbox) this.circleMaskCheckbox.checked = false;
-
-        this.updateTransforms(true);
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
-  setZoom(z) {
-    this.zoom = Math.max(0.5, Math.min(3.0, z));
-    if (this.zoomSlider) this.zoomSlider.value = Math.round(this.zoom * 100);
-    if (this.zoomValue)
-      this.zoomValue.textContent = `${Math.round(this.zoom * 100)}%`;
-
-    if (this.stageWrapper) {
-      this.stageWrapper.style.transform = `scale(${this.zoom})`;
-    }
-  }
-
-  updateTransforms(resetCropBox = false) {
-    if (!this.originalImg) return;
-
-    // 1. Prepare Full-Res Transformed Offscreen Canvas
-    let tw = this.imgWidth;
-    let th = this.imgHeight;
-    if (this.rotation === 90 || this.rotation === 270) {
-      tw = this.imgHeight;
-      th = this.imgWidth;
+    if (this.cropper) {
+      this.cropper.destroy();
+      this.cropper = null;
     }
 
-    this.offscreenCanvas.width = tw;
-    this.offscreenCanvas.height = th;
+    // Reset scales
+    this.scaleX = 1;
+    this.scaleY = 1;
+    this.rotation = 0;
+    this.updateRotationBadge();
+    this.clearActiveChips();
 
-    this.offscreenCtx.save();
-    this.offscreenCtx.clearRect(0, 0, tw, th);
-
-    // Center transform
-    this.offscreenCtx.translate(tw / 2, th / 2);
-
-    // Rotation
-    this.offscreenCtx.rotate((this.rotation * Math.PI) / 180);
-
-    // Flips
-    const sx = this.flipH ? -1 : 1;
-    const sy = this.flipV ? -1 : 1;
-    this.offscreenCtx.scale(sx, sy);
-
-    // Draw Image centered
-    this.offscreenCtx.drawImage(
-      this.originalImg,
-      -this.imgWidth / 2,
-      -this.imgHeight / 2,
-    );
-    this.offscreenCtx.restore();
-
-    // 2. Compute Stage Display Scale
-    const maxStageW = Math.min(
-      580,
-      this.stageContainer ? this.stageContainer.clientWidth - 32 : 580,
-    );
-    const maxStageH = 460;
-
-    this.displayScale = Math.min(maxStageW / tw, maxStageH / th, 1.0);
-    this.displayW = Math.round(tw * this.displayScale);
-    this.displayH = Math.round(th * this.displayScale);
-
-    // 3. Render Display Canvas
-    if (this.displayCanvas) {
-      this.displayCanvas.width = this.displayW;
-      this.displayCanvas.height = this.displayH;
-      const ctx = this.displayCanvas.getContext("2d");
-      ctx.drawImage(this.offscreenCanvas, 0, 0, this.displayW, this.displayH);
+    // Default to free crop
+    const freeChip = document.querySelector('.aspect-preset-btn[data-aspect="free"]');
+    if (freeChip) {
+      freeChip.classList.add("active", "btn--primary");
+      freeChip.classList.remove("btn--outline");
     }
 
-    // Update Rotation Badge
-    if (this.rotationAngleBadge) {
-      this.rotationAngleBadge.textContent = `${this.rotation}°`;
-    }
-
-    // 4. Update or Reset Crop Box
-    if (resetCropBox || !this.cropBox.w) {
-      this.centerDefaultCropBox();
-    } else {
-      this.clampCropBox();
-    }
-
-    this.updateOverlayStyles();
-    this.renderLivePreview();
-  }
-
-  centerDefaultCropBox() {
-    let targetW = this.displayW * 0.85;
-    let targetH = this.displayH * 0.85;
-
-    if (this.activeAspect) {
-      if (targetW / targetH > this.activeAspect) {
-        targetW = targetH * this.activeAspect;
-      } else {
-        targetH = targetW / this.activeAspect;
-      }
-    }
-
-    this.cropBox = {
-      x: Math.round((this.displayW - targetW) / 2),
-      y: Math.round((this.displayH - targetH) / 2),
-      w: Math.round(targetW),
-      h: Math.round(targetH),
-    };
-  }
-
-  clampCropBox() {
-    let { x, y, w, h } = this.cropBox;
-
-    w = Math.min(w, this.displayW);
-    h = Math.min(h, this.displayH);
-
-    if (this.activeAspect) {
-      if (w / h > this.activeAspect) {
-        w = h * this.activeAspect;
-      } else {
-        h = w / this.activeAspect;
-      }
-    }
-
-    x = Math.max(0, Math.min(x, this.displayW - w));
-    y = Math.max(0, Math.min(y, this.displayH - h));
-
-    this.cropBox = { x, y, w, h };
-  }
-
-  applyAspectPreset(presetKey) {
-    switch (presetKey) {
-      case "free":
-        this.setAspectRatio(null, "Free");
-        break;
-      case "1:1":
-        this.setAspectRatio(1.0, "1:1");
-        break;
-      case "4:3":
-        this.setAspectRatio(4 / 3, "4:3");
-        break;
-      case "3:4":
-        this.setAspectRatio(3 / 4, "3:4");
-        break;
-      case "16:9":
-        this.setAspectRatio(16 / 9, "16:9");
-        break;
-      case "9:16":
-        this.setAspectRatio(9 / 16, "9:16");
-        break;
-      case "3:2":
-        this.setAspectRatio(3 / 2, "3:2");
-        break;
-      case "2:3":
-        this.setAspectRatio(2 / 3, "2:3");
-        break;
-      case "a4":
-        this.setAspectRatio(1 / 1.4142, "A4");
-        break;
-      default:
-        this.setAspectRatio(null, "Free");
-    }
-  }
-
-  setAspectRatio(ratio, labelText) {
-    this.activeAspect = ratio;
-
-    if (ratio && this.circleMaskCheckbox && labelText === "1:1") {
-      // Keep circle mask state
-    } else if (ratio !== 1.0 && this.circleMaskCheckbox) {
-      this.isCircleMask = false;
-      this.circleMaskCheckbox.checked = false;
-    }
-
-    this.centerDefaultCropBox();
-    this.updateOverlayStyles();
-    this.renderLivePreview();
-  }
-
-  updateOverlayStyles() {
-    if (!this.overlayBox) return;
-
-    const { x, y, w, h } = this.cropBox;
-    this.overlayBox.style.left = `${x}px`;
-    this.overlayBox.style.top = `${y}px`;
-    this.overlayBox.style.width = `${w}px`;
-    this.overlayBox.style.height = `${h}px`;
-
-    if (this.isCircleMask) {
-      this.overlayBox.style.borderRadius = "50%";
-    } else {
-      this.overlayBox.style.borderRadius = "0px";
-    }
-
-    // Update real pixel dimension label
-    const realW = Math.round(w / this.displayScale);
-    const realH = Math.round(h / this.displayScale);
-
-    if (this.boxDimensionsLabel) {
-      this.boxDimensionsLabel.textContent = `${realW} × ${realH} px`;
-    }
-  }
-
-  // Pointer interaction logic for drag & resize
-  onPointerDown(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const handle = e.target.getAttribute("data-handle");
-    if (handle) {
-      this.isResizing = true;
-      this.activeHandle = handle;
-    } else {
-      this.isDragging = true;
-      this.activeHandle = null;
-    }
-
-    this.dragStart = { x: e.clientX, y: e.clientY };
-    this.boxStart = { ...this.cropBox };
-
-    if (e.target.setPointerCapture) {
+    // Load image before initializing
+    this.imageElement.onload = () => {
       try {
-        e.target.setPointerCapture(e.pointerId);
-      } catch (err) {
-        // ignore
-      }
-    }
-  }
-
-  onPointerMove(e) {
-    if (!this.isDragging && !this.isResizing) return;
-
-    e.preventDefault();
-
-    // Adjust delta by current stage zoom level
-    const dx = (e.clientX - this.dragStart.x) / this.zoom;
-    const dy = (e.clientY - this.dragStart.y) / this.zoom;
-
-    if (this.isDragging) {
-      let newX = this.boxStart.x + dx;
-      let newY = this.boxStart.y + dy;
-
-      newX = Math.max(0, Math.min(newX, this.displayW - this.boxStart.w));
-      newY = Math.max(0, Math.min(newY, this.displayH - this.boxStart.h));
-
-      this.cropBox.x = Math.round(newX);
-      this.cropBox.y = Math.round(newY);
-    } else if (this.isResizing) {
-      this.resizeCropBox(dx, dy);
-    }
-
-    this.updateOverlayStyles();
-    this.renderLivePreview();
-  }
-
-  onPointerUp(e) {
-    if (this.isDragging || this.isResizing) {
-      this.isDragging = false;
-      this.isResizing = false;
-      this.activeHandle = null;
-    }
-  }
-
-  resizeCropBox(dx, dy) {
-    let { x, y, w, h } = this.boxStart;
-    const minSize = 24;
-
-    const handle = this.activeHandle;
-
-    if (handle.includes("e")) w += dx;
-    if (handle.includes("s")) h += dy;
-    if (handle.includes("w")) {
-      const possibleW = w - dx;
-      if (possibleW >= minSize) {
-        x += dx;
-        w = possibleW;
-      }
-    }
-    if (handle.includes("n")) {
-      const possibleH = h - dy;
-      if (possibleH >= minSize) {
-        y += dy;
-        h = possibleH;
-      }
-    }
-
-    // Apply active aspect ratio lock
-    if (this.activeAspect) {
-      if (
-        handle === "e" ||
-        handle === "w" ||
-        handle === "se" ||
-        handle === "ne"
-      ) {
-        h = w / this.activeAspect;
-      } else {
-        w = h * this.activeAspect;
-      }
-    }
-
-    // Enforce bounds
-    w = Math.max(minSize, Math.min(w, this.displayW - x));
-    h = Math.max(minSize, Math.min(h, this.displayH - y));
-
-    if (x < 0) x = 0;
-    if (y < 0) y = 0;
-
-    this.cropBox = {
-      x: Math.round(x),
-      y: Math.round(y),
-      w: Math.round(w),
-      h: Math.round(h),
-    };
-  }
-
-  renderLivePreview() {
-    if (!this.offscreenCanvas || !this.livePreviewCanvas) return;
-
-    const { x, y, w, h } = this.cropBox;
-
-    // Convert display crop box coordinates to full-res offscreen canvas coordinates
-    const sourceX = Math.round(x / this.displayScale);
-    const sourceY = Math.round(y / this.displayScale);
-    const sourceW = Math.round(w / this.displayScale);
-    const sourceH = Math.round(h / this.displayScale);
-
-    if (sourceW <= 0 || sourceH <= 0) return;
-
-    this.livePreviewCanvas.width = sourceW;
-    this.livePreviewCanvas.height = sourceH;
-
-    const ctx = this.livePreviewCanvas.getContext("2d");
-    ctx.clearRect(0, 0, sourceW, sourceH);
-
-    if (this.isCircleMask) {
-      ctx.beginPath();
-      ctx.arc(
-        sourceW / 2,
-        sourceH / 2,
-        Math.min(sourceW, sourceH) / 2,
-        0,
-        Math.PI * 2,
-      );
-      ctx.closePath();
-      ctx.clip();
-    }
-
-    ctx.drawImage(
-      this.offscreenCanvas,
-      sourceX,
-      sourceY,
-      sourceW,
-      sourceH,
-      0,
-      0,
-      sourceW,
-      sourceH,
-    );
-
-    // Update live metrics UI
-    if (this.liveCropDimensions) {
-      this.liveCropDimensions.textContent = `${sourceW} × ${sourceH} px`;
-    }
-
-    if (this.liveAspectText) {
-      const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-      const divisor = gcd(sourceW, sourceH);
-      const aspectW = Math.round((sourceW / divisor) * 10) / 10;
-      const aspectH = Math.round((sourceH / divisor) * 10) / 10;
-
-      if (this.activeAspect) {
-        this.liveAspectText.textContent = `${aspectW}:${aspectH}`;
-      } else {
-        this.liveAspectText.textContent = `${(sourceW / sourceH).toFixed(2)}:1 (Free)`;
-      }
-    }
-
-    if (this.liveEstSize) {
-      // Rough estimate based on megapixels and quality
-      const megaPixels = (sourceW * sourceH) / 1000000;
-      const estKB = Math.round(
-        megaPixels * 350 * (parseFloat(this.qualitySlider?.value || 90) / 100),
-      );
-      this.liveEstSize.textContent =
-        estKB > 1024 ? `~${(estKB / 1024).toFixed(1)} MB` : `~${estKB} KB`;
-    }
-  }
-
-  executeCrop() {
-    if (!this.offscreenCanvas || !this.cropBox) return;
-
-    this.configSection.style.display = "none";
-    this.progressSection.style.display = "block";
-
-    if (this.progressBar) this.progressBar.style.width = "10%";
-    if (this.progressStatus)
-      this.progressStatus.textContent = "Extracting pixel region...";
-
-    setTimeout(() => {
-      const { x, y, w, h } = this.cropBox;
-      const sourceX = Math.round(x / this.displayScale);
-      const sourceY = Math.round(y / this.displayScale);
-      const sourceW = Math.round(w / this.displayScale);
-      const sourceH = Math.round(h / this.displayScale);
-
-      // Create output canvas
-      const outputCanvas = document.createElement("canvas");
-      outputCanvas.width = sourceW;
-      outputCanvas.height = sourceH;
-
-      const ctx = outputCanvas.getContext("2d");
-
-      if (this.progressBar) this.progressBar.style.width = "50%";
-      if (this.progressStatus)
-        this.progressStatus.textContent =
-          "Applying mask & high quality compression...";
-
-      if (this.isCircleMask) {
-        ctx.beginPath();
-        ctx.arc(
-          sourceW / 2,
-          sourceH / 2,
-          Math.min(sourceW, sourceH) / 2,
-          0,
-          Math.PI * 2,
-        );
-        ctx.closePath();
-        ctx.clip();
-      }
-
-      ctx.drawImage(
-        this.offscreenCanvas,
-        sourceX,
-        sourceY,
-        sourceW,
-        sourceH,
-        0,
-        0,
-        sourceW,
-        sourceH,
-      );
-
-      // Export format & quality
-      let format = this.exportFormatSelect?.value || "original";
-      if (format === "original") {
-        format = this.file.type || "image/jpeg";
-      }
-
-      const quality = parseFloat(this.qualitySlider?.value || 90) / 100;
-
-      outputCanvas.toBlob(
-        (blob) => {
-          if (this.progressBar) this.progressBar.style.width = "100%";
-
-          setTimeout(() => {
-            this.progressSection.style.display = "none";
-            this.resultSection.style.display = "block";
-
-            const croppedUrl = URL.createObjectURL(blob);
-            if (this.resultCroppedImage)
-              this.resultCroppedImage.src = croppedUrl;
-
-            // Stats
-            if (this.resOrigDims)
-              this.resOrigDims.textContent = `${this.imgWidth} × ${this.imgHeight} px`;
-            if (this.resCroppedDims)
-              this.resCroppedDims.textContent = `${sourceW} × ${sourceH} px`;
-            if (this.resOrigSize)
-              this.resOrigSize.textContent = ImageUtils.formatBytes(
-                this.file.size,
-              );
-            if (this.resCroppedSize)
-              this.resCroppedSize.textContent = ImageUtils.formatBytes(
-                blob.size,
-              );
-
-            // Download Link
-            if (this.btnDownloadCropped) {
-              const baseName =
-                this.outputFilenameInput?.value.trim() || "cropped-image";
-              const ext =
-                format === "image/png"
-                  ? "png"
-                  : format === "image/webp"
-                    ? "webp"
-                    : "jpg";
-              this.btnDownloadCropped.href = croppedUrl;
-              this.btnDownloadCropped.download = `${baseName}.${ext}`;
+        this.cropper = new Cropper(this.imageElement, {
+          viewMode: 1, 
+          dragMode: 'crop',
+          aspectRatio: NaN,
+          autoCropArea: 1,
+          restore: false,
+          guides: true,
+          center: true,
+          highlight: true,
+          cropBoxMovable: true,
+          cropBoxResizable: true,
+          toggleDragModeOnDblclick: false,
+          zoomOnTouch: true,
+          zoomOnWheel: true,
+          ready: () => {
+            const canvasData = this.cropper.getCanvasData();
+            const minZoom = canvasData.width / canvasData.naturalWidth;
+            if (this.zoomSlider) {
+              this.zoomSlider.min = Math.floor(minZoom * 100);
+              this.zoomSlider.max = 300;
+              this.zoomSlider.value = Math.floor(minZoom * 100);
             }
-          }, 300);
-        },
-        format,
-        quality,
-      );
-    }, 200);
+            this.updatePreview();
+          },
+          zoom: (e) => {
+            if (e.detail.ratio && this.zoomSlider) {
+               this.zoomSlider.value = Math.floor(e.detail.ratio * 100);
+            }
+            if (this.zoomValue) {
+              this.zoomValue.textContent = `${Math.floor(e.detail.ratio * 100)}%`;
+            }
+          },
+          crop: () => {
+            this.updatePreview();
+          }
+        });
+      } catch (err) {
+        console.error("Cropper init failed:", err);
+        this.showToast("Failed to initialize cropping engine.", "error");
+      }
+    };
+    
+    this.imageElement.onerror = () => {
+      this.showToast("Image failed to load in editor.", "error");
+    };
+
+    // Trigger load
+    this.imageElement.src = this.objectUrl;
   }
 
-  resetToUpload() {
-    this.file = null;
-    this.originalImg = null;
-    this.fileInput.value = "";
+  // ----------------------------------------------------
+  // PREVIEW
+  // ----------------------------------------------------
+  updatePreview() {
+    if (!this.cropper || !this.livePreviewCanvas) return;
+    
+    const cropData = this.cropper.getData();
+    if (!cropData || cropData.width === 0) return;
+    
+    const width = Math.round(cropData.width);
+    const height = Math.round(cropData.height);
+    
+    // Labels
+    if (this.liveCropDimensions) {
+      this.liveCropDimensions.textContent = `${width} × ${height} px`;
+    }
+    if (this.liveAspectText) {
+      const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+      const div = gcd(width, height);
+      this.liveAspectText.textContent = `${width/div}:${height/div}`;
+    }
+    
+    // Canvas preview (throttled)
+    if (this.previewTimeout) clearTimeout(this.previewTimeout);
+    this.previewTimeout = setTimeout(() => {
+      try {
+        const canvas = this.cropper.getCroppedCanvas({
+          width: 150,
+          height: 150,
+          imageSmoothingEnabled: true,
+          imageSmoothingQuality: 'low'
+        });
+        
+        if (canvas) {
+          const ctx = this.livePreviewCanvas.getContext('2d');
+          this.livePreviewCanvas.width = canvas.width;
+          this.livePreviewCanvas.height = canvas.height;
+          
+          if (this.circleMaskCheckbox && this.circleMaskCheckbox.checked) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(canvas.width/2, canvas.height/2, Math.min(canvas.width, canvas.height)/2, 0, Math.PI * 2);
+            ctx.clip();
+            ctx.drawImage(canvas, 0, 0);
+            ctx.restore();
+          } else {
+            ctx.drawImage(canvas, 0, 0);
+          }
+        }
+      } catch(e) {
+        // Suppress fast-crop errors
+      }
+    }, 50);
+  }
 
-    this.resultSection.style.display = "none";
-    this.configSection.style.display = "none";
-    this.progressSection.style.display = "none";
-    this.uploadSection.style.display = "block";
+  // ----------------------------------------------------
+  // EXPORT
+  // ----------------------------------------------------
+  async executeExport() {
+    if (!this.cropper || !this.currentFile) return;
+
+    try {
+      if (this.configSection) this.configSection.style.display = "none";
+      if (this.progressSection) this.progressSection.style.display = "block";
+      
+      GlobalImageProgressManager.update(ImageProgressState.PROCESSING, 20, "Generating final crop...");
+
+      let mime = this.exportFormat ? this.exportFormat.value : "original";
+      if (mime === "original") {
+        mime = this.currentMetadata ? this.currentMetadata.mimeType : "image/jpeg";
+      }
+
+      let quality = 0.90;
+      if (this.exportQuality) {
+        quality = parseFloat(this.exportQuality.value) / 100;
+      }
+
+      const ext = ImageUtils.mimeToExtension(mime);
+      let baseName = this.currentFile.name.substring(0, this.currentFile.name.lastIndexOf('.')) || "image";
+      
+      if (this.outputFilenameInput && this.outputFilenameInput.value.trim() !== "") {
+        baseName = this.outputFilenameInput.value.trim();
+      }
+      
+      this.outputFilename = ImageUtils.generateFilename(baseName, "cropped", ext);
+
+      GlobalImageProgressManager.update(ImageProgressState.PROCESSING, 60, "Encoding image...");
+
+      const canvas = this.cropper.getCroppedCanvas({
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high',
+      });
+
+      if (!canvas) {
+        throw new Error("Failed to generate cropped canvas.");
+      }
+
+      // Preserve background for JPEG
+      if (mime === "image/jpeg" || mime === "image/jpg") {
+        const tmpCanvas = document.createElement("canvas");
+        tmpCanvas.width = canvas.width;
+        tmpCanvas.height = canvas.height;
+        const tmpCtx = tmpCanvas.getContext("2d");
+        tmpCtx.fillStyle = "#FFFFFF";
+        tmpCtx.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+        tmpCtx.drawImage(canvas, 0, 0);
+        this.resultBlob = await ImageExporter.exportCanvasToBlob(tmpCanvas, mime, quality);
+      } else {
+        this.resultBlob = await ImageExporter.exportCanvasToBlob(canvas, mime, quality);
+      }
+
+      if (this.resultDataUrl) URL.revokeObjectURL(this.resultDataUrl);
+      this.resultDataUrl = URL.createObjectURL(this.resultBlob);
+
+      GlobalImageProgressManager.update(ImageProgressState.COMPLETED, 100, "Crop Complete!");
+
+      // Show Result
+      if (this.resultImage) this.resultImage.src = this.resultDataUrl;
+      if (this.resOrigDims) this.resOrigDims.textContent = this.currentMetadata.dimensionsFormatted;
+      if (this.resCroppedDims) this.resCroppedDims.textContent = `${canvas.width} × ${canvas.height} px`;
+      if (this.resOrigSize) this.resOrigSize.textContent = this.currentMetadata.fileSizeFormatted;
+      if (this.resCroppedSize) this.resCroppedSize.textContent = ImageUtils.formatFileSize(this.resultBlob.size);
+      
+      if (this.btnDownloadCropped) {
+        this.btnDownloadCropped.download = this.outputFilename;
+      }
+
+      if (this.progressSection) this.progressSection.style.display = "none";
+      if (this.resultSection) this.resultSection.style.display = "block";
+      
+      this.showToast("Image cropped successfully!", "success");
+
+    } catch (err) {
+      if (this.progressSection) this.progressSection.style.display = "none";
+      if (this.configSection) this.configSection.style.display = "block";
+      this.showToast(err?.message || "An error occurred during crop.", "error");
+    }
+  }
+
+  downloadExport() {
+    if (!this.resultBlob) return;
+    ImageExporter.downloadImage(this.resultBlob, this.outputFilename);
+    this.showToast("Download started...", "info");
+  }
+
+  // ----------------------------------------------------
+  // UTILS
+  // ----------------------------------------------------
+  resetWorkspace() {
+    if (this.cropper) {
+      this.cropper.destroy();
+      this.cropper = null;
+    }
+    
+    this.currentFile = null;
+    this.currentMetadata = null;
+    this.resultBlob = null;
+    
+    if (this.objectUrl) URL.revokeObjectURL(this.objectUrl);
+    if (this.resultDataUrl) URL.revokeObjectURL(this.resultDataUrl);
+    this.objectUrl = null;
+    this.resultDataUrl = null;
+    
+    this.outputFilename = "";
+    if (this.fileInput) this.fileInput.value = "";
+    if (this.outputFilenameInput) this.outputFilenameInput.value = "";
+    if (this.imageElement) this.imageElement.src = "";
+    
+    if (this.uploadSection) this.uploadSection.style.display = "block";
+    if (this.configSection) this.configSection.style.display = "none";
+    if (this.progressSection) this.progressSection.style.display = "none";
+    if (this.resultSection) this.resultSection.style.display = "none";
+    
+    GlobalImageProgressManager.reset();
+  }
+
+  clearActiveChips() {
+    this.aspectChips.forEach(c => {
+      c.classList.remove("active", "btn--primary");
+      c.classList.add("btn--outline");
+    });
+    this.socialChips.forEach(c => {
+      c.classList.remove("active", "btn--primary");
+      c.classList.add("btn--outline");
+    });
+  }
+
+  updateRotationBadge() {
+    if (this.rotationAngleBadge) {
+      const displayAngle = this.rotation < 0 ? this.rotation + 360 : this.rotation;
+      this.rotationAngleBadge.textContent = `${displayAngle}°`;
+    }
+  }
+
+  showToast(message, type = "info") {
+    if (window.ComprexaFramework && typeof window.ComprexaFramework.showToast === "function") {
+      return window.ComprexaFramework.showToast(message, type);
+    }
+    const container = document.getElementById("toast-container") || document.body;
+    const toast = document.createElement("div");
+    toast.className = `toast toast--${type}`;
+    toast.style.cssText = `
+      position: fixed; bottom: 20px; right: 20px; z-index: 999999;
+      background: ${type === "error" ? "#ef4444" : type === "success" ? "#10b981" : "#3b82f6"};
+      color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: opacity 0.3s;
+    `;
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
   }
 }
 
-// Auto-initialize when DOM ready
-if (typeof document !== "undefined") {
-  document.addEventListener("DOMContentLoaded", () => {
-    new CropImageController();
-  });
+// Auto-initialize
+if (typeof window !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      window.cropImageApp = new CropImageApp();
+    });
+  } else {
+    window.cropImageApp = new CropImageApp();
+  }
 }

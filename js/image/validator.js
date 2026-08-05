@@ -179,6 +179,16 @@ export class ImageValidator {
       // BMP Magic: BM (42 4D)
       if (arr[0] === 0x42 && arr[1] === 0x4d) return true;
 
+      // AVIF / HEIC Magic: ISOBMFF ftyp box at offset 4 (66 74 79 70)
+      if (
+        arr.length >= 8 &&
+        arr[4] === 0x66 &&
+        arr[5] === 0x74 &&
+        arr[6] === 0x79 &&
+        arr[7] === 0x70
+      )
+        return true;
+
       // SVG text check (<svg or <?xml)
       if (file.type.includes("svg") || file.name.endsWith(".svg")) {
         const text = await file.slice(0, 100).text();

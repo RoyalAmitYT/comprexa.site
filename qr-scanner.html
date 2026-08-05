@@ -155,12 +155,16 @@
   }
 }
 </script>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/icon-512x512.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/manifest.json" />
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=comprexa" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png?v=comprexa" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
+  <link rel="manifest" href="/site.webmanifest?v=comprexa" />
+  <meta name="theme-color" content="#6366f1" />
 </head>
   <body>
     <!-- ==========================================================================
@@ -641,6 +645,175 @@
                     </button>
                   </div>
                 </div>
+
+                <!-- DEDICATED DECODED RESULT CARD -->
+                <div
+                  id="main-decoded-result-card"
+                  style="
+                    display: none;
+                    margin-top: 24px;
+                    padding: 24px;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-xl);
+                    background: var(--bg-surface);
+                    backdrop-filter: blur(12px);
+                    box-shadow: var(--shadow-lg);
+                    animation: resultFadeIn 0.35s ease-out;
+                  "
+                >
+                  <style>
+                    @keyframes resultFadeIn {
+                      from { opacity: 0; transform: translateY(10px); }
+                      to { opacity: 1; transform: translateY(0); }
+                    }
+                    .result-field-box {
+                      background: var(--bg-surface-subtle);
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 16px;
+                      margin-bottom: 20px;
+                      word-break: break-word;
+                      white-space: pre-wrap;
+                      font-size: 0.95rem;
+                      line-height: 1.6;
+                      max-height: 320px;
+                      overflow-y: auto;
+                    }
+                    .result-vcard-grid, .result-wifi-grid {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                      gap: 12px;
+                      margin-bottom: 20px;
+                    }
+                    .result-kv-item {
+                      background: var(--bg-surface-subtle);
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 12px;
+                      display: flex;
+                      flex-direction: column;
+                      gap: 4px;
+                    }
+                    .result-kv-label {
+                      font-size: 0.75rem;
+                      font-weight: 700;
+                      color: var(--text-muted);
+                      text-transform: uppercase;
+                      letter-spacing: 0.05em;
+                    }
+                    .result-kv-val {
+                      font-size: 0.92rem;
+                      font-weight: 600;
+                      color: var(--text-main);
+                      word-break: break-all;
+                    }
+                  </style>
+
+                  <!-- Header -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle);">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(34, 197, 94, 0.12); color: #22c55e; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <div>
+                        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin: 0;">Decoded Result</h3>
+                        <span id="decoded-result-meta" style="font-size: 0.8rem; color: var(--text-muted);">Decoded payload content</span>
+                      </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span id="decoded-type-badge" class="badge badge--pill" style="background: rgba(99, 102, 241, 0.12); color: var(--primary); font-size: 0.8rem; font-weight: 700; padding: 6px 14px;">QR Code</span>
+                      <span id="decoded-char-count" style="font-size: 0.78rem; color: var(--text-muted); background: var(--bg-surface-subtle); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-subtle);">0 chars</span>
+                    </div>
+                  </div>
+
+                  <!-- Special Type Content Containers -->
+                  <div id="decoded-content-wrapper">
+                    <!-- 1. General / Plain Text Box -->
+                    <div id="decoded-text-box" class="result-field-box"></div>
+
+                    <!-- 2. URL Box with direct link -->
+                    <div id="decoded-url-box" style="display: none; margin-bottom: 20px;">
+                      <div style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--radius-md); padding: 16px;">
+                        <div style="font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">Website Link</div>
+                        <a id="decoded-url-link" href="#" target="_blank" rel="noopener noreferrer" style="font-size: 1rem; font-weight: 600; color: var(--primary); word-break: break-all; text-decoration: underline;">https://...</a>
+                      </div>
+                    </div>
+
+                    <!-- 3. WiFi Grid -->
+                    <div id="decoded-wifi-box" style="display: none;">
+                      <div class="result-wifi-grid">
+                        <div class="result-kv-item">
+                          <span class="result-kv-label">SSID (Network Name)</span>
+                          <span class="result-kv-val" id="res-wifi-ssid">-</span>
+                        </div>
+                        <div class="result-kv-item">
+                          <span class="result-kv-label">Password</span>
+                          <span class="result-kv-val" id="res-wifi-pass" style="font-family: monospace; letter-spacing: 0.05em;">-</span>
+                        </div>
+                        <div class="result-kv-item">
+                          <span class="result-kv-label">Security Type</span>
+                          <span class="result-kv-val" id="res-wifi-sec">-</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 4. vCard Contact Grid -->
+                    <div id="decoded-vcard-box" style="display: none;">
+                      <div class="result-vcard-grid" id="res-vcard-fields"></div>
+                    </div>
+
+                    <!-- 5. Email Box -->
+                    <div id="decoded-email-box" style="display: none;" class="result-field-box">
+                      <div><strong>To:</strong> <span id="res-email-to">-</span></div>
+                      <div id="res-email-sub-wrap" style="display:none; margin-top: 4px;"><strong>Subject:</strong> <span id="res-email-sub"></span></div>
+                      <div id="res-email-body-wrap" style="display:none; margin-top: 4px;"><strong>Body:</strong> <span id="res-email-body"></span></div>
+                    </div>
+
+                    <!-- 6. Phone Box -->
+                    <div id="decoded-phone-box" style="display: none;" class="result-field-box">
+                      <strong>Phone Number:</strong> <span id="res-phone-num">-</span>
+                    </div>
+
+                    <!-- 7. SMS Box -->
+                    <div id="decoded-sms-box" style="display: none;" class="result-field-box">
+                      <div><strong>Recipient:</strong> <span id="res-sms-num">-</span></div>
+                      <div id="res-sms-body-wrap" style="display:none; margin-top: 4px;"><strong>Message:</strong> <span id="res-sms-body"></span></div>
+                    </div>
+
+                    <!-- 8. Geo Location Box -->
+                    <div id="decoded-geo-box" style="display: none;" class="result-field-box">
+                      <strong>Coordinates:</strong> <span id="res-geo-coords">-</span>
+                    </div>
+                  </div>
+
+                  <!-- ACTION BUTTONS TOOLBAR -->
+                  <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle);">
+                    <!-- Copy Button -->
+                    <button type="button" class="btn btn--primary" id="main-copy-btn" style="flex: 1; min-width: 140px; justify-content: center;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                      <span>Copy Result</span>
+                    </button>
+
+                    <!-- Download TXT Button -->
+                    <button type="button" class="btn btn--secondary" id="main-download-btn" style="flex: 1; min-width: 150px; justify-content: center;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Download Result (.txt)</span>
+                    </button>
+
+                    <!-- Contextual Action Button (Open Link / Call / Email / Maps) -->
+                    <a id="main-action-link-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn--secondary" style="display: none; flex: 1; min-width: 140px; justify-content: center; text-decoration: none; background: rgba(99, 102, 241, 0.1); color: var(--primary); border-color: rgba(99, 102, 241, 0.3);">
+                      <svg id="main-action-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      <span id="main-action-text">Open Link</span>
+                    </a>
+
+                    <!-- Scan Another Image Button -->
+                    <button type="button" class="btn btn--secondary" id="main-scan-another-btn" style="flex: 1; min-width: 160px; justify-content: center;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+                      <span>Scan Another Image</span>
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <!-- CAMERA MODE CARD -->
@@ -745,41 +918,7 @@
                     box-shadow: var(--shadow-md);
                   "
                 >
-                  <video
-                    id="camera-video"
-                    autoplay
-                    muted
-                    playsinline
-                    style="
-                      width: 100%;
-                      height: 100%;
-                      display: block;
-                      object-fit: cover;
-                    "
-                  ></video>
-                  <div
-                    style="
-                      position: absolute;
-                      top: 0;
-                      left: 0;
-                      width: 100%;
-                      height: 100%;
-                      pointer-events: none;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                    "
-                  >
-                    <div
-                      style="
-                        width: 200px;
-                        height: 200px;
-                        border: 3px dashed rgba(255, 255, 255, 0.8);
-                        border-radius: 12px;
-                        box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.5);
-                      "
-                    ></div>
-                  </div>
+                  <div id="qr-reader" style="width: 100%;"></div>
                 </div>
               </div>
 
@@ -1006,6 +1145,30 @@
                         />
                       </svg>
                       <span>Copy Decoded Result</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn--secondary"
+                      id="share-result-btn"
+                      style="width: 100%; justify-content: center;"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                      </svg>
+                      <span>Share Result</span>
                     </button>
 
                     <!-- Contextual Action Buttons -->

@@ -77,9 +77,12 @@ class ComprexaSettingsManager {
         ComprexaSettingsManager.STORAGE_KEY,
         JSON.stringify(this.settings),
       );
-      // Sync legacy key for simple scripts
-      const effectiveTheme = this.getEffectiveTheme();
-      localStorage.setItem("comprexa-theme", effectiveTheme);
+      // Sync legacy key for simple scripts if explicit theme preference is set
+      if (this.settings.theme === "dark" || this.settings.theme === "light") {
+        localStorage.setItem("comprexa-theme", this.settings.theme);
+      } else {
+        localStorage.removeItem("comprexa-theme");
+      }
     } catch (e) {
       console.error(
         "[ComprexaSettings] Error saving settings to LocalStorage:",

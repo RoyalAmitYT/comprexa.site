@@ -322,9 +322,8 @@ function initComprexaApp() {
       : "light";
   }
 
-  function setTheme(theme) {
+  function updateThemeUI(theme) {
     rootElement.setAttribute("data-theme", theme);
-    localStorage.setItem("comprexa-theme", theme);
 
     const isDark = theme === "dark";
     const iconToSet = isDark ? sunIcon : moonIcon;
@@ -340,16 +339,48 @@ function initComprexaApp() {
     }
   }
 
-  // Initialize theme
-  setTheme(getPreferredTheme());
+  // Initialize theme UI without overwriting localStorage on initial load
+  updateThemeUI(getPreferredTheme());
+
+  // Listen for OS theme changes when no manual preference is saved
+  if (window.matchMedia) {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = () => {
+      let hasExplicitPref = false;
+      try {
+        const raw = localStorage.getItem("comprexa_settings_v1");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && (parsed.theme === "dark" || parsed.theme === "light")) {
+            hasExplicitPref = true;
+          }
+        }
+      } catch (e) {}
+      const saved2 = localStorage.getItem("comprexa-theme");
+      if (saved2 === "dark" || saved2 === "light") {
+        hasExplicitPref = true;
+      }
+      if (!hasExplicitPref) {
+        updateThemeUI(mediaQuery.matches ? "dark" : "light");
+      }
+    };
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleSystemThemeChange);
+    } else if (mediaQuery.addListener) {
+      mediaQuery.addListener(handleSystemThemeChange);
+    }
+  }
 
   function toggleTheme() {
-    const currentTheme = rootElement.getAttribute("data-theme") || "light";
+    const currentTheme = rootElement.getAttribute("data-theme") || (
+      window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+    );
     const newTheme = currentTheme === "light" ? "dark" : "light";
     if (window.ComprexaSettings) {
       window.ComprexaSettings.set("theme", newTheme);
     } else {
-      setTheme(newTheme);
+      updateThemeUI(newTheme);
+      localStorage.setItem("comprexa-theme", newTheme);
     }
   }
 

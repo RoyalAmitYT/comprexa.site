@@ -23,6 +23,7 @@ export const ImageConfig = {
     "image/svg+xml",
     "image/bmp",
     "image/x-icon",
+    "image/avif",
   ],
 
   supportedExtensions: [
@@ -34,6 +35,7 @@ export const ImageConfig = {
     "svg",
     "bmp",
     "ico",
+    "avif",
   ],
 
   // Extended / Future Formats

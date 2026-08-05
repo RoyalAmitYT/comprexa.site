@@ -1,8 +1,11 @@
+// @ts-nocheck
 /**
  * Comprexa Organize PDF Controller
  * Reusable client-side PDF page organization engine powered by PDF-Lib & PDF.js.
  * Supports visual drag-and-drop reordering, page selection, rotation, deletion, duplication, move, and undo/redo.
  */
+
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
 
 class OrganizePdfUI {
   constructor() {
@@ -20,10 +23,7 @@ class OrganizePdfUI {
   }
 
   init() {
-    if (window.pdfjsLib) {
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-    }
+    ensurePdfWorker();
 
     this.bindDropzone();
     this.bindToolbarEvents();
@@ -205,14 +205,13 @@ class OrganizePdfUI {
       this.redoStack = [];
 
       // Load PDF.js document for canvas thumbnail rendering
-      if (window.pdfjsLib) {
-        try {
-          const loadingTask = window.pdfjsLib.getDocument({
-            data: this.arrayBuffer.slice(0),
-          });
-          this.pdfJsDoc = await loadingTask.promise;
-        } catch (e) {}
-      }
+      try {
+        const lib = ensurePdfWorker();
+        const loadingTask = lib.getDocument({
+          data: this.arrayBuffer.slice(0),
+        });
+        this.pdfJsDoc = await loadingTask.promise;
+      } catch (e) {}
 
       this.showWorkspaceSection();
     } catch (err) {
@@ -427,7 +426,7 @@ class OrganizePdfUI {
         canvas.height = viewport.height;
         const ctx = canvas.getContext("2d");
 
-        await page.render({ canvasContext: ctx, viewport }).promise;
+        await page.render({ canvas, canvasContext: ctx, viewport }).promise;
       } catch (e) {}
     }
   }

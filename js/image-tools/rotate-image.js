@@ -1,7 +1,7 @@
 // @ts-nocheck
 /**
  * Comprexa - Universal Rotate & Flip Image Controller
- * Completely rebuilt client-side image orientation controller with full precision rotation, flip, live preview, and high-quality canvas export.
+ * Client-side image orientation controller with full precision rotation, flip, live preview, paste support, and high-quality canvas export.
  */
 
 import {
@@ -9,6 +9,7 @@ import {
   ImageMetadataExtractor,
   ImageExporter,
   GlobalImageProgressManager,
+  ImageProgressState,
   ImageUtils,
   ImageEngineError,
 } from "../image-engine.js";
@@ -26,7 +27,7 @@ export class RotateImageController {
     this.flipHorizontal = false;
     this.flipVertical = false;
     this.targetMime = "original";
-    this.quality = 0.92;
+    this.quality = 0.95;
 
     // Output State
     this.resultBlob = null;
@@ -113,9 +114,14 @@ export class RotateImageController {
   bindEvents() {
     if (!this.dropZone || !this.fileInput) return;
 
+    // Prevent default drag behaviors on window level to avoid opening files in browser
+    ["dragover", "drop"].forEach((eventName) => {
+      window.addEventListener(eventName, (e) => e.preventDefault(), false);
+    });
+
     // Dropzone Click & Keyboard Trigger
     this.dropZone.addEventListener("click", (e) => {
-      if (e.target.closest("#browse-btn")) return; // Avoid double click if browse button clicked
+      if (e.target === this.fileInput || e.target.closest("#browse-btn")) return;
       this.fileInput.click();
     });
 
@@ -125,6 +131,22 @@ export class RotateImageController {
         this.fileInput.click();
       }
     });
+
+    if (this.browseBtn) {
+      this.browseBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.fileInput.click();
+      });
+    }
+
+    if (this.fileInput) {
+      this.fileInput.addEventListener("click", (e) => e.stopPropagation());
+      this.fileInput.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          this.handleFileSelect(e.target.files[0]);
+        }
+      });
+    }
 
     // Drag & Drop Handling
     ["dragenter", "dragover"].forEach((name) => {
@@ -146,19 +168,27 @@ export class RotateImageController {
     });
 
     this.dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const files = e.dataTransfer?.files;
       if (files && files.length > 0) {
         this.handleFileSelect(files[0]);
       }
     });
 
-    if (this.browseBtn) {
-      this.browseBtn.addEventListener("click", () => this.fileInput.click());
-    }
-
-    this.fileInput.addEventListener("change", (e) => {
-      if (e.target.files && e.target.files.length > 0) {
-        this.handleFileSelect(e.target.files[0]);
+    // Clipboard Paste Handler (Ctrl+V / Cmd+V)
+    window.addEventListener("paste", (e) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.startsWith("image/")) {
+          const file = items[i].getAsFile();
+          if (file) {
+            e.preventDefault();
+            this.handleFileSelect(file);
+            break;
+          }
+        }
       }
     });
 
@@ -252,10 +282,11 @@ export class RotateImageController {
   }
 
   async handleFileSelect(file) {
+    if (!file) return;
     try {
       this.showToast("Loading image file...", "info");
 
-      // 1. Validate File Format (JPG, JPEG, PNG, WebP, GIF, BMP)
+      // 1. Validate File Format (JPG, JPEG, PNG, WebP, GIF, BMP, AVIF)
       await ImageValidator.validateFile(file, {
         allowedMimeTypes: [
           "image/jpeg",
@@ -265,8 +296,9 @@ export class RotateImageController {
           "image/gif",
           "image/bmp",
           "image/x-bmp",
+          "image/avif",
         ],
-        allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif", "bmp"],
+        allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif", "bmp", "avif"],
       });
 
       this.currentFile = file;
@@ -435,9 +467,26 @@ export class RotateImageController {
   updateLivePreview() {
     if (!this.rotatorPreviewImg || !this.loadedImage) return;
 
-    // Apply CSS Transform for real-time visual feedback
-    const scaleX = this.flipHorizontal ? -1 : 1;
-    const scaleY = this.flipVertical ? -1 : 1;
+    let fitScale = 1;
+    // When rotated off 0/180°, adjust CSS scale so preview image fits inside stage bounds without clipping
+    if (this.rotationAngle % 180 !== 0 && this.loadedImage) {
+      const origW = this.loadedImage.naturalWidth || 800;
+      const origH = this.loadedImage.naturalHeight || 600;
+      const stageW = this.rotatorPreviewImg.parentElement?.clientWidth || 340;
+      const stageH = 260; // Max preview height in stage
+      const scaleW = stageW / origH;
+      const scaleH = stageH / origW;
+      const unrotScaleW = stageW / origW;
+      const unrotScaleH = stageH / origH;
+      const rotMaxScale = Math.min(scaleW, scaleH);
+      const unrotMaxScale = Math.min(unrotScaleW, unrotScaleH);
+      if (unrotMaxScale > 0 && rotMaxScale < unrotMaxScale) {
+        fitScale = rotMaxScale / unrotMaxScale;
+      }
+    }
+
+    const scaleX = (this.flipHorizontal ? -1 : 1) * fitScale;
+    const scaleY = (this.flipVertical ? -1 : 1) * fitScale;
 
     this.rotatorPreviewImg.style.transform = `rotate(${this.rotationAngle}deg) scale(${scaleX}, ${scaleY})`;
 
@@ -475,7 +524,11 @@ export class RotateImageController {
       if (this.settingsCard) this.settingsCard.style.display = "none";
       if (this.progressCard) this.progressCard.style.display = "block";
 
-      GlobalImageProgressManager.update(15, "Preparing rotation canvas...");
+      GlobalImageProgressManager.update(
+        ImageProgressState.PROCESSING,
+        15,
+        "Preparing rotation canvas...",
+      );
 
       let mime = this.targetMime;
       if (mime === "original") {
@@ -484,14 +537,27 @@ export class RotateImageController {
           : "image/jpeg";
       }
 
+      let actionSuffix = "oriented";
+      if (
+        this.rotationAngle !== 0 &&
+        (this.flipHorizontal || this.flipVertical)
+      ) {
+        actionSuffix = "rotated-flipped";
+      } else if (this.rotationAngle !== 0) {
+        actionSuffix = "rotated";
+      } else if (this.flipHorizontal || this.flipVertical) {
+        actionSuffix = "flipped";
+      }
+
       const ext = ImageUtils.mimeToExtension(mime);
       this.outputFilename = ImageUtils.generateFilename(
         this.currentFile.name,
-        `oriented_${this.rotationAngle}deg`,
+        actionSuffix,
         ext,
       );
 
       GlobalImageProgressManager.update(
+        ImageProgressState.PROCESSING,
         40,
         "Applying pixel transformations on canvas...",
       );
@@ -512,6 +578,10 @@ export class RotateImageController {
       canvas.width = destW;
       canvas.height = destH;
       const ctx = canvas.getContext("2d");
+
+      if (!ctx) {
+        throw new Error("Unable to create 2D canvas context for image rotation.");
+      }
 
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
@@ -537,13 +607,23 @@ export class RotateImageController {
       ctx.restore();
 
       GlobalImageProgressManager.update(
+        ImageProgressState.PROCESSING,
         80,
         "Encoding processed output image...",
       );
 
-      // Export Canvas to Blob
+      // Export Canvas to Blob with fallback
       this.resultBlob = await new Promise((resolve) => {
-        canvas.toBlob((b) => resolve(b), mime, this.quality);
+        canvas.toBlob(
+          (b) => {
+            if (b) return resolve(b);
+            // Fallback to PNG or JPEG if target MIME canvas encoding is unsupported
+            const fallbackMime = mime.includes("jpeg") ? "image/jpeg" : "image/png";
+            canvas.toBlob((b2) => resolve(b2), fallbackMime, this.quality);
+          },
+          mime,
+          this.quality,
+        );
       });
 
       if (!this.resultBlob) {
@@ -553,7 +633,11 @@ export class RotateImageController {
       if (this.resultDataUrl) URL.revokeObjectURL(this.resultDataUrl);
       this.resultDataUrl = URL.createObjectURL(this.resultBlob);
 
-      GlobalImageProgressManager.update(100, "Rotation & Flip complete!");
+      GlobalImageProgressManager.update(
+        ImageProgressState.COMPLETED,
+        100,
+        "Rotation & Flip complete!",
+      );
 
       // Populate Result View Elements
       if (this.resultPreviewImg) this.resultPreviewImg.src = this.resultDataUrl;
@@ -624,12 +708,31 @@ export class RotateImageController {
     ) {
       return window.ComprexaFramework.showToast(message, type);
     }
+    const container = document.getElementById("toast-container") || document.body;
+    const toast = document.createElement("div");
+    toast.className = `toast toast--${type}`;
+    toast.style.cssText = `
+      position: fixed; bottom: 20px; right: 20px; z-index: 999999;
+      background: ${type === "error" ? "#ef4444" : type === "success" ? "#10b981" : "#3b82f6"};
+      color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: opacity 0.3s;
+    `;
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
   }
 }
 
-// Auto-initialize when DOM is loaded
+// Auto-initialize when DOM is ready
 if (typeof window !== "undefined") {
-  document.addEventListener("DOMContentLoaded", () => {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      window.rotateImageController = new RotateImageController();
+    });
+  } else {
     window.rotateImageController = new RotateImageController();
-  });
+  }
 }

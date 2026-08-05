@@ -23,7 +23,7 @@ export class ImageMetadataExtractor {
     let name = "image";
 
     if (source instanceof File || source instanceof Blob) {
-      file = source;
+      _file = source;
       fileSize = source.size;
       name = source.name || "image";
       extension = ImageUtils.getFileExtension(name);

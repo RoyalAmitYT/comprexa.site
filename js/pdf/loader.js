@@ -5,6 +5,7 @@
  */
 
 import { PdfConfig } from "./config.js";
+import { pdfjsLib, ensurePdfWorker } from "./pdf-init.js";
 
 export class PdfLoader {
   constructor() {
@@ -25,12 +26,7 @@ export class PdfLoader {
    * Ensure PDF.js worker is properly configured
    */
   ensurePdfJsWorker() {
-    if (typeof window !== "undefined" && window.pdfjsLib) {
-      if (!window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-          PdfConfig.pdfJsWorkerUrl;
-      }
-    }
+    return ensurePdfWorker();
   }
 
   /**
@@ -39,20 +35,12 @@ export class PdfLoader {
    * @returns {Promise<Object>} PDFDocumentProxy
    */
   async loadPdfJsDoc(buffer) {
-    if (typeof window === "undefined" || !window.pdfjsLib) {
-      throw new Error("PDF.js library is not loaded on page.");
-    }
-
-    this.ensurePdfJsWorker();
+    const lib = ensurePdfWorker();
 
     // Slice buffer to prevent detachment issues
     const bufferCopy = buffer.slice(0);
-    const loadingTask = window.pdfjsLib.getDocument({
+    const loadingTask = lib.getDocument({
       data: bufferCopy,
-      cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/",
-      cMapPacked: true,
-      standardFontDataUrl:
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/standard_fonts/",
     });
 
     return await loadingTask.promise;

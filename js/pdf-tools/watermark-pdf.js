@@ -5,11 +5,9 @@
  * Built from scratch using Universal Tool Page Template.
  */
 
-// Initialize PDF.js worker
-if (typeof pdfjsLib !== "undefined") {
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-}
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
+
+ensurePdfWorker();
 
 // Safe Toast Helper
 function showWatermarkToast(message, type = "info", title = "") {
@@ -640,8 +638,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Read ArrayBuffer for PDF.js preview rendering
       const arrayBuffer = await file.arrayBuffer();
-      state.pdfJsDoc = await pdfjsLib.getDocument({ data: arrayBuffer })
-        .promise;
+      const lib = ensurePdfWorker();
+      state.pdfJsDoc = await lib.getDocument({ data: arrayBuffer }).promise;
       state.totalPages = state.pdfJsDoc.numPages;
       state.currentPreviewPage = 1;
 

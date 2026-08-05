@@ -4,6 +4,8 @@
  * Built from scratch following the Universal Tool standard.
  */
 
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
+
 function showPdfImagesToast(message, type = "info", title = "") {
   if (
     window.ComprexaToast &&
@@ -107,18 +109,11 @@ class PdfToImagesEngine {
   }
 
   initWorker() {
-    if (window.pdfjsLib) {
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-    }
+    ensurePdfWorker();
   }
 
   async loadPdfDocument(file) {
-    if (!window.pdfjsLib) {
-      throw new Error(
-        "PDF processing engine (PDF.js) is not loaded. Please reload the page.",
-      );
-    }
+    const lib = ensurePdfWorker();
 
     const arrayBuffer = await file.arrayBuffer();
 
@@ -132,7 +127,7 @@ class PdfToImagesEngine {
     }
 
     try {
-      const loadingTask = window.pdfjsLib.getDocument({ data: arrayBuffer });
+      const loadingTask = lib.getDocument({ data: arrayBuffer });
       const pdfDoc = await loadingTask.promise;
       return pdfDoc;
     } catch (err) {

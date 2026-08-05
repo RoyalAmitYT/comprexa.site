@@ -3,6 +3,8 @@
  * Inspects EXIF, author, creation date, software, and properties for PDF, Word, Excel, & PPT.
  */
 
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const dropzone = document.getElementById("meta-dropzone");
   const fileInput = document.getElementById("meta-file-input");
@@ -25,38 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!dropzone || !fileInput) return;
 
   function loadDependencies() {
+    ensurePdfWorker();
     return new Promise((resolve, reject) => {
-      let loaded = 0;
-      const total = 2;
-      function check() {
-        loaded++;
-        if (loaded >= total) resolve();
-      }
-
-      if (!window.pdfjsLib) {
-        const s1 = document.createElement("script");
-        s1.src =
-          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-        s1.onload = () => {
-          window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-          check();
-        };
-        s1.onerror = () => reject("Failed to load PDF.js");
-        document.head.appendChild(s1);
-      } else {
-        check();
-      }
-
       if (!window.JSZip) {
         const s2 = document.createElement("script");
         s2.src =
           "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
-        s2.onload = check;
+        s2.onload = () => resolve();
         s2.onerror = () => reject("Failed to load JSZip");
         document.head.appendChild(s2);
       } else {
-        check();
+        resolve();
       }
     });
   }

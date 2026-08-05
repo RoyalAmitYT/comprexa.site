@@ -3,6 +3,8 @@
  * Centralized settings, constraints, defaults, and future feature flags.
  */
 
+import { pdfWorker } from "./pdf-init.js";
+
 export const PdfConfig = {
   // Max file size limits
   maxFileSizeMB: 100,
@@ -28,9 +30,8 @@ export const PdfConfig = {
     placeholderBg: "var(--bg-surface)",
   },
 
-  // PDF.js CDN Worker path
-  pdfJsWorkerUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js",
+  // PDF.js Worker path
+  pdfJsWorkerUrl: pdfWorker,
 
   // Universal Error Codes
   errorCodes: {

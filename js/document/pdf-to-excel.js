@@ -3,6 +3,8 @@
  * Extracts tables, numbers, and structured text from PDF files into Excel (.xlsx, .csv).
  */
 
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const dropzone = document.getElementById("pdf-excel-dropzone");
   const fileInput = document.getElementById("pdf-excel-file-input");
@@ -37,38 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!dropzone || !fileInput) return;
 
   function loadDependencies() {
+    ensurePdfWorker();
     return new Promise((resolve, reject) => {
-      let loaded = 0;
-      const total = 2;
-      function check() {
-        loaded++;
-        if (loaded >= total) resolve();
-      }
-
-      if (!window.pdfjsLib) {
-        const s1 = document.createElement("script");
-        s1.src =
-          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-        s1.onload = () => {
-          window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-          check();
-        };
-        s1.onerror = () => reject("Failed to load PDF.js");
-        document.head.appendChild(s1);
-      } else {
-        check();
-      }
-
       if (!window.XLSX) {
         const s2 = document.createElement("script");
         s2.src =
           "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js";
-        s2.onload = check;
+        s2.onload = () => resolve();
         s2.onerror = () => reject("Failed to load XLSX");
         document.head.appendChild(s2);
       } else {
-        check();
+        resolve();
       }
     });
   }

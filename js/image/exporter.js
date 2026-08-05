@@ -6,7 +6,7 @@
 
 import { ImageConfig } from "./config.js";
 import { ImageEngineError, ImageErrorCategory } from "./errors.js";
-import { _ImageUtils } from "./utils.js";
+import { ImageUtils } from "./utils.js";
 
 export class ImageExporter {
   /**

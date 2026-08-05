@@ -1,19 +1,11 @@
 // @ts-nocheck
 /**
- * Comprexa QR Code Scanner Engine (Rewritten)
+ * Comprexa QR Code Scanner Engine
  * Enterprise-grade 100% Client-Side QR Scanner.
- * Architecture: State Machine + UI Controller + Scanner Engine.
+ * Architecture: State Machine + UI Controller + Scanner Engine using html5-qrcode.
  */
 
-import {
-  BrowserQRCodeReader,
-  MultiFormatReader,
-  RGBLuminanceSource,
-  HybridBinarizer,
-  BinaryBitmap,
-  BarcodeFormat,
-  DecodeHintType,
-} from "@zxing/library";
+import { Html5Qrcode } from "html5-qrcode";
 
 // --- STATE MACHINE ---
 const ScannerState = {
@@ -27,27 +19,17 @@ const ScannerState = {
 
 class QrScannerApp {
   constructor() {
-    // Current application state
     this.state = ScannerState.IDLE;
+    
+    this.html5Qrcode = null;
 
-    // Decoders
-    this.zxingBrowserReader = new BrowserQRCodeReader();
-    this.zxingMultiReader = new MultiFormatReader();
-    const hints = new Map();
-    hints.set(DecodeHintType.POSSIBLE_FORMATS, [BarcodeFormat.QR_CODE]);
-    hints.set(DecodeHintType.TRY_HARDER, true);
-    this.zxingMultiReader.setHints(hints);
-
-    // Active Data
     this.selectedFile = null;
     this.selectedDataUrl = null;
     this.decodedResult = null;
 
-    // Camera Data
     this.isCameraActive = false;
     this.activeCameraId = null;
 
-    // Wait for DOM
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () => this.init());
     } else {
@@ -60,10 +42,25 @@ class QrScannerApp {
     this.bindEvents();
     this.setupGlobalPaste();
     this.updateUI();
+    
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        if (this.isCameraActive && this.html5Qrcode && this.html5Qrcode.getState() === 2) {
+          this.html5Qrcode.pause();
+        }
+      } else {
+        if (this.isCameraActive && this.html5Qrcode && this.html5Qrcode.getState() === 3) {
+          this.html5Qrcode.resume();
+        }
+      }
+    });
+
+    window.addEventListener("beforeunload", () => {
+      this.stopCamera();
+    });
   }
 
   cacheDOM() {
-    // Upload & States
     this.uploadState = document.getElementById("scanner-upload-state");
     this.previewState = document.getElementById("scanner-preview-state");
     this.dropzone = document.getElementById("scanner-dropzone");
@@ -72,38 +69,32 @@ class QrScannerApp {
     this.pasteBtn = document.getElementById("paste-clipboard-btn");
     this.clearImageBtn = document.getElementById("clear-image-btn");
 
-    // Preview details
     this.imagePreview = document.getElementById("image-preview");
     this.metaFilename = document.getElementById("img-meta-filename");
     this.metaSize = document.getElementById("img-meta-size");
     this.metaDimensions = document.getElementById("img-meta-dimensions");
     this.warningCard = document.getElementById("scanner-warning-card");
 
-    // Primary Buttons
     this.scanActionBtn = document.getElementById("scan-action-btn");
     this.scanBtnSpinner = document.getElementById("scan-btn-spinner");
     this.scanBtnIcon = document.getElementById("scan-btn-icon");
     this.scanBtnText = document.getElementById("scan-btn-text");
     this.scanAnotherBtn = document.getElementById("scan-another-btn");
 
-    // Camera
     this.startCameraBtn = document.getElementById("start-camera-btn");
     this.stopCameraBtn = document.getElementById("stop-camera-btn");
     this.cameraSelect = document.getElementById("camera-select");
-    this.cameraContainer = document.getElementById(
-      "camera-viewfinder-container",
-    );
-    this.cameraVideo = document.getElementById("camera-video");
+    this.cameraContainer = document.getElementById("camera-viewfinder-container");
 
-    // Results Panel
+    // Sidebar Result elements
     this.resultsPanel = document.getElementById("scanner-results-panel");
     this.emptyState = document.getElementById("scanner-empty-state");
     this.resultText = document.getElementById("scanner-result-text");
     this.resultCharCount = document.getElementById("scanner-result-char-count");
     this.resultTypeBadge = document.getElementById("scanner-result-type-badge");
 
-    // Action Buttons
     this.copyBtn = document.getElementById("copy-result-btn");
+    this.shareBtn = document.getElementById("share-result-btn");
     this.openUrlBtn = document.getElementById("open-url-btn");
     this.callBtn = document.getElementById("call-btn");
     this.emailBtn = document.getElementById("email-btn");
@@ -112,22 +103,59 @@ class QrScannerApp {
     this.mapsBtn = document.getElementById("maps-btn");
     this.generateQrBtn = document.getElementById("generate-qr-again-btn");
     this.downloadTxtBtn = document.getElementById("download-txt-btn");
-    this.scanAgainBtn = document.getElementById("scan-again-btn"); // In sidebar
+    this.scanAgainBtn = document.getElementById("scan-again-btn"); 
 
-    // WiFi Card
     this.wifiDetailsCard = document.getElementById("wifi-details-card");
     this.wifiSsid = document.getElementById("wifi-ssid");
     this.wifiPassword = document.getElementById("wifi-password");
     this.wifiEncryption = document.getElementById("wifi-encryption");
     this.copyWifiPassBtn = document.getElementById("copy-wifi-pass-btn");
+
+    // DEDICATED MAIN RESULT CARD ELEMENTS
+    this.mainDecodedResultCard = document.getElementById("main-decoded-result-card");
+    this.decodedResultMeta = document.getElementById("decoded-result-meta");
+    this.decodedTypeBadge = document.getElementById("decoded-type-badge");
+    this.decodedCharCount = document.getElementById("decoded-char-count");
+    
+    this.decodedTextBox = document.getElementById("decoded-text-box");
+    this.decodedUrlBox = document.getElementById("decoded-url-box");
+    this.decodedUrlLink = document.getElementById("decoded-url-link");
+    
+    this.decodedWifiBox = document.getElementById("decoded-wifi-box");
+    this.resWifiSsid = document.getElementById("res-wifi-ssid");
+    this.resWifiPass = document.getElementById("res-wifi-pass");
+    this.resWifiSec = document.getElementById("res-wifi-sec");
+
+    this.decodedVcardBox = document.getElementById("decoded-vcard-box");
+    this.resVcardFields = document.getElementById("res-vcard-fields");
+
+    this.decodedEmailBox = document.getElementById("decoded-email-box");
+    this.resEmailTo = document.getElementById("res-email-to");
+    this.resEmailSub = document.getElementById("res-email-sub");
+    this.resEmailSubWrap = document.getElementById("res-email-sub-wrap");
+    this.resEmailBody = document.getElementById("res-email-body");
+    this.resEmailBodyWrap = document.getElementById("res-email-body-wrap");
+
+    this.decodedPhoneBox = document.getElementById("decoded-phone-box");
+    this.resPhoneNum = document.getElementById("res-phone-num");
+
+    this.decodedSmsBox = document.getElementById("decoded-sms-box");
+    this.resSmsNum = document.getElementById("res-sms-num");
+    this.resSmsBody = document.getElementById("res-sms-body");
+    this.resSmsBodyWrap = document.getElementById("res-sms-body-wrap");
+
+    this.decodedGeoBox = document.getElementById("decoded-geo-box");
+    this.resGeoCoords = document.getElementById("res-geo-coords");
+
+    this.mainCopyBtn = document.getElementById("main-copy-btn");
+    this.mainDownloadBtn = document.getElementById("main-download-btn");
+    this.mainActionLinkBtn = document.getElementById("main-action-link-btn");
+    this.mainActionText = document.getElementById("main-action-text");
+    this.mainScanAnotherBtn = document.getElementById("main-scan-another-btn");
   }
 
   bindEvents() {
-    // Upload Events
-    if (this.selectFileBtn)
-      this.selectFileBtn.addEventListener("click", () =>
-        this.fileInput?.click(),
-      );
+    if (this.selectFileBtn) this.selectFileBtn.addEventListener("click", () => this.fileInput?.click());
     if (this.fileInput) {
       this.fileInput.addEventListener("change", (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -154,52 +182,40 @@ class QrScannerApp {
       });
     }
 
-    if (this.pasteBtn)
-      this.pasteBtn.addEventListener("click", () => this.handlePaste());
-    if (this.clearImageBtn)
-      this.clearImageBtn.addEventListener("click", () => this.resetState());
+    if (this.pasteBtn) this.pasteBtn.addEventListener("click", () => this.handlePaste());
+    if (this.clearImageBtn) this.clearImageBtn.addEventListener("click", () => this.resetState());
 
-    // Main Scan Action
-    if (this.scanActionBtn)
-      this.scanActionBtn.addEventListener("click", () => this.executeScan());
-    if (this.scanAnotherBtn)
-      this.scanAnotherBtn.addEventListener("click", () => this.resetState());
-    if (this.scanAgainBtn)
-      this.scanAgainBtn.addEventListener("click", () => this.resetState());
+    if (this.scanActionBtn) this.scanActionBtn.addEventListener("click", () => this.executeScan());
+    if (this.scanAnotherBtn) this.scanAnotherBtn.addEventListener("click", () => this.resetState());
+    if (this.scanAgainBtn) this.scanAgainBtn.addEventListener("click", () => this.resetState());
+    if (this.mainScanAnotherBtn) this.mainScanAnotherBtn.addEventListener("click", () => this.resetState());
 
-    // Camera Events
-    if (this.startCameraBtn)
-      this.startCameraBtn.addEventListener("click", () => this.startCamera());
-    if (this.stopCameraBtn)
-      this.stopCameraBtn.addEventListener("click", () => this.stopCamera());
+    if (this.startCameraBtn) this.startCameraBtn.addEventListener("click", () => this.startCamera());
+    if (this.stopCameraBtn) this.stopCameraBtn.addEventListener("click", async () => await this.stopCamera());
     if (this.cameraSelect) {
       this.cameraSelect.addEventListener("change", (e) => {
         this.activeCameraId = e.target.value;
         if (this.isCameraActive) {
-          this.startCamera(); // Restart with new device
+          this.startCamera(); 
         }
       });
     }
 
-    // Result Action Events
-    if (this.copyBtn)
-      this.copyBtn.addEventListener("click", () =>
-        this.copyResultToClipboard(),
-      );
-    if (this.openUrlBtn)
-      this.openUrlBtn.addEventListener("click", () => this.openResultUrl());
-    if (this.downloadTxtBtn)
-      this.downloadTxtBtn.addEventListener("click", () =>
-        this.downloadResultTxt(),
-      );
+    if (this.copyBtn) this.copyBtn.addEventListener("click", () => this.copyResultToClipboard());
+    if (this.mainCopyBtn) this.mainCopyBtn.addEventListener("click", () => this.copyResultToClipboard());
+    
+    if (this.shareBtn) this.shareBtn.addEventListener("click", () => this.shareResult());
+    if (this.openUrlBtn) this.openUrlBtn.addEventListener("click", () => this.openResultUrl());
+    
+    if (this.downloadTxtBtn) this.downloadTxtBtn.addEventListener("click", () => this.downloadResultTxt());
+    if (this.mainDownloadBtn) this.mainDownloadBtn.addEventListener("click", () => this.downloadResultTxt());
+
     if (this.copyWifiPassBtn) {
       this.copyWifiPassBtn.addEventListener("click", () => {
         if (this.wifiPassword && this.wifiPassword.textContent !== "-") {
-          navigator.clipboard
-            .writeText(this.wifiPassword.textContent)
-            .then(() => {
-              this.toast("Wi-Fi password copied!", "success");
-            });
+          navigator.clipboard.writeText(this.wifiPassword.textContent).then(() => {
+            this.toast("Wi-Fi password copied!", "success");
+          });
         }
       });
     }
@@ -229,9 +245,7 @@ class QrScannerApp {
         const imageType = item.types.find((t) => t.startsWith("image/"));
         if (imageType) {
           const blob = await item.getType(imageType);
-          const file = new File([blob], "pasted-image.png", {
-            type: imageType,
-          });
+          const file = new File([blob], "pasted-image.png", { type: imageType });
           this.handleFileSelected(file);
           return;
         }
@@ -242,21 +256,18 @@ class QrScannerApp {
     }
   }
 
-  // --- STATE CONTROLLER ---
   setState(newState) {
     this.state = newState;
     this.updateUI();
   }
 
-  resetState() {
+  async resetState() {
     this.selectedFile = null;
     this.selectedDataUrl = null;
     this.decodedResult = null;
     if (this.fileInput) this.fileInput.value = "";
 
-    // Stop camera if running
-    this.stopCamera();
-
+    await this.stopCamera();
     this.setState(ScannerState.IDLE);
   }
 
@@ -266,10 +277,8 @@ class QrScannerApp {
         this.toggleElement(this.uploadState, true);
         this.toggleElement(this.previewState, false);
         this.toggleElement(this.warningCard, false);
-
         this.toggleElement(this.scanActionBtn, true);
         this.toggleElement(this.scanAnotherBtn, false);
-
         this.setScanButtonMode("ready");
         this.hideResultPanel();
         break;
@@ -279,10 +288,8 @@ class QrScannerApp {
         this.toggleElement(this.uploadState, false);
         this.toggleElement(this.previewState, true);
         this.toggleElement(this.warningCard, false);
-
         this.toggleElement(this.scanActionBtn, true);
         this.toggleElement(this.scanAnotherBtn, false);
-
         this.setScanButtonMode("ready");
         this.hideResultPanel();
         break;
@@ -309,7 +316,6 @@ class QrScannerApp {
     }
   }
 
-  // --- IMAGE HANDLING ---
   async handleFileSelected(file) {
     if (!file) return;
     if (!file.type.startsWith("image/")) {
@@ -317,197 +323,180 @@ class QrScannerApp {
       return;
     }
 
-    // Stop camera if running
-    this.stopCamera();
+    await this.stopCamera();
 
     this.selectedFile = file;
     this.selectedDataUrl = await this.fileToDataUrl(file);
 
-    // Render Preview
     if (this.imagePreview) {
       this.imagePreview.src = this.selectedDataUrl;
     }
-    if (this.metaFilename)
-      this.metaFilename.innerHTML = `<strong>File:</strong> ${this.escapeHtml(file.name)}`;
-    if (this.metaSize)
-      this.metaSize.innerHTML = `<strong>Size:</strong> ${this.formatFileSize(file.size)}`;
+    if (this.metaFilename) this.metaFilename.innerHTML = `<strong>File:</strong> ${this.escapeHtml(file.name)}`;
+    if (this.metaSize) this.metaSize.innerHTML = `<strong>Size:</strong> ${this.formatFileSize(file.size)}`;
 
-    // Get dimensions
     try {
       const img = await this.loadImage(this.selectedDataUrl);
       if (this.metaDimensions) {
-        this.metaDimensions.innerHTML = `<strong>Dimensions:</strong> ${img.naturalWidth} × ${img.naturalHeight} px`;
+        this.metaDimensions.innerHTML = `<strong>Dimensions:</strong> ${img.naturalWidth} &times; ${img.naturalHeight} px`;
       }
     } catch (e) {}
 
     this.setState(ScannerState.READY_TO_SCAN);
+    
+    // Auto execute scan immediately on file selection
+    await this.executeScan();
   }
 
-  // --- SCAN ENGINE ---
   async executeScan() {
-    if (
-      this.state !== ScannerState.READY_TO_SCAN &&
-      this.state !== ScannerState.FAILED
-    )
-      return;
-    if (!this.selectedDataUrl) return;
+    if (!this.selectedFile) return;
 
     this.setState(ScannerState.SCANNING);
 
     try {
-      // Allow UI to render scanning state
-      await new Promise((resolve) => setTimeout(resolve, 50));
+      if (!this.html5Qrcode) {
+        this.html5Qrcode = new Html5Qrcode("qr-reader");
+      }
+      
+      const rawResult = await this.html5Qrcode.scanFile(this.selectedFile, false);
+      
+      let decodedText = "";
+      if (typeof rawResult === "string") {
+        decodedText = rawResult;
+      } else if (rawResult && typeof rawResult === "object") {
+        decodedText = rawResult.decodedText || rawResult.text || String(rawResult);
+      }
 
-      const result = await this.decodeImageElement(this.imagePreview);
-
-      if (result && result.getText()) {
-        this.decodedResult = result.getText();
+      if (decodedText && decodedText.trim()) {
+        this.decodedResult = decodedText.trim();
         this.toast("QR Code decoded successfully!", "success");
         this.setState(ScannerState.SUCCESS);
       } else {
-        throw new Error("No QR detected");
+        throw new Error("No QR code detected");
       }
     } catch (err) {
+      console.log("Scan error:", err);
       this.setState(ScannerState.FAILED);
+      this.toast("No QR Code detected in image.", "warning");
     }
   }
 
-  async decodeImageElement(imgEl) {
-    // Pass 1: BrowserQRCodeReader directly on image element
-    try {
-      const result =
-        await this.zxingBrowserReader.decodeFromImageElement(imgEl);
-      if (result) return result;
-    } catch (e) {
-      // Continue to next pass
-    }
-
-    // Pass 2: Canvas based robust scanning
-    try {
-      const img = await this.loadImage(imgEl.src);
-      const canvas = document.createElement("canvas");
-      const w = img.naturalWidth || img.width;
-      const h = img.naturalHeight || img.height;
-      canvas.width = w;
-      canvas.height = h;
-      const ctx = canvas.getContext("2d", { willReadFrequently: true });
-      if (ctx) {
-        ctx.drawImage(img, 0, 0, w, h);
-        const imgData = ctx.getImageData(0, 0, w, h);
-
-        const luminanceSource = new RGBLuminanceSource(imgData.data, w, h);
-        const binarizer = new HybridBinarizer(luminanceSource);
-        const binaryBitmap = new BinaryBitmap(binarizer);
-
-        const result = this.zxingMultiReader.decode(binaryBitmap);
-        if (result) return result;
-      }
-    } catch (e) {
-      // Continue
-    }
-
-    return null;
-  }
-
-  // --- CAMERA HANDLING ---
   async startCamera() {
-    this.stopCamera(); // Clean up existing
-    this.resetState(); // Clear image states
+    await this.stopCamera(); 
+    await this.resetState(); 
 
     if (this.cameraContainer) this.cameraContainer.style.display = "block";
     if (this.startCameraBtn) this.startCameraBtn.style.display = "none";
     if (this.stopCameraBtn) this.stopCameraBtn.style.display = "inline-flex";
 
     try {
-      const devices = await this.zxingBrowserReader.listVideoInputDevices();
+      const devices = await Html5Qrcode.getCameras();
 
-      if (devices.length === 0) {
-        throw new Error("No camera found");
-      }
-
-      if (this.cameraSelect && devices.length > 1) {
-        this.cameraSelect.style.display = "inline-block";
-        if (this.cameraSelect.options.length === 0) {
-          devices.forEach((d) => {
-            const opt = document.createElement("option");
-            opt.value = d.deviceId;
-            opt.text =
-              d.label || `Camera ${this.cameraSelect.options.length + 1}`;
-            this.cameraSelect.appendChild(opt);
-          });
+      if (devices && devices.length > 0) {
+        if (this.cameraSelect) {
+          this.cameraSelect.style.display = "inline-block";
+          if (this.cameraSelect.options.length === 0) {
+            devices.forEach((d, idx) => {
+              const opt = document.createElement("option");
+              opt.value = d.id;
+              opt.text = d.label || `Camera ${idx + 1}`;
+              this.cameraSelect.appendChild(opt);
+            });
+            
+            // Default to back camera if available
+            const backCamera = devices.find(d => d.label.toLowerCase().includes('back') || d.label.toLowerCase().includes('rear') || d.label.toLowerCase().includes('environment'));
+            if (backCamera) {
+              this.cameraSelect.value = backCamera.id;
+            }
+          }
         }
+        this.activeCameraId = this.cameraSelect.value || devices[0].id;
       }
 
-      const deviceId = this.activeCameraId || devices[0].deviceId;
       this.isCameraActive = true;
+      
+      if (!this.html5Qrcode) {
+        this.html5Qrcode = new Html5Qrcode("qr-reader");
+      }
 
-      this.zxingBrowserReader.decodeFromVideoDevice(
-        deviceId,
-        this.cameraVideo,
-        (result, err) => {
-          if (result && this.isCameraActive) {
-            // Success!
-            this.decodedResult = result.getText();
-            this.toast("QR Code detected via camera!", "success");
-            this.stopCamera();
-            this.setState(ScannerState.SUCCESS);
+      const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+      
+      const cameraIdOrConfig = this.activeCameraId ? this.activeCameraId : { facingMode: "environment" };
+
+      await this.html5Qrcode.start(
+        cameraIdOrConfig,
+        config,
+        async (decodedText, rawResult) => {
+          if (this.isCameraActive) {
+            let text = decodedText;
+            if (!text && rawResult) {
+              text = typeof rawResult === "string" ? rawResult : rawResult.decodedText;
+            }
+            if (text && text.trim()) {
+              this.decodedResult = text.trim();
+              this.toast("QR Code detected via camera!", "success");
+              await this.stopCamera();
+              this.setState(ScannerState.SUCCESS);
+            }
           }
         },
+        (_errorMessage) => {
+          // ignore constant frame scanning errors
+        }
       );
     } catch (err) {
       console.error("Camera startup error:", err);
-      this.stopCamera();
+      await this.stopCamera();
       this.toast("Could not start camera. Check permissions.", "error");
     }
   }
 
-  stopCamera() {
+  async stopCamera() {
     this.isCameraActive = false;
-    try {
-      this.zxingBrowserReader.reset();
-    } catch (e) {}
+    
+    if (this.html5Qrcode && this.html5Qrcode.getState() === 2) {
+      try {
+        await this.html5Qrcode.stop();
+        this.html5Qrcode.clear();
+      } catch (err) {
+        console.error("Error stopping camera:", err);
+      }
+    }
 
     if (this.cameraContainer) this.cameraContainer.style.display = "none";
     if (this.startCameraBtn) this.startCameraBtn.style.display = "inline-flex";
     if (this.stopCameraBtn) this.stopCameraBtn.style.display = "none";
   }
 
-  // --- RESULTS UI ---
   hideResultPanel() {
     if (this.resultsPanel) this.resultsPanel.style.display = "none";
     if (this.emptyState) this.emptyState.style.display = "block";
-    if (this.resultTypeBadge)
-      this.resultTypeBadge.textContent = "Awaiting Code";
+    if (this.resultTypeBadge) this.resultTypeBadge.textContent = "Awaiting Code";
+
+    if (this.mainDecodedResultCard) this.mainDecodedResultCard.style.display = "none";
   }
 
   renderResultPanel() {
     if (!this.decodedResult) return;
 
+    const rawStr = String(this.decodedResult);
+    const charCountText = `${rawStr.length} chars`;
+
+    // 1. Update Sidebar panel if visible
     if (this.emptyState) this.emptyState.style.display = "none";
     if (this.resultsPanel) this.resultsPanel.style.display = "block";
+    if (this.resultText) this.resultText.value = rawStr;
+    if (this.resultCharCount) this.resultCharCount.textContent = charCountText;
 
-    if (this.resultText) this.resultText.value = this.decodedResult;
-    if (this.resultCharCount)
-      this.resultCharCount.textContent = `${this.decodedResult.length} chars`;
+    const parsedData = this.parseQrData(rawStr);
 
-    const parsedData = this.parseQrData(this.decodedResult);
+    if (this.resultTypeBadge) this.resultTypeBadge.textContent = parsedData.label;
 
-    if (this.resultTypeBadge)
-      this.resultTypeBadge.textContent = parsedData.label;
-
-    // Reset action buttons visibility
     const actionBtns = [
-      this.openUrlBtn,
-      this.callBtn,
-      this.emailBtn,
-      this.smsBtn,
-      this.whatsappBtn,
-      this.mapsBtn,
-      this.wifiDetailsCard,
+      this.openUrlBtn, this.callBtn, this.emailBtn, this.smsBtn,
+      this.whatsappBtn, this.mapsBtn, this.wifiDetailsCard,
     ];
     actionBtns.forEach((btn) => this.toggleElement(btn, false));
 
-    // Display context specific buttons
     if (parsedData.isUrl) {
       this.toggleElement(this.openUrlBtn, true, "inline-flex");
     } else if (parsedData.type === "PHONE" && this.callBtn) {
@@ -528,106 +517,304 @@ class QrScannerApp {
     } else if (parsedData.type === "WIFI" && this.wifiDetailsCard) {
       this.toggleElement(this.wifiDetailsCard, true, "block");
       if (this.wifiSsid) this.wifiSsid.textContent = parsedData.ssid;
-      if (this.wifiPassword)
-        this.wifiPassword.textContent = parsedData.password;
-      if (this.wifiEncryption)
-        this.wifiEncryption.textContent = parsedData.encryption;
+      if (this.wifiPassword) this.wifiPassword.textContent = parsedData.password;
+      if (this.wifiEncryption) this.wifiEncryption.textContent = parsedData.security;
     }
 
     if (this.generateQrBtn) {
-      this.generateQrBtn.href = `/?text=${encodeURIComponent(this.decodedResult)}`;
+      this.generateQrBtn.href = `/?text=${encodeURIComponent(rawStr)}`;
+    }
+
+    // 2. UPDATE DEDICATED MAIN DECODED RESULT CARD
+    if (this.mainDecodedResultCard) {
+      this.mainDecodedResultCard.style.display = "block";
+      
+      if (this.decodedTypeBadge) this.decodedTypeBadge.textContent = parsedData.label;
+      if (this.decodedCharCount) this.decodedCharCount.textContent = charCountText;
+      if (this.decodedResultMeta) this.decodedResultMeta.textContent = `Type: ${parsedData.label}`;
+
+      // Reset content view containers
+      const boxes = [
+        this.decodedTextBox, this.decodedUrlBox, this.decodedWifiBox,
+        this.decodedVcardBox, this.decodedEmailBox, this.decodedPhoneBox,
+        this.decodedSmsBox, this.decodedGeoBox
+      ];
+      boxes.forEach(b => { if (b) b.style.display = "none"; });
+
+      if (this.mainActionLinkBtn) this.mainActionLinkBtn.style.display = "none";
+
+      // Populate specific view based on type
+      switch (parsedData.type) {
+        case "URL":
+          if (this.decodedUrlBox) {
+            this.decodedUrlBox.style.display = "block";
+            if (this.decodedUrlLink) {
+              this.decodedUrlLink.href = parsedData.actionUrl;
+              this.decodedUrlLink.textContent = parsedData.url || parsedData.actionUrl;
+            }
+          }
+          if (this.mainActionLinkBtn) {
+            this.mainActionLinkBtn.href = parsedData.actionUrl;
+            this.mainActionLinkBtn.style.display = "inline-flex";
+            if (this.mainActionText) this.mainActionText.textContent = "Open Link";
+          }
+          break;
+
+        case "WIFI":
+          if (this.decodedWifiBox) {
+            this.decodedWifiBox.style.display = "block";
+            if (this.resWifiSsid) this.resWifiSsid.textContent = parsedData.ssid || "-";
+            if (this.resWifiPass) this.resWifiPass.textContent = parsedData.password || "-";
+            if (this.resWifiSec) this.resWifiSec.textContent = parsedData.security || "Open";
+          }
+          break;
+
+        case "VCARD":
+          if (this.decodedVcardBox && this.resVcardFields && parsedData.contact) {
+            this.decodedVcardBox.style.display = "block";
+            const c = parsedData.contact;
+            let html = "";
+            if (c.fn) html += `<div class="result-kv-item"><span class="result-kv-label">Name</span><span class="result-kv-val">${this.escapeHtml(c.fn)}</span></div>`;
+            if (c.tel) html += `<div class="result-kv-item"><span class="result-kv-label">Phone</span><span class="result-kv-val">${this.escapeHtml(c.tel)}</span></div>`;
+            if (c.email) html += `<div class="result-kv-item"><span class="result-kv-label">Email</span><span class="result-kv-val">${this.escapeHtml(c.email)}</span></div>`;
+            if (c.org) html += `<div class="result-kv-item"><span class="result-kv-label">Company</span><span class="result-kv-val">${this.escapeHtml(c.org)}</span></div>`;
+            if (c.title) html += `<div class="result-kv-item"><span class="result-kv-label">Job Title</span><span class="result-kv-val">${this.escapeHtml(c.title)}</span></div>`;
+            if (c.url) html += `<div class="result-kv-item"><span class="result-kv-label">Website</span><span class="result-kv-val">${this.escapeHtml(c.url)}</span></div>`;
+            if (c.note) html += `<div class="result-kv-item"><span class="result-kv-label">Note</span><span class="result-kv-val">${this.escapeHtml(c.note)}</span></div>`;
+            
+            this.resVcardFields.innerHTML = html || `<div class="result-kv-item"><span class="result-kv-val">${this.escapeHtml(rawStr)}</span></div>`;
+
+            if (c.tel && this.mainActionLinkBtn) {
+              this.mainActionLinkBtn.href = `tel:${c.tel}`;
+              this.mainActionLinkBtn.style.display = "inline-flex";
+              if (this.mainActionText) this.mainActionText.textContent = "Call Contact";
+            }
+          }
+          break;
+
+        case "EMAIL":
+          if (this.decodedEmailBox) {
+            this.decodedEmailBox.style.display = "block";
+            if (this.resEmailTo) this.resEmailTo.textContent = parsedData.email || "-";
+            
+            if (parsedData.subject && this.resEmailSub) {
+              this.resEmailSub.textContent = parsedData.subject;
+              if (this.resEmailSubWrap) this.resEmailSubWrap.style.display = "block";
+            }
+            if (parsedData.body && this.resEmailBody) {
+              this.resEmailBody.textContent = parsedData.body;
+              if (this.resEmailBodyWrap) this.resEmailBodyWrap.style.display = "block";
+            }
+          }
+          if (this.mainActionLinkBtn) {
+            this.mainActionLinkBtn.href = parsedData.actionUrl;
+            this.mainActionLinkBtn.style.display = "inline-flex";
+            if (this.mainActionText) this.mainActionText.textContent = "Send Email";
+          }
+          break;
+
+        case "PHONE":
+          if (this.decodedPhoneBox && this.resPhoneNum) {
+            this.decodedPhoneBox.style.display = "block";
+            this.resPhoneNum.textContent = parsedData.phone || "-";
+          }
+          if (this.mainActionLinkBtn) {
+            this.mainActionLinkBtn.href = parsedData.actionUrl;
+            this.mainActionLinkBtn.style.display = "inline-flex";
+            if (this.mainActionText) this.mainActionText.textContent = "Call Number";
+          }
+          break;
+
+        case "SMS":
+          if (this.decodedSmsBox) {
+            this.decodedSmsBox.style.display = "block";
+            if (this.resSmsNum) this.resSmsNum.textContent = parsedData.recipient || "-";
+            if (parsedData.body && this.resSmsBody) {
+              this.resSmsBody.textContent = parsedData.body;
+              if (this.resSmsBodyWrap) this.resSmsBodyWrap.style.display = "block";
+            }
+          }
+          if (this.mainActionLinkBtn) {
+            this.mainActionLinkBtn.href = parsedData.actionUrl;
+            this.mainActionLinkBtn.style.display = "inline-flex";
+            if (this.mainActionText) this.mainActionText.textContent = "Send SMS";
+          }
+          break;
+
+        case "LOCATION":
+          if (this.decodedGeoBox && this.resGeoCoords) {
+            this.decodedGeoBox.style.display = "block";
+            this.resGeoCoords.textContent = parsedData.coords || rawStr;
+          }
+          if (this.mainActionLinkBtn) {
+            this.mainActionLinkBtn.href = parsedData.actionUrl;
+            this.mainActionLinkBtn.style.display = "inline-flex";
+            if (this.mainActionText) this.mainActionText.textContent = "Open in Maps";
+          }
+          break;
+
+        default:
+          if (this.decodedTextBox) {
+            this.decodedTextBox.style.display = "block";
+            this.decodedTextBox.textContent = rawStr;
+          }
+          break;
+      }
+
+      // Smooth scroll into view if card wasn't already visible
+      setTimeout(() => {
+        this.mainDecodedResultCard?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 50);
     }
   }
 
   parseQrData(text) {
+    if (!text || typeof text !== "string") {
+      return { type: "TEXT", label: "Plain Text", text: "" };
+    }
     const str = text.trim();
 
-    if (/^https?:\/\//i.test(str) || /^www\./i.test(str)) {
+    // 1. URL
+    if (/^(https?:\/\/|ftps?:\/\/|www\.)/i.test(str)) {
       const url = /^www\./i.test(str) ? `https://${str}` : str;
-      return {
-        type: "URL",
-        label: "Website Link",
-        isUrl: true,
-        actionUrl: url,
-      };
+      return { type: "URL", label: "Website Link", isUrl: true, actionUrl: url, url };
     }
 
-    if (/^tel:/i.test(str) || /^\+?[0-9\s-]{7,15}$/.test(str)) {
-      const phone = str.replace(/^tel:/i, "").trim();
-      return {
-        type: "PHONE",
-        label: "Phone Number",
-        actionUrl: `tel:${phone}`,
-      };
-    }
-
-    if (/^mailto:/i.test(str) || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str)) {
-      const email = str
-        .replace(/^mailto:/i, "")
-        .split("?")[0]
-        .trim();
-      return {
-        type: "EMAIL",
-        label: "Email Address",
-        actionUrl: str.startsWith("mailto:") ? str : `mailto:${email}`,
-      };
-    }
-
-    if (/^smsto:/i.test(str) || /^sms:/i.test(str)) {
-      const number = str.split(":")[1] || "";
-      return { type: "SMS", label: "SMS Message", actionUrl: `sms:${number}` };
-    }
-
-    if (/^https:\/\/wa\.me\//i.test(str) || /^whatsapp:\/\//i.test(str)) {
-      return { type: "WHATSAPP", label: "WhatsApp", actionUrl: str };
-    }
-
-    if (/^geo:/i.test(str) || /google\.com\/maps/i.test(str)) {
-      const url = /^geo:/i.test(str)
-        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(str.replace(/^geo:/i, ""))}`
-        : str;
-      return {
-        type: "LOCATION",
-        label: "Location Coordinates",
-        actionUrl: url,
-      };
-    }
-
+    // 2. Wi-Fi
     if (/^WIFI:/i.test(str)) {
-      const ssid = str.match(/S:([^;]+)/)?.[1] || "Unknown";
-      const pass = str.match(/P:([^;]+)/)?.[1] || "None";
-      const enc = str.match(/T:([^;]+)/)?.[1] || "WPA";
+      const ssidMatch = str.match(/S:((?:\\;|[^;])+)/i);
+      const passMatch = str.match(/P:((?:\\;|[^;])+)/i);
+      const secMatch = str.match(/T:([^;]+)/i);
+      const hiddenMatch = str.match(/H:([^;]+)/i);
+
+      const ssid = ssidMatch ? ssidMatch[1].replace(/\\;/g, ";") : "Unknown Network";
+      const password = passMatch ? passMatch[1].replace(/\\;/g, ";") : "(No password)";
+      const security = secMatch ? secMatch[1].toUpperCase() : "Open";
+      const hidden = hiddenMatch ? hiddenMatch[1].toLowerCase() === "true" : false;
+
+      return { type: "WIFI", label: "Wi-Fi Network", ssid, password, security, hidden };
+    }
+
+    // 3. vCard / MeCard
+    if (/BEGIN:VCARD/i.test(str) || /^MECARD:/i.test(str)) {
+      let fn = str.match(/FN:(.*)/i)?.[1]?.trim();
+      if (!fn) {
+        const n = str.match(/N:(.*)/i)?.[1]?.split(";").filter(Boolean).reverse().join(" ").trim();
+        fn = n || "Contact";
+      }
+      const tel = str.match(/TEL.*?:(.*)/i)?.[1]?.trim();
+      const email = str.match(/EMAIL.*?:(.*)/i)?.[1]?.trim();
+      const org = str.match(/ORG:(.*)/i)?.[1]?.trim();
+      const title = str.match(/TITLE:(.*)/i)?.[1]?.trim();
+      const url = str.match(/URL.*?:(.*)/i)?.[1]?.trim();
+      const note = str.match(/NOTE:(.*)/i)?.[1]?.trim();
+
       return {
-        type: "WIFI",
-        label: "Wi-Fi Network",
-        ssid,
-        password: pass,
-        encryption: enc,
+        type: "VCARD",
+        label: "vCard Contact",
+        contact: { fn, tel, email, org, title, url, note }
       };
     }
 
-    if (/BEGIN:VCARD/i.test(str))
-      return { type: "VCARD", label: "vCard Contact" };
-    if (/BEGIN:VEVENT/i.test(str))
-      return { type: "CALENDAR", label: "Calendar Event" };
+    // 4. Email
+    if (/^mailto:/i.test(str) || /^MATMSG:/i.test(str) || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str)) {
+      let email = "";
+      let subject = "";
+      let body = "";
 
+      if (/^MATMSG:/i.test(str)) {
+        email = str.match(/TO:([^;]+)/i)?.[1] || "";
+        subject = str.match(/SUB:([^;]+)/i)?.[1] || "";
+        body = str.match(/BODY:([^;]+)/i)?.[1] || "";
+      } else if (/^mailto:/i.test(str)) {
+        try {
+          const u = new URL(str);
+          email = u.pathname;
+          subject = u.searchParams.get("subject") || "";
+          body = u.searchParams.get("body") || "";
+        } catch (e) {
+          email = str.replace(/^mailto:/i, "").split("?")[0];
+        }
+      } else {
+        email = str;
+      }
+
+      const actionUrl = `mailto:${email}` + (subject || body ? `?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` : "");
+      return { type: "EMAIL", label: "Email Address", email, subject, body, actionUrl };
+    }
+
+    // 5. Phone
+    if (/^tel:/i.test(str) || /^\+?[0-9\s\-\.\(\)]{7,20}$/.test(str)) {
+      const phone = str.replace(/^tel:/i, "").trim();
+      return { type: "PHONE", label: "Phone Number", phone, actionUrl: `tel:${phone}` };
+    }
+
+    // 6. SMS
+    if (/^smsto:/i.test(str) || /^sms:/i.test(str) || /^SMS:/i.test(str)) {
+      let recipient = "";
+      let body = "";
+      if (str.includes("?body=")) {
+        const parts = str.split("?body=");
+        recipient = parts[0].replace(/^(sms|smsto):/i, "");
+        body = decodeURIComponent(parts[1] || "");
+      } else {
+        const parts = str.split(":");
+        recipient = parts[1] || "";
+        body = parts.slice(2).join(":") || "";
+      }
+      const actionUrl = `sms:${recipient}` + (body ? `?body=${encodeURIComponent(body)}` : "");
+      return { type: "SMS", label: "SMS Message", recipient, body, actionUrl };
+    }
+
+    // 7. Geo Location
+    if (/^geo:/i.test(str) || /maps\.google\.com/i.test(str) || /google\.com\/maps/i.test(str)) {
+      let coords = str;
+      let actionUrl = str;
+      if (/^geo:/i.test(str)) {
+        coords = str.replace(/^geo:/i, "");
+        actionUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coords)}`;
+      }
+      return { type: "LOCATION", label: "Geo Location", coords, actionUrl };
+    }
+
+    // 8. Plain Text (fallback)
     return { type: "TEXT", label: "Plain Text" };
   }
 
-  // --- ACTIONS ---
   async copyResultToClipboard() {
     if (!this.decodedResult) return;
+    const str = String(this.decodedResult);
     try {
-      await navigator.clipboard.writeText(this.decodedResult);
+      await navigator.clipboard.writeText(str);
       this.toast("Copied result to clipboard!", "success");
     } catch {
       this.toast("Failed to copy", "error");
     }
   }
 
+  async shareResult() {
+    if (!this.decodedResult) return;
+    const str = String(this.decodedResult);
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'QR Code Result',
+          text: str,
+        });
+        this.toast("Shared successfully!", "success");
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          this.toast("Failed to share.", "error");
+        }
+      }
+    } else {
+      this.toast("Sharing is not supported on this browser.", "warning");
+    }
+  }
+
   openResultUrl() {
     if (!this.decodedResult) return;
-    const parsed = this.parseQrData(this.decodedResult);
+    const parsed = this.parseQrData(String(this.decodedResult));
     if (parsed.isUrl && parsed.actionUrl) {
       window.open(parsed.actionUrl, "_blank", "noopener,noreferrer");
     }
@@ -635,9 +822,8 @@ class QrScannerApp {
 
   downloadResultTxt() {
     if (!this.decodedResult) return;
-    const blob = new Blob([this.decodedResult], {
-      type: "text/plain;charset=utf-8",
-    });
+    const str = String(this.decodedResult);
+    const blob = new Blob([str], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -647,7 +833,6 @@ class QrScannerApp {
     this.toast("Result downloaded as TXT", "success");
   }
 
-  // --- UTILS ---
   toggleElement(el, show, displayStyle = "block") {
     if (el) el.style.display = show ? displayStyle : "none";
   }
@@ -702,15 +887,12 @@ class QrScannerApp {
   }
 
   toast(msg, type = "info") {
-    if (
-      window.ComprexaFramework &&
-      typeof window.ComprexaFramework.showToast === "function"
-    ) {
+    if (window.ComprexaFramework && typeof window.ComprexaFramework.showToast === "function") {
       window.ComprexaFramework.showToast(msg, type);
     } else {
+      console.log(msg);
     }
   }
 }
 
-// Start App Engine
 new QrScannerApp();

@@ -3,6 +3,8 @@
  * Converts PDF document pages into PowerPoint presentation slides (.pptx).
  */
 
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const dropzone = document.getElementById("pdf-ppt-dropzone");
   const fileInput = document.getElementById("pdf-ppt-file-input");
@@ -32,38 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!dropzone || !fileInput) return;
 
   function loadDependencies() {
+    ensurePdfWorker();
     return new Promise((resolve, reject) => {
-      let loaded = 0;
-      const total = 2;
-      function check() {
-        loaded++;
-        if (loaded >= total) resolve();
-      }
-
-      if (!window.pdfjsLib) {
-        const s1 = document.createElement("script");
-        s1.src =
-          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-        s1.onload = () => {
-          window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-          check();
-        };
-        s1.onerror = () => reject("Failed to load PDF.js");
-        document.head.appendChild(s1);
-      } else {
-        check();
-      }
-
       if (!window.PptxGenJS) {
         const s2 = document.createElement("script");
         s2.src =
           "https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js";
-        s2.onload = check;
+        s2.onload = () => resolve();
         s2.onerror = () => reject("Failed to load PptxGenJS");
         document.head.appendChild(s2);
       } else {
-        check();
+        resolve();
       }
     });
   }

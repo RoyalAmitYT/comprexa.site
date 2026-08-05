@@ -564,6 +564,7 @@ class ComprexaFramework {
                 <li><a href="/pdf-tools.html">PDF Tools</a></li>
                 <li><a href="/document-tools.html">Document Tools</a></li>
                 <li><a href="/image-tools.html">Image Tools</a></li>
+                <li><a href="/converter-tools.html">Converter Tools</a></li>
                 <li><a href="/color-tools.html">Color Tools</a></li>
                 <li><a href="/text-tools.html">Text Tools</a></li>
                 <li><a href="/qr-tools.html">QR Tools</a></li>

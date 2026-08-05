@@ -176,12 +176,16 @@
   ]
 }
 </script>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/icon-512x512.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/manifest.json" />
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=comprexa" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png?v=comprexa" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
+  <link rel="manifest" href="/site.webmanifest?v=comprexa" />
+  <meta name="theme-color" content="#6366f1" />
 </head>
 <body>
 
@@ -1789,87 +1793,47 @@
           </p>
         </div>
 
-        <!-- How It Works Timeline Container -->
-        <div class="how-it-works__timeline-wrap">
-          <div class="how-it-works__line" aria-hidden="true"></div>
-          <div class="how-it-works__grid">
-            
+                <!-- Universal How It Works Component -->
+        <div class="workspace-how-card fade-in-on-scroll" style="max-width: 1000px; margin: 40px auto 0;">
+          <div class="workspace-how-steps">
             <!-- Step 1 -->
-            <div class="step-card fade-in-on-scroll">
-              <div class="step-card__top">
-                <span class="step-card__number">01</span>
-                <div class="step-card__icon step-icon--blue">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="17 8 12 3 7 8"/>
-                    <line x1="12" y1="3" x2="12" y2="15"/>
-                  </svg>
-                </div>
+            <div class="workspace-how-step">
+              <div class="workspace-how-step__badge">1</div>
+              <div class="workspace-how-step__text">
+                <strong>Upload your file</strong>
+                <span>Choose the file you want to process using drag & drop or the file picker.</span>
               </div>
-              <h3 class="step-card__title">Upload your file</h3>
-              <p class="step-card__desc">
-                Choose the file you want to process using drag & drop or the file picker.
-              </p>
             </div>
-
+            <div class="workspace-how-arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+            
             <!-- Step 2 -->
-            <div class="step-card fade-in-on-scroll">
-              <div class="step-card__top">
-                <span class="step-card__number">02</span>
-                <div class="step-card__icon step-icon--purple">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="4" y1="21" x2="4" y2="14"/>
-                    <line x1="4" y1="10" x2="4" y2="3"/>
-                    <line x1="12" y1="21" x2="12" y2="12"/>
-                    <line x1="12" y1="8" x2="12" y2="3"/>
-                    <line x1="20" y1="21" x2="20" y2="16"/>
-                    <line x1="20" y1="12" x2="20" y2="3"/>
-                    <line x1="1" y1="14" x2="7" y2="14"/>
-                    <line x1="9" y1="8" x2="15" y2="8"/>
-                    <line x1="17" y1="16" x2="23" y2="16"/>
-                  </svg>
-                </div>
+            <div class="workspace-how-step">
+              <div class="workspace-how-step__badge">2</div>
+              <div class="workspace-how-step__text">
+                <strong>Configure settings</strong>
+                <span>Adjust compression levels, formats, or specialized tool parameters.</span>
               </div>
-              <h3 class="step-card__title">Choose your tool or settings</h3>
-              <p class="step-card__desc">
-                Select the desired operation such as compress, convert, merge, resize, or optimize.
-              </p>
             </div>
+            <div class="workspace-how-arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
 
             <!-- Step 3 -->
-            <div class="step-card fade-in-on-scroll">
-              <div class="step-card__top">
-                <span class="step-card__number">03</span>
-                <div class="step-card__icon step-icon--amber">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                  </svg>
-                </div>
+            <div class="workspace-how-step">
+              <div class="workspace-how-step__badge">3</div>
+              <div class="workspace-how-step__text">
+                <strong>Instant processing</strong>
+                <span>Files are processed securely in your browser instantly.</span>
               </div>
-              <h3 class="step-card__title">Processing</h3>
-              <p class="step-card__desc">
-                Your file is processed quickly and securely. For browser-based tools, processing happens locally whenever possible.
-              </p>
             </div>
+            <div class="workspace-how-arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
 
             <!-- Step 4 -->
-            <div class="step-card fade-in-on-scroll">
-              <div class="step-card__top">
-                <span class="step-card__number">04</span>
-                <div class="step-card__icon step-icon--emerald">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                </div>
+            <div class="workspace-how-step">
+              <div class="workspace-how-step__badge">4</div>
+              <div class="workspace-how-step__text">
+                <strong>Download result</strong>
+                <span>Save the optimized or converted file directly to your device.</span>
               </div>
-              <h3 class="step-card__title">Download</h3>
-              <p class="step-card__desc">
-                Download your processed file instantly.
-              </p>
             </div>
-
           </div>
         </div>
       </div>
@@ -2285,6 +2249,7 @@
               <li><a href="/pdf-tools.html">PDF Tools</a></li>
               <li><a href="/document-tools.html">Document Tools</a></li>
               <li><a href="/image-tools.html">Image Tools</a></li>
+              <li><a href="/converter-tools.html">Converter Tools</a></li>
               <li><a href="/color-tools.html">Color Tools</a></li>
               <li><a href="/text-tools.html">Text Tools</a></li>
               <li><a href="/qr-tools.html">QR Tools</a></li>

@@ -51,8 +51,47 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      /* Premium Cropper Overrides */
+      .cropper-view-box {
+        outline: 3px solid var(--primary);
+        outline-color: var(--primary);
+      }
+      .cropper-line {
+        background-color: var(--primary);
+      }
+      .cropper-point {
+        background-color: var(--primary);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      @media (max-width: 768px) {
+        .cropper-point {
+          width: 24px;
+          height: 24px;
+        }
+        .cropper-point.point-se {
+          width: 32px;
+          height: 32px;
+        }
+      }
+      .cropper-modal {
+        background-color: rgba(0, 0, 0, 0.75);
+      }
+      .cropper-bg {
+        background-image: none;
+        background-color: #f1f5f9;
+      }
+      [data-theme="dark"] .cropper-bg {
+        background-color: #1e293b;
+      }
+    </style>
 
 <title>Crop Image Online | Free Photo Cropper — Comprexa</title>
   <meta name="description" content="Crop your images and photos to any size or aspect ratio. Secure, fast, and free online image cropper." />
@@ -126,12 +165,16 @@
   }
 }
 </script>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/icon-512x512.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/manifest.json" />
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=comprexa" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png?v=comprexa" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
+  <link rel="manifest" href="/site.webmanifest?v=comprexa" />
+  <meta name="theme-color" content="#6366f1" />
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -531,8 +574,9 @@
                     style="
                       position: relative;
                       width: 100%;
-                      min-height: 380px;
-                      max-height: 520px;
+                      min-height: 300px;
+                      height: 60vh;
+                      max-height: 600px;
                       background: #0b0f19;
                       border-radius: var(--radius-xl);
                       overflow: hidden;
@@ -549,137 +593,21 @@
                       id="crop-stage-wrapper"
                       style="
                         position: relative;
-                        display: inline-block;
-                        transform-origin: center center;
+                        display: block;
+                        width: 100%;
+                        height: 100%;
                       "
                     >
-                      <!-- Displayed Image Canvas -->
-                      <canvas
-                        id="crop-display-canvas"
+                      <img
+                        id="cropper-image"
+                        src=""
+                        alt="Crop Preview"
                         style="
                           display: block;
                           max-width: 100%;
-                          max-height: 480px;
-                          pointer-events: none;
+                          max-height: 100%;
                         "
-                      ></canvas>
-
-                      <!-- Interactive Crop Overlay / Box -->
-                      <div
-                        class="crop-overlay-box"
-                        id="crop-overlay-box"
-                        style="
-                          position: absolute;
-                          border: 2px solid #818cf8;
-                          box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.65);
-                          cursor: move;
-                          touch-action: none;
-                        "
-                      >
-                        <!-- Grid Lines -->
-                        <div
-                          style="
-                            position: absolute;
-                            inset: 0;
-                            pointer-events: none;
-                            display: grid;
-                            grid-template-columns: 1fr 1fr 1fr;
-                            grid-template-rows: 1fr 1fr 1fr;
-                          "
-                        >
-                          <div
-                            style="
-                              border-right: 1px dashed rgba(255, 255, 255, 0.35);
-                              border-bottom: 1px dashed
-                                rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div
-                            style="
-                              border-right: 1px dashed rgba(255, 255, 255, 0.35);
-                              border-bottom: 1px dashed
-                                rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div
-                            style="
-                              border-bottom: 1px dashed
-                                rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div
-                            style="
-                              border-right: 1px dashed rgba(255, 255, 255, 0.35);
-                              border-bottom: 1px dashed
-                                rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div
-                            style="
-                              border-right: 1px dashed rgba(255, 255, 255, 0.35);
-                              border-bottom: 1px dashed
-                                rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div
-                            style="
-                              border-bottom: 1px dashed
-                                rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div
-                            style="
-                              border-right: 1px dashed rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div
-                            style="
-                              border-right: 1px dashed rgba(255, 255, 255, 0.35);
-                            "
-                          ></div>
-                          <div></div>
-                        </div>
-                        <!-- Dimension Tooltip -->
-                        <div
-                          id="crop-box-dimensions-label"
-                          style="
-                            position: absolute;
-                            top: 6px;
-                            left: 8px;
-                            background: rgba(15, 23, 42, 0.85);
-                            color: #ffffff;
-                            font-size: 0.72rem;
-                            font-weight: 700;
-                            padding: 2px 6px;
-                            border-radius: 4px;
-                            pointer-events: none;
-                            backdrop-filter: blur(4px);
-                          "
-                        >
-                          800 × 600 px
-                        </div>
-                        <!-- 8 Resize Handles -->
-                        <div
-                          class="crop-handle handle-nw"
-                          data-handle="nw"
-                        ></div>
-                        <div
-                          class="crop-handle handle-ne"
-                          data-handle="ne"
-                        ></div>
-                        <div
-                          class="crop-handle handle-sw"
-                          data-handle="sw"
-                        ></div>
-                        <div
-                          class="crop-handle handle-se"
-                          data-handle="se"
-                        ></div>
-                        <div class="crop-handle handle-n" data-handle="n"></div>
-                        <div class="crop-handle handle-e" data-handle="e"></div>
-                        <div class="crop-handle handle-s" data-handle="s"></div>
-                        <div class="crop-handle handle-w" data-handle="w"></div>
-                      </div>
+                      />
                     </div>
                   </div>
 
@@ -1657,6 +1585,7 @@
     <script type="module" src="/js/tool-content.js"></script>
     <script type="module" src="/js/tool-landing.js"></script>
     <script type="module" src="/js/image-engine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
     <script type="module" src="/js/image-tools/crop-image.js"></script>
   </body>
 </html>

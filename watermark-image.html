@@ -124,12 +124,184 @@
   }
 }
 </script>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/icon-512x512.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/manifest.json" />
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=comprexa" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png?v=comprexa" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png?v=comprexa" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
+  <link rel="manifest" href="/site.webmanifest?v=comprexa" />
+  <meta name="theme-color" content="#6366f1" />
+
+<style id="mobile-wm-styles">
+@media (max-width: 768px) {
+  /* Studio layout */
+  #studio-grid-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  /* Live preview */
+  #canvas-preview-container {
+    min-height: auto !important;
+    aspect-ratio: 16/9;
+    padding: 12px !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 20px !important;
+    margin-bottom: 8px;
+    width: 100% !important;
+  }
+  
+  [data-theme="dark"] #canvas-preview-container {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  
+  /* Collapsible sections */
+  #desktop-controls-panel {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    gap: 12px !important;
+  }
+  
+  .wm-mobile-section {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03) !important;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  
+  [data-theme="dark"] .wm-mobile-section {
+    background: rgba(30, 41, 59, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  
+  .wm-mobile-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+  }
+  
+  .wm-mobile-header::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s;
+  }
+  
+  .wm-mobile-section.is-open .wm-mobile-header::after {
+    transform: rotate(180deg);
+  }
+  
+  .wm-mobile-content {
+    display: none !important;
+    padding: 0 20px 20px 20px !important;
+  }
+  
+  .wm-mobile-section.is-open .wm-mobile-content {
+    display: flex !important;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* Sticky bottom export button */
+  #btn-execute-watermark {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    width: calc(100% - 40px) !important;
+    z-index: 99;
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4) !important;
+    border-radius: 16px !important;
+    height: 54px !important;
+    font-size: 1.1rem !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Added padding to body to account for fixed button */
+  body {
+    padding-bottom: 90px !important;
+  }
+  
+  /* Sliders and Touch controls */
+  input[type="range"] {
+    height: 44px !important;
+  }
+  
+  .ui-input, .ui-select, .btn {
+    min-height: 44px !important;
+  }
+  
+  /* Buttons */
+  #btn-add-more-trigger {
+    border-radius: 12px !important;
+    padding: 8px 16px !important;
+  }
+  #btn-clear-all {
+    border-radius: 12px !important;
+    padding: 8px 16px !important;
+    border: 1px solid var(--danger) !important;
+    color: var(--danger) !important;
+  }
+  
+  /* Position Grid */
+  .pos-grid-btn {
+    height: 44px !important;
+    border-radius: 10px !important;
+  }
+  
+  /* Color chips */
+  .text-color-btn {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 22px !important;
+    padding: 0 !important;
+    font-size: 0 !important; /* Hide text */
+  }
+  #custom-text-color-picker {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 22px !important;
+  }
+}
+
+/* Hide mobile headers on desktop */
+@media (min-width: 769px) {
+  .wm-mobile-header {
+    display: none !important;
+  }
+  .wm-mobile-content {
+    display: flex !important;
+    flex-direction: column;
+    padding: 0 !important;
+    gap: 14px;
+  }
+  .wm-mobile-section {
+    display: contents; /* Strip out the wrapper visually on desktop */
+  }
+}
+</style>
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -607,7 +779,7 @@
                 </div>
 
                 <!-- Right Column: Watermark Controls Panel -->
-                <div
+                <div id="desktop-controls-panel"
                   style="
                     display: flex;
                     flex-direction: column;
@@ -619,7 +791,10 @@
                   "
                 >
                   <!-- Watermark Mode Switcher: Text vs Image -->
-                  <div class="form-group" style="margin-bottom: 0">
+                  <div class="wm-mobile-section is-open">
+<div class="wm-mobile-header">Watermark Mode</div>
+<div class="wm-mobile-content">
+<div class="form-group" style="margin-bottom: 0">
                     <label
                       class="form-label"
                       style="
@@ -685,7 +860,11 @@
                     </div>
                   </div>
 
-                  <!-- PANEL 1: TEXT WATERMARK CONTROLS -->
+                  </div></div>
+<!-- PANEL 1: TEXT WATERMARK CONTROLS -->
+<div class="wm-mobile-section">
+<div class="wm-mobile-header">Watermark Text / Image</div>
+<div class="wm-mobile-content">
                   <div
                     id="text-controls-panel"
                     style="display: flex; flex-direction: column; gap: 14px"
@@ -713,7 +892,11 @@
                       />
                     </div>
 
-                    <!-- Font Family & Weight -->
+                    </div></div>
+<div class="wm-mobile-section">
+<div class="wm-mobile-header">Font Settings</div>
+<div class="wm-mobile-content">
+<!-- Font Family & Weight -->
                     <div
                       style="
                         display: grid;
@@ -848,7 +1031,11 @@
                       />
                     </div>
 
-                    <!-- Text Color Options -->
+                    </div></div>
+<div class="wm-mobile-section">
+<div class="wm-mobile-header">Color & Settings</div>
+<div class="wm-mobile-content">
+<!-- Text Color Options -->
                     <div class="form-group" style="margin-bottom: 0">
                       <label
                         class="form-label"
@@ -940,7 +1127,11 @@
                     </div>
                   </div>
 
-                  <!-- PANEL 2: LOGO IMAGE WATERMARK CONTROLS -->
+                  </div></div>
+<!-- PANEL 2: LOGO IMAGE WATERMARK CONTROLS -->
+<div class="wm-mobile-section">
+<div class="wm-mobile-header">Image Logo Settings</div>
+<div class="wm-mobile-content">
                   <div
                     id="image-controls-panel"
                     style="display: none; flex-direction: column; gap: 14px"
@@ -1051,7 +1242,11 @@
                     </div>
                   </div>
 
-                  <!-- SHARED CONTROLS: Opacity, Rotation, Position, Margin -->
+                  </div></div>
+<!-- SHARED CONTROLS: Opacity, Rotation, Position, Margin -->
+<div class="wm-mobile-section">
+<div class="wm-mobile-header">Opacity & Rotation</div>
+<div class="wm-mobile-content">
                   <div
                     style="
                       display: flex;
@@ -1158,7 +1353,11 @@
                       </div>
                     </div>
 
-                    <!-- Margin / Offset Slider -->
+                    </div></div>
+<div class="wm-mobile-section">
+<div class="wm-mobile-header">Margin / Padding</div>
+<div class="wm-mobile-content">
+<!-- Margin / Offset Slider -->
                     <div class="form-group" style="margin-bottom: 0">
                       <div
                         style="
@@ -1203,7 +1402,11 @@
                       />
                     </div>
 
-                    <!-- Position Grid Buttons -->
+                    </div></div>
+<div class="wm-mobile-section">
+<div class="wm-mobile-header">Position</div>
+<div class="wm-mobile-content">
+<!-- Position Grid Buttons -->
                     <div class="form-group" style="margin-bottom: 0">
                       <label
                         class="form-label"
@@ -1311,7 +1514,8 @@
                     </div>
                   </div>
 
-                  <!-- Execute Action Button -->
+                  </div></div>
+<!-- Execute Action Button -->
                   <button
                     type="button"
                     class="btn btn--primary btn--lg btn--full"
@@ -1533,5 +1737,24 @@
     <script type="module" src="/js/tool-content.js"></script>
     <script type="module" src="/js/tool-landing.js"></script>
     <script type="module" src="/js/image-tools/watermark-image.js"></script>
-  </body>
+  
+<script id="mobile-wm-script">
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('.wm-mobile-section');
+  sections.forEach(sec => {
+    const header = sec.querySelector('.wm-mobile-header');
+    if(header) {
+      header.addEventListener('click', () => {
+        // Close others
+        sections.forEach(other => {
+          if(other !== sec) other.classList.remove('is-open');
+        });
+        // Toggle current
+        sec.classList.toggle('is-open');
+      });
+    }
+  });
+});
+</script>
+</body>
 </html>

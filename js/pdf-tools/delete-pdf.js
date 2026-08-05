@@ -1,8 +1,11 @@
+// @ts-nocheck
 /**
  * Comprexa - Delete PDF Pages Tool Controller
  * Production-ready, client-side PDF page deletion module.
  * Redesigned to fit Comprexa Universal Tool Page Standard.
  */
+
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
 
 // Helper Toast function
 function showDeleteToast(message, type = "info", title = "") {
@@ -388,17 +391,14 @@ class DeletePdfUI {
       if (this.processingState) this.processingState.style.display = "none";
 
       // Load PDF.js document for canvas thumbnail generation
-      if (window.pdfjsLib) {
-        try {
-          window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-          const loadingTask = window.pdfjsLib.getDocument({
-            data: meta.arrayBuffer.slice(0),
-          });
-          this.pdfJsDoc = await loadingTask.promise;
-        } catch (e) {
-          this.pdfJsDoc = null;
-        }
+      try {
+        const lib = ensurePdfWorker();
+        const loadingTask = lib.getDocument({
+          data: meta.arrayBuffer.slice(0),
+        });
+        this.pdfJsDoc = await loadingTask.promise;
+      } catch (e) {
+        this.pdfJsDoc = null;
       }
 
       this.renderPagesGrid();
@@ -521,6 +521,7 @@ class DeletePdfUI {
         const ctx = canvas.getContext("2d");
 
         await page.render({
+          canvas,
           canvasContext: ctx,
           viewport: viewport,
         }).promise;

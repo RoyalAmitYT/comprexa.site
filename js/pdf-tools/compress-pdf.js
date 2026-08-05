@@ -5,11 +5,9 @@
  * Built from scratch using Universal Tool Page Template.
  */
 
-// Initialize PDF.js worker
-if (typeof pdfjsLib !== "undefined") {
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-}
+import { pdfjsLib, ensurePdfWorker } from "../pdf/pdf-init.js";
+
+ensurePdfWorker();
 
 // Safe Toast Helper
 function showCompressToast(message, type = "info", title = "") {
@@ -498,13 +496,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Read page count via PDF.js if available
       const arrayBuffer = await file.arrayBuffer();
-      if (window.pdfjsLib) {
-        const doc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-        state.pageCount = doc.numPages;
-        filemetaDisplay.textContent = `Original Size: ${CompressPdfEngine.formatBytes(file.size)} • ${state.pageCount} page${state.pageCount > 1 ? "s" : ""}`;
-      } else {
-        filemetaDisplay.textContent = `Original Size: ${CompressPdfEngine.formatBytes(file.size)}`;
-      }
+      const lib = ensurePdfWorker();
+      const doc = await lib.getDocument({ data: arrayBuffer }).promise;
+      state.pageCount = doc.numPages;
+      filemetaDisplay.textContent = `Original Size: ${CompressPdfEngine.formatBytes(file.size)} • ${state.pageCount} page${state.pageCount > 1 ? "s" : ""}`;
 
       // Hide upload area, reveal workspace
       uploadSection.style.display = "none";
@@ -518,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.error(err);
       showCompressToast(
-        `Could not process PDF file: ${err.message}`,
+        `Could not process PDF: ${err.message}`,
         "error",
         "Error Loading PDF",
       );
