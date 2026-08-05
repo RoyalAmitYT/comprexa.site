@@ -2063,18 +2063,23 @@ class ComprexaMetadataEngine {
     const webAppSchema = {
       "@context": "https://schema.org",
       "@type": "WebApplication",
+      "@id": `${canonical}#webapp`,
       name: item.title || item.name,
       url: canonical,
       description: desc,
-      applicationCategory: catName,
-      operatingSystem: "Any",
-      browserRequirements: item.browserCapabilities
-        ? item.browserCapabilities.join(", ")
-        : "Requires HTML5 JavaScript Web Browser",
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Web Browser",
+      browserRequirements: "Requires HTML5, JavaScript enabled web browser",
       offers: {
         "@type": "Offer",
-        price: "0.00",
+        price: "0",
         priceCurrency: "USD",
+      },
+      creator: {
+        "@type": "Organization",
+        "@id": "https://comprexa.in/#organization",
+        name: "Comprexa",
+        url: "https://comprexa.in",
       },
       featureList: Array.isArray(item.keywords)
         ? item.keywords.join(", ")

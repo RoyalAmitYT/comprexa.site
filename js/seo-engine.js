@@ -35,13 +35,17 @@ class ComprexaSeoEngine {
       url: this.baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${this.baseUrl}/assets/logo.png`,
+        url: `${this.baseUrl}/icon-512x512.png`,
         width: 512,
         height: 512,
       },
       description:
         "Comprexa is a privacy-first collection of free, client-side online developer, PDF, image, and utility tools.",
-      sameAs: ["https://twitter.com/comprexa", "https://github.com/comprexa"],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        url: `${this.baseUrl}/contact.html`,
+      },
     };
   }
 
@@ -54,16 +58,9 @@ class ComprexaSeoEngine {
       name: this.siteName,
       description:
         "Free Online Tools for PDF, Images, Code, QR Codes, and Text Processing.",
+      inLanguage: "en-US",
       publisher: {
         "@id": `${this.baseUrl}/#organization`,
-      },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${this.baseUrl}/?q={search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
       },
     };
   }
@@ -77,7 +74,10 @@ class ComprexaSeoEngine {
       name: title,
       description: description,
       isPartOf: {
+        "@type": "WebSite",
         "@id": `${this.baseUrl}/#website`,
+        name: this.siteName,
+        url: this.baseUrl,
       },
       breadcrumb: {
         "@id": `${canonicalUrl}#breadcrumb`,
@@ -139,28 +139,29 @@ class ComprexaSeoEngine {
   getSoftwareApplicationSchema(tool, canonicalUrl) {
     if (!tool) return null;
 
-    const catName =
-      tool.categoryName ||
-      (tool.category ? tool.category.toUpperCase() : "Utility");
-
     return {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "@id": `${canonicalUrl}#softwareapplication`,
+      "@type": "WebApplication",
+      "@id": `${canonicalUrl}#webapp`,
       name: tool.title || tool.name,
       url: canonicalUrl,
       description:
         tool.shortDescription ||
         tool.longDescription ||
         `Free online ${tool.title} tool.`,
-      applicationCategory: catName,
-      operatingSystem: "Any (Web Browser)",
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Web Browser",
       browserRequirements: "Requires HTML5, JavaScript enabled web browser",
       offers: {
         "@type": "Offer",
-        price: "0.00",
+        price: "0",
         priceCurrency: "USD",
-        availability: "https://schema.org/InStock",
+      },
+      creator: {
+        "@type": "Organization",
+        "@id": `${this.baseUrl}/#organization`,
+        name: this.siteName,
+        url: this.baseUrl,
       },
       featureList: Array.isArray(tool.keywords)
         ? tool.keywords.join(", ")
@@ -387,7 +388,10 @@ class ComprexaSeoEngine {
   }
 
   _generateSchemasForPage(pageType, meta, options) {
-    const schemas = [this.getOrganizationSchema(), this.getWebsiteSchema()];
+    const schemas = [];
+    if (pageType === "home") {
+      schemas.push(this.getOrganizationSchema(), this.getWebsiteSchema());
+    }
 
     // WebPage schema
     schemas.push(

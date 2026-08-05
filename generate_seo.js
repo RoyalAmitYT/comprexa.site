@@ -118,7 +118,7 @@ htmlFiles.forEach(file => {
 `;
 
   // Remove existing canonical, manifest, etc. if they exist to avoid duplicates
-  content = content.replace(/<link rel="canonical"[^>]*>/gi, '');
+  content = content.replace(/<link\s+[^>]*?rel=["']canonical["'][^>]*?>/gis, '');
   content = content.replace(/<link rel="manifest"[^>]*>/gi, '');
   content = content.replace(/<link rel="icon"[^>]*>/gi, '');
   content = content.replace(/<link rel="apple-touch-icon"[^>]*>/gi, '');

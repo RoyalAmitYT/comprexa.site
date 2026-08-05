@@ -187,17 +187,24 @@ export class ComprexaToolLandingPage {
     const appSchema = {
       "@context": "https://schema.org",
       "@type": "WebApplication",
+      "@id": `${canonicalUrl}#webapp`,
       name: tool.title,
       description: metaDesc,
       url: canonicalUrl,
-      applicationCategory: "BrowserApplication",
-      operatingSystem: "All",
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Web Browser",
+      browserRequirements: "Requires HTML5, JavaScript enabled web browser",
       offers: {
         "@type": "Offer",
         price: "0",
         priceCurrency: "USD",
       },
-      browserRequirements: "Requires JavaScript. Requires HTML5.",
+      creator: {
+        "@type": "Organization",
+        "@id": "https://comprexa.in/#organization",
+        name: "Comprexa",
+        url: "https://comprexa.in",
+      },
     };
 
     // 3. FAQPage Schema (if FAQs exist)
@@ -206,6 +213,7 @@ export class ComprexaToolLandingPage {
       faqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faqpage`,
         mainEntity: content.faqs.map((item) => ({
           "@type": "Question",
           name: item.question,
@@ -217,22 +225,13 @@ export class ComprexaToolLandingPage {
       };
     }
 
-    // 4. Organization Schema Hook
-    const orgSchema = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Comprexa",
-      url: "https://comprexa.in",
-      logo: "https://comprexa.in/assets/logo.png",
-    };
-
     this._appendSchemaScript(breadcrumbSchema);
     this._appendSchemaScript(appSchema);
     if (faqSchema) this._appendSchemaScript(faqSchema);
-    this._appendSchemaScript(orgSchema);
   }
 
   _appendSchemaScript(schemaObj) {
+    if (!schemaObj) return;
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.setAttribute("data-comprexa-schema", "true");
