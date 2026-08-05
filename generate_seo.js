@@ -4,8 +4,17 @@ import path from 'path';
 const SITE_URL = 'https://comprexa.com'; // We'll assume a generic domain, or we can use https://comprexa.com
 const htmlFiles = fs.readdirSync('.').filter(f => f.endsWith('.html'));
 
+// Helper to write to both root and public/
+if (!fs.existsSync('public')) {
+  fs.mkdirSync('public', { recursive: true });
+}
+const writePublicAndRoot = (filename, content) => {
+  fs.writeFileSync(filename, content);
+  fs.writeFileSync(path.join('public', filename), content);
+};
+
 // 1. Generate robots.txt
-fs.writeFileSync('robots.txt', `User-agent: *
+writePublicAndRoot('robots.txt', `User-agent: *
 Allow: /
 
 Sitemap: ${SITE_URL}/sitemap.xml
@@ -37,11 +46,11 @@ ${files.map(f => `  <url>
 </urlset>`;
 };
 
-fs.writeFileSync('sitemap-pages.xml', generateSitemap(pages));
-fs.writeFileSync('sitemap-tools.xml', generateSitemap(tools));
-fs.writeFileSync('sitemap-blog.xml', generateSitemap(blog));
+writePublicAndRoot('sitemap-pages.xml', generateSitemap(pages));
+writePublicAndRoot('sitemap-tools.xml', generateSitemap(tools));
+writePublicAndRoot('sitemap-blog.xml', generateSitemap(blog));
 
-fs.writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
+writePublicAndRoot('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>${SITE_URL}/sitemap-pages.xml</loc>
@@ -76,7 +85,7 @@ const manifest = {
     }
   ]
 };
-fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2));
+writePublicAndRoot('manifest.json', JSON.stringify(manifest, null, 2));
 
 // 4. Update HTML Files
 htmlFiles.forEach(file => {

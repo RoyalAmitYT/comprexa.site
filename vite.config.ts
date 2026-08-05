@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { defineConfig } from "vite";
+import { defineConfig, Plugin } from "vite";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -12,9 +12,56 @@ htmlFiles.forEach(file => {
   input[name] = path.resolve(__dirname, file);
 });
 
+function copySeoAssetsPlugin(): Plugin {
+  const seoFiles = [
+    'robots.txt',
+    'sitemap.xml',
+    'sitemap-tools.xml',
+    'sitemap-pages.xml',
+    'sitemap-blog.xml',
+    'site.webmanifest',
+    'manifest.json'
+  ];
+
+  return {
+    name: 'copy-seo-assets',
+    buildStart() {
+      const publicDir = path.resolve(__dirname, 'public');
+      if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir, { recursive: true });
+      }
+      seoFiles.forEach(file => {
+        const rootPath = path.resolve(__dirname, file);
+        const publicPath = path.resolve(publicDir, file);
+        if (fs.existsSync(rootPath)) {
+          fs.copyFileSync(rootPath, publicPath);
+        } else if (fs.existsSync(publicPath)) {
+          fs.copyFileSync(publicPath, rootPath);
+        }
+      });
+    },
+    closeBundle() {
+      const distDir = path.resolve(__dirname, 'dist');
+      if (fs.existsSync(distDir)) {
+        seoFiles.forEach(file => {
+          const rootPath = path.resolve(__dirname, file);
+          const publicPath = path.resolve(__dirname, 'public', file);
+          const distPath = path.resolve(distDir, file);
+          
+          if (fs.existsSync(publicPath)) {
+            fs.copyFileSync(publicPath, distPath);
+          } else if (fs.existsSync(rootPath)) {
+            fs.copyFileSync(rootPath, distPath);
+          }
+        });
+      }
+    }
+  };
+}
+
 export default defineConfig(() => {
   return {
-    plugins: [],
+    plugins: [copySeoAssetsPlugin()],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "."),
