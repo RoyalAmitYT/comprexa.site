@@ -13,7 +13,7 @@ export class ConverterUIController {
   constructor() {
     this.sampleJson = {
       server: {
-        host: "api.comprexa.app",
+        host: "api.comprexa.in",
         port: 8080,
         ssl: true,
         cluster: ["us-east-1", "us-west-2", "eu-central-1"],
@@ -35,7 +35,7 @@ export class ConverterUIController {
     };
 
     this.sampleYaml = `server:
-  host: api.comprexa.app
+  host: api.comprexa.in
   port: 8080
   ssl: true
   cluster:

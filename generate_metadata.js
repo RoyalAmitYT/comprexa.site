@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const SITE_URL = 'https://comprexa.com';
+const SITE_URL = 'https://comprexa.in';
 const OG_IMAGE = `${SITE_URL}/icon-512x512.png`;
 
 const metadataMap = {

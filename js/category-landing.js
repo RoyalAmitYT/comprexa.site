@@ -149,7 +149,7 @@ class ComprexaCategoryLandingPage {
       category.seoDescription ||
       category.description ||
       `Explore free, privacy-first ${category.name} on Comprexa. 100% browser-based processing with zero limits.`;
-    const canonical = `https://comprexa.app/${category.slug || category.id + "-tools"}.html`;
+    const canonical = `https://comprexa.in/${category.slug || category.id + "-tools"}.html`;
     const keywords = `${category.name}, free ${category.name.toLowerCase()}, online file tools, browser tools, comprexa`;
 
     // Document Title
@@ -191,13 +191,13 @@ class ComprexaCategoryLandingPage {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://comprexa.app/",
+          item: "https://comprexa.in/",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Categories",
-          item: "https://comprexa.app/#categories",
+          item: "https://comprexa.in/#categories",
         },
         {
           "@type": "ListItem",
@@ -224,7 +224,7 @@ class ComprexaCategoryLandingPage {
           name: tool.title,
           description: tool.shortDescription,
           url:
-            tool.seo?.canonicalUrl || `https://comprexa.app/${tool.slug}.html`,
+            tool.seo?.canonicalUrl || `https://comprexa.in/${tool.slug}.html`,
         })),
       },
     };

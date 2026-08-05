@@ -11,7 +11,7 @@
   [![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white)](#)
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 
-  [Live Demo](https://comprexa.com) • [Report Bug](#) • [Request Feature](#)
+  [Live Demo](https://comprexa.in) • [Report Bug](#) • [Request Feature](#)
 </div>
 
 <br />

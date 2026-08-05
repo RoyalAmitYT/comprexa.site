@@ -113,7 +113,7 @@ export class ComprexaToolLandingPage {
       tool.shortDescription ||
       `Use ${tool.title} online for free. Fast, secure, browser-based file tool with zero limits.`;
     const canonical =
-      seo.canonicalUrl || `https://comprexa.app/${tool.slug}.html`;
+      seo.canonicalUrl || `https://comprexa.in/${tool.slug}.html`;
     const keywords =
       seo.keywords ||
       (tool.keywords
@@ -166,13 +166,13 @@ export class ComprexaToolLandingPage {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://comprexa.app/",
+          item: "https://comprexa.in/",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: category.name || "Tools",
-          item: "https://comprexa.app/#tools",
+          item: "https://comprexa.in/#tools",
         },
         {
           "@type": "ListItem",
@@ -222,8 +222,8 @@ export class ComprexaToolLandingPage {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "Comprexa",
-      url: "https://comprexa.app",
-      logo: "https://comprexa.app/assets/logo.png",
+      url: "https://comprexa.in",
+      logo: "https://comprexa.in/assets/logo.png",
     };
 
     this._appendSchemaScript(breadcrumbSchema);

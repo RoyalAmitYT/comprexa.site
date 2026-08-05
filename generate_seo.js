@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const SITE_URL = 'https://comprexa.com'; // We'll assume a generic domain, or we can use https://comprexa.com
+const SITE_URL = 'https://comprexa.in'; // We'll assume a generic domain, or we can use https://comprexa.in
 const htmlFiles = fs.readdirSync('.').filter(f => f.endsWith('.html'));
 
 // Helper to write to both root and public/

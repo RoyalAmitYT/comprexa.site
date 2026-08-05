@@ -36,7 +36,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Merge PDF Files Online — Free & Secure | Comprexa",
       metaDescription:
         "Combine multiple PDF documents into a single organized file directly in your browser. Fast, 100% private, and free with zero file limits.",
-      canonicalUrl: "https://comprexa.app/tools/merge-pdf",
+      canonicalUrl: "https://comprexa.in/tools/merge-pdf",
       keywords:
         "merge pdf, combine pdf online, join pdf files, pdf binder, free pdf joiner",
     },
@@ -64,7 +64,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Split PDF Online — Extract PDF Pages Free | Comprexa",
       metaDescription:
         "Split large PDF documents into separate files or extract specific page ranges instantly without cloud uploads.",
-      canonicalUrl: "https://comprexa.app/tools/split-pdf",
+      canonicalUrl: "https://comprexa.in/tools/split-pdf",
       keywords:
         "split pdf, extract pdf pages, separate pdf, cut pdf pages online",
     },
@@ -102,7 +102,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Rotate PDF Online — Free & Permanent PDF Rotation | Comprexa",
       metaDescription:
         "Rotate PDF pages 90 or 180 degrees online instantly. Rotate all or selected pages 100% free with browser-first privacy.",
-      canonicalUrl: "https://comprexa.app/rotate-pdf.html",
+      canonicalUrl: "https://comprexa.in/rotate-pdf.html",
       keywords:
         "rotate pdf, rotate pdf online, turn pdf pages, flip pdf 90 degrees",
     },
@@ -141,7 +141,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Organize PDF Online — Visual PDF Page Reorder & Delete | Comprexa",
       metaDescription:
         "Reorder, delete, rotate, move, and duplicate PDF pages visually online. Free browser-first PDF page organizer with instant preview.",
-      canonicalUrl: "https://comprexa.app/organize-pdf.html",
+      canonicalUrl: "https://comprexa.in/organize-pdf.html",
       keywords:
         "organize pdf, reorder pdf pages, delete pdf pages, rearrange pdf, rearrange pages online",
     },
@@ -178,7 +178,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Delete PDF Pages Online — Remove PDF Pages Fast & Free | Comprexa",
       metaDescription:
         "Delete unwanted pages from PDF files online. Visual page selection, multi-page remove, undo support, and 100% private browser processing.",
-      canonicalUrl: "https://comprexa.app/delete-pdf.html",
+      canonicalUrl: "https://comprexa.in/delete-pdf.html",
       keywords:
         "delete pdf pages, remove pages from pdf, delete pages pdf online, free pdf page remover",
     },
@@ -215,7 +215,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Extract PDF Pages Online — Separate & Save PDF Pages Free | Comprexa",
       metaDescription:
         "Extract specific pages or page ranges from PDF files online. Visual page selection, instant preview, 100% private client-side processing.",
-      canonicalUrl: "https://comprexa.app/extract-pdf.html",
+      canonicalUrl: "https://comprexa.in/extract-pdf.html",
       keywords:
         "extract pdf pages, pull pages from pdf, extract pages online, separate pdf pages, save selected pdf pages",
     },
@@ -253,7 +253,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Watermark PDF Online — Add Text & Image Watermarks Free | Comprexa",
       metaDescription:
         "Add custom text or logo image watermarks to PDF documents online. Full control over position, opacity, font, size, rotation, and page selection. 100% private.",
-      canonicalUrl: "https://comprexa.app/watermark-pdf.html",
+      canonicalUrl: "https://comprexa.in/watermark-pdf.html",
       keywords:
         "watermark pdf, add watermark to pdf, pdf text watermark, pdf logo watermark, stamp pdf online, brand pdf document",
     },
@@ -291,7 +291,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Protect PDF Online — Password Protect & Encrypt PDF Free | Comprexa",
       metaDescription:
         "Secure your PDF documents with custom passwords and encryption. 100% private client-side PDF protection with permission control.",
-      canonicalUrl: "https://comprexa.app/protect-pdf.html",
+      canonicalUrl: "https://comprexa.in/protect-pdf.html",
       keywords:
         "protect pdf, password protect pdf, encrypt pdf online, secure pdf, lock pdf document",
     },
@@ -327,7 +327,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Unlock PDF Online — Remove Password from PDF Free | Comprexa",
       metaDescription:
         "Remove passwords and encryption from protected PDF files online. Fast, secure, 100% client-side PDF password removal tool.",
-      canonicalUrl: "https://comprexa.app/unlock-pdf.html",
+      canonicalUrl: "https://comprexa.in/unlock-pdf.html",
       keywords:
         "unlock pdf, remove password from pdf, pdf password remover, decrypt pdf online, unprotect pdf free",
     },
@@ -365,7 +365,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "PDF to Images Online — Convert PDF to PNG, JPG & WebP Free | Comprexa",
       metaDescription:
         "Convert PDF pages into high-resolution PNG, JPG, or WebP images online. Choose page ranges, quality levels, and DPI resolutions with 100% private client-side processing.",
-      canonicalUrl: "https://comprexa.app/pdf-to-images.html",
+      canonicalUrl: "https://comprexa.in/pdf-to-images.html",
       keywords:
         "pdf to images, convert pdf to jpg, pdf to png online, export pdf pages as images, high resolution pdf to image",
     },
@@ -401,7 +401,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Compress PDF Online — Reduce PDF File Size | Comprexa",
       metaDescription:
         "Shrink PDF file sizes up to 90% without losing visual quality. 100% browser-based compression.",
-      canonicalUrl: "https://comprexa.app/tools/compress-pdf",
+      canonicalUrl: "https://comprexa.in/tools/compress-pdf",
       keywords:
         "compress pdf, shrink pdf size, reduce pdf file size, optimize pdf",
     },
@@ -429,7 +429,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Convert PDF to Word Online — Free & Editable | Comprexa",
       metaDescription:
         "Convert PDF documents to Microsoft Word (.docx) files accurately with layout and font formatting intact.",
-      canonicalUrl: "https://comprexa.app/tools/pdf-to-word",
+      canonicalUrl: "https://comprexa.in/tools/pdf-to-word",
       keywords:
         "pdf to word, convert pdf to docx, edit pdf in word, free pdf converter",
     },
@@ -471,7 +471,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Compress Image Online — Reduce JPG, PNG, WebP File Size | Comprexa",
       metaDescription:
         "Optimize and shrink image file sizes online in seconds without visual quality loss. 100% private client-side processing.",
-      canonicalUrl: "https://comprexa.app/compress-image.html",
+      canonicalUrl: "https://comprexa.in/compress-image.html",
       keywords:
         "compress image, reduce image size, shrink png, shrink jpg size, webp optimizer, image compressor online",
     },
@@ -519,7 +519,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Resize Image Online — Change Photo Dimensions & Scale | Comprexa",
       metaDescription:
         "Resize images online with accurate aspect ratio lock, custom pixels, percentage scales, and social media presets.",
-      canonicalUrl: "https://comprexa.app/resize-image.html",
+      canonicalUrl: "https://comprexa.in/resize-image.html",
       keywords:
         "resize image, change photo dimensions, scale image pixels, aspect ratio resizer, photo dimension editor",
     },
@@ -558,7 +558,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Crop Image Online — Free Photo Cropper with Aspect Ratio Presets | Comprexa",
       metaDescription:
         "Crop JPG, PNG, WebP images online with custom selection handles, 16:9, 1:1, 4:3 aspect ratio locking, and social media presets.",
-      canonicalUrl: "https://comprexa.app/crop-image.html",
+      canonicalUrl: "https://comprexa.in/crop-image.html",
       keywords:
         "crop image online, image cropper, photo cropper, crop png, crop jpg, aspect ratio crop, social media photo cropper",
     },
@@ -598,7 +598,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Rotate & Flip Image Online — Free Photo Orientation Tool | Comprexa",
       metaDescription:
         "Rotate images 90, 180, 270 degrees or custom angles, and mirror flip horizontally or vertically online with 100% privacy.",
-      canonicalUrl: "https://comprexa.app/rotate-image.html",
+      canonicalUrl: "https://comprexa.in/rotate-image.html",
       keywords:
         "rotate image online, flip photo, mirror image, rotate 90 degrees, horizontal flip, vertical flip",
     },
@@ -646,7 +646,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Universal Image Converter Online — Convert JPG, PNG, WebP Free | Comprexa",
       metaDescription:
         "Convert image files online instantly between JPG, PNG, WebP, AVIF, and HEIC formats with custom quality and background controls. 100% private client-side processing.",
-      canonicalUrl: "https://comprexa.app/convert-image.html",
+      canonicalUrl: "https://comprexa.in/convert-image.html",
       keywords:
         "image converter, convert jpg to png, convert png to webp, convert heic to jpg, batch image converter",
     },
@@ -683,7 +683,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Watermark Image Online — Add Text & Logo Watermark Free | Comprexa",
       metaDescription:
         "Add text or logo watermarks to your photos online. Custom font styling, opacity, 9-grid position, rotation, and batch export to ZIP.",
-      canonicalUrl: "https://comprexa.app/watermark-image.html",
+      canonicalUrl: "https://comprexa.in/watermark-image.html",
       keywords:
         "watermark image, add watermark to photo, batch photo watermark, image logo stamp, protect images",
     },
@@ -711,7 +711,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Convert PNG to JPG Online Free — Comprexa",
       metaDescription:
         "Batch convert PNG images to JPG format instantly with crisp color preservation.",
-      canonicalUrl: "https://comprexa.app/png-to-jpg.html",
+      canonicalUrl: "https://comprexa.in/png-to-jpg.html",
       keywords: "png to jpg, convert png to jpeg, image format converter",
     },
   },
@@ -738,7 +738,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Convert JPG to PNG Online Free — Comprexa",
       metaDescription:
         "Convert JPG photos to high quality PNG format with transparent alpha channels.",
-      canonicalUrl: "https://comprexa.app/jpg-to-png.html",
+      canonicalUrl: "https://comprexa.in/jpg-to-png.html",
       keywords: "jpg to png, convert jpeg to png, lossless image conversion",
     },
   },
@@ -774,7 +774,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Convert WebP to PNG Online Free — Comprexa",
       metaDescription:
         "Convert WebP images to high quality transparent PNG format with batch ZIP export directly in your browser.",
-      canonicalUrl: "https://comprexa.app/webp-to-png.html",
+      canonicalUrl: "https://comprexa.in/webp-to-png.html",
       keywords:
         "webp to png, convert webp to png, webp image converter, transparent png from webp",
     },
@@ -813,7 +813,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Word to PDF Online — Convert DOCX & DOC to PDF Free | Comprexa",
       metaDescription:
         "Convert Word documents (.docx) to PDF format online in seconds. Preserves fonts, paragraph layout, and headers with 100% private browser processing.",
-      canonicalUrl: "https://comprexa.app/word-to-pdf.html",
+      canonicalUrl: "https://comprexa.in/word-to-pdf.html",
       keywords:
         "word to pdf, convert docx to pdf, doc to pdf online, free word pdf converter",
     },
@@ -851,7 +851,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Excel to PDF Online — Convert XLSX & Spreadsheets to PDF Free | Comprexa",
       metaDescription:
         "Convert Excel spreadsheets (.xlsx, .xls, .csv) into clean, professional PDF files directly in your browser. Choose sheet range, orientation, and gridlines.",
-      canonicalUrl: "https://comprexa.app/excel-to-pdf.html",
+      canonicalUrl: "https://comprexa.in/excel-to-pdf.html",
       keywords:
         "excel to pdf, convert xlsx to pdf, spreadsheet to pdf, csv to pdf online",
     },
@@ -888,7 +888,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "PowerPoint to PDF Online — Convert PPTX Slides to PDF Free | Comprexa",
       metaDescription:
         "Convert PowerPoint presentations (.pptx, .ppt) to PDF format online. High-resolution vector slides with zero software downloads.",
-      canonicalUrl: "https://comprexa.app/powerpoint-to-pdf.html",
+      canonicalUrl: "https://comprexa.in/powerpoint-to-pdf.html",
       keywords:
         "powerpoint to pdf, convert pptx to pdf, ppt to pdf online, slides to pdf free",
     },
@@ -924,7 +924,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "PDF to Excel Online — Convert PDF Tables to XLSX Free | Comprexa",
       metaDescription:
         "Extract tables and numerical data from PDF documents directly into Microsoft Excel (.xlsx) or CSV files with 100% private browser processing.",
-      canonicalUrl: "https://comprexa.app/pdf-to-excel.html",
+      canonicalUrl: "https://comprexa.in/pdf-to-excel.html",
       keywords:
         "pdf to excel, convert pdf to xlsx, pdf to csv, extract tables from pdf online",
     },
@@ -960,7 +960,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "PDF to PowerPoint Online — Convert PDF to PPTX Free | Comprexa",
       metaDescription:
         "Convert PDF pages into editable PowerPoint (.pptx) slides online. Retains page layout, high-res images, and presentation structure.",
-      canonicalUrl: "https://comprexa.app/pdf-to-powerpoint.html",
+      canonicalUrl: "https://comprexa.in/pdf-to-powerpoint.html",
       keywords:
         "pdf to powerpoint, convert pdf to pptx, pdf to ppt online, turn pdf into slides",
     },
@@ -997,7 +997,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Word to JPG Online — Convert DOCX to Images Free | Comprexa",
       metaDescription:
         "Convert Word documents (.docx) into high-quality JPG image files. Download individual pages or a single ZIP package directly in your browser.",
-      canonicalUrl: "https://comprexa.app/word-to-jpg.html",
+      canonicalUrl: "https://comprexa.in/word-to-jpg.html",
       keywords:
         "word to jpg, convert docx to jpg, word to jpeg online, docx image export",
     },
@@ -1034,7 +1034,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Word to TXT Online — Extract Text from DOCX Free | Comprexa",
       metaDescription:
         "Extract raw text from Word documents (.docx, .doc) into plain TXT format instantly. Zero formatting clutter, 100% private.",
-      canonicalUrl: "https://comprexa.app/word-to-txt.html",
+      canonicalUrl: "https://comprexa.in/word-to-txt.html",
       keywords:
         "word to txt, convert docx to txt, extract text from word, plain text word converter",
     },
@@ -1072,7 +1072,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Document Metadata Viewer Online — Inspect PDF, Word, Excel EXIF & Info | Comprexa",
       metaDescription:
         "Inspect document properties, hidden EXIF metadata, author, software, page counts, and security settings for PDF, DOCX, XLSX, and PPTX files 100% privately in browser.",
-      canonicalUrl: "https://comprexa.app/document-metadata-viewer.html",
+      canonicalUrl: "https://comprexa.in/document-metadata-viewer.html",
       keywords:
         "document metadata viewer, pdf metadata inspector, docx metadata viewer, excel metadata reader, view hidden document properties",
     },
@@ -1112,7 +1112,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free QR Code Generator — Create Custom Vector QR Codes | Comprexa",
       metaDescription:
         "Generate custom vector QR codes with colors, logos, and high-resolution SVG or PNG downloads.",
-      canonicalUrl: "https://comprexa.app/qr-generator.html",
+      canonicalUrl: "https://comprexa.in/qr-generator.html",
       keywords:
         "qr code generator, create qr code, free vector qr code, custom qr code maker",
     },
@@ -1140,7 +1140,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Online QR Code Scanner — Read QR Codes Free | Comprexa",
       metaDescription:
         "Scan QR codes from image files or webcam streams directly inside your browser.",
-      canonicalUrl: "https://comprexa.app/qr-scanner.html",
+      canonicalUrl: "https://comprexa.in/qr-scanner.html",
       keywords:
         "qr scanner, scan qr code online, decode qr image, web qr reader",
     },
@@ -1179,7 +1179,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Free Word Counter — Real-Time Word & Text Analytics | Comprexa",
       metaDescription:
         "Count words, characters, sentences, paragraphs, and calculate reading and speaking time in real-time.",
-      canonicalUrl: "https://comprexa.app/word-counter.html",
+      canonicalUrl: "https://comprexa.in/word-counter.html",
       keywords:
         "word counter, count words online, character counter, reading time calculator, text analytics",
     },
@@ -1216,7 +1216,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Character Counter — Count Characters & Spaces Online | Comprexa",
       metaDescription:
         "Count characters with or without spaces, lines, and paragraphs. Includes live character limit indicators for social media.",
-      canonicalUrl: "https://comprexa.app/character-counter.html",
+      canonicalUrl: "https://comprexa.in/character-counter.html",
       keywords:
         "character counter, count characters, twitter character limit, count letters, online letter counter",
     },
@@ -1254,7 +1254,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Case Converter — UPPERCASE, lowercase, Title Case | Comprexa",
       metaDescription:
         "Convert text case instantly online. Change to UPPERCASE, lowercase, Title Case, Sentence case, and Capitalized words.",
-      canonicalUrl: "https://comprexa.app/case-converter.html",
+      canonicalUrl: "https://comprexa.in/case-converter.html",
       keywords:
         "case converter, uppercase converter, title case converter, sentence case, lowercase converter",
     },
@@ -1290,7 +1290,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Extra Spaces Remover — Trim & Clean Whitespace Online | Comprexa",
       metaDescription:
         "Remove extra double spaces, leading/trailing whitespace, tabs, and blank lines from text online with live processing.",
-      canonicalUrl: "https://comprexa.app/remove-extra-spaces.html",
+      canonicalUrl: "https://comprexa.in/remove-extra-spaces.html",
       keywords:
         "remove extra spaces, space remover online, trim whitespace, clean spaces, remove blank lines",
     },
@@ -1324,7 +1324,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Free Duplicate Line Remover — Deduplicate Text Online | Comprexa",
       metaDescription:
         "Remove duplicate lines from lists and text instantly. Preserve order, toggle case sensitivity, and see stats.",
-      canonicalUrl: "https://comprexa.app/remove-duplicate-lines.html",
+      canonicalUrl: "https://comprexa.in/remove-duplicate-lines.html",
       keywords:
         "remove duplicate lines, deduplicate text, unique line extractor, line deduplicator online",
     },
@@ -1360,7 +1360,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Online Text Sorter — Alphabetical & Length Line Sorting | Comprexa",
       metaDescription:
         "Sort text lines alphabetically A to Z or Z to A, or sort by line length ascending or descending. Fast, browser-based, and private.",
-      canonicalUrl: "https://comprexa.app/text-sorter.html",
+      canonicalUrl: "https://comprexa.in/text-sorter.html",
       keywords:
         "text sorter, sort lines alphabetically, sort list by length, alphabetize list online, line sorter",
     },
@@ -1396,7 +1396,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Secure Random Password Generator — Comprexa",
       metaDescription:
         "Generate unbreakable, high-entropy passwords with custom length, symbols, and numbers.",
-      canonicalUrl: "https://comprexa.app/password-generator.html",
+      canonicalUrl: "https://comprexa.in/password-generator.html",
       keywords:
         "password generator, strong random password, secure passphrase maker",
     },
@@ -1430,7 +1430,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Password Strength Checker — Free & Private | Comprexa",
       metaDescription:
         "Analyze password security, entropy bits, estimated crack time, and common vulnerabilities with 100% private client-side processing.",
-      canonicalUrl: "https://comprexa.app/password-strength-checker.html",
+      canonicalUrl: "https://comprexa.in/password-strength-checker.html",
       keywords:
         "password strength checker, password security analyzer, password entropy calculator, time to crack password",
     },
@@ -1465,7 +1465,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Bulk UUID v4 Generator — Free & Private | Comprexa",
       metaDescription:
         "Generate cryptographically random RFC 4122 UUID v4 identifiers in bulk. Customizable formatting, JSON, array, and SQL output.",
-      canonicalUrl: "https://comprexa.app/uuid-generator.html",
+      canonicalUrl: "https://comprexa.in/uuid-generator.html",
       keywords:
         "uuid generator, guid generator, random uuid v4, bulk uuid maker, online uuid tool",
     },
@@ -1502,7 +1502,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Cryptographic Hash Generator (MD5, SHA-1, SHA-256, SHA-512) — Comprexa",
       metaDescription:
         "Generate MD5, SHA-1, SHA-256, and SHA-512 digests for text and files instantly with zero cloud uploads.",
-      canonicalUrl: "https://comprexa.app/hash-generator.html",
+      canonicalUrl: "https://comprexa.in/hash-generator.html",
       keywords:
         "hash generator, md5 generator, sha256 generator, sha1 calculator, file hash checker, sha512 generator",
     },
@@ -1536,7 +1536,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Random Number Generator — Free & Private | Comprexa",
       metaDescription:
         "Generate cryptographically random numbers and decimals in bulk. Customize min, max, unique values, sorting, and delimiters.",
-      canonicalUrl: "https://comprexa.app/random-number-generator.html",
+      canonicalUrl: "https://comprexa.in/random-number-generator.html",
       keywords:
         "random number generator, rng tool, random integer maker, random decimal generator, unique random numbers",
     },
@@ -1570,7 +1570,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Random String & Token Generator — Free & Private | Comprexa",
       metaDescription:
         "Generate random strings, tokens, secrets, and API keys with custom character rules, prefixes, and length limits.",
-      canonicalUrl: "https://comprexa.app/random-string-generator.html",
+      canonicalUrl: "https://comprexa.in/random-string-generator.html",
       keywords:
         "random string generator, token generator, api key generator, secret string maker",
     },
@@ -1604,7 +1604,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Unix Timestamp Converter — Free & Private | Comprexa",
       metaDescription:
         "Convert Unix timestamps to human-readable dates and dates to Unix timestamps in seconds and milliseconds.",
-      canonicalUrl: "https://comprexa.app/timestamp-converter.html",
+      canonicalUrl: "https://comprexa.in/timestamp-converter.html",
       keywords:
         "timestamp converter, unix timestamp to date, epoch converter, date to unix timestamp",
     },
@@ -1639,7 +1639,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Base64 Encoder / Decoder — Free & Private | Comprexa",
       metaDescription:
         "Encode and decode text and binary files with Base64. Complete UTF-8 Unicode and URL-safe support.",
-      canonicalUrl: "https://comprexa.app/base64-encoder-decoder.html",
+      canonicalUrl: "https://comprexa.in/base64-encoder-decoder.html",
       keywords:
         "base64 encoder, base64 decoder, base64 tool, file to base64, url safe base64",
     },
@@ -1679,7 +1679,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Online JSON Formatter — Prettify & Indent JSON Code | Comprexa",
       metaDescription:
         "Format and prettify JSON data online instantly. Supports 2 spaces, 4 spaces, and tab indentation, syntax validation, Unicode preservation, and 100% browser privacy.",
-      canonicalUrl: "https://comprexa.app/json-formatter.html",
+      canonicalUrl: "https://comprexa.in/json-formatter.html",
       keywords:
         "json formatter, prettify json, format json online, json indenter, pretty print json",
     },
@@ -1714,7 +1714,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Free Online JSON Validator — Check Syntax & Errors | Comprexa",
       metaDescription:
         "Validate JSON syntax online in real-time. Detect syntax errors with line & column numbers, human-readable error explanations, and node tree metrics.",
-      canonicalUrl: "https://comprexa.app/json-validator.html",
+      canonicalUrl: "https://comprexa.in/json-validator.html",
       keywords:
         "json validator, validate json, json syntax checker, json error detector",
     },
@@ -1749,7 +1749,7 @@ const COMPREXA_TOOLS_REGISTRY = [
       title: "Free Online JSON Minifier — Compress JSON Code | Comprexa",
       metaDescription:
         "Minify and compress JSON online instantly. Remove unnecessary whitespace, newlines, and comments while measuring payload size reduction and space saved.",
-      canonicalUrl: "https://comprexa.app/json-minifier.html",
+      canonicalUrl: "https://comprexa.in/json-minifier.html",
       keywords:
         "json minifier, minify json, compress json, remove json whitespace",
     },
@@ -1786,7 +1786,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Online JSON ↔ YAML Converter — Convert JSON & YAML Code | Comprexa",
       metaDescription:
         "Convert JSON to YAML and YAML to JSON online instantly. Features auto-detection, live syntax validation, custom indentation, Unicode support, and 100% browser privacy.",
-      canonicalUrl: "https://comprexa.app/json-yaml-converter.html",
+      canonicalUrl: "https://comprexa.in/json-yaml-converter.html",
       keywords:
         "json to yaml, yaml to json, json yaml converter, convert json to yaml online, convert yaml to json",
     },
@@ -1823,7 +1823,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Online JSON Tree Viewer — Interactive Node Inspector | Comprexa",
       metaDescription:
         "Inspect, navigate, and search complex JSON objects and arrays with an interactive tree view. Features expand/collapse all, node path copying, real-time key/value search, and metrics.",
-      canonicalUrl: "https://comprexa.app/json-tree-viewer.html",
+      canonicalUrl: "https://comprexa.in/json-tree-viewer.html",
       keywords:
         "json tree viewer, json node inspector, json tree, interactive json viewer, copy json path",
     },
@@ -1860,7 +1860,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Online Color Picker — Inspect HEX, RGB & HSL Codes | Comprexa",
       metaDescription:
         "Pick, inspect, and extract precise color values in HEX, RGB, and HSL formats with instant copy buttons, native color wheel, and local session history.",
-      canonicalUrl: "https://comprexa.app/color-picker.html",
+      canonicalUrl: "https://comprexa.in/color-picker.html",
       keywords:
         "color picker, online color picker, hex color picker, rgb color picker, hsl color picker",
     },
@@ -1897,7 +1897,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Online HEX / RGB / HSL Converter — Convert Color Codes | Comprexa",
       metaDescription:
         "Convert color values instantly between HEX, RGB, and HSL formats. Features real-time conversion, syntax error checking, copy buttons, and local privacy.",
-      canonicalUrl: "https://comprexa.app/color-converter.html",
+      canonicalUrl: "https://comprexa.in/color-converter.html",
       keywords:
         "hex to rgb, rgb to hex, hex to hsl, hsl to hex, rgb to hsl, color converter",
     },
@@ -1933,7 +1933,7 @@ const COMPREXA_TOOLS_REGISTRY = [
         "Free Online Color Palette Generator — Harmony & Swatch Exporter | Comprexa",
       metaDescription:
         "Generate harmonious color palettes with Monochromatic, Analogous, Complementary, Triadic, and Tetradic rules. Lock individual swatches, shuffle, and export CSS/SVG.",
-      canonicalUrl: "https://comprexa.app/color-palette-generator.html",
+      canonicalUrl: "https://comprexa.in/color-palette-generator.html",
       keywords:
         "color palette generator, color scheme generator, palette creator, complementary color palette, triadic palette",
     },
@@ -1965,7 +1965,7 @@ class ComprexaMetadataEngine {
       const catDesc =
         item.description ||
         `Browse free online ${catName} at Comprexa. Fast, client-side, zero limits.`;
-      const canonical = `https://comprexa.app/${item.slug || "pdf-tools"}.html`;
+      const canonical = `https://comprexa.in/${item.slug || "pdf-tools"}.html`;
 
       return {
         title: `${catName} — Free Online Tools | Comprexa`,
@@ -1978,16 +1978,16 @@ class ComprexaMetadataEngine {
           url: canonical,
           type: "website",
           siteName: "Comprexa",
-          image: "https://comprexa.app/assets/og-category.png",
+          image: "https://comprexa.in/assets/og-category.png",
         },
         twitter: {
           card: "summary_large_image",
           title: `${catName} — Free Online Tools | Comprexa`,
           description: catDesc,
-          image: "https://comprexa.app/assets/og-category.png",
+          image: "https://comprexa.in/assets/og-category.png",
         },
         breadcrumbs: [
-          { position: 1, name: "Home", item: "https://comprexa.app/" },
+          { position: 1, name: "Home", item: "https://comprexa.in/" },
           { position: 2, name: catName, item: canonical },
         ],
         jsonLd: [
@@ -1999,7 +1999,7 @@ class ComprexaMetadataEngine {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://comprexa.app/",
+                item: "https://comprexa.in/",
               },
               {
                 "@type": "ListItem",
@@ -2023,7 +2023,7 @@ class ComprexaMetadataEngine {
       item.longDescription ||
       `Free online ${item.title} tool. 100% private, client-side, zero limits.`;
     const canonical =
-      seo.canonicalUrl || `https://comprexa.app/${item.slug || item.id}.html`;
+      seo.canonicalUrl || `https://comprexa.in/${item.slug || item.id}.html`;
     const keywordsStr =
       seo.keywords ||
       (Array.isArray(item.keywords)
@@ -2040,11 +2040,11 @@ class ComprexaMetadataEngine {
     const catSlug = catObj ? catObj.slug : `${item.category}-tools`;
 
     const breadcrumbs = [
-      { position: 1, name: "Home", item: "https://comprexa.app/" },
+      { position: 1, name: "Home", item: "https://comprexa.in/" },
       {
         position: 2,
         name: catName,
-        item: `https://comprexa.app/${catSlug}.html`,
+        item: `https://comprexa.in/${catSlug}.html`,
       },
       { position: 3, name: item.title || item.name, item: canonical },
     ];
@@ -2092,13 +2092,13 @@ class ComprexaMetadataEngine {
         url: canonical,
         type: "website",
         siteName: "Comprexa",
-        image: seo.ogImage || "https://comprexa.app/assets/og-image.png",
+        image: seo.ogImage || "https://comprexa.in/assets/og-image.png",
       },
       twitter: {
         card: seo.twitterCard || "summary_large_image",
         title,
         description: desc,
-        image: seo.ogImage || "https://comprexa.app/assets/og-image.png",
+        image: seo.ogImage || "https://comprexa.in/assets/og-image.png",
       },
       breadcrumbs,
       jsonLd: [breadcrumbSchema, webAppSchema],
@@ -2263,13 +2263,13 @@ class ComprexaToolRegistry {
     const seo = raw.seo || {};
     seo.title = seo.title || `${title} — Free Online Tool | Comprexa`;
     seo.metaDescription = seo.metaDescription || shortDescription;
-    seo.canonicalUrl = seo.canonicalUrl || `https://comprexa.app/${slug}.html`;
+    seo.canonicalUrl = seo.canonicalUrl || `https://comprexa.in/${slug}.html`;
     seo.keywords =
       seo.keywords ||
       (keywords.length > 0
         ? keywords.join(", ")
         : `${title}, free tool, comprexa`);
-    seo.ogImage = seo.ogImage || "https://comprexa.app/assets/og-image.png";
+    seo.ogImage = seo.ogImage || "https://comprexa.in/assets/og-image.png";
     seo.twitterCard = seo.twitterCard || "summary_large_image";
 
     return {

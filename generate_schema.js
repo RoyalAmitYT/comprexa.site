@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const SITE_URL = 'https://comprexa.com';
+const SITE_URL = 'https://comprexa.in';
 const LOGO_URL = `${SITE_URL}/icon-512x512.png`;
 
 const categories = {

@@ -9,8 +9,8 @@
 class ComprexaSeoEngine {
   constructor() {
     this.siteName = "Comprexa";
-    this.baseUrl = "https://comprexa.app";
-    this.defaultOgImage = "https://comprexa.app/assets/og-image.png";
+    this.baseUrl = "https://comprexa.in";
+    this.defaultOgImage = "https://comprexa.in/assets/og-image.png";
     this.defaultTwitterCard = "summary_large_image";
     this.defaultThemeColor = "#4f46e5";
     this.defaultRobots =
