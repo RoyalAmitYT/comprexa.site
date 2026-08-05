@@ -147,7 +147,10 @@
       }
       
       /* 1. Document Preview card fixes */
-      #extract-file-info:not([style*="display: none"]):not([style*="display:none"]) {
+      #extract-file-info {
+        display: none !important;
+      }
+      #extract-file-info.visible-preview {
         display: flex !important;
         flex-direction: column !important;
       }
@@ -183,18 +186,31 @@
       #extract-file-info > div:first-child button {
         order: 3 !important;
         width: 100% !important;
-        min-height: 44px !important;
-        background: var(--bg-surface) !important;
-        border: 1px solid #ef4444 !important;
+        min-height: 46px !important;
+        background: rgba(239, 68, 68, 0.05) !important;
+        border: 1.5px solid #ef4444 !important;
         color: #ef4444 !important;
-        margin: 0 !important;
-        display: inline-flex !important;
+        margin-top: 8px !important;
+        display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         gap: 8px !important;
+        border-radius: var(--radius-md) !important;
+        padding: 10px 16px !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+      }
+      #extract-file-info > div:first-child button span {
+        display: inline-block !important;
+        white-space: nowrap !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: #ef4444 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
       }
       #extract-file-info > div:first-child button:hover {
-        background: rgba(239, 68, 68, 0.08) !important;
+        background: rgba(239, 68, 68, 0.12) !important;
       }
 
       /* 2. Page Thumbnails */

@@ -436,7 +436,10 @@ class ExtractPdfUI {
 
       // Hide upload zone, show file info & workspace
       if (this.uploadSection) this.uploadSection.style.display = "none";
-      if (this.fileInfoCard) this.fileInfoCard.style.display = "flex";
+      if (this.fileInfoCard) {
+        this.fileInfoCard.style.display = "flex";
+        this.fileInfoCard.classList.add("visible-preview");
+      }
       if (this.workspaceSection) this.workspaceSection.style.display = "block";
       if (this.resultSection) this.resultSection.style.display = "none";
 
@@ -732,7 +735,10 @@ class ExtractPdfUI {
     if (this.currentFile) {
       if (this.workspaceSection) this.workspaceSection.style.display = "block";
     } else {
-      if (this.fileInfoCard) this.fileInfoCard.style.display = "none";
+      if (this.fileInfoCard) {
+        this.fileInfoCard.style.display = "none";
+        this.fileInfoCard.classList.remove("visible-preview");
+      }
       if (this.uploadSection) this.uploadSection.style.display = "block";
     }
   }
