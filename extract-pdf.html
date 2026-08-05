@@ -147,7 +147,7 @@
       }
       
       /* 1. Document Preview card fixes */
-      #extract-file-info {
+      #extract-file-info:not([style*="display: none"]):not([style*="display:none"]) {
         display: flex !important;
         flex-direction: column !important;
       }
@@ -185,8 +185,16 @@
         width: 100% !important;
         min-height: 44px !important;
         background: var(--bg-surface) !important;
-        border: 1px solid var(--border-subtle) !important;
+        border: 1px solid #ef4444 !important;
+        color: #ef4444 !important;
         margin: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+      }
+      #extract-file-info > div:first-child button:hover {
+        background: rgba(239, 68, 68, 0.08) !important;
       }
 
       /* 2. Page Thumbnails */
