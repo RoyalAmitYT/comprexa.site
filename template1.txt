@@ -1,0 +1,91 @@
+        class="breadcrumb-nav"
+        id="landing-breadcrumb"
+        aria-label="Breadcrumb"
+      ></nav>
+
+      <!-- 2. Dynamic Hero Header -->
+      <div id="landing-hero"></div>
+
+      <!-- 3. Universal Tool Workspace Container -->
+      <section class="tool-workspace" id="landing-workspace">
+        <div class="container container--narrow" style="max-width: 860px">
+          <!-- Universal Single Tool Container -->
+          <div
+            class="card workspace-card"
+            id="split-app-container"
+            style="padding: 28px"
+          >
+            <!-- Step 1: Universal Dropzone Area -->
+            <div class="split-upload-section" id="split-upload-section">
+              <div
+                class="file-uploader__dropzone"
+                id="split-dropzone"
+                tabindex="0"
+                role="button"
+                aria-label="Upload PDF file zone. Click or drag and drop a PDF file here."
+              >
+                <input
+                  type="file"
+                  id="split-file-input"
+                  class="file-uploader__input"
+                  accept="application/pdf"
+                  aria-hidden="true"
+                  tabindex="-1"
+                />
+                <div class="file-uploader__icon-wrap">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="9" y1="15" x2="15" y2="15" />
+                  </svg>
+                </div>
+                <div class="file-uploader__title">
+                  Upload PDF to <span>Split PDF</span>
+                </div>
+                <div class="file-uploader__hint-main">
+                  Drag & drop your PDF file here
+                </div>
+                <button
+                  type="button"
+                  class="btn btn--primary file-uploader__choose-btn"
+                  tabindex="-1"
+                  style="
+                    margin-top: 4px;
+                    margin-bottom: 8px;
+                    min-width: 150px;
+                    height: 38px;
+                    padding: 0 18px;
+                    font-size: 0.9rem;
+                  "
+                >
+                  Browse Files
+                </button>
+                <div
+                  class="file-uploader__sub-text"
+                  style="
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    color: var(--text-muted);
+                  "
+                >
+                  Select a PDF file to extract or split into separate documents
+                </div>
+                <div
+                  class="file-uploader__formats"
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--text-muted);
+                    opacity: 0.8;
+                    margin-top: 2px;

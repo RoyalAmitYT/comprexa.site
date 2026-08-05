@@ -37,22 +37,17 @@
       content="powerpoint to pdf, convert pptx to pdf, ppt to pdf online, free powerpoint pdf converter"
     />
 
-<title>
-      PowerPoint to PDF Online — Convert PPTX & PPT to PDF Free | Comprexa
-    </title>
-
-    <!-- Open Graph -->
+<!-- Open Graph -->
 
 <!-- Google Fonts & Stylesheet -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
+
+<link rel="stylesheet" href="/css/style.css" />
 
     <!-- JSZip & PDFLib -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Convert PowerPoint to PDF | PPTX to PDF — Comprexa</title>
   <meta name="description" content="Convert Microsoft PowerPoint presentations (PPTX) to PDF format easily. Free and secure local document conversion." />
@@ -63,21 +58,20 @@
   <meta property="og:description" content="Convert Microsoft PowerPoint presentations (PPTX) to PDF format easily. Free and secure local document conversion." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/powerpoint-to-pdf.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Convert PowerPoint to PDF | PPTX to PDF — Comprexa" />
   <meta name="twitter:description" content="Convert Microsoft PowerPoint presentations (PPTX) to PDF format easily. Free and secure local document conversion." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/powerpoint-to-pdf.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -136,6 +130,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Header -->
@@ -197,7 +195,10 @@
 
     <main>
       <nav class="breadcrumb-nav" id="landing-breadcrumb"></nav>
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Convert PowerPoint to PDF</h1>
+        <p class="visually-hidden">Convert Microsoft PowerPoint presentations (PPTX) to PDF format easily. Free and secure local document conversion.</p>
+      </div>
 
       <section class="tool-workspace" id="landing-workspace">
         <div class="container container--narrow" style="max-width: 860px">
@@ -280,16 +281,14 @@
                 <div style="display: flex; align-items: center; gap: 14px">
                   <div
                     class="icon-bg--doc"
-                    style="
-                      width: 44px;
-                      height: 44px;
+                    style="width: 44px;
+                      
                       border-radius: var(--radius-md);
                       display: flex;
                       align-items: center;
                       justify-content: center;
                       background: rgba(79, 70, 229, 0.12);
-                      color: var(--primary);
-                    "
+                      color: var(--primary)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +371,7 @@
                     <select
                       id="ppt-pdf-layout"
                       class="ui-input"
-                      style="height: 42px"
+                      
                     >
                       <option value="16:9" selected>16:9 Widescreen</option>
                       <option value="4:3">4:3 Standard</option>
@@ -391,7 +390,7 @@
                       id="ppt-pdf-filename"
                       class="ui-input"
                       value="presentation.pdf"
-                      style="height: 42px; font-weight: 600"
+                      style="font-weight: 600"
                     />
                   </div>
                 </div>
@@ -400,7 +399,7 @@
                   type="button"
                   class="btn btn--primary btn--lg btn--full"
                   id="btn-execute-ppt-pdf"
-                  style="height: 48px; font-size: 1rem; font-weight: 700"
+                  style="font-size: 1rem; font-weight: 700"
                 >
                   <span>Convert to PDF</span>
                 </button>
@@ -503,7 +502,7 @@
                   type="button"
                   class="btn btn--primary btn--full btn--lg"
                   id="btn-download-ppt-pdf"
-                  style="height: 48px; font-weight: 700"
+                  style="font-weight: 700"
                 >
                   <span>Download PDF Presentation</span>
                 </button>

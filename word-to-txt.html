@@ -37,22 +37,17 @@
       content="word to txt, convert docx to txt, doc to text online, extract text from docx, word text extractor"
     />
 
-<title>
-      Word to TXT Online — Extract Plain Text from DOCX Free | Comprexa
-    </title>
-
-    <!-- Open Graph -->
+<!-- Open Graph -->
 
 <!-- Google Fonts & Stylesheet -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
+
+<link rel="stylesheet" href="/css/style.css" />
 
     <!-- Mammoth -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Convert Word to TXT | Extract Text — Comprexa</title>
   <meta name="description" content="Extract plain text from Microsoft Word documents. Convert DOCX to TXT files quickly and securely without data uploads." />
@@ -63,21 +58,20 @@
   <meta property="og:description" content="Extract plain text from Microsoft Word documents. Convert DOCX to TXT files quickly and securely without data uploads." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/word-to-txt.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Convert Word to TXT | Extract Text — Comprexa" />
   <meta name="twitter:description" content="Extract plain text from Microsoft Word documents. Convert DOCX to TXT files quickly and securely without data uploads." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/word-to-txt.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -136,6 +130,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Header -->
@@ -197,7 +195,10 @@
 
     <main>
       <nav class="breadcrumb-nav" id="landing-breadcrumb"></nav>
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Convert Word to TXT</h1>
+        <p class="visually-hidden">Extract plain text from Microsoft Word documents. Convert DOCX to TXT files quickly and securely without data uploads.</p>
+      </div>
 
       <section class="tool-workspace" id="landing-workspace">
         <div class="container container--narrow" style="max-width: 860px">
@@ -280,16 +281,14 @@
                 <div style="display: flex; align-items: center; gap: 14px">
                   <div
                     class="icon-bg--doc"
-                    style="
-                      width: 44px;
-                      height: 44px;
+                    style="width: 44px;
+                      
                       border-radius: var(--radius-md);
                       display: flex;
                       align-items: center;
                       justify-content: center;
                       background: rgba(79, 70, 229, 0.12);
-                      color: var(--primary);
-                    "
+                      color: var(--primary)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +371,7 @@
                     <select
                       id="word-txt-line-breaks"
                       class="ui-input"
-                      style="height: 42px"
+                      
                     >
                       <option value="crlf" selected>
                         Windows (CRLF - \r\n)
@@ -393,7 +392,7 @@
                       id="word-txt-filename"
                       class="ui-input"
                       value="document.txt"
-                      style="height: 42px; font-weight: 600"
+                      style="font-weight: 600"
                     />
                   </div>
                 </div>
@@ -402,7 +401,7 @@
                   type="button"
                   class="btn btn--primary btn--lg btn--full"
                   id="btn-execute-word-txt"
-                  style="height: 48px; font-size: 1rem; font-weight: 700"
+                  style="font-size: 1rem; font-weight: 700"
                 >
                   <span>Extract Plain Text</span>
                 </button>
@@ -498,17 +497,15 @@
                 id="word-txt-preview-area"
                 class="ui-textarea"
                 readonly
-                style="
-                  width: 100%;
-                  height: 260px;
+                style="width: 100%;
+                  
                   font-family: &quot;JetBrains Mono&quot;, monospace;
                   font-size: 0.85rem;
                   padding: 14px;
                   border-radius: var(--radius-lg);
                   background: var(--bg-surface-hover);
                   margin-bottom: 20px;
-                  resize: vertical;
-                "
+                  resize: vertical"
               ></textarea>
 
               <div style="display: flex; gap: 12px">
@@ -516,7 +513,7 @@
                   type="button"
                   class="btn btn--primary btn--full btn--lg"
                   id="btn-download-word-txt"
-                  style="height: 48px; font-weight: 700"
+                  style="font-weight: 700"
                 >
                   <span>Download .TXT File</span>
                 </button>

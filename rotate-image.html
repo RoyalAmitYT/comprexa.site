@@ -37,22 +37,16 @@
       content="rotate image, flip image, rotate photo online, mirror image, turn image 90 degrees, flip image horizontally, fix photo orientation"
     />
 
-<title>
-      Rotate & Flip Image Online — Free Photo Orientation Tool | Comprexa
-    </title>
-
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Main Stylesheet -->
+<!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Rotate Image Online | Flip & Rotate Photos — Comprexa</title>
   <meta name="description" content="Rotate your images clockwise or counter-clockwise, or flip them vertically and horizontally. Free and fast browser tool." />
@@ -63,21 +57,20 @@
   <meta property="og:description" content="Rotate your images clockwise or counter-clockwise, or flip them vertically and horizontally. Free and fast browser tool." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/rotate-image.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Rotate Image Online | Flip & Rotate Photos — Comprexa" />
   <meta name="twitter:description" content="Rotate your images clockwise or counter-clockwise, or flip them vertically and horizontally. Free and fast browser tool." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/rotate-image.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -136,6 +129,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -315,7 +312,10 @@
       ></nav>
 
       <!-- 2. Dynamic Hero Header -->
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Rotate Image Online</h1>
+        <p class="visually-hidden">Rotate your images clockwise or counter-clockwise, or flip them vertically and horizontally. Free and fast browser tool.</p>
+      </div>
 
       <!-- 3. Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -371,14 +371,12 @@
                     class="btn btn--primary file-uploader__choose-btn"
                     id="browse-btn"
                     tabindex="-1"
-                    style="
-                      margin-top: 4px;
+                    style="margin-top: 4px;
                       margin-bottom: 8px;
                       min-width: 150px;
-                      height: 38px;
+                      
                       padding: 0 18px;
-                      font-size: 0.9rem;
-                    "
+                      font-size: 0.9rem"
                   >
                     Browse Image
                   </button>
@@ -479,30 +477,26 @@
                     <div class="tool-preview-panel">
                       <div
                         class="rotator-stage"
-                        style="
-                          position: relative;
+                        style="position: relative;
                           width: 100%;
-                          min-height: 260px;
+                          min-
                           background: var(--bg-surface-subtle);
                           border-radius: var(--radius-lg);
                           overflow: hidden;
                           display: flex;
                           align-items: center;
                           justify-content: center;
-                          border: 1px solid var(--border-subtle);
-                        "
+                          border: 1px solid var(--border-subtle)"
                       >
                         <img
                           id="rotator-preview-img"
                           class="rotator-canvas"
                           src=""
                           alt="Rotated Image Preview"
-                          style="
-                            max-width: 100%;
-                            max-height: 280px;
+                          style="max-width: 100%;
+                            max-
                             object-fit: contain;
-                            transition: transform 0.2s ease;
-                          "
+                            transition: transform 0.2s ease"
                          width="800" height="600" loading="lazy" decoding="async" />
                       </div>
 
@@ -972,14 +966,12 @@
 
                 <div
                   class="progress-bar-container"
-                  style="
-                    background: var(--bg-surface-hover);
-                    height: 10px;
+                  style="background: var(--bg-surface-hover);
+                    
                     border-radius: var(--radius-pill);
                     overflow: hidden;
                     max-width: 480px;
-                    margin: 0 auto 12px auto;
-                  "
+                    margin: 0 auto 12px auto"
                 >
                   <div
                     class="progress-bar"
@@ -1015,17 +1007,15 @@
                 >
                   <div
                     class="success-icon"
-                    style="
-                      width: 56px;
-                      height: 56px;
+                    style="width: 56px;
+                      
                       background: rgba(34, 197, 94, 0.12);
                       color: var(--success);
                       border-radius: 50%;
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      margin: 0 auto 16px auto;
-                    "
+                      margin: 0 auto 16px auto"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -1066,18 +1056,16 @@
                   >
                     <div
                       class="preview-box"
-                      style="max-width: 380px; max-height: 280px; width: 100%"
+                      style="max-width: 380px; max- width: 100%"
                     >
                       <img
                         id="result-preview-img"
                         src=""
                         alt="Result Rotated Image Preview"
                         class="preview-box__img"
-                        style="
-                          max-width: 100%;
-                          max-height: 280px;
-                          object-fit: contain;
-                        "
+                        style="max-width: 100%;
+                          max-
+                          object-fit: contain"
                        width="800" height="600" loading="lazy" decoding="async" />
                     </div>
 

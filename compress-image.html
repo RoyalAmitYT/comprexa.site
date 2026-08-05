@@ -37,24 +37,18 @@
       content="compress image, image compressor, reduce image size, shrink jpg, compress png online, webp optimizer"
     />
 
-<title>
-      Compress Image Online — Reduce JPG, PNG & WebP File Size | Comprexa
-    </title>
-
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Main Stylesheet -->
+<!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
 
     <!-- JSZip Library for Bulk ZIP Packaging -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Compress Image Online | Reduce JPG/PNG Size — Comprexa</title>
   <meta name="description" content="Reduce the file size of your JPG, PNG, and WebP images. Compress images in bulk securely within your browser." />
@@ -65,21 +59,20 @@
   <meta property="og:description" content="Reduce the file size of your JPG, PNG, and WebP images. Compress images in bulk securely within your browser." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/compress-image.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Compress Image Online | Reduce JPG/PNG Size — Comprexa" />
   <meta name="twitter:description" content="Reduce the file size of your JPG, PNG, and WebP images. Compress images in bulk securely within your browser." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/compress-image.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -138,6 +131,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -317,7 +314,10 @@
       ></nav>
 
       <!-- 2. Dynamic Hero Header -->
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Compress Image Online</h1>
+        <p class="visually-hidden">Reduce the file size of your JPG, PNG, and WebP images. Compress images in bulk securely within your browser.</p>
+      </div>
 
       <!-- 3. Universal Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -373,14 +373,12 @@
                   type="button"
                   class="btn btn--primary file-uploader__choose-btn"
                   tabindex="-1"
-                  style="
-                    margin-top: 4px;
+                  style="margin-top: 4px;
                     margin-bottom: 8px;
                     min-width: 150px;
-                    height: 38px;
+                    
                     padding: 0 18px;
-                    font-size: 0.9rem;
-                  "
+                    font-size: 0.9rem"
                 >
                   Browse Files
                 </button>
@@ -643,13 +641,11 @@
                     </div>
                   </div>
                   <label
-                    style="
-                      position: relative;
+                    style="position: relative;
                       display: inline-block;
                       width: 44px;
-                      height: 24px;
-                      flex-shrink: 0;
-                    "
+                      
+                      flex-shrink: 0"
                   >
                     <input
                       type="checkbox"
@@ -680,7 +676,7 @@
                 type="button"
                 class="btn btn--primary btn--lg btn--full"
                 id="btn-execute-compress"
-                style="height: 48px; font-size: 1rem; font-weight: 700"
+                style="font-size: 1rem; font-weight: 700"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -794,7 +790,7 @@
                     type="button"
                     class="btn btn--primary"
                     id="btn-download-all-zip"
-                    style="height: 42px; font-weight: 700"
+                    style="font-weight: 700"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -816,7 +812,7 @@
                     type="button"
                     class="btn btn--outline"
                     id="btn-start-over"
-                    style="height: 42px"
+                    
                   >
                     <span>Compress More Images</span>
                   </button>

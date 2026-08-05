@@ -41,16 +41,12 @@
       rel="canonical"
       href="https://comprexa.app/color-palette-generator.html"
     />
-    <title>
-      Color Palette Generator — Free Online Harmony Maker | Comprexa
-    </title>
 
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
+
+<link
       href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
@@ -180,6 +176,10 @@
       }
     </style>
 
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
+
 <title>Color Palette Generator — Comprexa</title>
   <meta name="description" content="Generate beautiful and harmonious color palettes for your design projects. Create monochromatic, analogous, and complementary themes." />
   <meta name="robots" content="index, follow" />
@@ -189,21 +189,20 @@
   <meta property="og:description" content="Generate beautiful and harmonious color palettes for your design projects. Create monochromatic, analogous, and complementary themes." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/color-palette-generator.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Color Palette Generator — Comprexa" />
   <meta name="twitter:description" content="Generate beautiful and harmonious color palettes for your design projects. Create monochromatic, analogous, and complementary themes." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/color-palette-generator.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -262,6 +261,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -441,7 +444,10 @@
       ></nav>
 
       <!-- 2. Dynamic Hero Header -->
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Color Palette Generator</h1>
+        <p class="visually-hidden">Generate beautiful and harmonious color palettes for your design projects. Create monochromatic, analogous, and complementary themes.</p>
+      </div>
 
       <!-- 3. Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -470,13 +476,11 @@
                   type="color"
                   id="palette-native-picker"
                   value="#2563EB"
-                  style="
-                    width: 38px;
-                    height: 38px;
+                  style="width: 38px;
+                    
                     border: none;
                     border-radius: 6px;
-                    cursor: pointer;
-                  "
+                    cursor: pointer"
                 />
                 <input
                   type="text"

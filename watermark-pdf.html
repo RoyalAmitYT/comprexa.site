@@ -37,24 +37,18 @@
       content="watermark pdf, add watermark to pdf, pdf text watermark, pdf image watermark, stamp pdf, confidential stamp pdf"
     />
 
-<title>
-      Watermark PDF Online — Add Text & Image Stamp to PDF Free | Comprexa
-    </title>
-
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Main Stylesheet -->
+<!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
 
     <!-- PDF-Lib & PDF.js Libraries for Client-Side Processing & Real-time Canvas Preview -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Add Watermark to PDF | Free PDF Tool — Comprexa</title>
   <meta name="description" content="Stamp an image or text watermark over your PDF document. Securely add watermarks to PDFs locally in your browser." />
@@ -65,21 +59,20 @@
   <meta property="og:description" content="Stamp an image or text watermark over your PDF document. Securely add watermarks to PDFs locally in your browser." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/watermark-pdf.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Add Watermark to PDF | Free PDF Tool — Comprexa" />
   <meta name="twitter:description" content="Stamp an image or text watermark over your PDF document. Securely add watermarks to PDFs locally in your browser." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/watermark-pdf.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -138,6 +131,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -317,7 +314,10 @@
       ></nav>
 
       <!-- 2. Dynamic Hero Header -->
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Add Watermark to PDF</h1>
+        <p class="visually-hidden">Stamp an image or text watermark over your PDF document. Securely add watermarks to PDFs locally in your browser.</p>
+      </div>
 
       <!-- 3. Universal Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -371,14 +371,12 @@
                   type="button"
                   class="btn btn--primary file-uploader__choose-btn"
                   tabindex="-1"
-                  style="
-                    margin-top: 4px;
+                  style="margin-top: 4px;
                     margin-bottom: 8px;
                     min-width: 150px;
-                    height: 38px;
+                    
                     padding: 0 18px;
-                    font-size: 0.9rem;
-                  "
+                    font-size: 0.9rem"
                 >
                   Browse Files
                 </button>
@@ -431,17 +429,15 @@
                 >
                   <div
                     class="tool-card-mini__icon icon-bg--pdf"
-                    style="
-                      width: 38px;
-                      height: 38px;
+                    style="width: 38px;
+                      
                       display: flex;
                       align-items: center;
                       justify-content: center;
                       border-radius: var(--radius-md);
                       background: rgba(99, 102, 241, 0.12);
                       color: var(--primary);
-                      flex-shrink: 0;
-                    "
+                      flex-shrink: 0"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -677,7 +673,7 @@
                         <select
                           id="wm-font-select"
                           class="ui-input"
-                          style="height: 38px; font-size: 0.85rem"
+                          style="font-size: 0.85rem"
                         >
                           <option value="Helvetica">
                             Helvetica (Sans-Serif)
@@ -703,15 +699,13 @@
                             type="color"
                             id="wm-color-picker"
                             value="#dc2626"
-                            style="
-                              width: 38px;
-                              height: 38px;
+                            style="width: 38px;
+                              
                               border: 1px solid var(--border-subtle);
                               border-radius: var(--radius-sm);
                               cursor: pointer;
                               padding: 2px;
-                              background: transparent;
-                            "
+                              background: transparent"
                           />
                           <span
                             id="wm-color-hex"
@@ -946,13 +940,11 @@
                               id="wm-img-thumb"
                               src=""
                               alt="Watermark Image"
-                              style="
-                                max-width: 48px;
-                                max-height: 48px;
+                              style="max-width: 48px;
+                                max-
                                 object-fit: contain;
                                 border-radius: var(--radius-sm);
-                                border: 1px solid var(--border-subtle);
-                              "
+                                border: 1px solid var(--border-subtle)"
                              width="48" height="48" loading="lazy" decoding="async" />
                             <div style="text-align: left">
                               <div
@@ -1273,7 +1265,7 @@
                       <select
                         id="wm-pages-select"
                         class="ui-input"
-                        style="height: 38px; font-size: 0.85rem"
+                        style="font-size: 0.85rem"
                       >
                         <option value="all">All Pages</option>
                         <option value="first">First Page Only</option>
@@ -1289,7 +1281,7 @@
                           id="wm-custom-pages-input"
                           class="ui-input"
                           placeholder="e.g. 1, 3, 5-10"
-                          style="height: 36px; font-size: 0.85rem"
+                          style="font-size: 0.85rem"
                         />
                       </div>
                     </div>
@@ -1318,7 +1310,7 @@
                       type="button"
                       class="btn btn--primary btn--lg btn--full"
                       id="btn-apply-watermark"
-                      style="height: 48px; font-weight: 700; margin-top: 8px"
+                      style="font-weight: 700; margin-top: 8px"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1441,30 +1433,26 @@
 
                   <!-- Preview Stage Container -->
                   <div
-                    style="
-                      flex: 1;
+                    style="flex: 1;
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      min-height: 420px;
+                      min-
                       position: relative;
                       overflow: hidden;
                       background: var(--bg-surface-hover);
                       border-radius: var(--radius-lg);
-                      padding: 12px;
-                    "
+                      padding: 12px"
                     id="watermark-preview-stage"
                   >
                     <div
-                      style="
-                        position: relative;
+                      style="position: relative;
                         box-shadow: var(--shadow-md);
                         border-radius: 4px;
                         overflow: hidden;
                         max-width: 100%;
-                        max-height: 520px;
-                        display: inline-block;
-                      "
+                        max-
+                        display: inline-block"
                       id="watermark-preview-wrapper"
                     >
                       <!-- Base PDF Page Canvas rendered by PDF.js -->
@@ -1627,17 +1615,15 @@
                     >
                       <div
                         class="tool-card-mini__icon icon-bg--pdf"
-                        style="
-                          width: 44px;
-                          height: 44px;
+                        style="width: 44px;
+                          
                           display: flex;
                           align-items: center;
                           justify-content: center;
                           border-radius: var(--radius-md);
                           background: rgba(99, 102, 241, 0.12);
                           color: var(--primary);
-                          flex-shrink: 0;
-                        "
+                          flex-shrink: 0"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1693,7 +1679,7 @@
                     download="watermarked-document.pdf"
                     class="btn btn--primary btn--full btn--lg"
                     id="btn-download-watermarked"
-                    style="height: 48px; font-weight: 700"
+                    style="font-weight: 700"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

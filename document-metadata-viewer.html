@@ -41,23 +41,18 @@
       rel="canonical"
       href="https://comprexa.app/document-metadata-viewer.html"
     />
-    <title>
-      Document Metadata Viewer — Inspect PDF, Word, Excel & PPT Properties |
-      Comprexa
-    </title>
 
-    <!-- Open Graph -->
+<!-- Open Graph -->
 
 <!-- Google Fonts & Stylesheet -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
+
+<link rel="stylesheet" href="/css/style.css" />
 
     <!-- PDF.js & JSZip -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>View Document Metadata | Exif & Info — Comprexa</title>
   <meta name="description" content="Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser." />
@@ -68,21 +63,20 @@
   <meta property="og:description" content="Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/document-metadata-viewer.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="View Document Metadata | Exif & Info — Comprexa" />
   <meta name="twitter:description" content="Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/document-metadata-viewer.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -141,6 +135,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Header -->
@@ -202,7 +200,10 @@
 
     <main>
       <nav class="breadcrumb-nav" id="landing-breadcrumb"></nav>
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">View Document Metadata</h1>
+        <p class="visually-hidden">Read and extract hidden metadata and properties from PDF and Office documents. Securely view document info in your browser.</p>
+      </div>
 
       <section class="tool-workspace" id="landing-workspace">
         <div class="container container--narrow" style="max-width: 860px">
@@ -282,16 +283,14 @@
                 <div style="display: flex; align-items: center; gap: 14px">
                   <div
                     class="icon-bg--doc"
-                    style="
-                      width: 44px;
-                      height: 44px;
+                    style="width: 44px;
+                      
                       border-radius: var(--radius-md);
                       display: flex;
                       align-items: center;
                       justify-content: center;
                       background: rgba(79, 70, 229, 0.12);
-                      color: var(--primary);
-                    "
+                      color: var(--primary)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

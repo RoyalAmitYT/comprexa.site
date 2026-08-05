@@ -374,7 +374,7 @@ class QrScannerApp {
         throw new Error("No QR code detected");
       }
     } catch (err) {
-      console.log("Scan error:", err);
+
       this.setState(ScannerState.FAILED);
       this.toast("No QR Code detected in image.", "warning");
     }
@@ -890,7 +890,7 @@ class QrScannerApp {
     if (window.ComprexaFramework && typeof window.ComprexaFramework.showToast === "function") {
       window.ComprexaFramework.showToast(msg, type);
     } else {
-      console.log(msg);
+
     }
   }
 }

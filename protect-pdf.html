@@ -37,24 +37,18 @@
       content="protect pdf, password protect pdf, encrypt pdf online, lock pdf, pdf security, secure pdf file"
     />
 
-<title>
-      Protect PDF Online — Password Protect & Encrypt PDF Free | Comprexa
-    </title>
-
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Main Stylesheet -->
+<!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
 
     <!-- PDF-Lib Library for Client-Side Processing -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Protect PDF Online | Add Password to PDF — Comprexa</title>
   <meta name="description" content="Encrypt and password protect your PDF files to keep them secure. Add passwords to PDFs locally without server uploads." />
@@ -65,21 +59,20 @@
   <meta property="og:description" content="Encrypt and password protect your PDF files to keep them secure. Add passwords to PDFs locally without server uploads." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/protect-pdf.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Protect PDF Online | Add Password to PDF — Comprexa" />
   <meta name="twitter:description" content="Encrypt and password protect your PDF files to keep them secure. Add passwords to PDFs locally without server uploads." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/protect-pdf.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -138,6 +131,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -317,7 +314,10 @@
       ></nav>
 
       <!-- 2. Dynamic Hero Header -->
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Protect PDF Online</h1>
+        <p class="visually-hidden">Encrypt and password protect your PDF files to keep them secure. Add passwords to PDFs locally without server uploads.</p>
+      </div>
 
       <!-- 3. Universal Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -372,14 +372,12 @@
                   class="btn btn--primary file-uploader__choose-btn"
                   id="protect-choose-btn"
                   tabindex="-1"
-                  style="
-                    margin-top: 4px;
+                  style="margin-top: 4px;
                     margin-bottom: 8px;
                     min-width: 150px;
-                    height: 38px;
+                    
                     padding: 0 18px;
-                    font-size: 0.9rem;
-                  "
+                    font-size: 0.9rem"
                 >
                   Browse Files
                 </button>
@@ -435,17 +433,15 @@
                   "
                 >
                   <div
-                    style="
-                      width: 42px;
-                      height: 42px;
+                    style="width: 42px;
+                      
                       border-radius: var(--radius-md);
                       background: rgba(99, 102, 241, 0.1);
                       color: var(--primary);
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      flex-shrink: 0;
-                    "
+                      flex-shrink: 0"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -536,17 +532,15 @@
                       type="button"
                       id="btn-toggle-open-pw"
                       class="btn btn--icon"
-                      style="
-                        position: absolute;
+                      style="position: absolute;
                         right: 4px;
                         top: 50%;
                         transform: translateY(-50%);
                         width: 36px;
-                        height: 36px;
+                        
                         border: none;
                         background: transparent;
-                        color: var(--text-muted);
-                      "
+                        color: var(--text-muted)"
                       aria-label="Show Password"
                     >
                       <svg
@@ -622,17 +616,15 @@
                       type="button"
                       id="btn-toggle-confirm-pw"
                       class="btn btn--icon"
-                      style="
-                        position: absolute;
+                      style="position: absolute;
                         right: 4px;
                         top: 50%;
                         transform: translateY(-50%);
                         width: 36px;
-                        height: 36px;
+                        
                         border: none;
                         background: transparent;
-                        color: var(--text-muted);
-                      "
+                        color: var(--text-muted)"
                       aria-label="Show Password"
                     >
                       <svg
@@ -792,11 +784,9 @@
                             type="checkbox"
                             id="perm-printing"
                             checked
-                            style="
-                              width: 16px;
-                              height: 16px;
-                              accent-color: var(--primary);
-                            "
+                            style="width: 16px;
+                              
+                              accent-color: var(--primary)"
                           />
                           <span>Allow Printing</span>
                         </label>
@@ -812,11 +802,9 @@
                           <input
                             type="checkbox"
                             id="perm-copying"
-                            style="
-                              width: 16px;
-                              height: 16px;
-                              accent-color: var(--primary);
-                            "
+                            style="width: 16px;
+                              
+                              accent-color: var(--primary)"
                           />
                           <span>Allow Copying Text</span>
                         </label>
@@ -832,11 +820,9 @@
                           <input
                             type="checkbox"
                             id="perm-editing"
-                            style="
-                              width: 16px;
-                              height: 16px;
-                              accent-color: var(--primary);
-                            "
+                            style="width: 16px;
+                              
+                              accent-color: var(--primary)"
                           />
                           <span>Allow Editing</span>
                         </label>
@@ -852,11 +838,9 @@
                           <input
                             type="checkbox"
                             id="perm-annotating"
-                            style="
-                              width: 16px;
-                              height: 16px;
-                              accent-color: var(--primary);
-                            "
+                            style="width: 16px;
+                              
+                              accent-color: var(--primary)"
                           />
                           <span>Allow Annotations</span>
                         </label>
@@ -892,12 +876,9 @@
                   type="button"
                   class="btn btn--primary btn--lg btn--full"
                   id="btn-execute-protect"
-                  style="
-                    height: 48px;
-                    font-size: 1rem;
+                  style="font-size: 1rem;
                     font-weight: 700;
-                    margin-top: 8px;
-                  "
+                    margin-top: 8px"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1038,16 +1019,14 @@
                     <div style="display: flex; align-items: center; gap: 12px">
                       <div
                         class="tool-card-mini__icon icon-bg--pdf"
-                        style="
-                          width: 44px;
-                          height: 44px;
+                        style="width: 44px;
+                          
                           display: flex;
                           align-items: center;
                           justify-content: center;
                           border-radius: var(--radius-md);
                           background: rgba(99, 102, 241, 0.12);
-                          color: var(--primary);
-                        "
+                          color: var(--primary)"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1101,7 +1080,7 @@
                     download="protected-document.pdf"
                     class="btn btn--primary btn--full btn--lg"
                     id="btn-download-protected"
-                    style="height: 48px; font-weight: 700"
+                    style="font-weight: 700"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -37,22 +37,16 @@
       content="character counter, count characters, twitter character limit, letter counter, count letters, count spaces, text character limit"
     />
 
-<title>
-      Free Character Counter — Count Characters & Spaces Online | Comprexa
-    </title>
-
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Main Stylesheet -->
+<!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Character Counter | Social Media Limit Check — Comprexa</title>
   <meta name="description" content="Count characters in your text and check limits for social media platforms like Twitter, Facebook, and Instagram." />
@@ -63,21 +57,20 @@
   <meta property="og:description" content="Count characters in your text and check limits for social media platforms like Twitter, Facebook, and Instagram." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/character-counter.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Character Counter | Social Media Limit Check — Comprexa" />
   <meta name="twitter:description" content="Count characters in your text and check limits for social media platforms like Twitter, Facebook, and Instagram." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/character-counter.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -136,6 +129,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -315,7 +312,10 @@
       ></nav>
 
       <!-- 2. Dynamic Hero Header -->
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Character Counter</h1>
+        <p class="visually-hidden">Count characters in your text and check limits for social media platforms like Twitter, Facebook, and Instagram.</p>
+      </div>
 
       <!-- 3. Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -544,13 +544,10 @@
               </div>
               <div
                 class="text-limit-meter__track"
-                style="
-                  height: 8px;
-                  background: var(--bg-surface-hover);
+                style="background: var(--bg-surface-hover);
                   border-radius: 4px;
                   overflow: hidden;
-                  border: 1px solid var(--border-subtle);
-                "
+                  border: 1px solid var(--border-subtle)"
               >
                 <div
                   id="char-limit-progress-bar"
@@ -596,14 +593,12 @@
               <textarea
                 id="char-counter-input"
                 class="ui-textarea"
-                style="
-                  width: 100%;
-                  min-height: 220px;
+                style="width: 100%;
+                  min-
                   font-size: 0.95rem;
                   line-height: 1.6;
                   resize: vertical;
-                  border-radius: var(--radius-md);
-                "
+                  border-radius: var(--radius-md)"
                 placeholder="Type, paste, or drag & drop a text file (.txt, .md, .csv) here to count characters and verify limit presets..."
                 rows="8"
                 aria-label="Text input area for character counter"

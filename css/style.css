@@ -63,10 +63,10 @@
 
   /* Layout & Geometry */
   --header-height: 62px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-pill: 9999px;
   --max-width: 1280px;
 
@@ -498,7 +498,7 @@ ol {
   border: 1px solid var(--border-subtle);
   background-color: var(--bg-surface);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   flex-shrink: 0;
   box-sizing: border-box;
 }
@@ -559,7 +559,7 @@ ol {
   text-decoration: none;
   white-space: nowrap;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   flex-shrink: 0;
   border: none;
 }
@@ -594,7 +594,7 @@ ol {
   background-color: var(--bg-surface);
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .menu-toggle:hover,
@@ -641,6 +641,7 @@ ol {
 /* Buttons */
 .btn {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -648,13 +649,14 @@ ol {
   font-size: 0.9375rem;
   font-weight: 600;
   border-radius: var(--radius-md);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   white-space: nowrap;
 }
 
 .btn--icon {
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
+  min-height: 36px !important;
   padding: 0;
   border-radius: var(--radius-md);
   color: var(--text-muted);
@@ -700,6 +702,7 @@ ol {
 
 .btn--lg {
   padding: 14px 28px;
+  min-height: 48px;
   font-size: 1rem;
   border-radius: var(--radius-lg);
 }
@@ -885,7 +888,7 @@ ol {
     0 2px 10px rgba(99, 102, 241, 0.08),
     0 1px 2px rgba(0, 0, 0, 0.03);
   backdrop-filter: blur(8px);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-normal);
+  transition: all var(--transition-normal);
   animation: fadeInDown 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -984,7 +987,7 @@ ol {
   box-shadow:
     0 4px 16px rgba(79, 70, 229, 0.35),
     0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-normal);
+  transition: all var(--transition-normal);
   font-weight: 700;
   height: 48px;
   padding: 0 24px;
@@ -1009,7 +1012,7 @@ ol {
   color: var(--text-main);
   border: 1px solid var(--border-strong);
   box-shadow: var(--shadow-sm);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-normal);
+  transition: all var(--transition-normal);
   font-weight: 600;
   height: 48px;
   padding: 0 22px;
@@ -1049,7 +1052,7 @@ ol {
   box-shadow:
     0 16px 36px -8px rgba(15, 23, 42, 0.08),
     0 2px 6px rgba(0, 0, 0, 0.02);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-normal);
+  transition: all var(--transition-normal);
 }
 
 [data-theme="dark"] .search-box {
@@ -1120,7 +1123,7 @@ ol {
   background-color: var(--bg-surface-hover);
   margin-right: 8px;
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   flex-shrink: 0;
 }
 
@@ -1194,7 +1197,7 @@ ol {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
@@ -1313,9 +1316,9 @@ ol {
 }
 
 .tool-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   border-color: var(--primary-border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
   background-color: var(--bg-surface-hover);
 }
 
@@ -1607,7 +1610,7 @@ section.stats-section,
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .category-tab:hover {
@@ -2011,7 +2014,7 @@ section.stats-section,
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 20px 22px;
+  padding: 24px;
   box-shadow: var(--shadow-sm);
   transition:
     transform var(--transition-normal),
@@ -2024,7 +2027,7 @@ section.stats-section,
 }
 
 .category-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   border-color: var(--primary-border);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
@@ -2165,7 +2168,7 @@ section.stats-section,
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 32px 28px;
+  padding: 24px;
   box-shadow: var(--shadow-sm);
   transition:
     transform var(--transition-normal),
@@ -2175,7 +2178,7 @@ section.stats-section,
 }
 
 .trust-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: var(--primary-border);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
@@ -2275,7 +2278,7 @@ section.stats-section,
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 32px 28px;
+  padding: 24px;
   box-shadow: var(--shadow-sm);
   transition:
     transform var(--transition-normal),
@@ -2287,7 +2290,7 @@ section.stats-section,
 }
 
 .featured-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: var(--primary-border);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
@@ -2513,7 +2516,7 @@ section.stats-section,
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 32px 28px;
+  padding: 24px;
   box-shadow: var(--shadow-sm);
   transition:
     transform var(--transition-normal),
@@ -2523,7 +2526,7 @@ section.stats-section,
 }
 
 .privacy-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: var(--primary-border);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
@@ -3109,7 +3112,7 @@ section.stats-section,
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .back-to-top-btn:hover {
@@ -4516,12 +4519,14 @@ section.stats-section,
 
 .btn--sm {
   padding: 6px 14px;
+  min-height: 36px;
   font-size: 0.8125rem;
   border-radius: var(--radius-md);
 }
 
 .btn--lg {
   padding: 14px 28px;
+  min-height: 48px;
   font-size: 1rem;
   border-radius: var(--radius-xl);
 }
@@ -4641,7 +4646,7 @@ section.stats-section,
   color: var(--text-main);
   cursor: pointer;
   user-select: none;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .chip:hover {
@@ -5562,7 +5567,7 @@ section.stats-section,
   cursor: pointer;
   user-select: none;
   outline: none;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter 300ms ease;
+  transition: all 300ms ease;
 }
 .file-uploader__dropzone:hover {
   border-color: var(--primary);
@@ -6527,8 +6532,10 @@ section.stats-section,
 }
 
 .tool-card:hover {
+  transform: translateY(-4px);
   border-color: var(--primary-border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  background-color: var(--bg-surface-hover);
 }
 
 .card__header {
@@ -6657,7 +6664,7 @@ section.stats-section,
   border-radius: 4px;
   border: 1.5px solid var(--border-subtle);
   background-color: var(--bg-surface);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6707,7 +6714,7 @@ section.stats-section,
   display: flex;
   flex-direction: column;
   gap: 2px;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .ui-radio-card input:checked + .ui-radio-card__inner {
@@ -6969,7 +6976,7 @@ section.stats-section,
   align-items: center;
   gap: 16px;
   text-decoration: none;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-normal);
+  transition: all var(--transition-normal);
   box-shadow: var(--shadow-sm);
 }
 
@@ -7257,7 +7264,7 @@ section.stats-section,
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 12px 14px;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   cursor: grab;
   position: relative;
   user-select: none;
@@ -7472,7 +7479,7 @@ section.stats-section,
   cursor: pointer;
   width: 100%;
   text-align: left;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .settings-nav__item:hover {
@@ -7554,7 +7561,7 @@ section.stats-section,
   color: var(--text-muted);
   font-size: 0.8125rem;
   font-weight: 600;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .settings-radio-card:hover .settings-radio-box {
@@ -7910,7 +7917,7 @@ section.stats-section,
   background-color: var(--bg-surface);
   color: var(--text-muted);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .organize-card__move-btn:hover:not(:disabled) {
@@ -8625,7 +8632,7 @@ section.stats-section,
   position: relative;
   width: 100%;
   border-radius: var(--radius-md, 12px);
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .text-workspace__input-wrap--dragover .text-workspace__textarea {
@@ -8784,7 +8791,7 @@ section.stats-section,
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .case-btn:hover {
@@ -8949,7 +8956,7 @@ section.stats-section,
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
   font-size: 0.875rem;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .dev-status-banner--valid {
@@ -9222,7 +9229,7 @@ section.stats-section,
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .json-tree-action-btn:hover {
@@ -9430,7 +9437,7 @@ section.stats-section,
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .palette-card__lock-btn:hover {
@@ -9463,7 +9470,7 @@ section.stats-section,
   border-radius: var(--radius-sm);
   backdrop-filter: blur(4px);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   text-align: center;
 }
 
@@ -9596,7 +9603,7 @@ body.cmd-palette-open {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   flex-shrink: 0;
 }
 
@@ -9651,7 +9658,7 @@ body.cmd-palette-open {
   border-radius: var(--radius-pill);
   cursor: pointer;
   white-space: nowrap;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .cmd-filter-pill:hover {
@@ -9741,7 +9748,7 @@ body.cmd-palette-open {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .cmd-recent-chip:hover {
@@ -9782,7 +9789,7 @@ body.cmd-palette-open {
   border-radius: var(--radius-lg);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
   user-select: none;
 }
 
@@ -10021,7 +10028,7 @@ kbd.cmd-kbd {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform, opacity, background-color, border-color, color, box-shadow, filter var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .pipeline-step--active .pipeline-step__num {
@@ -10220,6 +10227,12 @@ kbd.cmd-kbd {
   max-width: 1200px !important;
   margin: 0 auto !important;
 }
+@media (max-width: 992px) {
+  .tool-workspace[data-workspace-state="has-file"] .tool-workspace__grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 
 .tool-workspace[data-workspace-state="has-file"]
   .workspace-initial-workflow-preview {
@@ -11040,7 +11053,7 @@ kbd.cmd-kbd {
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-family);
 }
 
 .workspace-how-steps {
@@ -11136,4 +11149,165 @@ kbd.cmd-kbd {
   .workspace-how-arrow {
     display: none; /* Hide arrows on mobile */
   }
+}
+
+/* ==========================================================================
+   Global Mobile Tool Workspace Overrides (<= 992px)
+   ========================================================================== */
+@media (max-width: 992px) {
+  /* Override inline grid columns for specialized tool layouts */
+  .crop-editor-grid,
+  #studio-grid-layout,
+  [style*="minmax(0, 1fr) 320px"],
+  [style*="minmax(0, 1fr) 380px"],
+  [style*="1.1fr 0.9fr"] {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Ensure tool workspaces flow vertically on mobile */
+  .tool-workspace__grid {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Make sure sidebars and settings sections take full width */
+  .tool-workspace__sidebar,
+  .tool-settings,
+  .crop-editor-grid > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Optimize canvas heights for mobile */
+  .crop-stage-container,
+  #studio-grid-layout > div:first-child,
+  .workspace-dropzone-card .rotator-canvas-container {
+    height: 50vh !important;
+    min-height: 250px !important;
+    max-height: 400px !important;
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   Comprehensive Mobile Optimizations (<= 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Prevent horizontal scrolling globally */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  /* Full-width primary buttons in tool sidebars/options */
+  .tool-workspace__sidebar .btn,
+  .tool-settings .btn,
+  .download-card .btn,
+  .workspace-stage--options .btn,
+  .output-section .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Exception for button groups and small buttons so they don't break side-by-side controls */
+  .btn-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+  .btn-group .btn,
+  .tool-settings .btn--sm,
+  .tool-workspace__sidebar .btn--sm {
+    width: auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  /* Ensure inputs and sliders don't overflow */
+  input[type="range"],
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  select,
+  textarea {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Allow tabs to wrap or scroll */
+  .tabs, .tab-list, .nav-tabs, .file-uploader__formats {
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Ensure container bounds */
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Adjust gaps and paddings for mobile space */
+  .tool-workspace__main,
+  .tool-workspace__sidebar {
+    gap: 16px !important;
+  }
+  
+  .tool-workspace__grid {
+    gap: 16px !important;
+  }
+
+  .card, .workspace-card, .tool-card {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  
+  /* Ensure canvases and previews are responsive */
+  canvas, img {
+    max-width: 100% !important;
+    height: auto;
+  }
+}
+
+@media (max-width: 992px) {
+  /* Override additional inline grids found in the codebase */
+  [style*="1.2fr 0.8fr"],
+  [style*="1fr 280px"] {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Fix specific rotate tool canvas */
+  .rotator-stage {
+    height: 50vh !important;
+    min-height: 250px !important;
+    max-height: 400px !important;
+    width: 100% !important;
+  }
+}
+
+/* SEO Accessibility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

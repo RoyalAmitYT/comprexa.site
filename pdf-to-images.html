@@ -37,24 +37,18 @@
       content="pdf to images, convert pdf to jpg, pdf to png online, export pdf pages as images, high resolution pdf to image, pdf to image converter"
     />
 
-<title>
-      PDF to Images Online — Convert PDF to PNG & JPG Free | Comprexa
-    </title>
-
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Main Stylesheet -->
+<!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
 
     <!-- PDF.js & JSZip Libraries for In-Browser PDF Rendering & ZIP Packaging -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Convert PDF to Images | Extract JPG/PNG — Comprexa</title>
   <meta name="description" content="Convert every page of a PDF document into high-quality JPG or PNG images. Fast and private browser-based conversion." />
@@ -65,21 +59,20 @@
   <meta property="og:description" content="Convert every page of a PDF document into high-quality JPG or PNG images. Fast and private browser-based conversion." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/pdf-to-images.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Convert PDF to Images | Extract JPG/PNG — Comprexa" />
   <meta name="twitter:description" content="Convert every page of a PDF document into high-quality JPG or PNG images. Fast and private browser-based conversion." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/pdf-to-images.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -138,6 +131,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Header Navigation -->
@@ -317,7 +314,10 @@
       ></nav>
 
       <!-- 2. Dynamic Hero Header -->
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Convert PDF to Images</h1>
+        <p class="visually-hidden">Convert every page of a PDF document into high-quality JPG or PNG images. Fast and private browser-based conversion.</p>
+      </div>
 
       <!-- 3. Universal Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -373,14 +373,12 @@
                   type="button"
                   class="btn btn--primary file-uploader__choose-btn"
                   tabindex="-1"
-                  style="
-                    margin-top: 4px;
+                  style="margin-top: 4px;
                     margin-bottom: 8px;
                     min-width: 150px;
-                    height: 38px;
+                    
                     padding: 0 18px;
-                    font-size: 0.9rem;
-                  "
+                    font-size: 0.9rem"
                 >
                   Browse File
                 </button>
@@ -435,17 +433,15 @@
                   "
                 >
                   <div
-                    style="
-                      width: 44px;
-                      height: 44px;
+                    style="width: 44px;
+                      
                       border-radius: var(--radius-md);
                       background: rgba(99, 102, 241, 0.12);
                       color: var(--primary);
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      flex-shrink: 0;
-                    "
+                      flex-shrink: 0"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -558,7 +554,7 @@
                     <select
                       id="format-select"
                       class="ui-input"
-                      style="height: 42px; font-size: 0.92rem; font-weight: 600"
+                      style="font-size: 0.92rem; font-weight: 600"
                     >
                       <option value="png" selected>
                         PNG (Lossless, Transparent)
@@ -582,7 +578,7 @@
                     <select
                       id="quality-select"
                       class="ui-input"
-                      style="height: 42px; font-size: 0.92rem; font-weight: 600"
+                      style="font-size: 0.92rem; font-weight: 600"
                     >
                       <option value="0.75">Standard (75%)</option>
                       <option value="0.90" selected>High (90%)</option>
@@ -605,7 +601,7 @@
                     <select
                       id="resolution-select"
                       class="ui-input"
-                      style="height: 42px; font-size: 0.92rem; font-weight: 600"
+                      style="font-size: 0.92rem; font-weight: 600"
                     >
                       <option value="1">1x Scale (72 DPI - Fast)</option>
                       <option value="2" selected>
@@ -679,7 +675,7 @@
                       id="page-range-input"
                       class="ui-input"
                       placeholder="e.g. 1-3, 5, 8-10"
-                      style="height: 42px; font-size: 0.9rem"
+                      style="font-size: 0.9rem"
                     />
                     <div
                       style="
@@ -699,7 +695,7 @@
                   type="button"
                   class="btn btn--primary btn--lg btn--full"
                   id="btn-execute-convert"
-                  style="height: 48px; font-size: 1rem; font-weight: 700"
+                  style="font-size: 1rem; font-weight: 700"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -815,7 +811,7 @@
                     type="button"
                     class="btn btn--primary"
                     id="btn-download-all-zip"
-                    style="height: 42px; font-weight: 700"
+                    style="font-weight: 700"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -837,7 +833,7 @@
                     type="button"
                     class="btn btn--outline"
                     id="btn-convert-start-over"
-                    style="height: 42px"
+                    
                   >
                     <span>Convert Another PDF</span>
                   </button>

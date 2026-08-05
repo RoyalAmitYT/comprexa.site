@@ -742,6 +742,44 @@ const COMPREXA_TOOLS_REGISTRY = [
       keywords: "jpg to png, convert jpeg to png, lossless image conversion",
     },
   },
+  {
+    id: "webp-to-png",
+    slug: "webp-to-png",
+    title: "WebP to PNG",
+    shortDescription:
+      "Convert WebP images into transparent PNG format with full resolution and alpha channel preservation.",
+    category: "image",
+    categoryName: "Image Tools",
+    badge: "Alpha",
+    featured: false,
+    popular: true,
+    comingSoon: false,
+    colorClass: "icon-bg--image",
+    supportedFileTypes: ["webp"],
+    acceptsMultipleFiles: true,
+    outputFormat: "png",
+    keywords: [
+      "webp",
+      "png",
+      "convert",
+      "image",
+      "format",
+      "transparency",
+      "alpha",
+      "batch",
+    ],
+    relatedTools: ["jpg-to-png", "png-to-jpg", "convert-image", "compress-image"],
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m21 15-3-3a2 2 0 0 0-2.8 0L6 21"/></svg>`,
+    seo: {
+      title: "Convert WebP to PNG Online Free — Comprexa",
+      metaDescription:
+        "Convert WebP images to high quality transparent PNG format with batch ZIP export directly in your browser.",
+      canonicalUrl: "https://comprexa.app/webp-to-png.html",
+      keywords:
+        "webp to png, convert webp to png, webp image converter, transparent png from webp",
+    },
+  },
+
 
   // --- DOCUMENT TOOLS ---
   {
@@ -1608,43 +1646,7 @@ const COMPREXA_TOOLS_REGISTRY = [
   },
 
   // --- EXPANDABLE FUTURE TOOL DEFINITIONS (100+ Scalability Architecture) ---
-  {
-    id: "webp-to-png",
-    slug: "webp-to-png",
-    title: "WebP to PNG",
-    shortDescription:
-      "Convert WebP images into transparent PNG format with full resolution and alpha channel preservation.",
-    category: "image",
-    categoryName: "Image Tools",
-    badge: "Alpha",
-    featured: false,
-    popular: true,
-    comingSoon: false,
-    colorClass: "icon-bg--image",
-    supportedFileTypes: ["webp"],
-    acceptsMultipleFiles: true,
-    outputFormat: "png",
-    keywords: [
-      "webp",
-      "png",
-      "convert",
-      "image",
-      "format",
-      "transparency",
-      "alpha",
-      "batch",
-    ],
-    relatedTools: ["jpg-to-png", "png-to-jpg", "convert-image", "compress-image"],
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m21 15-3-3a2 2 0 0 0-2.8 0L6 21"/></svg>`,
-    seo: {
-      title: "Convert WebP to PNG Online Free — Comprexa",
-      metaDescription:
-        "Convert WebP images to high quality transparent PNG format with batch ZIP export directly in your browser.",
-      canonicalUrl: "https://comprexa.app/webp-to-png.html",
-      keywords:
-        "webp to png, convert webp to png, webp image converter, transparent png from webp",
-    },
-  },
+
   {
     id: "json-formatter",
     slug: "json-formatter",

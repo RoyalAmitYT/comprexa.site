@@ -37,24 +37,18 @@
       content="word to pdf, convert docx to pdf, doc to pdf online, free word pdf converter, docx to pdf converter"
     />
 
-<title>
-      Word to PDF Online — Convert DOCX & DOC to PDF Free | Comprexa
-    </title>
-
-    <!-- Open Graph / Social -->
+<!-- Open Graph / Social -->
 
 <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Main Stylesheet -->
+<!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
 
     <!-- Document Processing Libraries -->
+
+<!-- Open Graph -->
+
+<!-- Twitter Card -->
 
 <title>Convert Word to PDF | DOCX to PDF — Comprexa</title>
   <meta name="description" content="Convert Microsoft Word documents (DOCX) to PDF format easily. Preserve formatting with secure, local file conversion." />
@@ -65,21 +59,20 @@
   <meta property="og:description" content="Convert Microsoft Word documents (DOCX) to PDF format easily. Preserve formatting with secure, local file conversion." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprexa.com/word-to-pdf.html" />
-  <meta property="og:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta property="og:image" content="https://comprexa.com/icon-512x512.png" />
   <meta property="og:site_name" content="Comprexa" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@comprexa" />
   <meta name="twitter:title" content="Convert Word to PDF | DOCX to PDF — Comprexa" />
   <meta name="twitter:description" content="Convert Microsoft Word documents (DOCX) to PDF format easily. Preserve formatting with secure, local file conversion." />
-  <meta name="twitter:image" content="https://comprexa.com/assets/images/og-image.webp" />
+  <meta name="twitter:image" content="https://comprexa.com/icon-512x512.png" />
   
   <link rel="canonical" href="https://comprexa.com/word-to-pdf.html" />
-  
-  
-  
-  <meta name="color-scheme" content="light dark" />
+
+<meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -138,6 +131,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=comprexa" />
   <link rel="manifest" href="/site.webmanifest?v=comprexa" />
   <meta name="theme-color" content="#6366f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
   <body>
     <!-- Universal Header Navigation -->
@@ -227,7 +224,10 @@
         id="landing-breadcrumb"
         aria-label="Breadcrumb"
       ></nav>
-      <div id="landing-hero"></div>
+      <div id="landing-hero">
+        <h1 class="visually-hidden">Convert Word to PDF</h1>
+        <p class="visually-hidden">Convert Microsoft Word documents (DOCX) to PDF format easily. Preserve formatting with secure, local file conversion.</p>
+      </div>
 
       <!-- Universal Tool Workspace Container -->
       <section class="tool-workspace" id="landing-workspace">
@@ -311,16 +311,14 @@
                 <div style="display: flex; align-items: center; gap: 14px">
                   <div
                     class="icon-bg--doc"
-                    style="
-                      width: 44px;
-                      height: 44px;
+                    style="width: 44px;
+                      
                       border-radius: var(--radius-md);
                       display: flex;
                       align-items: center;
                       justify-content: center;
                       background: rgba(79, 70, 229, 0.12);
-                      color: var(--primary);
-                    "
+                      color: var(--primary)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -403,7 +401,7 @@
                     <select
                       id="word-pdf-orientation"
                       class="ui-input"
-                      style="height: 42px"
+                      
                     >
                       <option value="portrait" selected>
                         Portrait (Standard)
@@ -422,7 +420,7 @@
                     <select
                       id="word-pdf-margins"
                       class="ui-input"
-                      style="height: 42px"
+                      
                     >
                       <option value="36" selected>Standard (0.5 inch)</option>
                       <option value="54">Wide (0.75 inch)</option>
@@ -440,7 +438,7 @@
                     <select
                       id="word-pdf-font-size"
                       class="ui-input"
-                      style="height: 42px"
+                      
                     >
                       <option value="11" selected>Standard (11pt)</option>
                       <option value="10">Compact (10pt)</option>
@@ -461,7 +459,7 @@
                     id="word-pdf-filename"
                     class="ui-input"
                     value="document.pdf"
-                    style="height: 42px; font-weight: 600"
+                    style="font-weight: 600"
                   />
                 </div>
 
@@ -469,7 +467,7 @@
                   type="button"
                   class="btn btn--primary btn--lg btn--full"
                   id="btn-execute-word-pdf"
-                  style="height: 48px; font-size: 1rem; font-weight: 700"
+                  style="font-size: 1rem; font-weight: 700"
                 >
                   <span>Convert to PDF</span>
                 </button>
@@ -572,7 +570,7 @@
                   type="button"
                   class="btn btn--primary btn--full btn--lg"
                   id="btn-download-word-pdf"
-                  style="height: 48px; font-weight: 700"
+                  style="font-weight: 700"
                 >
                   <span>Download PDF File</span>
                 </button>
