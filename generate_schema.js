@@ -271,9 +271,6 @@ htmlFiles.forEach(file => {
         "@id": `${SITE_URL}/#website`,
         "name": "Comprexa",
         "url": SITE_URL
-      },
-      "breadcrumb": {
-        "@id": `${canonicalUrl}#breadcrumb`
       }
     });
   }

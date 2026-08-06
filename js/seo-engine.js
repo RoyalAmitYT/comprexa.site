@@ -79,9 +79,6 @@ class ComprexaSeoEngine {
         name: this.siteName,
         url: this.baseUrl,
       },
-      breadcrumb: {
-        "@id": `${canonicalUrl}#breadcrumb`,
-      },
       inLanguage: "en-US",
     };
   }
