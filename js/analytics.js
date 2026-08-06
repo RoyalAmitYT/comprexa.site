@@ -5,7 +5,7 @@
 
 class ComprexaAnalyticsEngine {
   constructor() {
-    this.measurementId = window.COMPREXA_GA_ID || this._getMetaMeasurementId() || null;
+    this.measurementId = window.COMPREXA_GA_ID || this._getMetaMeasurementId() || "G-D9FTBRTVG5";
     this.initialized = false;
     this.init();
   }
@@ -28,7 +28,7 @@ class ComprexaAnalyticsEngine {
   }
 
   _loadGA4Script(id) {
-    if (document.getElementById("ga4-gtag-script")) return;
+    if (document.getElementById("ga4-gtag-script") || typeof window.gtag === "function") return;
     
     const script = document.createElement("script");
     script.id = "ga4-gtag-script";

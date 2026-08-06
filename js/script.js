@@ -7,6 +7,7 @@ import './settings.js';
 import './search-engine.js';
 import './command-palette.js';
 import './seo-engine.js';
+import './analytics.js';
 
 /**
  * Comprexa - Modern File Utility Hub
