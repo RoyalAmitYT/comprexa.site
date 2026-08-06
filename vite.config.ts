@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const htmlFiles = fs.readdirSync(__dirname).filter(file => file.endsWith('.html'));
+
 const input = {};
 htmlFiles.forEach(file => {
   const name = file.replace('.html', '');
@@ -20,7 +21,8 @@ function copySeoAssetsPlugin(): Plugin {
     'sitemap-pages.xml',
     'sitemap-blog.xml',
     'site.webmanifest',
-    'manifest.json'
+    'manifest.json',
+    'a23721bd2aa14326806c77b401ef92e1.txt'
   ];
 
   return {
@@ -30,9 +32,11 @@ function copySeoAssetsPlugin(): Plugin {
       if (!fs.existsSync(publicDir)) {
         fs.mkdirSync(publicDir, { recursive: true });
       }
+
       seoFiles.forEach(file => {
         const rootPath = path.resolve(__dirname, file);
         const publicPath = path.resolve(publicDir, file);
+
         if (fs.existsSync(rootPath)) {
           fs.copyFileSync(rootPath, publicPath);
         } else if (fs.existsSync(publicPath)) {
@@ -68,14 +72,21 @@ export default defineConfig(() => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== "true",
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === "true" ? null : {},
     },
     build: {
       target: 'esnext',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          passes: 2
+        }
+      },
+      cssMinify: 'lightningcss',
+      cssCodeSplit: true,
       modulePreload: {
         polyfill: false
       },

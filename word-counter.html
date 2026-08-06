@@ -1,14 +1,25 @@
 <!doctype html>
 <html lang="en">
   <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9FTBRTVG5"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-D9FTBRTVG5');
+  <!-- Google tag (gtag.js) Deferred -->
+  <script type="module">
+    function loadGA() {
+      if(window.gaLoaded) return;
+      window.gaLoaded = true;
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-D9FTBRTVG5";
+      document.head.appendChild(script);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-D9FTBRTVG5');
+    }
+    window.addEventListener('load', () => { setTimeout(loadGA, 2000); });
+    document.addEventListener('scroll', loadGA, {once: true, passive: true});
+    document.addEventListener('mousemove', loadGA, {once: true, passive: true});
+    document.addEventListener('touchstart', loadGA, {once: true, passive: true});
   </script>
   <script>
     (function() {
@@ -99,7 +110,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
                   <link rel="canonical" href="https://comprexa.in/word-counter.html" />
   <script type="application/ld+json">
 {
@@ -202,12 +214,21 @@
   ]
 }
 </script>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xxwhl3efim");
+<script type="module">
+    function loadClarity() {
+      if(window.clarityLoaded) return;
+      window.clarityLoaded = true;
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "xxwhl3efim");
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadClarity, { timeout: 5000 });
+    } else {
+      setTimeout(loadClarity, 3000);
+    }
 </script>
 </head>
   <body>
