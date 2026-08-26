@@ -14,7 +14,13 @@ const writePublicAndRoot = (filename, content) => {
 };
 
 // 1. Generate robots.txt
-writePublicAndRoot('robots.txt', `User-agent: *
+writePublicAndRoot('robots.txt', `User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Google-Display-Ads-Bot
+Allow: /
+
+User-agent: *
 Allow: /
 
 Sitemap: ${SITE_URL}/sitemap.xml
