@@ -22,7 +22,8 @@ function copySeoAssetsPlugin(): Plugin {
     'sitemap-blog.xml',
     'site.webmanifest',
     'manifest.json',
-    'a23721bd2aa14326806c77b401ef92e1.txt'
+    'a23721bd2aa14326806c77b401ef92e1.txt',
+    'ads.txt'
   ];
 
   return {
